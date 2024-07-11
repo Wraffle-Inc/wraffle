@@ -15,13 +15,13 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@wraffle/eslint-config": "workspace:*",
     "@wraffle/prettier-config": "workspace:*",
     "@wraffle/tailwind-config": "workspace:*",
     "@wraffle/typescript-config": "workspace:*",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
