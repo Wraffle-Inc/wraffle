@@ -6,7 +6,7 @@
     "plugins": [{ "name": "next" }],
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "allowJs": true,
+    "allowJs": false,
     "jsx": "preserve",
     "noEmit": true
   }
