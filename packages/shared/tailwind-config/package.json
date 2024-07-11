@@ -6,6 +6,7 @@
     ".": "./tailwind.config.ts"
   },
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "@wraffle/typescript-config": "workspace:*",
     "tailwindcss": "^3.4.1"
   }
