@@ -11,7 +11,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
 	args: {
-		primary: true,
-		label: "Button"
+		children: "안녕하세요 임시 버튼 입니다"
 	}
 };
