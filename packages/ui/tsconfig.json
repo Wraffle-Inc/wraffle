@@ -1,8 +1,10 @@
 {
-  "extends": "@wraffle/typescript-config/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+	"extends": "@wraffle/typescript-config/storybook.json",
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		".storybook/**/*.ts",
+		".storybook/**/*.tsx"
+	],
+	"exclude": ["node_modules"]
 }
