@@ -1,0 +1,47 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/front-api/src",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "introspectComments": true
+        }
+      }
+    ],
+    "webpack": true,
+    "tsConfigPath": "apps/front-api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/front-api",
+  "projects": {
+    "front-api": {
+      "type": "application",
+      "root": "apps/front-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/front-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/front-api/tsconfig.app.json"
+      }
+    },
+    "admin-api": {
+      "type": "application",
+      "root": "apps/admin-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/admin-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/admin-api/tsconfig.app.json"
+      }
+    },
+    "batch": {
+      "type": "application",
+      "root": "apps/batch",
+      "entryFile": "main",
+      "sourceRoot": "apps/batch/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/batch/tsconfig.app.json"
+      }
+    }
+  }
+}
