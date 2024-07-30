@@ -10,6 +10,8 @@ const password =
   env === "test" ? process.env.TEST_DB_PASSWORD : process.env.DB_PASSWORD;
 const database =
   env === "test" ? process.env.TEST_DB_DATABASE : process.env.DB_DATABASE;
+const SnakeNamingStrategy =
+  require("typeorm-naming-strategies").SnakeNamingStrategy;
 
 module.exports = {
   type: "postgres",
@@ -26,4 +28,5 @@ module.exports = {
   seeds: ["apps/**/*.seed.ts"],
   factories: ["apps/**/*.factory.ts"],
   timezone: "Z",
+  namingStrategy: new SnakeNamingStrategy(),
 };
