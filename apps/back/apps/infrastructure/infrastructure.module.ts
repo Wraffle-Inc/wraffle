@@ -9,6 +9,7 @@ import {
   initializeTransactionalContext,
 } from "typeorm-transactional";
 import { DataSource } from "typeorm";
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 const clients = [NhnCloudService];
 
@@ -45,6 +46,7 @@ const clients = [NhnCloudService];
             decimalNumbers: true,
             bigNumberStrings: false,
           },
+          namingStrategy: new SnakeNamingStrategy(),
           autoLoadEntities: true,
           entities: [join(__dirname, "..", "domain", "**", "*.entity.{ts,js}")],
           synchronize:
