@@ -3,7 +3,11 @@ import { LoginWithEmailDto } from "apps/application/auth/dto/request/login-with-
 import { LoginResultDto } from "apps/application/auth/dto/response/login-result.dto";
 import { AuthService } from "apps/application/auth/service/auth.service";
 import { Public } from "apps/application/common/auth/public.decorator";
-import { ApiOperation } from "@nestjs/swagger";
+import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
+import {
+  IResponse,
+  ResponseDto,
+} from "apps/application/common/response/response";
 
 @Controller("auth")
 export class AuthController {
@@ -14,9 +18,14 @@ export class AuthController {
     operationId: "loginByEmail",
     tags: ["auth"],
   })
+  @ApiOkResponse({
+    type: ResponseDto(LoginResultDto, "LoginResult"),
+  })
   @Public()
   @Post("/login")
-  async loginByEmail(@Body() dto: LoginWithEmailDto): Promise<LoginResultDto> {
+  async loginByEmail(
+    @Body() dto: LoginWithEmailDto,
+  ): Promise<IResponse<LoginResultDto>> {
     return this.authService.loginUserWithEmail(dto);
   }
 }

@@ -10,6 +10,10 @@ import { Repository } from "typeorm";
 import { LoginWithEmailDto } from "../dto/request/login-with-email.dto";
 import { LoginResultDto } from "../dto/response/login-result.dto";
 import { User } from "apps/domain/user/user.entity";
+import {
+  CustomResponse,
+  IResponse,
+} from "apps/application/common/response/response";
 
 @Injectable()
 export class AuthService {
@@ -20,12 +24,16 @@ export class AuthService {
   ) {}
 
   // 유저 이메일, 비밀번호로 인증 및 토큰발급
-  async loginUserWithEmail(dto: LoginWithEmailDto): Promise<LoginResultDto> {
+  async loginUserWithEmail(
+    dto: LoginWithEmailDto,
+  ): Promise<IResponse<LoginResultDto>> {
     const user = await this.authUserWithEmail(dto.email, dto.password);
 
-    return plainToInstance(LoginResultDto, {
+    const loginDto = plainToInstance(LoginResultDto, {
       token: await this.generateAccessToken(user.id),
     });
+
+    return new CustomResponse<LoginResultDto>(200, "A001", loginDto);
   }
 
   // 유저id 인증 및 토큰 발급
