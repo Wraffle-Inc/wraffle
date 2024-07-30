@@ -1,0 +1,49 @@
+import { Meta, Story, Controls, Canvas, Primary } from "@storybook/blocks";
+
+import * as stories from "./Toast.stories";
+
+<Meta of={stories} />
+
+# Toast
+
+`Toast` is the component that allows click events.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+---
+
+## Description
+
+`Toast` 사용자에게 메시지를 표시하는 컴포넌트입니다.
+
+- `Toast`는 `useToast`훅을 사용하여 사용할 수 있습니다.
+
+```tsx
+const { toast } = useToast();
+const showToast = () => {
+	toast({
+		title: "Toast Title",
+		description: "Toast Description",
+		action: "Toast Action"
+	});
+};
+
+return <Button onClick={showToast}>Show Toast</Button>;
+```
+
+## Usage
+
+<Canvas of={stories.Appearance} meta={stories} />
