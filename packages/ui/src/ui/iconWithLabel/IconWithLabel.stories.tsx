@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import IconWithLabel from './IconWithLabel';
-import MenuIcon from '@/shared/icons/MenuIcon';
+import SVGIcon from '@/shared/SVGIcon';
 
 const meta: Meta<typeof IconWithLabel> = {
   component: IconWithLabel,
@@ -11,7 +11,7 @@ type Story = StoryObj<typeof IconWithLabel>;
 
 export const MenuIconWithLabel: Story = {
   args: {
-    Icon: <MenuIcon className="w-6 h-6" storkeColor="currentColor" />,
+    Icon: <SVGIcon id="menu" width={20} height={20} />,
     label: 'Search',
   },
 };
