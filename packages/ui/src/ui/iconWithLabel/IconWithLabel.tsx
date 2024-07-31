@@ -3,8 +3,7 @@ import clsx from 'clsx';
 interface IconWithLabelProps {
   Icon: React.ReactNode;
   label: string;
-  strokeColor?: string;
-  url?: string;
+  strokeColor: string;
   onClick?: () => void;
 }
 
@@ -12,12 +11,10 @@ function IconWithLabel({
   Icon,
   label,
   strokeColor,
-  url,
   onClick,
 }: IconWithLabelProps) {
   return (
     <a
-      href={url}
       className={clsx(
         'flex flex-col items-center gap-1 hover:cursor-pointer hover:text-foreground',
         strokeColor
