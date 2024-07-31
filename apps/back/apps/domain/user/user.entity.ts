@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany } from "typeorm";
 import { DefaultEntity } from "apps/domain/common/default.entity";
 import { PushNotice } from "apps/domain/push-notice/push-notice.entity";
 import { Card } from "apps/domain/card/card.entity";
+import { Clipping } from "apps/domain/clipping/clipping.entity";
 
 @Entity()
 export class User extends DefaultEntity {
@@ -25,4 +26,7 @@ export class User extends DefaultEntity {
 
   @OneToMany(() => Card, (card) => card.user)
   cards: Card[];
+
+  @OneToMany(() => Clipping, (clipping) => clipping.user)
+  clippings: Clipping[];
 }
