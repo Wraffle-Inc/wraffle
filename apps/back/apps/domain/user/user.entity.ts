@@ -21,6 +21,12 @@ export class User extends DefaultEntity {
   @Column()
   phoneNumber: string;
 
+  @Column({ nullable: true, comment: "정산용 계좌 은행" })
+  settlementBankName?: string;
+
+  @Column({ nullable: true, comment: "정산용 계좌 번호" })
+  settlementBankAccount?: string;
+
   @OneToMany(() => PushNotice, (pushNotice) => pushNotice.user)
   pushNotices: PushNotice[];
 
