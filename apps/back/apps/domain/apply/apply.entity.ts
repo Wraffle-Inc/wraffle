@@ -1,9 +1,10 @@
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { DefaultEntity } from "apps/domain/common/default.entity";
 import { ApplyStatus } from "apps/domain/common/enum/apply.enum";
 import { PaymentMethod } from "apps/domain/common/enum/payment.enum";
 import { ApplyDetail } from "apps/domain/apply/apply-detail.entity";
 import { ApplyPayment } from "apps/domain/apply/apply-payment.entity";
+import { User } from "apps/domain/user/user.entity";
 
 @Entity()
 export class Apply extends DefaultEntity {
@@ -41,6 +42,12 @@ export class Apply extends DefaultEntity {
 
   @Column({ comment: "결제 완료일", nullable: true })
   paidAt?: Date;
+
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => User, (user) => user.applies)
+  user: User;
 
   @OneToMany(() => ApplyDetail, (applyDetail) => applyDetail.apply)
   applyDetails: ApplyDetail[];

@@ -3,6 +3,7 @@ import { DefaultEntity } from "apps/domain/common/default.entity";
 import { PushNotice } from "apps/domain/push-notice/push-notice.entity";
 import { Card } from "apps/domain/card/card.entity";
 import { Clipping } from "apps/domain/clipping/clipping.entity";
+import { Apply } from "apps/domain/apply/apply.entity";
 
 @Entity()
 export class User extends DefaultEntity {
@@ -35,4 +36,7 @@ export class User extends DefaultEntity {
 
   @OneToMany(() => Clipping, (clipping) => clipping.user)
   clippings: Clipping[];
+
+  @OneToMany(() => Apply, (apply) => apply.user)
+  applies: Apply[];
 }
