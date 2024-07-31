@@ -34,6 +34,8 @@ import { PushNotice } from "apps/domain/push-notice/push-notice.entity";
 import { Event } from "apps/domain/event/event.entity";
 import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
 import { EventProduct } from "apps/domain/event/event-product.entity";
+import { Raffle } from "apps/domain/raffle/raffle.entity";
+import { RaffleHashtag } from "apps/domain/raffle/raffle-hashtag.entity";
 
 const entities = [
   AgreementHistory,
@@ -59,6 +61,8 @@ const entities = [
   Product,
   ProductHashtag,
   PushNotice,
+  Raffle,
+  RaffleHashtag,
   User,
 ];
 
