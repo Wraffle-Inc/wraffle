@@ -1,0 +1,6 @@
+export enum AgreementType {
+  SERVICE = "SERVICE",
+  PRIVACY = "PRIVACY",
+  THIRD_PARTY = "THIRD_PARTY",
+  MARKETING = "MARKETING",
+}
