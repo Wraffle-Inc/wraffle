@@ -31,6 +31,9 @@ import { Images } from "apps/domain/image/image.entity";
 import { PhoneVerifyHistory } from "apps/domain/phone-verify-history/phone-verify-history.entity";
 import { Product } from "apps/domain/product/product.entity";
 import { PushNotice } from "apps/domain/push-notice/push-notice.entity";
+import { Event } from "apps/domain/event/event.entity";
+import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
+import { EventProduct } from "apps/domain/event/event-product.entity";
 
 const entities = [
   AgreementHistory,
@@ -38,6 +41,9 @@ const entities = [
   Apply,
   ApplyDetail,
   ApplyPayment,
+  Event,
+  EventHashtag,
+  EventProduct,
   SignInHistory,
   Notice,
   PopUp,
