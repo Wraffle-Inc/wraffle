@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from "typeorm";
 import { DefaultEntity } from "apps/domain/common/default.entity";
 import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
+import { EventProduct } from "apps/domain/event/event-product.entity";
 
 @Entity()
 export class Product extends DefaultEntity {
@@ -15,4 +16,7 @@ export class Product extends DefaultEntity {
 
   @OneToMany(() => ProductHashtag, (productHashtag) => productHashtag.product)
   productHashtags: ProductHashtag[];
+
+  @OneToMany(() => EventProduct, (eventProduct) => eventProduct.product)
+  eventProducts: EventProduct[];
 }
