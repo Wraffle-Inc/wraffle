@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol id="icon-menu" viewBox="0 0 18 12">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 11h16M1 6h16M1 1h16"/>
+</symbol>
+
+<symbol id="icon-search" viewBox="0 0 19 19">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 18l-4.197-4.197M16 8.5a7.5 7.5 0 1 0-15 0 7.5 7.5 0 0 0 15 0z"/>
+</symbol>
+
+<symbol id="icon-home" viewBox="0 0 18 19">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 8l8-7 8 7v10h-5v-4a3 3 0 0 0-6 0v4H1V8z"/>
+</symbol>
+
+<symbol id="icon-gift" viewBox="0 0 18 19">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8.08v10H2v-10m14 0H2m14 0h1v-3H1v3h1m7-3c.833-1.833 3-5.5 5-3.5s-2.5 3.334-5 3.5zm0 0c-.833-1.833-3-5.5-5-3.5s2.5 3.334 5 3.5z"/>
+</symbol>
+  
+<symbol id="icon-user" viewBox="0 0 20 20">  
+  <path stroke="currentColor" stroke-width="1.5" d="M16 16.708C16 15.088 14.828 13 13 13H7c-1.828 0-3 2.089-3 3.708M1 10a9 9 0 1 1 18 0 9 9 0 0 1-18 0zm12-3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+</symbol>
+</svg>
