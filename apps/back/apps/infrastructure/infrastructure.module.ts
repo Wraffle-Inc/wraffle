@@ -10,6 +10,51 @@ import {
 } from "typeorm-transactional";
 import { DataSource } from "typeorm";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
+import { User } from "apps/domain/user/user.entity";
+import { AgreementHistory } from "apps/domain/agreement/agreement-history/agreement-history.entity";
+import { AgreementVersion } from "apps/domain/agreement/agreement-version/agreement-version.entity";
+import { Apply } from "apps/domain/apply/apply.entity";
+import { ApplyDetail } from "apps/domain/apply/apply-detail.entity";
+import { ApplyPayment } from "apps/domain/apply/apply-payment.entity";
+import { SignInHistory } from "apps/domain/auth/signin-history.entity";
+import { Notice } from "apps/domain/backoffice/notice/notice.entity";
+import { PopUp } from "apps/domain/backoffice/pop-up/pop-up.entity";
+import { RecentRaffle } from "apps/domain/backoffice/recent-raffle/recent-raffle.entity";
+import { RecommendRaffle } from "apps/domain/backoffice/recommend-raffle/recommend-raffle.entity";
+import { RecommendSearch } from "apps/domain/backoffice/recommend-search/recommend-search.entity";
+import { Card } from "apps/domain/card/card.entity";
+import { Category } from "apps/domain/category/category.entity";
+import { Clipping } from "apps/domain/clipping/clipping.entity";
+import { Hashtag } from "apps/domain/hashtag/hashtag.entity";
+import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
+import { Images } from "apps/domain/image/image.entity";
+import { PhoneVerifyHistory } from "apps/domain/phone-verify-history/phone-verify-history.entity";
+import { Product } from "apps/domain/product/product.entity";
+import { PushNotice } from "apps/domain/push-notice/push-notice.entity";
+
+const entities = [
+  AgreementHistory,
+  AgreementVersion,
+  Apply,
+  ApplyDetail,
+  ApplyPayment,
+  SignInHistory,
+  Notice,
+  PopUp,
+  RecentRaffle,
+  RecommendRaffle,
+  RecommendSearch,
+  Card,
+  Category,
+  Clipping,
+  Hashtag,
+  Images,
+  PhoneVerifyHistory,
+  Product,
+  ProductHashtag,
+  PushNotice,
+  User,
+];
 
 const clients = [NhnCloudService];
 
@@ -63,6 +108,7 @@ const clients = [NhnCloudService];
         return addTransactionalDataSource(new DataSource(options));
       },
     }),
+    TypeOrmModule.forFeature(entities),
   ],
   providers: [...clients, ApplicationLogger],
   exports: [TypeOrmModule, ...clients, ApplicationLogger],

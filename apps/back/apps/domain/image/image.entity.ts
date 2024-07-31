@@ -3,7 +3,7 @@ import { DefaultEntity } from "apps/domain/common/default.entity";
 import { RaffleType } from "apps/domain/common/enum/raffle.enum";
 
 @Entity()
-export class Image extends DefaultEntity {
+export class Images extends DefaultEntity {
   @Column({ comment: "이미지 URL" })
   url: string;
 
