@@ -1,14 +1,14 @@
 {
-	"name": "@wraffle/tailwind-config",
-	"version": "0.0.0",
-	"private": true,
-	"exports": {
-		".": "./tailwind.config.ts"
-	},
-	"devDependencies": {
-		"@types/node": "^20.14.10",
-		"@wraffle/typescript-config": "workspace:*",
-		"tailwindcss": "^3.4.1",
-		"tailwindcss-animate": "^1.0.7"
-	}
+  "name": "@wraffle/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@wraffle/typescript-config": "workspace:*",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }
