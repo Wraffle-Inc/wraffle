@@ -8,12 +8,17 @@ import * as moment from "moment-timezone";
 import { Response } from "express";
 
 import { AppModule } from "./app.module";
+import { VersioningType } from "@nestjs/common";
 
 async function bootstrap() {
   moment.tz.setDefault("Asia/Seoul");
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
   app.enableCors();
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
   app.use(json({ limit: "100mb" }));
   app.use(urlencoded({ limit: "100mb", extended: true }));
   app.useLogger(new ApplicationLogger());
