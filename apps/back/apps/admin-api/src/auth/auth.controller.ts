@@ -4,7 +4,6 @@ import { LoginResultDto } from "apps/application/auth/dto/response/login-result.
 import { AuthService } from "apps/application/auth/service/auth.service";
 import { Public } from "apps/application/common/auth/public.decorator";
 import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
-import { IResponse } from "apps/application/common/response/response";
 
 @Controller("auth")
 export class AuthController {
@@ -20,9 +19,7 @@ export class AuthController {
   })
   @Public()
   @Post("/login")
-  async loginByEmail(
-    @Body() dto: LoginWithEmailDto,
-  ): Promise<IResponse<LoginResultDto>> {
+  async loginByEmail(@Body() dto: LoginWithEmailDto): Promise<LoginResultDto> {
     return this.authService.loginUserWithEmail(dto);
   }
 }

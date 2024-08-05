@@ -22,18 +22,6 @@ export class User extends DefaultEntity {
   @Column()
   phoneNumber: string;
 
-  @Column()
-  isAgreed: boolean;
-
-  @Column()
-  isPrivacyAgreed: boolean;
-
-  @Column()
-  isThirdAgreed: boolean;
-
-  @Column()
-  isMarketingAgreed: boolean;
-
   @Column({ nullable: true, comment: "정산용 계좌 은행" })
   settlementBankName?: string;
 
