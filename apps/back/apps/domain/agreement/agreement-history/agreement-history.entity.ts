@@ -11,7 +11,4 @@ export class AgreementHistory extends DefaultEntity {
 
   @Column({ comment: "동의한 약관 버전 ID" })
   agreementVersionId: number;
-
-  @Column({ comment: "동의 여부" })
-  isAgreed: boolean;
 }
