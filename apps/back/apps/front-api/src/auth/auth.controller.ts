@@ -8,8 +8,9 @@ import {
   IResponse,
   ResponseDto,
 } from "apps/application/common/response/response";
+import { SignUpDto } from "apps/application/auth/dto/request/sign-up.dto";
 
-@Controller("auth")
+@Controller({ path: "auth", version: "1" })
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -27,5 +28,19 @@ export class AuthController {
     @Body() dto: LoginWithEmailDto,
   ): Promise<IResponse<LoginResultDto>> {
     return this.authService.loginUserWithEmail(dto);
+  }
+
+  @ApiOperation({
+    summary: "회원가입",
+    operationId: "signUp",
+    tags: ["auth"],
+  })
+  @ApiOkResponse({
+    type: ResponseDto(LoginResultDto, "LoginResult"),
+  })
+  @Public()
+  @Post("/signup")
+  async signUp(@Body() dto: SignUpDto): Promise<IResponse<LoginResultDto>> {
+    return this.authService.signUp(dto);
   }
 }
