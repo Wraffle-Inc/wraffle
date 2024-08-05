@@ -28,7 +28,9 @@
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run",
     "migration:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert",
     "schema:drop": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js schema:drop",
-    "schema:sync": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js schema:sync"
+    "schema:sync": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js schema:sync",
+    "seed": "ts-node -r tsconfig-paths/register ./db/seeds/seeder.ts",
+    "seed:refresh": "ts-node -r tsconfig-paths/register ./db/seeds/seeder.ts --refresh"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.10",
@@ -59,6 +61,7 @@
     "moment-timezone": "^0.5.35",
     "nanoid": "^5.0.7",
     "nest-winston": "^1.7.0",
+    "nestjs-seeder": "^0.3.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
