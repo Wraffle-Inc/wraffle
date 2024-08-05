@@ -36,6 +36,7 @@ import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
 import { EventProduct } from "apps/domain/event/event-product.entity";
 import { Raffle } from "apps/domain/raffle/raffle.entity";
 import { RaffleHashtag } from "apps/domain/raffle/raffle-hashtag.entity";
+import { ConfigService } from "@nestjs/config";
 
 const entities = [
   AgreementHistory,
@@ -120,7 +121,7 @@ const clients = [NhnCloudService];
     }),
     TypeOrmModule.forFeature(entities),
   ],
-  providers: [...clients, ApplicationLogger],
+  providers: [...clients, ApplicationLogger, ConfigService],
   exports: [TypeOrmModule, ...clients, ApplicationLogger],
 })
 export class InfrastructureModule {
