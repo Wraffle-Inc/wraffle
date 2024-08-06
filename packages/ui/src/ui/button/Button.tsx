@@ -28,14 +28,19 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, className }))}
-        ref={ref}
-        {...props}
-      />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Comp
+          className={cn(buttonVariants({ variant, className }), {
+            "ring-0 ring-transparent": disabled, // 조건부 스타일: disabled 상태일 때 ring 스타일 제거
+          })}
+          ref={ref}
+          disabled={disabled}
+          {...props}
+        />
+      </div>
     );
   }
 );
