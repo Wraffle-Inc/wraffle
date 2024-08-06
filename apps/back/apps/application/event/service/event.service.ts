@@ -17,6 +17,7 @@ import { Transactional } from "typeorm-transactional";
 import { Images } from "apps/domain/image/image.entity";
 import { RaffleType } from "apps/domain/common/enum/raffle.enum";
 import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
+import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
 
 @Injectable()
 export class EventService {
@@ -106,8 +107,22 @@ export class EventService {
 
     return new CustomResponse<CreateEventResultDto>(
       200,
-      "A001",
+      "E001",
       createEventResultDto,
     );
+  }
+
+  async getEventById(id: number): Promise<IResponse<GetEventDto>> {
+    const event = await this.eventRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    const getEventDto = plainToInstance(GetEventDto, event);
+
+    const eventDto = plainToInstance(GetEventDto, event);
+
+    return new CustomResponse<GetEventDto>(200, "E002", eventDto);
   }
 }
