@@ -13,6 +13,7 @@ import { envValidationSchema } from "env.config";
 import { AuthController } from "./auth/auth.controller";
 import { HealthController } from "./health/health.controller";
 import { CardController } from "apps/front-api/src/card/card.controller";
+import {EventController} from "apps/front-api/src/event/event.controller";
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { CardController } from "apps/front-api/src/card/card.controller";
       useClass: HttpExceptionFilter,
     },
   ],
-  controllers: [AuthController, HealthController, CardController],
+  controllers: [AuthController, HealthController, EventController, CardController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
