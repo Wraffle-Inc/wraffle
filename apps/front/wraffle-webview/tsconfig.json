@@ -1,7 +1,7 @@
 {
   "extends": "@wraffle/typescript-config/nextjs.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
+    "plugins": [{"name": "next"}],
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/pages/*": ["./src/pages/*"],
