@@ -1,4 +1,4 @@
-import * as joi from 'joi';
+import * as joi from "joi";
 
 const common = {
   PORT: joi.number().required(),
@@ -6,15 +6,15 @@ const common = {
   BATCH_PORT: joi.number().required(),
   APP_ENV: joi
     .string()
-    .valid('test', 'dev', 'staging', 'production')
+    .valid("test", "dev", "staging", "production")
     .required(),
   SYNC: joi.boolean().required(),
   JWT_SECRET: joi.string().required(),
-  // ...and more
+  JWT_ACCESS_EXPIRATION_TIME: joi.string().required(),
 };
 
 const db =
-  process.env.NODE_ENV === 'test'
+  process.env.NODE_ENV === "test"
     ? {
         TEST_DB_HOST: joi.string().required(),
         TEST_DB_DATABASE: joi.string().required(),
