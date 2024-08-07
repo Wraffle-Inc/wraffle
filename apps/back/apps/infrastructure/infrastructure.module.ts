@@ -37,6 +37,9 @@ import { EventProduct } from "apps/domain/event/event-product.entity";
 import { Raffle } from "apps/domain/raffle/raffle.entity";
 import { RaffleHashtag } from "apps/domain/raffle/raffle-hashtag.entity";
 import { ConfigService } from "@nestjs/config";
+import { CacheModule } from "@nestjs/cache-manager";
+import * as redisStore from "cache-manager-redis-store";
+import { RedisService } from "apps/infrastructure/cache/redis/redis.service";
 
 const entities = [
   AgreementHistory,
@@ -67,11 +70,21 @@ const entities = [
   User,
 ];
 
-const clients = [NhnCloudService];
+const clients = [NhnCloudService, RedisService];
+
+const cacheModule = CacheModule.register({
+  useFactory: async () => ({
+    store: redisStore,
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    ttl: 1000, // 캐시 기본 유지시간: 10s
+  }),
+});
 
 @Global()
 @Module({
   imports: [
+    cacheModule,
     TypeOrmModule.forRootAsync({
       useFactory: async () => {
         const config =

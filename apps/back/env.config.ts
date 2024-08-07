@@ -11,6 +11,9 @@ const common = {
   SYNC: joi.boolean().required(),
   JWT_SECRET: joi.string().required(),
   JWT_ACCESS_EXPIRATION_TIME: joi.string().required(),
+  JWT_REFRESH_EXPIRATION_TIME: joi.string().required(),
+  REDIS_HOST: joi.string().required(),
+  REDIS_PORT: joi.number().required(),
 };
 
 const db =
