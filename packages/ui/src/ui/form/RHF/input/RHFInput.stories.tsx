@@ -3,7 +3,8 @@ import { z } from "zod";
 import type { Meta, StoryFn } from "@storybook/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getDefaults } from "@/shared/utils";
-import { RHFInput, RHFInputProps, Form } from "@/ui/form";
+import { RHFInput, RHFInputProps } from "@/ui/form";
+import { Form } from "@/shared/radix";
 
 const meta: Meta<typeof RHFInput> = {
   title: "Form/RHFInput",

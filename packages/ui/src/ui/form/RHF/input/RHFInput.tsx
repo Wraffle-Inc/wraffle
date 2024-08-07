@@ -5,8 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "@/ui/form";
+} from "@/shared/radix";
+import { Input } from "@/ui/form";
 
 import { HTMLInputTypeAttribute } from "react";
 import { useFormContext } from "react-hook-form";
