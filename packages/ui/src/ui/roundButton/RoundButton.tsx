@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils";
 
 const roundButtonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed",
   {
     variants: {
       selected: {
@@ -27,11 +27,7 @@ const RoundButton = React.forwardRef<HTMLButtonElement, RoundButtonProps>(
   ({ className, selected, ...props }, ref) => {
     return (
       <button
-        className={cn(
-          roundButtonVariants({ selected }),
-          "px-3 py-1.5",
-          className
-        )}
+        className={cn(roundButtonVariants({ selected }), className)}
         ref={ref}
         {...props}
       />
