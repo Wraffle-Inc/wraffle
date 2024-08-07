@@ -23,6 +23,7 @@ import { AgreementHistory } from "apps/domain/agreement/agreement-history/agreem
 import { AgreementVersion } from "apps/domain/agreement/agreement-version/agreement-version.entity";
 import { AgreementType } from "apps/domain/common/enum/agreement.enum";
 import { ErrorCode, ErrorMessage } from "apps/infrastructure/error/const";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class AuthService {
@@ -34,6 +35,7 @@ export class AuthService {
     @InjectRepository(AgreementVersion)
     private readonly agreementVersionRepository: Repository<AgreementVersion>,
 
+    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -44,7 +46,8 @@ export class AuthService {
     const user = await this.authUserWithEmail(dto.email, dto.password);
 
     const loginDto = plainToInstance(LoginResultDto, {
-      token: await this.generateAccessToken(user.id),
+      accessToken: await this.generateAccessToken(user.id),
+      refreshToken: await this.generateRefreshToken(user.id),
     });
 
     return new CustomResponse<LoginResultDto>(200, "A001", loginDto);
@@ -55,7 +58,8 @@ export class AuthService {
     const user = await this.authUserWithIdAndRole(userId, UserRole.USER);
 
     return plainToInstance(LoginResultDto, {
-      token: await this.generateAccessToken(user.id),
+      accessToken: await this.generateAccessToken(user.id),
+      refreshToken: await this.generateRefreshToken(user.id),
     });
   }
 
@@ -176,9 +180,22 @@ export class AuthService {
   }
 
   // JWT 액세스 토큰 생성
-  async generateAccessToken(userId: number) {
+  async generateAccessToken(userId: number): Promise<string> {
     const payload = { sub: userId, role: UserRole.USER };
     return this.jwtService.sign(payload);
+  }
+
+  // JWT 리프레시 토큰 생성
+  async generateRefreshToken(userId: number): Promise<string> {
+    const payload = {
+      sub: userId,
+      role: UserRole.USER,
+    };
+
+    return this.jwtService.sign(payload, {
+      secret: this.configService.get<string>("JWT_SECRET"),
+      expiresIn: this.configService.get<string>("JWT_REFRESH_EXPIRATION_TIME"), // '7d'
+    });
   }
 
   // 이메일 중복 체크

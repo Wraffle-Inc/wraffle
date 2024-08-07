@@ -7,5 +7,11 @@ export class LoginResultDto {
     example: "eyJhbGci",
   })
   @Expose()
-  token: string;
+  accessToken: string;
+
+  @ApiProperty({
+    example: "eyJhbGci",
+  })
+  @Expose()
+  refreshToken: string;
 }

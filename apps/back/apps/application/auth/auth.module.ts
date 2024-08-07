@@ -8,11 +8,20 @@ import { RolesGuard } from "../common/auth/roles.guard";
 import { JwtStrategy } from "./jwt.strategy";
 import { RoleStrategy } from "./role.strategy";
 import { AuthService } from "./service/auth.service";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { RefreshTokenService } from "apps/application/auth/service/refresh-token.service";
 
 @Module({
   imports: [
     JwtModule.registerAsync({
-      useFactory: () => ({ secret: process.env.JWT_SECRET }),
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>("JWT_SECRET"),
+        signOptions: {
+          expiresIn: configService.get<string>("JWT_ACCESS_EXPIRATION_TIME"),
+        },
+      }),
+      inject: [ConfigService],
     }),
   ],
   providers: [
@@ -24,6 +33,7 @@ import { AuthService } from "./service/auth.service";
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
     AuthService,
+    RefreshTokenService,
   ],
   exports: [AuthService],
 })
