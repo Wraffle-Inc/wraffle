@@ -162,4 +162,8 @@ export class EventService {
 
     return new CustomResponse<null>(204, "E003", null);
   }
+
+  async increaseViewCount(id: number): Promise<void> {
+    await this.eventRepository.increment({ id }, "viewCount", 1);
+  }
 }
