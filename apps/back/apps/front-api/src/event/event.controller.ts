@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseInterceptors,
+} from "@nestjs/common";
 import { EventService } from "apps/application/event/service/event.service";
 import { CreateEventDto } from "apps/application/event/dto/request/create-event.dto";
 import {
@@ -9,6 +17,7 @@ import { CreateEventResultDto } from "apps/application/event/dto/response/create
 import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
 import { Public } from "apps/application/common/auth/public.decorator";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
+import { EventViewCountInterceptor } from "apps/application/event/interceptor/event-view-count.interceptor";
 
 @Controller("events")
 export class EventController {
@@ -42,6 +51,7 @@ export class EventController {
   })
   @Get(":id")
   @Public()
+  @UseInterceptors(EventViewCountInterceptor)
   async getEventById(@Param("id") id: number): Promise<IResponse<GetEventDto>> {
     return this.eventService.getEventById(id);
   }
