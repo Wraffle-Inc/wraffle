@@ -3,6 +3,7 @@ import {
   IsArray,
   IsDate,
   IsInt,
+  IsNotEmpty,
   IsString,
   ValidateNested,
 } from "class-validator";
@@ -14,6 +15,7 @@ export class CreateEventDto {
     example: "이벤트 제목",
     description: "이벤트 제목",
   })
+  @IsNotEmpty()
   @IsString()
   title: string;
 
@@ -21,6 +23,7 @@ export class CreateEventDto {
     example: 10000,
     description: "이벤트 가격",
   })
+  @IsNotEmpty()
   @IsInt()
   price: number;
 
@@ -28,6 +31,7 @@ export class CreateEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "이벤트 시작일",
   })
+  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   startDate: Date;
@@ -36,6 +40,7 @@ export class CreateEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "이벤트 종료일",
   })
+  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   endDate: Date;
@@ -44,6 +49,7 @@ export class CreateEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "당첨 발표일",
   })
+  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   announceAt: Date;
@@ -52,6 +58,7 @@ export class CreateEventDto {
     example: "이벤트 설명",
     description: "이벤트 설명",
   })
+  @IsNotEmpty()
   @IsString()
   description: string;
 
@@ -59,6 +66,7 @@ export class CreateEventDto {
     example: "기타",
     description: "기타",
   })
+  @IsNotEmpty()
   @IsString()
   etc: string;
 
@@ -66,6 +74,7 @@ export class CreateEventDto {
     example: 1,
     description: "카테고리 ID",
   })
+  @IsNotEmpty()
   @IsInt()
   categoryId: number;
 
@@ -73,6 +82,7 @@ export class CreateEventDto {
     example: [1, 2],
     description: "태그 ID",
   })
+  @IsNotEmpty()
   @IsInt({ each: true })
   @IsArray()
   tagIds: number[];
@@ -81,6 +91,7 @@ export class CreateEventDto {
     example: ["이미지 URL"],
     description: "이미지 URL",
   })
+  @IsNotEmpty()
   @IsString({ each: true })
   images: string[];
 
@@ -94,6 +105,7 @@ export class CreateEventDto {
     ],
     description: "상품",
   })
+  @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => AddProductDto)
