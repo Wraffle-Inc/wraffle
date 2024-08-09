@@ -19,6 +19,7 @@ import { RaffleType } from "apps/domain/common/enum/raffle.enum";
 import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
 
+// TODO: Error 처리는 추후에 통일
 @Injectable()
 export class EventService {
   constructor(
@@ -117,8 +118,13 @@ export class EventService {
     const event = await this.eventRepository.findOne({
       where: {
         id: id,
+        isDeleted: false,
       },
     });
+
+    if (!event) {
+      return new CustomResponse<GetEventDto>(404, "E001", null);
+    }
 
     const eventDto = plainToInstance(GetEventDto, event);
 
@@ -126,11 +132,16 @@ export class EventService {
   }
 
   // 이벤트 삭제
+  @Transactional()
   async deleteEventById(id: number): Promise<IResponse<null>> {
     const event = await this.eventRepository.findOne({
       where: { id },
       relations: ["eventProducts", "eventHashtags"],
     });
+
+    if (!event) {
+      return new CustomResponse<null>(404, "E001", null);
+    }
 
     const now = new Date();
 
@@ -164,6 +175,10 @@ export class EventService {
   }
 
   async increaseViewCount(id: number): Promise<void> {
+    const event = await this.eventRepository.findOne({ where: { id } });
+    if (event.isDeleted) {
+      return;
+    }
     await this.eventRepository.increment({ id }, "viewCount", 1);
   }
 }

@@ -1,11 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsInt, IsString } from "class-validator";
+import { IsArray, IsInt, IsNotEmpty, IsString } from "class-validator";
 
 export class AddProductDto {
   @ApiProperty({
     example: "상품명",
     description: "상품명",
   })
+  @IsNotEmpty()
   @IsString()
   title: string;
 
@@ -13,6 +14,7 @@ export class AddProductDto {
     example: "이미지 URL",
     description: "이미지 URL",
   })
+  @IsNotEmpty()
   @IsString()
   imageUrl: string;
 
@@ -20,6 +22,7 @@ export class AddProductDto {
     example: [1, 2],
     description: "태그 ID",
   })
+  @IsNotEmpty()
   @IsInt({ each: true })
   @IsArray()
   tagIds: number[];
