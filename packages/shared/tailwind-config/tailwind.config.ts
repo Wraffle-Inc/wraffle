@@ -12,6 +12,31 @@ const config: Omit<Config, "content"> = {
       },
     },
     extend: {
+      fontFamily: {
+        pretendard: ["Pretendard"],
+      },
+      fontSize: {
+        h1: "32px",
+        h2: "24px",
+        h3: "20px",
+        h4: "17px",
+        h5: "16px",
+        h6: "15px",
+        p1: "16px",
+        p2: "14px",
+        p3: "14px",
+        p4: "13px",
+        sm1: "12px",
+        sm2: "10px",
+      },
+      fontWeight: {
+        medium: "500",
+        semibold: "600",
+        bold: "700",
+      },
+      lineHeight: {
+        "1.4": "140%",
+      },
       colors: {
         zinc: {
           100: "#fafafa",
