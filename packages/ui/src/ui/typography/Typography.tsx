@@ -27,10 +27,10 @@ export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, asChild = false, ...props }, ref) => {
     // const Comp = asChild ? Slot : "div";
-    const Comp = asChild
+    const Comp: React.ElementType = asChild
       ? Slot
       : ["h1", "h2", "h3", "h4", "h5", "h6"].includes(variant)
-        ? variant
+        ? (variant as React.ElementType)
         : "p";
 
     const classes = cn(baseStyles, typographyVariants[variant], className);
