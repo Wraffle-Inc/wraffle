@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils";
 
 const baseStyles = "font-pretendard";
@@ -25,12 +24,11 @@ export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   asChild?: boolean;
 }
 
-type Props = TypographyProps & React.RefAttributes<HTMLElement>;
 export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, asChild = false, ...props }, ref) => {
     // const Comp = asChild ? Slot : "div";
     const Comp = asChild
-      ? Slot<Props>
+      ? Slot
       : ["h1", "h2", "h3", "h4", "h5", "h6"].includes(variant)
         ? variant
         : "p";
