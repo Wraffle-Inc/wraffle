@@ -13,14 +13,17 @@ export class Card extends DefaultEntity {
   @Column({ comment: "카드 번호" })
   cardNumber: string;
 
+  @Column({ comment: "비밀번호" })
+  cardPassword: string;
+
   @Column({ comment: "카드 만료일" })
   cardExpirationDate: string;
 
   @Column({ comment: "카드 빌링키" })
-  cardBillingKey: string;
+  billingKey: string;
 
   @Column({ comment: "주사용 카드 여부" })
-  isDefault: boolean;
+  isDefault: boolean = false;
 
   @Column({ comment: "사용자 ID" })
   userId: number;
