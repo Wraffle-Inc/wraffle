@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from "@nestjs/common";
+import { Controller, Post, Body, Get, Param, Delete } from "@nestjs/common";
 import { CardService } from "apps/application/card/service/card.service";
 import { CreateCardDto } from "apps/application/card/dto/request/create-card.dto";
 import { ApiOperation, ApiOkResponse } from "@nestjs/swagger";
@@ -47,5 +47,17 @@ export class CardController {
   async getCards() // @CurrentUser() user: User
   : Promise<IResponse<GetCardDto>> {
     return this.cardService.getCards(1);
+  }
+
+  // TODO: @Public() 제거하기
+  @ApiOperation({
+    summary: "카드 삭제",
+    operationId: "deleteCard",
+    tags: ["card"],
+  })
+  @Delete(":id")
+  @Public()
+  async deleteCard(@Param("id") id: number): Promise<IResponse<null>> {
+    return this.cardService.deleteCard(id);
   }
 }

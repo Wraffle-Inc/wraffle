@@ -73,4 +73,15 @@ export class CardService {
 
     return new CustomResponse<GetCardDto>(200, "C002", cardListItemDto);
   }
+
+  // 카드 삭제
+  async deleteCard(id: number): Promise<IResponse<null>> {
+    const card = await this.cardRepository.findOne({ where: { id } });
+
+    card.deletedAt = new Date();
+    card.isDeleted = true;
+    await this.cardRepository.save(card);
+
+    return new CustomResponse<null>(204, "C003", null);
+  }
 }
