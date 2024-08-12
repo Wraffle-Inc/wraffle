@@ -42,7 +42,7 @@ export class CardService {
       id: card.id,
       cardName: card.cardName,
       cardCode: card.cardCode,
-      cardNumber: card.cardNumber,
+      cardNumber: card.cardNumber.replace(/.(?=.{4})/g, "*"),
       cardExpirationDate: card.cardExpirationDate,
       billingKey: card.billingKey,
       isDefault: card.isDefault,
