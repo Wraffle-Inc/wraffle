@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Param, Delete } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Delete,
+  Patch,
+} from "@nestjs/common";
 import { CardService } from "apps/application/card/service/card.service";
 import { CreateCardDto } from "apps/application/card/dto/request/create-card.dto";
 import { ApiOperation, ApiOkResponse } from "@nestjs/swagger";
@@ -9,6 +17,8 @@ import {
 import { CreateCardResultDto } from "apps/application/card/dto/response/create-card-result.dto";
 import { Public } from "apps/application/common/auth/public.decorator";
 import { GetCardDto } from "apps/application/card/dto/response/get-card.dto";
+import { SetDefaultCardResultDto } from "apps/application/card/dto/response/set-default-card-result.dto";
+import { SetDefaultCardDto } from "apps/application/card/dto/request/set-default-card.dto";
 // import { CurrentUser } from "apps/application/common/auth/current-user.decorator";
 
 @Controller("users/me/cards")
@@ -59,5 +69,23 @@ export class CardController {
   @Public()
   async deleteCard(@Param("id") id: number): Promise<IResponse<null>> {
     return this.cardService.deleteCard(id);
+  }
+
+  // TODO: @Public() 제거하기
+  @ApiOperation({
+    summary: "주사용 카드 변경",
+    operationId: "setDefaultCard",
+    tags: ["card"],
+  })
+  @ApiOkResponse({
+    type: ResponseDto(SetDefaultCardResultDto, "SetDefaultCardResult"),
+  })
+  @Patch(":id")
+  @Public()
+  async setDefaultCard(
+    @Param("id") id: number,
+    @Body() dto: SetDefaultCardDto
+  ): Promise<IResponse<SetDefaultCardResultDto>> {
+    return this.cardService.setDefaultCard(id, dto);
   }
 }
