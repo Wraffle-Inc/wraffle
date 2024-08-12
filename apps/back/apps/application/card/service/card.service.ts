@@ -14,6 +14,8 @@ import {
   CardDetailDto,
   GetCardDto,
 } from "apps/application/card/dto/response/get-card.dto";
+import { SetDefaultCardDto } from "apps/application/card/dto/request/set-default-card.dto";
+import { SetDefaultCardResultDto } from "apps/application/card/dto/response/set-default-card-result.dto";
 
 @Injectable()
 export class CardService {
@@ -83,5 +85,32 @@ export class CardService {
     await this.cardRepository.save(card);
 
     return new CustomResponse<null>(204, "C003", null);
+  }
+
+  // 주사용 카드 변경
+  async setDefaultCard(
+    id: number,
+    dto: SetDefaultCardDto
+  ): Promise<IResponse<SetDefaultCardResultDto>> {
+    const card = await this.cardRepository.findOne({ where: { id } });
+
+    card.isDefault = dto.isDefault;
+    await this.cardRepository.save(card);
+
+    const setDefaultCardResultDto = plainToInstance(SetDefaultCardResultDto, {
+      id: card.id,
+      cardName: card.cardName,
+      cardCode: card.cardCode,
+      cardNumber: card.cardNumber.replace(/.(?=.{4})/g, "*"),
+      cardExpirationDate: card.cardExpirationDate,
+      billingKey: card.billingKey,
+      isDefault: card.isDefault,
+    });
+
+    return new CustomResponse<SetDefaultCardResultDto>(
+      200,
+      "C004",
+      setDefaultCardResultDto
+    );
   }
 }
