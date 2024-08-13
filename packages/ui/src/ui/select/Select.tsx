@@ -6,7 +6,7 @@ import {
   SelectRoot,
   SelectTrigger,
   SelectValue,
-} from "@/shared/radix";
+} from "./PrimitiveSelect";
 
 export interface SelectItem {
   value: string;
