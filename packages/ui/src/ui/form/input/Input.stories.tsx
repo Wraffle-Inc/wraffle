@@ -7,11 +7,14 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     placeholder: {
       control: "text",
+      type: "string",
     },
     disabled: {
       control: "boolean",
+      type: "boolean",
     },
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

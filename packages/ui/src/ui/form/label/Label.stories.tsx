@@ -10,6 +10,7 @@ const meta: Meta<typeof Label> = {
       control: "text",
     },
   },
+  tags: ["autodocs"],
 };
 
 export default meta;
