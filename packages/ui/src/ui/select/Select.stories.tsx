@@ -1,5 +1,4 @@
 import { Select } from "./Select";
-// import type { SelectProps } from "./Select";
 import type { Meta, StoryFn } from "@storybook/react";
 
 const meta: Meta<typeof Select> = {
@@ -15,10 +14,12 @@ const meta: Meta<typeof Select> = {
     items: {
       table: {
         category: "Content",
+        type: { summary: "SelectItem[] | GroupSelectItem[]" },
       },
-      control: "object",
+      control: { type: "object" },
     },
   },
+  decorators: [(Story) => <div className="w-full">{Story()}</div>],
 };
 
 export default meta;

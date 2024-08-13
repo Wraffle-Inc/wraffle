@@ -1,0 +1,60 @@
+import { Meta, Story, Controls, Canvas, Primary } from "@storybook/blocks";
+
+import * as stories from "./Select.stories";
+
+<Meta of={stories} />
+
+# Select
+
+`Select` 컴포넌트는 단순한 선택 또는 그룹화된 항목을 선택할 수 있는 드롭다운 메뉴를 제공합니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Description
+
+`Select` 항목을 선택할 수 있는 드롭다운 메뉴를 제공합니다.
+
+- 단순 Select는 props의 items 타입을 `SelectItem[]`로 전달해야 합니다.
+
+```tsx
+interface SelectItem {
+  value: string;
+  name: string;
+}
+```
+
+- 그룹 Select는 props의 items 타입을 `GroupSelectItem[]`로 전달해야 합니다.
+
+```tsx
+interface GroupSelectItem {
+  groupName: string;
+  groupItems: SelectItem[];
+}
+```
+
+## Usage
+
+### Simple Select
+
+단순 선택 항목을 제공하는 Select 컴포넌트의 사용 예시입니다.
+
+<Canvas of={stories.Simple} meta={stories} />
+
+### Grouped Select
+
+그룹화된 항목을 선택할 수 있는 Select 컴포넌트의 사용 예시입니다.
+
+<Canvas of={stories.Group} meta={stories} />

@@ -8,25 +8,25 @@ import {
   SelectValue,
 } from "@/shared/radix";
 
-interface SelectItem {
+export interface SelectItem {
   value: string;
   name: string;
 }
 
-interface GroupSelectItem {
+export interface GroupSelectItem {
   groupName: string;
   groupItems: SelectItem[];
 }
 
-interface BaseSelectProps {
+export interface BaseSelectProps {
   placeholder: string;
 }
 
-interface GroupSelectProps extends BaseSelectProps {
+export interface GroupSelectProps extends BaseSelectProps {
   items: GroupSelectItem[];
 }
 
-interface SimpleSelectProps extends BaseSelectProps {
+export interface SimpleSelectProps extends BaseSelectProps {
   items: SelectItem[];
 }
 
