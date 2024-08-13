@@ -1,0 +1,77 @@
+import { Meta, Story, Controls, Canvas, Primary } from "@storybook/blocks";
+
+import * as stories from "./InputField.stories";
+
+<Meta of={stories} />
+
+# InputField
+
+`InputField` 컴포넌트는 Label, Input, ErrorMessage를 조합할 수 있는 합성 컴포넌트입니다.
+
+---
+
+- [Overview](#overview)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Primary />
+
+## Description
+
+`InputField` 컴포넌트는 Label, Input, ErrorMessage를 조합할 수 있는 합성 컴포넌트입니다.
+
+- InputField로 영역을 감싸고 Label과 Input을 배치합니다.
+
+```tsx
+<InputField>
+  <InputField.Label htmlFor="example">Label</InputField.Label>
+  <InputField.Input id="example" placeholder="Enter text here" />
+</InputField>
+```
+
+- Label과 ErrorMessage를 제외한 모든 값은 Input 영역으로 포함됩니다.
+
+```tsx
+<InputField>
+  <InputField.Label htmlFor="phone">Phone Number</InputField.Label>
+  <Select
+    placeholder="선택"
+    items={[
+      { value: "010", name: "010" },
+      { value: "02", name: "02" },
+      { value: "031", name: "031" },
+      { value: "032", name: "032" },
+    ]}
+  />
+  <InputField.Input id="middle" placeholder="" type="number" maxLength={4} />
+  <InputField.Input id="last" placeholder="" type="number" maxLength={4} />
+</InputField>
+```
+
+## Usage
+
+### Default
+
+단순 Input을 제공하는 InputField 컴포넌트의 사용 예시입니다.
+
+<Canvas of={stories.Default} meta={stories} />
+
+### WithFailedMessage
+
+ErrorMessage와 함께 사용된 InputField 컴포넌트의 사용 예시입니다.
+
+<Canvas of={stories.WithFailedMessage} meta={stories} />
+
+### WithSelectBox
+
+여러 컴포넌트를 Input 영역으로 사용하는 예시입니다.
+
+<Canvas of={stories.WithSelectBox} meta={stories} />
+
+### Disabled
+
+비활성화된 InputField 컴포넌트의 사용 예시입니다.
+
+<Canvas of={stories.Disabled} meta={stories} />
