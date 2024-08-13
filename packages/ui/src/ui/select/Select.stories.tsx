@@ -27,6 +27,7 @@ export default meta;
 const Template: StoryFn<typeof Select> = (args) => <Select {...args} />;
 
 export const Simple = Template.bind({});
+
 Simple.args = {
   placeholder: "Theme",
   items: [

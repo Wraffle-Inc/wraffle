@@ -15,7 +15,7 @@ import {
 import { cn } from "@/shared/utils";
 import { Label, ErrorMessage } from "@/ui/form";
 
-const Form = FormProvider;
+const PrimitiveForm = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -166,7 +166,7 @@ FormMessage.displayName = "FormMessage";
 
 export {
   useFormField,
-  Form,
+  PrimitiveForm,
   FormItem,
   FormLabel,
   FormControl,
