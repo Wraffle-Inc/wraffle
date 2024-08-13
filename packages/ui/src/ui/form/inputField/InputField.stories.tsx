@@ -1,3 +1,4 @@
+import { Select } from "@/ui/select/Select";
 import { InputField } from "./InputField";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -30,6 +31,37 @@ export const WithFailedMessage: Story = {
         <InputField.ErrorMessage isError>
           Failed message
         </InputField.ErrorMessage>
+      </InputField>
+    ),
+  },
+};
+
+export const WithSelectBox: Story = {
+  args: {
+    children: (
+      <InputField>
+        <InputField.Label htmlFor="phone">Phone Number</InputField.Label>
+        <Select
+          placeholder="선택"
+          items={[
+            { value: "010", name: "010" },
+            { value: "02", name: "02" },
+            { value: "031", name: "031" },
+            { value: "032", name: "032" },
+          ]}
+        />
+        <InputField.Input
+          id="middle"
+          placeholder=""
+          type="number"
+          maxLength={4}
+        />
+        <InputField.Input
+          id="last"
+          placeholder=""
+          type="number"
+          maxLength={4}
+        />
       </InputField>
     ),
   },

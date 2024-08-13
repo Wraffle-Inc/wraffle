@@ -20,7 +20,7 @@ const InputField = ({ children }: InputFieldProps) => {
   return (
     <div>
       <div className="mb-2">{labelComponent}</div>
-      {restComponents}
+      <div className="inline-flex gap-4">{restComponents}</div>
       <div className="min-h-6">{errorMessageComponent}</div>
     </div>
   );
