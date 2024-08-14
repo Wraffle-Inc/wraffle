@@ -9,6 +9,7 @@ const meta: Meta<typeof TooltipDemo> = {
       control: { type: "text" },
     },
   },
+  tags: ["autodocs"],
 };
 
 export default meta;

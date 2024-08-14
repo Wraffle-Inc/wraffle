@@ -12,6 +12,7 @@ const meta: Meta<typeof RoundButton> = {
       control: { type: "text" },
     },
   },
+  tags: ["autodocs"],
 };
 
 export default meta;
