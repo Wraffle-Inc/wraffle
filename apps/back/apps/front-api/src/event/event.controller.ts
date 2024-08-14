@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseInterceptors,
 } from "@nestjs/common";
 import { EventService } from "apps/application/event/service/event.service";
@@ -18,6 +19,7 @@ import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
 import { Public } from "apps/application/common/auth/public.decorator";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
 import { EventViewCountInterceptor } from "apps/application/event/interceptor/event-view-count.interceptor";
+import { ModifyEventDto } from "apps/application/event/dto/request/modify-event.dto";
 
 @Controller("events")
 export class EventController {
@@ -65,5 +67,19 @@ export class EventController {
   @Public()
   async deleteEventById(@Param("id") id: number): Promise<IResponse<null>> {
     return this.eventService.deleteEventById(id);
+  }
+
+  @ApiOperation({
+    summary: "이벤트 수정",
+    operationId: "modifyEvent",
+    tags: ["event"],
+  })
+  @Put(":id")
+  @Public()
+  async modifyEventById(
+    @Param("id") id: number,
+    @Body() dto: ModifyEventDto,
+  ): Promise<IResponse<any>> {
+    return this.eventService.modifyEventById(id, dto);
   }
 }
