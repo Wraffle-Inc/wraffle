@@ -1,4 +1,4 @@
-import { Select } from "@/ui/select/Select";
+import { Select } from "@/ui/form";
 import { InputField } from "./InputField";
 import type { Meta } from "@storybook/react";
 
