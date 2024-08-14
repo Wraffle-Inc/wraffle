@@ -2,7 +2,7 @@ import { Select } from "./Select";
 import type { Meta, StoryFn } from "@storybook/react";
 
 const meta: Meta<typeof Select> = {
-  title: "Select",
+  title: "Form/Select",
   component: Select,
   argTypes: {
     placeholder: {
