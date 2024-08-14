@@ -120,13 +120,47 @@ export class EventService {
         id: id,
         isDeleted: false,
       },
+      select: [
+        "id",
+        "title",
+        "price",
+        "startDate",
+        "endDate",
+        "announceAt",
+        "description",
+        "etc",
+        "status",
+        "clipCount",
+        "applyCount",
+        "createUserId",
+      ],
+      relations: [
+        "eventProducts",
+        "eventHashtags",
+        "eventProducts.product.productHashtags",
+      ],
+    });
+
+    const images = await this.imagesRepository.find({
+      where: { targetId: id, type: RaffleType.EVENT },
     });
 
     if (!event) {
       return new CustomResponse<GetEventDto>(404, "E001", null);
     }
 
-    const eventDto = plainToInstance(GetEventDto, event);
+    const eventDto = plainToInstance(GetEventDto, {
+      ...event,
+      type: RaffleType.EVENT,
+      tagIds: event.eventHashtags.map((eh) => eh.hashtagId),
+      images: images.map((image) => image.url),
+      products: event.eventProducts.map((ep) => ({
+        id: ep.product.id,
+        name: ep.product.title,
+        imageUrl: ep.product.imageUrl,
+        tagIds: (ep.product.productHashtags || []).map((ph) => ph.hashtagId),
+      })),
+    });
 
     return new CustomResponse<GetEventDto>(200, "E002", eventDto);
   }

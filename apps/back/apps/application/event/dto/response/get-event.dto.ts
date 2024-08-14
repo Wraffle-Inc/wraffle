@@ -1,5 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt } from "class-validator";
+import { IsInt, IsString } from "class-validator";
+import { GetProductDto } from "apps/application/product/dto/request/get-product.dto";
+import { Exclude } from "class-transformer";
+import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
+import { EventProduct } from "apps/domain/event/event-product.entity";
 
 export class GetEventDto {
   @ApiProperty({
@@ -8,6 +12,13 @@ export class GetEventDto {
   })
   @IsInt()
   id: number;
+
+  @ApiProperty({
+    example: "EVENT",
+    description: "타입",
+  })
+  @IsString()
+  type: string;
 
   @ApiProperty({
     example: "이벤트 제목",
@@ -58,6 +69,12 @@ export class GetEventDto {
   applyCount: number;
 
   @ApiProperty({
+    example: "waiting",
+    description: "이벤트 상태",
+  })
+  status: string;
+
+  @ApiProperty({
     example: "1",
     description: "이벤트 주최자 ID",
   })
@@ -74,4 +91,24 @@ export class GetEventDto {
     description: "이미지 URL 리스트",
   })
   images: string[];
+
+  @ApiProperty({
+    example: [
+      {
+        id: 1,
+        name: "상품 이름",
+        price: 10000,
+        imageUrl: "상품 이미지 URL",
+        tagIds: [1, 2, 3],
+      },
+    ],
+    description: "상품 리스트",
+  })
+  products: GetProductDto[];
+
+  @Exclude()
+  eventHashtags: EventHashtag[];
+
+  @Exclude()
+  eventProducts: EventProduct[];
 }
