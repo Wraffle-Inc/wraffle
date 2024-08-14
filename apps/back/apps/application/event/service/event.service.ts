@@ -18,6 +18,7 @@ import { Images } from "apps/domain/image/image.entity";
 import { RaffleType } from "apps/domain/common/enum/raffle.enum";
 import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
+import { ModifyEventDto } from "apps/application/event/dto/request/modify-event.dto";
 
 // TODO: Error 처리는 추후에 통일
 @Injectable()
@@ -206,6 +207,76 @@ export class EventService {
     await this.eventRepository.save(event);
 
     return new CustomResponse<null>(204, "E003", null);
+  }
+
+  // 이벤트 수정
+  @Transactional()
+  async modifyEventById(
+    id: number,
+    dto: ModifyEventDto,
+  ): Promise<IResponse<any>> {
+    const event = await this.eventRepository.findOne({
+      where: { id, isDeleted: false },
+      relations: ["eventProducts", "eventHashtags"],
+    });
+
+    if (!event) {
+      return new CustomResponse<any>(404, "E001", null);
+    }
+
+    // 이벤트 데이터 업데이트
+    event.title = dto.title;
+    event.price = dto.price;
+    event.startDate = dto.startDate;
+    event.endDate = dto.endDate;
+    event.announceAt = dto.announceAt;
+    event.description = dto.description;
+    event.etc = dto.etc;
+    event.categoryId = dto.categoryId;
+    event.thumbnail = dto.images[0];
+    event.updatedAt = new Date();
+
+    await this.eventRepository.save(event);
+
+    // 이미지 업데이트
+    const existingImages = await this.imagesRepository.find({
+      where: { targetId: event.id, type: RaffleType.EVENT },
+    });
+
+    for (let i = 0; i < dto.images.length; i++) {
+      if (existingImages[i]) {
+        existingImages[i].url = dto.images[i];
+        await this.imagesRepository.save(existingImages[i]);
+      } else {
+        const newImage = this.imagesRepository.create({
+          url: dto.images[i],
+          type: RaffleType.EVENT,
+          targetId: event.id,
+        });
+        await this.imagesRepository.save(newImage);
+      }
+    }
+
+    // 해시태그 업데이트
+    const existingEventHashtags = await this.eventHashtagRepository.find({
+      where: { eventId: event.id },
+    });
+
+    // 기존 해시태그를 새로운 해시태그로 교체
+    for (let i = 0; i < dto.tagIds.length; i++) {
+      if (existingEventHashtags[i]) {
+        existingEventHashtags[i].hashtagId = dto.tagIds[i];
+        await this.eventHashtagRepository.save(existingEventHashtags[i]);
+      } else {
+        const newEventHashtag = this.eventHashtagRepository.create({
+          eventId: event.id,
+          hashtagId: dto.tagIds[i],
+        });
+        await this.eventHashtagRepository.save(newEventHashtag);
+      }
+    }
+
+    return new CustomResponse<any>(200, "E004", { id: event.id });
   }
 
   async increaseViewCount(id: number): Promise<void> {
