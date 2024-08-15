@@ -45,22 +45,23 @@ const Select = ({ placeholder, items }: SelectProps) => {
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
-        {isGroupSelect(items)
-          ? items.map((group) => (
-              <SelectGroup key={group.groupName}>
-                <SelectLabel>{group.groupName}</SelectLabel>
-                {group.groupItems.map((item) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.name}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            ))
-          : items.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                {item.name}
-              </SelectItem>
-            ))}
+        {isGroupSelect(items) &&
+          items.map((group) => (
+            <SelectGroup key={group.groupName}>
+              <SelectLabel>{group.groupName}</SelectLabel>
+              {group.groupItems.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          ))}
+        {!isGroupSelect(items) &&
+          items.map((item) => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.name}
+            </SelectItem>
+          ))}
       </SelectContent>
     </SelectRoot>
   );
