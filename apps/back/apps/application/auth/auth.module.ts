@@ -9,7 +9,6 @@ import { JwtStrategy } from "./jwt.strategy";
 import { RoleStrategy } from "./role.strategy";
 import { AuthService } from "./service/auth.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { RefreshTokenService } from "apps/application/auth/service/refresh-token.service";
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { RefreshTokenService } from "apps/application/auth/service/refresh-token
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
     AuthService,
-    RefreshTokenService,
   ],
   exports: [AuthService],
 })

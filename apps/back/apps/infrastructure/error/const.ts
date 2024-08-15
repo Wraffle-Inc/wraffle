@@ -7,4 +7,5 @@ export const ErrorCode = {
   // A: Auth - 인증 관련 에러 코드
   DUPLICATE_EMAIL: "A002",
   DUPLICATE_NICKNAME: "A003",
+  AUTH_FAILED: "A004",
 };

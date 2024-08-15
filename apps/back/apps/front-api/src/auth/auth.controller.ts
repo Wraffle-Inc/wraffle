@@ -1,14 +1,17 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Res } from "@nestjs/common";
 import { LoginWithEmailDto } from "apps/application/auth/dto/request/login-with-email.dto";
 import { LoginResultDto } from "apps/application/auth/dto/response/login-result.dto";
 import { AuthService } from "apps/application/auth/service/auth.service";
 import { Public } from "apps/application/common/auth/public.decorator";
-import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
+import { Response } from "express";
+import { ApiBearerAuth, ApiOkResponse, ApiOperation } from "@nestjs/swagger";
 import {
   IResponse,
   ResponseDto,
 } from "apps/application/common/response/response";
 import { SignUpDto } from "apps/application/auth/dto/request/sign-up.dto";
+import { RefreshTokenDto } from "apps/application/auth/dto/request/refresh-token.dto";
+import { AuthFailedException } from "apps/infrastructure/error";
 
 @Controller({ path: "auth", version: "1" })
 export class AuthController {
@@ -42,5 +45,34 @@ export class AuthController {
   @Post("/signup")
   async signUp(@Body() dto: SignUpDto): Promise<IResponse<LoginResultDto>> {
     return this.authService.signUp(dto);
+  }
+
+  @ApiOperation({
+    summary: "토큰 재발급",
+    operationId: "refreshToken",
+    tags: ["auth"],
+  })
+  @ApiBearerAuth()
+  @Post("/refresh")
+  async refreshToken(
+    @Body() dto: RefreshTokenDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<void> {
+    try {
+      const newAccessToken = await this.authService.refreshAccessToken(
+        dto.refreshToken,
+      );
+
+      res.setHeader("Authorization", "Bearer " + newAccessToken);
+      res.cookie("access_token", newAccessToken, {
+        httpOnly: true,
+      });
+
+      res.send({
+        accessToken: newAccessToken,
+      });
+    } catch (err) {
+      throw new AuthFailedException();
+    }
   }
 }

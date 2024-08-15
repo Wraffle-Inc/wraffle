@@ -6,6 +6,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
+import { ErrorCode } from "apps/infrastructure/error/const";
 
 /* 400 Bad Request */
 export class InvalidParameterException extends BadRequestException {
@@ -17,7 +18,7 @@ export class InvalidParameterException extends BadRequestException {
 /* 401 Unauthorized */
 export class AuthFailedException extends UnauthorizedException {
   constructor(message?: string, code?: string) {
-    super(message ?? "인증에 실패하였습니다.", code ?? "AUTH_FAILED");
+    super(message ?? "인증에 실패하였습니다.", code ?? ErrorCode.AUTH_FAILED);
   }
 }
 

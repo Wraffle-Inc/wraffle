@@ -198,6 +198,21 @@ export class AuthService {
     });
   }
 
+  // JWT 리프레시 토큰으로 액세스 토큰 재발급
+  async refreshAccessToken(refreshToken: string): Promise<string> {
+    const payload = this.jwtService.verify(refreshToken, {
+      secret: this.configService.get<string>("JWT_SECRET"),
+    });
+
+    const user = await this.authUserWithIdAndRole(payload.sub, payload.role);
+
+    if (!user) {
+      throw new AuthFailedException();
+    }
+
+    return this.generateAccessToken(user.id);
+  }
+
   // 이메일 중복 체크
   async validDuplicateEmail(email: string): Promise<void> {
     const user = await this.userRepository.findOne({ where: { email } });
