@@ -24,6 +24,7 @@ import { AgreementVersion } from "apps/domain/agreement/agreement-version/agreem
 import { AgreementType } from "apps/domain/common/enum/agreement.enum";
 import { ErrorCode, ErrorMessage } from "apps/infrastructure/error/const";
 import { ConfigService } from "@nestjs/config";
+import { RedisService } from "apps/infrastructure/cache/redis/redis.service";
 
 @Injectable()
 export class AuthService {
@@ -37,6 +38,7 @@ export class AuthService {
 
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly redisService: RedisService,
   ) {}
 
   // 유저 이메일, 비밀번호로 인증 및 토큰발급
@@ -45,9 +47,23 @@ export class AuthService {
   ): Promise<IResponse<LoginResultDto>> {
     const user = await this.authUserWithEmail(dto.email, dto.password);
 
+    const accessToken = await this.generateAccessToken(user.id);
+    const refreshToken = await this.generateRefreshToken(user.id);
+
+    await this.redisService.set(
+      `auth:${user.id}`,
+      {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      },
+      {
+        ttl: 1000 * 60 * 60 * 24 * 7, //7d
+      },
+    );
+
     const loginDto = plainToInstance(LoginResultDto, {
-      accessToken: await this.generateAccessToken(user.id),
-      refreshToken: await this.generateRefreshToken(user.id),
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     });
 
     return new CustomResponse<LoginResultDto>(200, "A001", loginDto);
@@ -57,9 +73,23 @@ export class AuthService {
   async loginUserWithId(userId: number): Promise<LoginResultDto> {
     const user = await this.authUserWithIdAndRole(userId, UserRole.USER);
 
+    const accessToken = await this.generateAccessToken(user.id);
+    const refreshToken = await this.generateRefreshToken(user.id);
+
+    await this.redisService.set(
+      `auth:${user.id}`,
+      {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      },
+      {
+        ttl: 1000 * 60 * 60 * 24 * 7, //7d
+      },
+    );
+
     return plainToInstance(LoginResultDto, {
-      accessToken: await this.generateAccessToken(user.id),
-      refreshToken: await this.generateRefreshToken(user.id),
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     });
   }
 
@@ -210,7 +240,27 @@ export class AuthService {
       throw new AuthFailedException();
     }
 
+    await this.verifyIfRefreshTokenMatches(refreshToken, user.id);
+
     return this.generateAccessToken(user.id);
+  }
+
+  // JWT 리프레시 토큰 검증
+  async verifyIfRefreshTokenMatches(refreshToken: string, userId: number) {
+    const userAuthInfo = await this.redisService.get(`auth:${userId}`);
+
+    if (!userAuthInfo) {
+      return null;
+    }
+
+    const isRefreshTokenMatching = userAuthInfo.refreshToken === refreshToken;
+
+    if (!isRefreshTokenMatching) {
+      throw new RuntimeException(
+        ErrorMessage.INVALID_REFRESH_TOKEN,
+        ErrorCode.INVALID_REFRESH_TOKEN,
+      );
+    }
   }
 
   // 이메일 중복 체크

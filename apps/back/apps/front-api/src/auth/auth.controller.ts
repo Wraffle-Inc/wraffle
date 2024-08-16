@@ -12,6 +12,7 @@ import {
 import { SignUpDto } from "apps/application/auth/dto/request/sign-up.dto";
 import { RefreshTokenDto } from "apps/application/auth/dto/request/refresh-token.dto";
 import { AuthFailedException } from "apps/infrastructure/error";
+import { ErrorMessage } from "apps/infrastructure/error/const";
 
 @Controller({ path: "auth", version: "1" })
 export class AuthController {
@@ -72,7 +73,8 @@ export class AuthController {
         accessToken: newAccessToken,
       });
     } catch (err) {
-      throw new AuthFailedException();
+      console.log(err);
+      throw new AuthFailedException(ErrorMessage.FAILED_TO_REFRESH_TOKEN);
     }
   }
 }

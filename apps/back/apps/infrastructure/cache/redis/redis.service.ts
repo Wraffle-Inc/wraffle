@@ -11,7 +11,8 @@ export class RedisService {
   }
 
   async set(key: string, value: any, option?: any) {
-    await this.redis.set(key, value, option);
+    const { ttl } = option;
+    await this.redis.set(key, value, ttl);
   }
 
   async reset() {
