@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
@@ -56,17 +55,6 @@ export class EventController {
   @UseInterceptors(EventViewCountInterceptor)
   async getEventById(@Param("id") id: number): Promise<IResponse<GetEventDto>> {
     return this.eventService.getEventById(id);
-  }
-
-  @ApiOperation({
-    summary: "이벤트 삭제",
-    operationId: "deleteEvent",
-    tags: ["event"],
-  })
-  @Delete(":id")
-  @Public()
-  async deleteEventById(@Param("id") id: number): Promise<IResponse<null>> {
-    return this.eventService.deleteEventById(id);
   }
 
   @ApiOperation({
