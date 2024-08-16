@@ -20,7 +20,6 @@ import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
 import { ModifyEventDto } from "apps/application/event/dto/request/modify-event.dto";
 
-// TODO: Error 처리는 추후에 통일
 @Injectable()
 export class EventService {
   constructor(
@@ -38,6 +37,7 @@ export class EventService {
     private readonly eventHashtagRepository: Repository<EventHashtag>,
   ) {}
 
+  // TODO: Error 처리는 추후에 통일
   // TODO: SignUp API 추가 되면 테스트 후 @CurrentUser()로 사용자 정보 가져와서 createUserId에 넣어주기
   @Transactional()
   async createEvent(
