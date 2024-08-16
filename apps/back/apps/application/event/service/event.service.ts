@@ -38,12 +38,12 @@ export class EventService {
     private readonly eventHashtagRepository: Repository<EventHashtag>,
   ) {}
 
+  // TODO: SignUp API 추가 되면 테스트 후 @CurrentUser()로 사용자 정보 가져와서 createUserId에 넣어주기
   @Transactional()
   async createEvent(
     dto: CreateEventDto,
   ): Promise<IResponse<CreateEventResultDto>> {
     // 이벤트 생성
-    // TODO: SignUp API 추가 되면 테스트 후 @CurrentUser()로 사용자 정보 가져와서 createUserId에 넣어주기
     const event = this.eventRepository.create({
       ...dto,
       thumbnail: dto.images[0],
@@ -164,49 +164,6 @@ export class EventService {
     });
 
     return new CustomResponse<GetEventDto>(200, "E002", eventDto);
-  }
-
-  // 이벤트 삭제
-  @Transactional()
-  async deleteEventById(id: number): Promise<IResponse<null>> {
-    const event = await this.eventRepository.findOne({
-      where: { id },
-      relations: ["eventProducts", "eventHashtags"],
-    });
-
-    if (!event) {
-      return new CustomResponse<null>(404, "E001", null);
-    }
-
-    const now = new Date();
-
-    for (const eventProduct of event.eventProducts) {
-      eventProduct.deletedAt = now;
-      eventProduct.isDeleted = true;
-      await this.eventProductRepository.save(eventProduct);
-    }
-
-    for (const eventHashtag of event.eventHashtags) {
-      eventHashtag.deletedAt = now;
-      eventHashtag.isDeleted = true;
-      await this.eventHashtagRepository.save(eventHashtag);
-    }
-
-    const images = await this.imagesRepository.find({
-      where: { targetId: id, type: RaffleType.EVENT },
-    });
-
-    for (const image of images) {
-      image.deletedAt = now;
-      image.isDeleted = true;
-      await this.imagesRepository.save(image);
-    }
-
-    event.deletedAt = now;
-    event.isDeleted = true;
-    await this.eventRepository.save(event);
-
-    return new CustomResponse<null>(204, "E003", null);
   }
 
   // 이벤트 수정
