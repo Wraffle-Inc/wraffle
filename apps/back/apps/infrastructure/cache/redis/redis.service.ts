@@ -10,9 +10,8 @@ export class RedisService {
     return await this.redis.get(key);
   }
 
-  async set(key: string, value: any, option?: any) {
-    const { ttl } = option;
-    await this.redis.set(key, value, ttl);
+  async set(key: string, value: any, ttl?: number) {
+    await this.redis.set(key, value, ttl ?? 0);
   }
 
   async reset() {

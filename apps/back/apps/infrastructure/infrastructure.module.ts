@@ -36,10 +36,11 @@ import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
 import { EventProduct } from "apps/domain/event/event-product.entity";
 import { Raffle } from "apps/domain/raffle/raffle.entity";
 import { RaffleHashtag } from "apps/domain/raffle/raffle-hashtag.entity";
-import { ConfigService } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { CacheModule } from "@nestjs/cache-manager";
-import * as redisStore from "cache-manager-redis-store";
 import { RedisService } from "apps/infrastructure/cache/redis/redis.service";
+import Redis from "ioredis";
+import { ioRedisStore } from "@tirke/node-cache-manager-ioredis";
 
 const entities = [
   AgreementHistory,
@@ -72,19 +73,32 @@ const entities = [
 
 const clients = [NhnCloudService, RedisService];
 
-const cacheModule = CacheModule.register({
-  useFactory: async () => ({
-    store: redisStore,
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    ttl: 1000, // 캐시 기본 유지시간: 10s
-  }),
-});
-
 @Global()
 @Module({
   imports: [
-    cacheModule,
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const redisClient = new Redis({
+          host: configService.get<string>("REDIS_HOST"),
+          port: parseInt(configService.get<string>("REDIS_PORT")),
+          retryStrategy: (times) => {
+            if (times > 600) {
+              return null;
+            }
+            return 1000;
+          },
+        });
+
+        return {
+          store: ioRedisStore({
+            redisInstance: redisClient,
+          }),
+        };
+      },
+      isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       useFactory: async () => {
         const config =

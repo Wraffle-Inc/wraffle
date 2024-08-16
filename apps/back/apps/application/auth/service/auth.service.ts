@@ -56,9 +56,7 @@ export class AuthService {
         accessToken: accessToken,
         refreshToken: refreshToken,
       },
-      {
-        ttl: 1000 * 60 * 60 * 24 * 7, //7d
-      },
+      60 * 60 * 24 * 7, //7d
     );
 
     const loginDto = plainToInstance(LoginResultDto, {
@@ -82,9 +80,7 @@ export class AuthService {
         accessToken: accessToken,
         refreshToken: refreshToken,
       },
-      {
-        ttl: 1000 * 60 * 60 * 24 * 7, //7d
-      },
+      60 * 60 * 24 * 7, //7d
     );
 
     return plainToInstance(LoginResultDto, {
