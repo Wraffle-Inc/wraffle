@@ -233,7 +233,7 @@ export class EventService {
       }
     }
 
-    return new CustomResponse<any>(200, "E004", { id: event.id });
+    return new CustomResponse<any>(200, "E003", { id: event.id });
   }
 
   async increaseViewCount(id: number): Promise<void> {
