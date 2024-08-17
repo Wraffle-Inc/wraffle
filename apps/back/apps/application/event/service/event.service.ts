@@ -238,7 +238,7 @@ export class EventService {
 
   async increaseViewCount(id: number): Promise<void> {
     const event = await this.eventRepository.findOne({ where: { id } });
-    if (event.isDeleted) {
+    if (!event || event.isDeleted) {
       return;
     }
     await this.eventRepository.increment({ id }, "viewCount", 1);
