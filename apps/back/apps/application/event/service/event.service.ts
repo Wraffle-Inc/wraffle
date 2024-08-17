@@ -19,6 +19,7 @@ import { RaffleType } from "apps/domain/common/enum/raffle.enum";
 import { ProductHashtag } from "apps/domain/product/product-hashtag.entity";
 import { GetEventDto } from "apps/application/event/dto/response/get-event.dto";
 import { ModifyEventDto } from "apps/application/event/dto/request/modify-event.dto";
+import { ResourceNotFoundException } from "apps/infrastructure/error";
 
 @Injectable()
 export class EventService {
@@ -147,7 +148,7 @@ export class EventService {
     });
 
     if (!event) {
-      return new CustomResponse<GetEventDto>(404, "E001", null);
+      throw new ResourceNotFoundException("이벤트를 찾을 수 없습니다.", "E001");
     }
 
     const eventDto = plainToInstance(GetEventDto, {
@@ -178,7 +179,7 @@ export class EventService {
     });
 
     if (!event) {
-      return new CustomResponse<any>(404, "E001", null);
+      throw new ResourceNotFoundException("이벤트를 찾을 수 없습니다.", "E001");
     }
 
     // 이벤트 데이터 업데이트
