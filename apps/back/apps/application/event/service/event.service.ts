@@ -172,7 +172,7 @@ export class EventService {
   async modifyEventById(
     id: number,
     dto: ModifyEventDto,
-  ): Promise<IResponse<any>> {
+  ): Promise<IResponse<void>> {
     const event = await this.eventRepository.findOne({
       where: { id, isDeleted: false },
       relations: ["eventProducts", "eventHashtags"],
@@ -234,7 +234,7 @@ export class EventService {
       }
     }
 
-    return new CustomResponse<any>(200, "E003", { id: event.id });
+    return new CustomResponse<any>(204, "E003", null);
   }
 
   async increaseViewCount(id: number): Promise<void> {
