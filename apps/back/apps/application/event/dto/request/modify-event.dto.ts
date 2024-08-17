@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsDate, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsDate, IsInt, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 
 export class ModifyEventDto {
@@ -7,7 +7,6 @@ export class ModifyEventDto {
     example: "이벤트 제목",
     description: "이벤트 제목",
   })
-  @IsNotEmpty()
   @IsString()
   title: string;
 
@@ -15,7 +14,6 @@ export class ModifyEventDto {
     example: 10000,
     description: "이벤트 가격",
   })
-  @IsNotEmpty()
   @IsInt()
   price: number;
 
@@ -23,7 +21,6 @@ export class ModifyEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "이벤트 시작일",
   })
-  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   startDate: Date;
@@ -32,7 +29,6 @@ export class ModifyEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "이벤트 종료일",
   })
-  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   endDate: Date;
@@ -41,7 +37,6 @@ export class ModifyEventDto {
     example: "2021-08-05T00:00:00.000Z",
     description: "당첨 발표일",
   })
-  @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   announceAt: Date;
@@ -50,7 +45,6 @@ export class ModifyEventDto {
     example: "이벤트 설명",
     description: "이벤트 설명",
   })
-  @IsNotEmpty()
   @IsString()
   description: string;
 
@@ -58,7 +52,7 @@ export class ModifyEventDto {
     example: "기타",
     description: "기타",
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   etc: string;
 
@@ -66,7 +60,6 @@ export class ModifyEventDto {
     example: 1,
     description: "카테고리 ID",
   })
-  @IsNotEmpty()
   @IsInt()
   categoryId: number;
 
@@ -74,7 +67,6 @@ export class ModifyEventDto {
     example: [1, 2],
     description: "태그 ID",
   })
-  @IsNotEmpty()
   @IsInt({ each: true })
   @IsArray()
   tagIds: number[];
@@ -83,7 +75,6 @@ export class ModifyEventDto {
     example: ["이미지 URL"],
     description: "이미지 URL",
   })
-  @IsNotEmpty()
   @IsString({ each: true })
   images: string[];
 }
