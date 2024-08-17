@@ -1,5 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsString } from "class-validator";
 import { GetProductDto } from "apps/application/product/dto/request/get-product.dto";
 import { Exclude } from "class-transformer";
 import { EventHashtag } from "apps/domain/event/event-hashtag.entity";
@@ -10,14 +9,12 @@ export class GetEventDto {
     example: 1,
     description: "이벤트 ID",
   })
-  @IsInt()
   id: number;
 
   @ApiProperty({
     example: "EVENT",
     description: "타입",
   })
-  @IsString()
   type: string;
 
   @ApiProperty({
