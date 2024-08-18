@@ -1,0 +1,54 @@
+{/* Checkbox.mdx */}
+
+import {
+  Canvas,
+  Meta,
+  Primary,
+  Controls,
+  Description,
+} from '@storybook/blocks';
+
+import * as CheckboxStories from './CheckBox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+CheckBox는 선택하면 활성화 또는 비활성화할 수 있는 사각형 상자입니다.
+
+<Canvas of={CheckboxStories.CheckBoxPreview} />
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Stories](#stories)
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Stories
+
+### Disabled
+
+<Canvas of={CheckboxStories.CheckBoxDisabled} />
+
+### Checked
+
+<Canvas of={CheckboxStories.CheckBoxChecked} />
+
+### CheckedDisabled
+
+<Canvas of={CheckboxStories.CheckBoxCheckedDisabled} />
+
+### Label
+
+<Canvas of={CheckboxStories.CheckBoxWithLabel} />
+
+### GroupCheckBox
+
+<Canvas of={CheckboxStories.CheckBoxGroup} />
