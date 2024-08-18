@@ -1,0 +1,34 @@
+import { Meta, Story, Controls, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as stories from "./Tooltip.stories";
+
+<Meta title="Components/Tooltip" component={stories.Tooltip} of={stories} />
+
+# Tooltip Component
+
+`TooltipDemo` 컴포넌트는 사용자가 요소 위에 마우스를 호버할 때 추가 정보를 제공하는 툴팁을 보여줍니다. 이 구현은 Radix UI의 툴팁 구성 요소를 사용하여 구현되었습니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Canvas of={stories.Primary} />
+
+## Props
+
+<Controls />
+
+## Description
+
+`TooltipDemo`는 사용자 인터페이스에 설명 또는 추가 정보를 동적으로 제공하기 위해 사용됩니다. 이 컴포넌트는 버튼 위에 마우스를 호버했을 때 툴팁을 활성화시킵니다.
+
+## Usage
+
+### Default Tooltip
+
+<Canvas of={stories.Primary} />

@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react";
-import { RoundButton } from "./ChipButton";
+import { ChipButton } from "./ChipButton";
 
-const meta: Meta<typeof RoundButton> = {
-  title: "Components/RoundButton",
-  component: RoundButton,
+const meta: Meta<typeof ChipButton> = {
+  title: "Components/ChipButton",
+  component: ChipButton,
   argTypes: {
     selected: {
       control: { type: "boolean" },
@@ -12,17 +12,19 @@ const meta: Meta<typeof RoundButton> = {
       control: { type: "text" },
     },
   },
-  tags: ["autodocs"],
 };
 
 export default meta;
 
-const Template: StoryFn<typeof RoundButton> = (args) => (
-  <RoundButton {...args} />
-);
+const Template: StoryFn<typeof ChipButton> = (args) => <ChipButton {...args} />;
 
-export const ChipButton = Template.bind({});
-ChipButton.args = {
+export const ChipSelected = Template.bind({});
+ChipSelected.args = {
+  children: "Category",
+  selected: true,
+};
+export const ChipNotSelected = Template.bind({});
+ChipNotSelected.args = {
   children: "Category",
   selected: false,
 };
