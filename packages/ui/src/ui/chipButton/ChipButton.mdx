@@ -1,0 +1,45 @@
+import { Meta, Story, Controls, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as stories from "./ChipButton.stories";
+
+<Meta
+  title="Components/ChipButton"
+  component={stories.ChipButton}
+  of={stories}
+/>
+
+# ChipButton Component
+
+`ChipButton` 컴포넌트는 사용자 인터페이스에서 카테고리나 선택항목을 시각적으로 표시하는 데 사용됩니다. 이 버튼은 선택 상태에 따라 스타일이 변경됩니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Canvas of={stories.ChipNotSelected} meta={stories} />
+
+## Props
+
+<Controls />
+
+## Description
+
+`ChipButton`은 선택 상태에 따라 두 가지 주요 스타일 변형을 제공합니다:
+
+- **Not Selected**: 기본 상태로, 일반적으로 더 밝은 배경 색과 어두운 텍스트 색을 사용하여 비활성화 상태임을 나타냅니다.
+- **Selected**: 사용자가 항목을 선택했을 때, 강조된 배경 색과 밝은 텍스트 색으로 활성화 상태를 표시합니다.
+
+## Usage
+
+### Default ChipButton
+
+<Canvas of={stories.ChipNotSelected} meta={stories} />
+
+### Selected ChipButton
+
+<Canvas of={stories.ChipSelected} meta={stories} />

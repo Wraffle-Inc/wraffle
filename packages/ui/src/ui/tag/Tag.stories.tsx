@@ -9,13 +9,13 @@ const meta: Meta<typeof Tag> = {
       control: { type: "text" },
     },
   },
-  tags: ["autodocs"],
 };
 
 export default meta;
 
 const Template: StoryFn<typeof Tag> = (args) => <Tag {...args} />;
-export const Default = Template.bind({});
-Default.args = {
+
+export const Primary = Template.bind({});
+Primary.args = {
   children: "Tag",
 };

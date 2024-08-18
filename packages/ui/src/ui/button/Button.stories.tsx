@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react";
-
 import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
+  title: "Components/Buttons",
   component: Button,
   argTypes: {
     variant: {
@@ -16,7 +16,6 @@ const meta: Meta<typeof Button> = {
       control: { type: "text" },
     },
   },
-  tags: ["autodocs"],
 };
 
 export default meta;
@@ -31,3 +30,6 @@ Gray.args = { children: "회색 버튼", variant: "gray" };
 
 export const Stroke = Template.bind({});
 Stroke.args = { children: "테두리 버튼", variant: "stroke" };
+
+export const Disabled = Template.bind({});
+Disabled.args = { children: "비활성 버튼", disabled: true };

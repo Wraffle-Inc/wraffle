@@ -1,0 +1,35 @@
+import { Meta, Story, Controls, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as stories from "./Tag.stories";
+
+<Meta title="Components/Tag" component={stories.Tag} of={stories} />
+
+# Tag Component
+
+`Tag` 컴포넌트는 정보를 카테고리화하고 표시하는 데 사용되는 소규모 레이블입니다. 이는 리스트나 카드에 태그를 추가하여 콘텐츠의 종류를 빠르게 식별할 수 있도록 합니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Usage](#usage)
+
+## Overview
+
+<Canvas of={stories.Primary} />
+
+## Props
+
+<Controls />
+
+## Description
+
+`Tag` 컴포넌트는 시각적 식별자 역할을 하며, 사용자가 정보를 빠르게 분류하고 이해할 수 있도록 돕습니다. <br/>
+`#` 기호는 태그가 정보의 카테고리나 특성을 나타내는 데 사용되는 표준 컨벤션을 따릅니다.
+
+## Usage
+
+### Default Tag
+
+<Canvas of={stories.Primary} />

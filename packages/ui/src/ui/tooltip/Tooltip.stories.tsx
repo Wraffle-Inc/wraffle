@@ -9,7 +9,6 @@ const meta: Meta<typeof TooltipDemo> = {
       control: { type: "text" },
     },
   },
-  tags: ["autodocs"],
 };
 
 export default meta;
@@ -17,7 +16,7 @@ export default meta;
 const Template: StoryFn<typeof TooltipDemo> = (args) => (
   <TooltipDemo {...args} />
 );
-export const Default = Template.bind({});
-Default.args = {
+export const Primary = Template.bind({});
+Primary.args = {
   children: "Tooltip",
 };

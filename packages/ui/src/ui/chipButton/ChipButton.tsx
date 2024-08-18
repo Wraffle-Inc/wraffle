@@ -2,7 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils";
 
-const roundButtonVariants = cva(
+const chipButtonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed",
   {
     variants: {
@@ -17,17 +17,17 @@ const roundButtonVariants = cva(
   }
 );
 
-export interface RoundButtonProps
+export interface ChipButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof roundButtonVariants> {
+    VariantProps<typeof chipButtonVariants> {
   selected: boolean;
 }
 
-const RoundButton = React.forwardRef<HTMLButtonElement, RoundButtonProps>(
+const ChipButton = React.forwardRef<HTMLButtonElement, ChipButtonProps>(
   ({ className, selected, ...props }, ref) => {
     return (
       <button
-        className={cn(roundButtonVariants({ selected }), className)}
+        className={cn(chipButtonVariants({ selected }), className)}
         ref={ref}
         {...props}
       />
@@ -35,6 +35,6 @@ const RoundButton = React.forwardRef<HTMLButtonElement, RoundButtonProps>(
   }
 );
 
-RoundButton.displayName = "RoundButton";
+ChipButton.displayName = "ChipButton";
 
-export { RoundButton, roundButtonVariants };
+export { ChipButton, chipButtonVariants };
