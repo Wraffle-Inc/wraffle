@@ -1,30 +1,32 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import clsx from 'clsx';
+import { Label } from '../form';
 
 interface RadioGroupProps {
-  items: { value: string; label: string; disabled: boolean }[];
+  items: {
+    value: string;
+    label: string;
+    disabled: boolean;
+  }[];
   onValueChange: (value: string) => void;
-  defaultValue: string;
-  radioGroupClassName: string;
-  labelClassName: string;
+  defaultValue?: string;
+  className?: string;
 }
 
 interface RadioButtonProps {
   label: string;
   value: string;
   disabled: boolean;
-  labelClassName: string;
+  className?: string;
 }
 
 const RadioGroup = ({
   items,
   onValueChange,
   defaultValue,
-  radioGroupClassName,
-  labelClassName,
+  className,
 }: RadioGroupProps) => (
   <RadioGroupPrimitive.Root
-    className={radioGroupClassName}
+    className={className}
     defaultValue={defaultValue}
     onValueChange={onValueChange}
   >
@@ -33,7 +35,6 @@ const RadioGroup = ({
         value={item.value}
         label={item.label}
         disabled={item.disabled}
-        labelClassName={labelClassName}
       />
     ))}
   </RadioGroupPrimitive.Root>
@@ -41,20 +42,16 @@ const RadioGroup = ({
 
 export default RadioGroup;
 
-const RadioButton = ({
-  value,
-  label,
-  disabled,
-  labelClassName,
-}: RadioButtonProps) => (
+const RadioButton = ({ value, label, disabled }: RadioButtonProps) => (
   <div className='flex items-center gap-3'>
     <RadioGroupPrimitive.Item
       disabled={disabled}
       className='bg-white w-[22px] h-[22px] rounded-full border-2 border-solid  border-[#E5E8EB] disabled:cursor-not-allowed disabled:opacity-60 disabled:bg-[#F1F5F9]'
       value={value}
+      id={value}
     >
       <RadioGroupPrimitive.Indicator className='flex items-center justify-center w-full h-full relative after:w-3 after:h-3 after:rounded-full after:bg-black' />
     </RadioGroupPrimitive.Item>
-    <label className={labelClassName}>{label}</label>
+    <Label htmlFor={value}>{label}</Label>
   </div>
 );

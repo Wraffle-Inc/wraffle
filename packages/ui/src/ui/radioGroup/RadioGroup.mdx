@@ -1,0 +1,56 @@
+{/* RadioGroup.mdx */}
+
+import {
+  Canvas,
+  Meta,
+  Primary,
+  Controls,
+  Description,
+} from '@storybook/blocks';
+
+import * as RadioGroupStories from './RadioGroup.stories';
+
+<Meta of={RadioGroupStories} />
+
+# RadioButton
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+- [Stories](#stories)
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Description
+
+RadioButton을 단일로 사용하는 경우는 없다 생각하여, RadioGroup만 export하였습니다.
+
+(RadioButton을 단일로 사용하고 싶은 경우, RadioGroup에 items에 한개의 item만 넣으면 됨)
+
+```tsx
+interface ItemProps {
+  value: string;
+  label: string;
+  disabled: boolean;
+}
+```
+
+## Stories
+
+### Disabled
+
+<Canvas of={RadioGroupStories.RadioButtonDisabled} />
+
+### Checked-Disabled
+
+<Canvas of={RadioGroupStories.RadioButtonCheckedDisabled} />
+
+### RadioGroup
+
+<Canvas of={RadioGroupStories.RadioGroupDefault} />
