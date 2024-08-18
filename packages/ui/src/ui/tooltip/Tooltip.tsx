@@ -3,6 +3,7 @@ import { Button } from "@/ui/button/Button";
 import {
   Tooltip,
   TooltipContent,
+  TooltipPortal,
   TooltipProvider,
   TooltipTrigger,
   TooltipArrow,
@@ -10,15 +11,17 @@ import {
 
 const TooltipDemo = ({ children }: { children: string }) => {
   return (
-    <TooltipProvider skipDelayDuration={0} delayDuration={0}>
+    <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="default">Hover</Button>
         </TooltipTrigger>
-        <TooltipContent>
-          {children}
-          <TooltipArrow />
-        </TooltipContent>
+        <TooltipPortal>
+          <TooltipContent>
+            {children}
+            <TooltipArrow />
+          </TooltipContent>
+        </TooltipPortal>
       </Tooltip>
     </TooltipProvider>
   );
