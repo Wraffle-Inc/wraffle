@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   TooltipArrow,
-} from "./CustomTooltip";
+} from "./PrimitiveTooltip";
 
 const TooltipDemo = ({ children }: { children: string }) => {
   return (
