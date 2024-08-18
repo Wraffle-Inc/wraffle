@@ -29,7 +29,7 @@ export default function BottomNavigation() {
           <IconWithLabel
             key={label}
             label={label}
-            Icon={<SVGIcon id={id} width={20} height={20} />}
+            Icon={<SVGIcon id={id} />}
             strokeColor={
               isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'
             }
