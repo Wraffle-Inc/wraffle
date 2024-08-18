@@ -1,0 +1,39 @@
+{/* Switch.mdx */}
+
+import {
+  Canvas,
+  Meta,
+  Primary,
+  Controls,
+  Description,
+} from '@storybook/blocks';
+
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} />
+
+# Switch
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Description
+
+## Stories
+
+### Disabled
+
+<Canvas of={SwitchStories.UnSwitchDisabled} />
+
+### Switched
+
+<Canvas of={SwitchStories.Switched} />
+
+### Switched-Disabled
+
+<Canvas of={SwitchStories.SwitchedDisabled} />
