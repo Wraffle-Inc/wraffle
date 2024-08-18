@@ -16,15 +16,15 @@ interface ItemProps {
   disabled: boolean;
 }
 
-const DefaultButtonItems: ItemProps[] = [
+const defaultButtonItems: ItemProps[] = [
   { value: 'example1', label: 'Example1', disabled: false },
 ];
 
-const DisabledButtonItem: ItemProps[] = [
+const disabledButtonItem: ItemProps[] = [
   { value: 'example1', label: 'Example1', disabled: true },
 ];
 
-const GroupButtonItems: ItemProps[] = [
+const groupButtonItems: ItemProps[] = [
   { value: 'example1', label: 'Example1', disabled: false },
   { value: 'example2', label: 'Example2', disabled: false },
   { value: 'example3', label: 'Disabled Button', disabled: true },
@@ -33,7 +33,7 @@ const GroupButtonItems: ItemProps[] = [
 export const RadioButtonDefault: Story = {
   name: 'RadioButton',
   args: {
-    items: DefaultButtonItems,
+    items: defaultButtonItems,
     onValueChange: () => {},
     defaultValue: '',
     className: 'flex flex-col gap-4',
@@ -42,7 +42,7 @@ export const RadioButtonDefault: Story = {
 export const RadioButtonDisabled: Story = {
   name: 'RadioButton-Disabled',
   args: {
-    items: DisabledButtonItem,
+    items: disabledButtonItem,
     onValueChange: () => {},
     defaultValue: '',
     className: 'flex flex-col gap-4',
@@ -52,7 +52,7 @@ export const RadioButtonDisabled: Story = {
 export const RadioButtonCheckedDisabled: Story = {
   name: 'RadioButton-Checked-Disabled',
   args: {
-    items: DisabledButtonItem,
+    items: disabledButtonItem,
     onValueChange: () => {},
     defaultValue: 'example1',
     className: 'flex flex-col gap-4',
@@ -62,7 +62,7 @@ export const RadioButtonCheckedDisabled: Story = {
 export const RadioGroupDefault: Story = {
   name: 'RadioGroup',
   args: {
-    items: GroupButtonItems,
+    items: groupButtonItems,
     onValueChange: () => {},
     defaultValue: '',
     className: 'flex flex-col gap-4',
