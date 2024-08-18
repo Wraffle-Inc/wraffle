@@ -80,7 +80,6 @@ export const CheckBoxPreview: Story = {
         label=''
         disabled={true}
         onCheckedChange={() => {}}
-        className='cursor-not-allowed'
       />
       <CheckBox
         id='group3'
@@ -94,7 +93,6 @@ export const CheckBoxPreview: Story = {
         checked={true}
         disabled={true}
         onCheckedChange={() => {}}
-        className='cursor-not-allowed'
       />
       <CheckBox
         id='group5'
