@@ -1,14 +1,19 @@
 import { useState } from 'react';
 
 import IconWithLabel from '../iconWithLabel/IconWithLabel';
-import SVGIcon from '@/shared/SVGIcon';
+import SVGIcon, { SvgIconId } from '@/shared/SVGIcon';
 
-const menuItems = [
+type ItemType = {
+  id: SvgIconId;
+  label: string;
+};
+
+const menuItems: ItemType[] = [
   { id: 'menu', label: '카테고리' },
   { id: 'search', label: '검색' },
   { id: 'home', label: '홈' },
   { id: 'gift', label: '래플' },
-  { id: 'user', label: '내정보' },
+  { id: 'user-circle', label: '내정보' },
 ];
 
 export default function BottomNavigation() {
