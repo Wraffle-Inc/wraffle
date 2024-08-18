@@ -59,6 +59,12 @@ const meta = {
         },
       },
     },
+    showBadge: {
+      description: '아이콘 오른쪽 상단에 뱃지를 표시할지 여부',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     badgeCount: {
       description: '아이콘 오른쪽 상단에 표시할 숫자',
       table: {
@@ -68,12 +74,6 @@ const meta = {
         value: {
           defaultValue: null,
         },
-      },
-    },
-    showBadge: {
-      description: '아이콘 오른쪽 상단에 뱃지를 표시할지 여부',
-      table: {
-        type: { summary: 'boolean' },
       },
     },
   },

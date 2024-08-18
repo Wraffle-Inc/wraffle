@@ -28,16 +28,16 @@ interface SvgIconProps {
   id: SvgIconId;
   width?: number | string;
   height?: number | string;
-  badgeCount?: number;
   showBadge?: boolean;
+  badgeCount?: number;
 }
 
 const SVGIcon = ({
   id,
   width = 20,
   height = 20,
-  badgeCount = 0,
   showBadge = false,
+  badgeCount = 0,
 }: SvgIconProps) => (
   <div style={{ position: 'absolute' }}>
     <svg fill="none" width={width} height={height}>
