@@ -7,8 +7,8 @@ const roundButtonVariants = cva(
   {
     variants: {
       selected: {
-        true: "bg-primary text-white", // 선택된 상태
-        false: "bg-[#F4F4F5] text-[#52525B]", // 비선택된 상태
+        true: "bg-primary text-white",
+        false: "bg-[#F4F4F5] text-[#52525B]",
       },
     },
     defaultVariants: {

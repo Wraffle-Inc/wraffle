@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
-import { RoundButton } from "./RoundButton";
+import { RoundButton } from "./ChipButton";
 
 const meta: Meta<typeof RoundButton> = {
   title: "Components/RoundButton",
@@ -21,8 +21,8 @@ const Template: StoryFn<typeof RoundButton> = (args) => (
   <RoundButton {...args} />
 );
 
-export const Button = Template.bind({});
-Button.args = {
+export const ChipButton = Template.bind({});
+ChipButton.args = {
   children: "Category",
   selected: false,
 };
