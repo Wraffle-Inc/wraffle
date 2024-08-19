@@ -26,6 +26,7 @@ export type SvgIconId =
 
 interface SvgIconProps {
   id: SvgIconId;
+  withLabel?: boolean;
   width?: number | string;
   height?: number | string;
   showBadge?: boolean;
@@ -34,12 +35,13 @@ interface SvgIconProps {
 
 const SVGIcon = ({
   id,
+  withLabel,
   width = 20,
   height = 20,
   showBadge = false,
   badgeCount = 0,
 }: SvgIconProps) => (
-  <div style={{ position: 'absolute' }}>
+  <div className={clsx(withLabel && 'absolute')}>
     <svg fill="none" width={width} height={height}>
       <use href={`/icon.svg#icon-${id}`} />
     </svg>
