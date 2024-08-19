@@ -24,18 +24,6 @@ const meta: Meta<TypographyProps> = {
         ],
       },
     },
-    fontWeight: {
-      control: {
-        type: "select",
-        options: ["medium", "semibold", "bold"],
-      },
-    },
-    lineHeight: {
-      control: {
-        type: "text",
-      },
-      defaultValue: "tight",
-    },
     children: {
       control: {
         type: "text",
@@ -52,24 +40,12 @@ export const Heading = Template.bind({});
 Heading.args = {
   children: (
     <>
-      <Typography fontSize="h1" fontWeight="bold" lineHeight="tight">
-        Heading 1 (32px, Bold, 140%)
-      </Typography>
-      <Typography fontSize="h2" fontWeight="bold" lineHeight="tight">
-        Heading 2 (24px, Bold, 140%)
-      </Typography>
-      <Typography fontSize="h3" fontWeight="semibold" lineHeight="tight">
-        Heading 3 (20px, Semi Bold, 140%)
-      </Typography>
-      <Typography fontSize="h4" fontWeight="semibold" lineHeight="tight">
-        Heading 4 (17px, Semi Bold, 140%)
-      </Typography>
-      <Typography fontSize="h5" fontWeight="semibold" lineHeight="tight">
-        Heading 5 (16px, Semi Bold, 140%)
-      </Typography>
-      <Typography fontSize="h6" fontWeight="semibold" lineHeight="tight">
-        Heading 6 (15px, Semi Bold, 140%)
-      </Typography>
+      <Typography fontSize="h1">Heading 1 (32px, Bold, 140%)</Typography>
+      <Typography fontSize="h2">Heading 2 (24px, Bold, 140%)</Typography>
+      <Typography fontSize="h3">Heading 3 (20px, Semi Bold, 140%)</Typography>
+      <Typography fontSize="h4">Heading 4 (17px, Semi Bold, 140%)</Typography>
+      <Typography fontSize="h5">Heading 5 (16px, Semi Bold, 140%)</Typography>
+      <Typography fontSize="h6">Heading 6 (15px, Semi Bold, 140%)</Typography>
     </>
   ),
 };
@@ -78,18 +54,10 @@ export const Paragraph = Template.bind({});
 Paragraph.args = {
   children: (
     <>
-      <Typography fontSize="p1" fontWeight="medium" lineHeight="tight">
-        Paragraph 1 (16px, Medium, 140%)
-      </Typography>
-      <Typography fontSize="p2" fontWeight="medium" lineHeight="tight">
-        Paragraph 2 (14px, Medium, 140%)
-      </Typography>
-      <Typography fontSize="p3" fontWeight="medium" lineHeight="tight">
-        Paragraph 3 (14px, Medium, 140%)
-      </Typography>
-      <Typography fontSize="p4" fontWeight="medium" lineHeight="tight">
-        Paragraph 4 (13px, Medium, 140%)
-      </Typography>
+      <Typography fontSize="p1">Paragraph 1 (16px, Medium, 140%)</Typography>
+      <Typography fontSize="p2">Paragraph 2 (14px, Medium, 140%)</Typography>
+      <Typography fontSize="p3">Paragraph 3 (14px, Medium, 140%)</Typography>
+      <Typography fontSize="p4">Paragraph 4 (13px, Medium, 140%)</Typography>
     </>
   ),
 };
@@ -98,12 +66,8 @@ export const SmallText = Template.bind({});
 SmallText.args = {
   children: (
     <>
-      <Typography fontSize="sm1" fontWeight="medium" lineHeight="tight">
-        Small Text 1 (12px, Medium, 140%)
-      </Typography>
-      <Typography fontSize="sm2" fontWeight="medium" lineHeight="tight">
-        Small Text 2 (10px, Medium, 140%)
-      </Typography>
+      <Typography fontSize="sm1">Small Text 1 (12px, Medium, 140%)</Typography>
+      <Typography fontSize="sm2">Small Text 2 (10px, Medium, 140%)</Typography>
     </>
   ),
 };
