@@ -28,12 +28,17 @@ import * as stories from "./Typography.stories";
 
 ## Description
 
-`Typography`는 아래의 스타일을 지원합니다:
+`Typography`는 아래와 같이 사용하시면 됩니다:
 
-- **fontSize**: 글자 크기 및 스타일 설정.
-- **fontWeight**: 텍스트 굵기 설정.
-- **lineHeight**: 줄 간격 설정.
-- **color**: 텍스트 색상 설정.
+- `Typography` 컴포넌트는 h1부터 h6까지의 스타일은 기존의 `<h>` 태그에 매핑되고, p1부터 p4, sm1부터 sm2까지의 스타일은 `<p>` 태그에 매핑됩니다.
+
+  따라서, 각 스타일이 적용되는 태그를 유념하여 사용해 주세요.
+
+```tsx
+<h2 class="text-h2">This is a heading 2</h2>
+<p class="text-p1">This is a paragraph with p1 styling</p>
+<p class="text-sm2">This is a small text with sm2 styling</p>
+```
 
 ## Font Size
 
