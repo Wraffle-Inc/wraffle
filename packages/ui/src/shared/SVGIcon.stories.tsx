@@ -85,15 +85,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'Default',
-  args: { id: 'home' },
+  args: { id: 'home', withLabel: true },
 };
 
 export const SVGIconWithBadge: Story = {
   name: 'SVGIcon-Badge',
-  args: { id: 'bell', showBadge: true },
+  args: { id: 'bell', withLabel: true, showBadge: true },
 };
 
 export const SVGIconWithBadgeCount: Story = {
   name: 'SVGIcon-BadgeCount',
-  args: { id: 'cart', showBadge: true, badgeCount: 10 },
+  args: { id: 'cart', withLabel: true, showBadge: true, badgeCount: 10 },
 };
