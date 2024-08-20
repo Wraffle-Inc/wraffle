@@ -106,6 +106,10 @@ export class CardService {
 
     const card = await this.cardRepository.findOne({ where: { id } });
 
+    if (!card) {
+      return new CustomResponse<null>(404, "C005", null);
+    }
+
     card.isDefault = dto.isDefault;
     await this.cardRepository.save(card);
 
