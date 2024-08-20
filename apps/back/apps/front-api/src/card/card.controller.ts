@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Patch,
+  ParseIntPipe,
 } from "@nestjs/common";
 import { CardService } from "apps/application/card/service/card.service";
 import { CreateCardDto } from "apps/application/card/dto/request/create-card.dto";
@@ -67,7 +68,9 @@ export class CardController {
   })
   @Delete(":id")
   @Public()
-  async deleteCard(@Param("id") id: number): Promise<IResponse<null>> {
+  async deleteCard(
+    @Param("id", ParseIntPipe) id: number
+  ): Promise<IResponse<null>> {
     return this.cardService.deleteCard(id);
   }
 
