@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 
 export class CardDetailDto {
   @ApiProperty({ example: 1, description: "카드 ID" })
@@ -19,5 +20,6 @@ export class CardDetailDto {
 
 export class GetCardDto {
   @ApiProperty({ type: [CardDetailDto], description: "카드 목록" })
+  @Type(() => CardDetailDto)
   items: CardDetailDto[];
 }
