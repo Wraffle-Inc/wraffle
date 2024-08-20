@@ -1,9 +1,10 @@
 import { BookmarkIcon, BookmarkFilledIcon } from "@radix-ui/react-icons";
+import { Tag, useHiddenTags } from "./use-hiddenTag";
 
 export interface RaffleCardProps {
   name: string;
   price: string;
-  hashtags: string[];
+  hashtags: Tag[];
   scrapCount: number;
   thumbnailUrl: string;
   endDate?: string;
@@ -19,6 +20,10 @@ const RaffleCard = ({
   endDate,
   isBookmarked,
 }: RaffleCardProps) => {
+  const { visibleTags, hiddenTags, tagWrapperRef } = useHiddenTags(
+    hashtags,
+    14
+  );
   const isClosed = (endDate && new Date(endDate) < new Date()) || false;
   return (
     <div className="w-[160px] h-[267px">
@@ -34,14 +39,17 @@ const RaffleCard = ({
           </div>
         )}
       </div>
-      <h1 className="font-semibold text-sm">{name}</h1>
+      <h1 className="font-semibold text-sm truncate">{name}</h1>
       <p className="font-semibold text-xs text-gray-600 mb-2">{price}원</p>
-      <span className="flex items-center gap-1.5 my-1.5">
-        {hashtags.map((hashtag) => (
-          <p>{hashtag}</p>
+      <span
+        ref={tagWrapperRef}
+        className="flex items-center gap-1.5 w-full my-1.5"
+      >
+        {visibleTags.map((hashtag) => (
+          <p key={hashtag.id}>{hashtag.name}</p>
         ))}
+        {hiddenTags.length > 0 && <p>...</p>}
       </span>
-
       <span className="flex justify-start items-center gap-0.5">
         {isBookmarked && <BookmarkFilledIcon width={15} height={15} />}
         {!isBookmarked && <BookmarkIcon width={15} height={15} />}
