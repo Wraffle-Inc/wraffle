@@ -17,6 +17,7 @@ import {
 import { SetDefaultCardDto } from "apps/application/card/dto/request/set-default-card.dto";
 import { SetDefaultCardResultDto } from "apps/application/card/dto/response/set-default-card-result.dto";
 
+// TODO: Error 처리는 추후에 통일
 @Injectable()
 export class CardService {
   constructor(
@@ -79,6 +80,10 @@ export class CardService {
   // 카드 삭제
   async deleteCard(id: number): Promise<IResponse<null>> {
     const card = await this.cardRepository.findOne({ where: { id } });
+
+    if (!card) {
+      return new CustomResponse<null>(404, "C005", null);
+    }
 
     card.deletedAt = new Date();
     card.isDeleted = true;
