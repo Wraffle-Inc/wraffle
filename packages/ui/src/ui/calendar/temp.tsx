@@ -55,7 +55,7 @@ export function CalendarForm() {
           name='dob'
           render={({ field }) => (
             <FormItem className='flex flex-col'>
-              <FormLabel>당첨자 발표 일정*</FormLabel>
+              <FormLabel>Date of birth</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -69,12 +69,13 @@ export function CalendarForm() {
                       {field.value ? (
                         format(field.value, 'PPP')
                       ) : (
-                        <span>당첨자 발표 일정을 입력해주세요</span>
+                        <span>Pick a date</span>
                       )}
                       <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
+
                 <PopoverContent className='w-auto p-0' align='start'>
                   <Calendar
                     mode='single'
@@ -87,6 +88,9 @@ export function CalendarForm() {
                   />
                 </PopoverContent>
               </Popover>
+              <FormDescription>
+                Your date of birth is used to calculate your age.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
