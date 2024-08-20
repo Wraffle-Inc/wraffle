@@ -22,7 +22,7 @@ export class Card extends DefaultEntity {
   @Column({ comment: "카드 빌링키" })
   billingKey: string;
 
-  @Column({ comment: "주사용 카드 여부" })
+  @Column({ comment: "주사용 카드 여부", default: false })
   isDefault: boolean = false;
 
   @Column({ comment: "사용자 ID" })
