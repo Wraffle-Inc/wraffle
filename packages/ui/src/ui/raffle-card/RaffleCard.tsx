@@ -53,7 +53,9 @@ const RaffleCard = ({
       <span className="flex justify-start items-center gap-0.5">
         {isBookmarked && <BookmarkFilledIcon width={15} height={15} />}
         {!isBookmarked && <BookmarkIcon width={15} height={15} />}
-        <p className="font-semibold text-[11px]">{scrapCount}</p>
+        <p className="font-semibold text-[11px]">
+          {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </p>
       </span>
     </div>
   );
