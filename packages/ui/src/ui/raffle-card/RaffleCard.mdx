@@ -1,0 +1,40 @@
+import { Meta, Story, Controls, Canvas, Primary } from "@storybook/blocks";
+
+import * as stories from "./RaffleCard.stories";
+
+<Meta of={stories} />
+
+# Raffle Card
+
+`RaffleCard` 컴포넌트는 래플 상품 카드 컴포넌트입니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Usage](#usage)
+
+## Overview
+
+<Primary />
+
+## Props
+
+`endDate`가 없을 경우에는 마감되지 않은 래플로 간주합니다.<br/>
+`endDate`는 서버 응답으로 받아온 string 타입의 데이터입니다. 현재 시간과 비교하여 마감 여부를 결정합니다.
+
+<Controls />
+
+## Usage
+
+### Raffle Card
+
+래플 카드 사용 예시입니다.
+
+<Canvas of={stories.Default} meta={stories} />
+
+### Closed Raffle Card
+
+마감된 래플 카드 사용 예시입니다.
+
+<Canvas of={stories.Closed} meta={stories} />
