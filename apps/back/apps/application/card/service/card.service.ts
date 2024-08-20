@@ -97,6 +97,13 @@ export class CardService {
     id: number,
     dto: SetDefaultCardDto
   ): Promise<IResponse<SetDefaultCardResultDto>> {
+    await this.cardRepository
+      .createQueryBuilder()
+      .update(Card)
+      .set({ isDefault: false })
+      .where({ isDefault: true })
+      .execute();
+
     const card = await this.cardRepository.findOne({ where: { id } });
 
     card.isDefault = dto.isDefault;
