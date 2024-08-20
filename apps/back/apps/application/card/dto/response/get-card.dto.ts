@@ -1,9 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt } from "class-validator";
 
 export class CardDetailDto {
   @ApiProperty({ example: 1, description: "카드 ID" })
-  @IsInt()
   id: number;
 
   @ApiProperty({ example: "국민", description: "카드사 코드" })
