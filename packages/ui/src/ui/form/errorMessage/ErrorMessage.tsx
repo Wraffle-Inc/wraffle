@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cva, VariantProps } from "class-variance-authority";
-
-import { cn } from "@/shared/utils";
+import {cva, VariantProps} from 'class-variance-authority';
+import * as React from 'react';
+import {cn} from '@/shared/utils';
 
 const errorMessageVariants = cva(
-  "text-sm text-[#FA5252] font-medium text-destructive"
+  'text-sm text-[#FA5252] font-medium text-destructive',
 );
 
 export interface ErrorMessageProps
@@ -16,14 +15,14 @@ export interface ErrorMessageProps
 }
 
 const ErrorMessage = React.forwardRef<HTMLParagraphElement, ErrorMessageProps>(
-  ({ className, isError = true, children, ...props }, ref) => {
+  ({className, isError = true, children, ...props}, ref) => {
     return (
       <p ref={ref} className={cn(errorMessageVariants(), className)} {...props}>
-        {isError ? children : ""}
+        {isError ? children : ''}
       </p>
     );
-  }
+  },
 );
-ErrorMessage.displayName = "ErrorMessage";
+ErrorMessage.displayName = 'ErrorMessage';
 
-export { ErrorMessage };
+export {ErrorMessage};

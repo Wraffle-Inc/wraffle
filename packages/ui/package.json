@@ -5,7 +5,10 @@
   "main": "src/index.tsx",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build": "storybook build"
+    "build": "storybook build",
+    "lint": "eslint '**/*.{ts,tsx}' --ext .ts --fix --cache",
+    "prettier": "prettier '**/*.{js,ts,tsx,json,yaml,md}' --write --cache",
+    "format": "pnpm prettier && pnpm lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -42,6 +45,8 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@wraffle/tailwind-config": "workspace:*",
     "@wraffle/typescript-config": "workspace:*",
+    "@wraffle/eslint-config": "workspace:*",
+    "@wraffle/prettier-config": "workspace:*",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "storybook": "^8.2.2",
