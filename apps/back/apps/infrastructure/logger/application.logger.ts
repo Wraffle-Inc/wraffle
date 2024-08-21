@@ -1,5 +1,5 @@
-import { Injectable, LoggerService } from "@nestjs/common";
-import * as winston from "winston";
+import { Injectable, LoggerService } from '@nestjs/common';
+import * as winston from 'winston';
 
 //  error: 0,
 //  warn: 1,
@@ -9,13 +9,13 @@ import * as winston from "winston";
 //  debug: 5,
 //  silly: 6
 export enum LogLevel {
-  ERROR = "error",
-  WARN = "warn",
-  INFO = "info",
-  HTTP = "http",
-  VERBOSE = "verbose",
-  DEBUG = "debug",
-  SILLY = "silly",
+  ERROR = 'error',
+  WARN = 'warn',
+  INFO = 'info',
+  HTTP = 'http',
+  VERBOSE = 'verbose',
+  DEBUG = 'debug',
+  SILLY = 'silly',
 }
 
 @Injectable()
@@ -27,7 +27,7 @@ export class ApplicationLogger implements LoggerService {
       levels: winston.config.npm.levels,
       format: winston.format.combine(
         winston.format.timestamp({
-          format: "YYYY-MM-DD HH:mm:ss.SSS",
+          format: 'YYYY-MM-DD HH:mm:ss.SSS',
         }),
         winston.format.json(),
       ),
@@ -67,6 +67,6 @@ export class ApplicationLogger implements LoggerService {
   }
 
   private convertToPlainMessage(message: any) {
-    return typeof message === "string" ? message : JSON.stringify(message);
+    return typeof message === 'string' ? message : JSON.stringify(message);
   }
 }

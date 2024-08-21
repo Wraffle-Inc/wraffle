@@ -1,6 +1,6 @@
-import { ExecutionContext } from "@nestjs/common";
+import { ExecutionContext } from '@nestjs/common';
 
-export const IRoleStrategyName = "IRoleStrategy";
+export const IRoleStrategyName = 'IRoleStrategy';
 export interface IRoleStrategy {
   authorizeRole(
     context: ExecutionContext,

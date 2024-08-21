@@ -1,8 +1,9 @@
-import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { ScheduleModule } from "@nestjs/schedule";
-import { InfrastructureModule } from "apps/infrastructure/infrastructure.module";
-import { envValidationSchema } from "env.config";
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
+import { InfrastructureModule } from 'apps/infrastructure/infrastructure.module';
+import { envValidationSchema } from 'env.config';
+
 
 @Module({
   imports: [

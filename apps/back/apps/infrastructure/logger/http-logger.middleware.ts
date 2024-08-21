@@ -1,7 +1,7 @@
-import { Injectable, NestMiddleware } from "@nestjs/common";
-import { NextFunction, Request, Response } from "express";
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
 
-import { ApplicationLogger } from "./application.logger";
+import { ApplicationLogger } from './application.logger';
 
 @Injectable()
 export class HttpLoggerMiddleware implements NestMiddleware {
@@ -25,7 +25,7 @@ export class HttpLoggerMiddleware implements NestMiddleware {
       return resEnd.apply(res, [chunk, ...rest]);
     };
 
-    res.on("close", () => {
+    res.on('close', () => {
       const {
         headers: reqHeaders,
         ip,
@@ -40,7 +40,7 @@ export class HttpLoggerMiddleware implements NestMiddleware {
       const resHeaders = res.getHeaders();
 
       if (statusCode >= 400) {
-        const errBody = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+        const errBody = JSON.parse(Buffer.concat(chunks).toString('utf8'));
 
         this.logger.error({
           method,
