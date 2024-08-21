@@ -21,9 +21,10 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
     },
     ref
   ) => {
+    const isHeading = ["h1", "h2", "h3", "h4", "h5", "h6"].includes(fontSize);
     const Comp: React.ElementType = asChild
       ? Slot
-      : ["h1", "h2", "h3", "h4", "h5", "h6"].includes(fontSize)
+      : isHeading
         ? (fontSize as React.ElementType)
         : "p";
 
