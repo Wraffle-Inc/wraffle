@@ -3,9 +3,9 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
-} from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
-import { Response } from "express";
+} from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { Response } from 'express';
 
 export class ErrorResponse {
   @ApiProperty()
@@ -19,8 +19,8 @@ export class ErrorResponse {
 
   constructor(exception: HttpException) {
     this.status = exception.getStatus();
-    this.code = exception.getResponse()["error"];
-    this.message = exception.getResponse()["message"];
+    this.code = exception.getResponse()['error'];
+    this.message = exception.getResponse()['message'];
   }
 
   toJson() {

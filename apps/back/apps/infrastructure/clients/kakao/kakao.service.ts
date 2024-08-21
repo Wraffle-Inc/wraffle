@@ -1,24 +1,24 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import axios from "axios";
-import * as jwt from "jsonwebtoken";
-import * as jwks from "jwks-rsa";
-import * as qs from "qs";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import axios from 'axios';
+import * as jwt from 'jsonwebtoken';
+import * as jwks from 'jwks-rsa';
+import * as qs from 'qs';
 
-import { TokenResponse, UserInfo } from "./types";
+import { TokenResponse, UserInfo } from './types';
 
 @Injectable()
 export class KakaoService {
-  static JWKS_URI = "https://kauth.kakao.com/.well-known/jwks.json";
-  static TOKEN_ISSUER = "https://kauth.kakao.com";
-  static AUTH_HOST = "https://kauth.kakao.com";
-  static API_HOST = "https://kapi.kakao.com";
+  static JWKS_URI = 'https://kauth.kakao.com/.well-known/jwks.json';
+  static TOKEN_ISSUER = 'https://kauth.kakao.com';
+  static AUTH_HOST = 'https://kauth.kakao.com';
+  static API_HOST = 'https://kapi.kakao.com';
   private readonly restClientId: string;
   private readonly appClientId: string;
 
   constructor(private readonly configService: ConfigService) {
-    this.restClientId = configService.get("KAKAO_REST_CLIENT_ID");
-    this.appClientId = configService.get("KAKAO_APP_CLIENT_ID");
+    this.restClientId = configService.get('KAKAO_REST_CLIENT_ID');
+    this.appClientId = configService.get('KAKAO_APP_CLIENT_ID');
   }
 
   // https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
@@ -27,7 +27,7 @@ export class KakaoService {
     redirectUri: string,
   ): Promise<TokenResponse> {
     const reqData = {
-      grant_type: "authorization_code",
+      grant_type: 'authorization_code',
       client_id: this.restClientId,
       redirect_uri: redirectUri,
       code: authorizationCode,
@@ -38,7 +38,7 @@ export class KakaoService {
       qs.stringify(reqData),
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
         },
       },
     );
@@ -82,7 +82,7 @@ export class KakaoService {
           });
         },
         {
-          algorithms: ["RS256"],
+          algorithms: ['RS256'],
           issuer: KakaoService.TOKEN_ISSUER,
           audience: [this.restClientId, this.appClientId].filter(Boolean),
         },

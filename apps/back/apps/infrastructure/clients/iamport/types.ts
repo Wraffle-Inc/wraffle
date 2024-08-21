@@ -1,4 +1,4 @@
-import { plainToInstance } from "class-transformer";
+import { plainToInstance } from 'class-transformer';
 
 export class ImpTokenResponse {
   code?: number;
@@ -7,10 +7,10 @@ export class ImpTokenResponse {
 
   static fromRawData(data: any): ImpTokenResponse {
     return plainToInstance(ImpTokenResponse, {
-      code: data["code"],
-      message: data["message"],
-      ...(data["response"] && {
-        response: ImpAccessToken.fromRawData(data["response"]),
+      code: data['code'],
+      message: data['message'],
+      ...(data['response'] && {
+        response: ImpAccessToken.fromRawData(data['response']),
       }),
     });
   }
@@ -24,9 +24,9 @@ export class ImpAccessToken {
 
   static fromRawData(data: any): ImpAccessToken {
     return plainToInstance(ImpAccessToken, {
-      accessToken: data["access_token"],
-      now: new Date(data["now"] * 1000),
-      expiredAt: new Date(data["expired_at"] * 1000),
+      accessToken: data['access_token'],
+      now: new Date(data['now'] * 1000),
+      expiredAt: new Date(data['expired_at'] * 1000),
     });
   }
 }
@@ -39,10 +39,10 @@ export class ImpPaymentResponse {
 
   static fromRawData(data: any): ImpPaymentResponse {
     return plainToInstance(ImpPaymentResponse, {
-      code: data["code"],
-      message: data["message"],
-      ...(data["response"] && {
-        response: ImpPayment.fromRawData(data["response"]),
+      code: data['code'],
+      message: data['message'],
+      ...(data['response'] && {
+        response: ImpPayment.fromRawData(data['response']),
       }),
     });
   }
@@ -54,7 +54,7 @@ export class ImpPayment {
   buyerTel?: string;
   impUid?: string;
   merchantUid?: string;
-  status?: "ready" | "paid" | "cancelled" | "failed";
+  status?: 'ready' | 'paid' | 'cancelled' | 'failed';
   name?: string;
   amount?: number;
   startedAt?: Date;
@@ -89,51 +89,51 @@ export class ImpPayment {
 
   static fromRawData(data: any): ImpAccessToken {
     return plainToInstance(ImpAccessToken, {
-      buyerEmail: data["buyer_email"],
-      buyerName: data["buyer_name"],
-      buyerTel: data["buyer_tel"],
-      impUid: data["imp_uid"],
-      merchantUid: data["merchant_uid"],
-      status: data["status"],
-      name: data["name"],
-      amount: data["amount"],
-      staretdAt: data["started_at"]
-        ? new Date(data["started_at"] * 1000)
+      buyerEmail: data['buyer_email'],
+      buyerName: data['buyer_name'],
+      buyerTel: data['buyer_tel'],
+      impUid: data['imp_uid'],
+      merchantUid: data['merchant_uid'],
+      status: data['status'],
+      name: data['name'],
+      amount: data['amount'],
+      staretdAt: data['started_at']
+        ? new Date(data['started_at'] * 1000)
         : null,
-      receiptUrl: data["receipt_url"],
-      isCacheReceiptIssued: data["cash_receipt_issued"],
-      currency: data["currency"],
-      channel: data["channel"],
-      pgProvider: data["pg_provider"],
-      pgTid: data["pg_tid"],
-      pgId: data["pg_id"],
-      escrow: data["escrow"],
-      applyNum: data["apply_num"],
-      bankCode: data["bank_code"],
-      bankName: data["bank_name"],
-      cardCode: data["card_code"],
-      cardName: data["card_name"],
-      cardQuota: data["card_quota"],
-      cardNumber: data["card_number"],
-      cardType: data["card_type"],
-      vbankCode: data["vbank_code"],
-      vbankName: data["vbank_name"],
-      vbankNum: data["vbank_num"],
-      vbankHolder: data["vbank_holder"],
-      vbankDate: data["vbank_date"]
-        ? new Date(data["vbank_date"] * 1000)
+      receiptUrl: data['receipt_url'],
+      isCacheReceiptIssued: data['cash_receipt_issued'],
+      currency: data['currency'],
+      channel: data['channel'],
+      pgProvider: data['pg_provider'],
+      pgTid: data['pg_tid'],
+      pgId: data['pg_id'],
+      escrow: data['escrow'],
+      applyNum: data['apply_num'],
+      bankCode: data['bank_code'],
+      bankName: data['bank_name'],
+      cardCode: data['card_code'],
+      cardName: data['card_name'],
+      cardQuota: data['card_quota'],
+      cardNumber: data['card_number'],
+      cardType: data['card_type'],
+      vbankCode: data['vbank_code'],
+      vbankName: data['vbank_name'],
+      vbankNum: data['vbank_num'],
+      vbankHolder: data['vbank_holder'],
+      vbankDate: data['vbank_date']
+        ? new Date(data['vbank_date'] * 1000)
         : null,
-      vbankIssuedAt: data["vbank_issued_at"]
-        ? new Date(data["vbank_issued_at"] * 1000)
+      vbankIssuedAt: data['vbank_issued_at']
+        ? new Date(data['vbank_issued_at'] * 1000)
         : null,
-      paidAt: data["paid_at"] ? new Date(data["paid_at"] * 1000) : null,
-      cancelAmount: data["cancel_amount"],
-      cancelledAt: data["cancelled_at"]
-        ? new Date(data["cancelled_at"] * 1000)
+      paidAt: data['paid_at'] ? new Date(data['paid_at'] * 1000) : null,
+      cancelAmount: data['cancel_amount'],
+      cancelledAt: data['cancelled_at']
+        ? new Date(data['cancelled_at'] * 1000)
         : null,
-      cancelReason: data["cancel_reason"],
-      failedAt: data["failed_at"] ? new Date(data["failed_at"] * 1000) : null,
-      failReason: data["fail_reason"],
+      cancelReason: data['cancel_reason'],
+      failedAt: data['failed_at'] ? new Date(data['failed_at'] * 1000) : null,
+      failReason: data['fail_reason'],
     });
   }
 }

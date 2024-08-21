@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable } from "@nestjs/common";
+import { ExecutionContext, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RoleStrategy {

@@ -1,5 +1,5 @@
-import { Type } from "class-transformer";
-import { IsNumber, IsOptional, Max } from "class-validator";
+import { Type } from 'class-transformer';
+import { IsNumber, IsOptional, Max } from 'class-validator';
 
 const DEFAULT_ITEMS_PER_PAGE = 30;
 const MAX_ITEMS_PER_PAGE = 1000;

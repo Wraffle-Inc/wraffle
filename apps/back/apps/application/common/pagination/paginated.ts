@@ -1,7 +1,7 @@
-import { Type } from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
+import { Type } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 
-import { PaginationMetaData } from "./pagination-meta-data.dto";
+import { PaginationMetaData } from './pagination-meta-data.dto';
 
 export interface IPaginated<T> {
   items: T[];
@@ -39,7 +39,7 @@ export function BasePaginatedDto<D>(
   }
 
   if (resourceName) {
-    Object.defineProperty(PaginatedHost, "name", {
+    Object.defineProperty(PaginatedHost, 'name', {
       writable: false,
       value: `Paginated${resourceName}ListDto`,
     });
