@@ -6,7 +6,7 @@ import {
   SelectRoot,
   SelectTrigger,
   SelectValue,
-} from "./PrimitiveSelect";
+} from './PrimitiveSelect';
 
 export interface SelectItem {
   value: string;
@@ -33,12 +33,12 @@ export interface SimpleSelectProps extends BaseSelectProps {
 export type SelectProps = GroupSelectProps | SimpleSelectProps;
 
 const isGroupSelect = (
-  items: SelectItem[] | GroupSelectItem[]
+  items: SelectItem[] | GroupSelectItem[],
 ): items is GroupSelectItem[] => {
   return (items as GroupSelectItem[])[0]?.groupName !== undefined;
 };
 
-const Select = ({ placeholder, items }: SelectProps) => {
+const Select = ({placeholder, items}: SelectProps) => {
   return (
     <SelectRoot>
       <SelectTrigger>
@@ -46,10 +46,10 @@ const Select = ({ placeholder, items }: SelectProps) => {
       </SelectTrigger>
       <SelectContent>
         {isGroupSelect(items) &&
-          items.map((group) => (
+          items.map(group => (
             <SelectGroup key={group.groupName}>
               <SelectLabel>{group.groupName}</SelectLabel>
-              {group.groupItems.map((item) => (
+              {group.groupItems.map(item => (
                 <SelectItem key={item.value} value={item.value}>
                   {item.name}
                 </SelectItem>
@@ -57,7 +57,7 @@ const Select = ({ placeholder, items }: SelectProps) => {
             </SelectGroup>
           ))}
         {!isGroupSelect(items) &&
-          items.map((item) => (
+          items.map(item => (
             <SelectItem key={item.value} value={item.value}>
               {item.name}
             </SelectItem>
@@ -67,4 +67,4 @@ const Select = ({ placeholder, items }: SelectProps) => {
   );
 };
 
-export { Select };
+export {Select};
