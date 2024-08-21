@@ -4,10 +4,10 @@ import {
   PipeTransform,
   Type,
   ValidationError,
-} from '@nestjs/common';
-import { InvalidParameterException } from 'apps/infrastructure/error';
-import { plainToClass } from 'class-transformer';
-import { validate } from 'class-validator';
+} from "@nestjs/common";
+import { InvalidParameterException } from "apps/infrastructure/error";
+import { plainToClass } from "class-transformer";
+import { validate } from "class-validator";
 
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
@@ -30,7 +30,7 @@ export class ValidationPipe implements PipeTransform<any> {
       return value;
     }
 
-    const isDtoType = metatype.name.includes('Dto');
+    const isDtoType = metatype.name.includes("Dto");
     const object = plainToClass(metatype, value);
     const errors = await validate(object, {
       ...(isDtoType && { whitelist: true }),

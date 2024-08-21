@@ -3,11 +3,11 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
-} from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { PermissionDeniedException } from 'apps/infrastructure/error';
+} from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { PermissionDeniedException } from "apps/infrastructure/error";
 
-import { IRoleStrategy, IRoleStrategyName } from './role-strategy.interface';
+import { IRoleStrategy, IRoleStrategyName } from "./role-strategy.interface";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -18,12 +18,12 @@ export class RolesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext) {
-    const requiredRoles = this.reflector.getAllAndOverride<string[]>('roles', [
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>("roles", [
       context.getHandler(),
       context.getClass(),
     ]);
     const isPublic = this.reflector.get<boolean>(
-      'public',
+      "public",
       context.getHandler(),
     );
 
