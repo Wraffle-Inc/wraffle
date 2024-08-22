@@ -26,7 +26,7 @@ const RaffleCard = ({
   );
   const isClosed = (endDate && new Date(endDate) < new Date()) || false;
   return (
-    <div className="w-[160px] h-[267px">
+    <div className="w-[160px] h-[267px]">
       <div className="relative flex justify-center items-center w-full h-[160px] mb-2 rounded-sm backdrop-brightness-90">
         <img
           src={thumbnailUrl}
