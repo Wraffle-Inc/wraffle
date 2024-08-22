@@ -34,7 +34,7 @@ export default function BottomNavigation() {
           <IconWithLabel
             key={label}
             label={label}
-            Icon={<SVGIcon id={id} withLabel />}
+            Icon={<SVGIcon id={id} />}
             strokeColor={
               isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'
             }
