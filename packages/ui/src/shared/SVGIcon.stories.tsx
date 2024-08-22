@@ -59,6 +59,13 @@ const meta = {
         },
       },
     },
+    withBadge: {
+      description:
+        '뱃지를 표시할 경우, 아이콘을 절대 위치로 설정하기 위해 필요한 속성',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     showBadge: {
       description: '아이콘 오른쪽 상단에 뱃지를 표시할지 여부',
       table: {
