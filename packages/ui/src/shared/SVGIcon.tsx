@@ -26,18 +26,18 @@ export type SvgIconId =
 
 interface SvgIconProps {
   id: SvgIconId;
-  withBadge?: boolean;
   width?: number | string;
   height?: number | string;
+  withBadge?: boolean;
   showBadge?: boolean;
   badgeCount?: number;
 }
 
 const SVGIcon = ({
   id,
-  withBadge,
   width = 20,
   height = 20,
+  withBadge,
   showBadge = false,
   badgeCount = 0,
 }: SvgIconProps) => (
