@@ -78,10 +78,10 @@ export class GetEventDto {
   createUserId: number;
 
   @ApiProperty({
-    example: "[1, 2, 3]",
-    description: "태그 ID 리스트",
+    example: "[ '태그1', '태그2' ]",
+    description: "태그 리스트",
   })
-  tagIds: number[];
+  tags: string[];
 
   @ApiProperty({
     example: "[ '이미지 URL1', '이미지 URL2' ]",

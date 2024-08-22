@@ -30,6 +30,8 @@ export class EventService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(Images)
     private readonly imagesRepository: Repository<Images>,
+    @InjectRepository(Hashtag)
+    private readonly hashtagRepository: Repository<Hashtag>,
     @InjectRepository(ProductHashtag)
     private readonly productHashtagRepository: Repository<ProductHashtag>,
     @InjectRepository(EventProduct)
@@ -151,10 +153,14 @@ export class EventService {
       throw new ResourceNotFoundException("이벤트를 찾을 수 없습니다.", "E001");
     }
 
+    const hashtags = await this.hashtagRepository.findByIds(
+      event.eventHashtags.map((eh) => eh.hashtagId),
+    );
+
     const eventDto = plainToInstance(GetEventDto, {
       ...event,
       type: RaffleType.EVENT,
-      tagIds: event.eventHashtags.map((eh) => eh.hashtagId),
+      tags: hashtags.map((hashtag) => hashtag.name),
       images: images.map((image) => image.url),
       products: event.eventProducts.map((ep) => ({
         id: ep.product.id,
