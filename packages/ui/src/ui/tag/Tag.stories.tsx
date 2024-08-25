@@ -8,6 +8,9 @@ const meta: Meta<typeof Tag> = {
     children: {
       control: { type: "text" },
     },
+    noHash: {
+      control: { type: "boolean" },
+    },
   },
 };
 
