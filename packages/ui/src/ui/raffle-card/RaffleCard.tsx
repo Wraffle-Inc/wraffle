@@ -1,10 +1,12 @@
-import { BookmarkIcon, BookmarkFilledIcon } from "@radix-ui/react-icons";
-import { Tag, useHiddenTags } from "./use-hiddenTag";
+import { Tag as TagType, useHiddenTags } from "./use-hiddenTag";
+import { Tag } from "../tag/Tag";
+import SVGIcon from "@/shared/SVGIcon";
+import { Typography } from "../typography/Typography";
 
 export interface RaffleCardProps {
   name: string;
   price: string;
-  hashtags: Tag[];
+  hashtags: TagType[];
   scrapCount: number;
   thumbnailUrl: string;
   endDate?: string;
@@ -22,7 +24,7 @@ const RaffleCard = ({
 }: RaffleCardProps) => {
   const { visibleTags, hiddenTags, tagWrapperRef } = useHiddenTags(
     hashtags,
-    14
+    20
   );
   const isClosed = (endDate && new Date(endDate) < new Date()) || false;
 
@@ -36,27 +38,37 @@ const RaffleCard = ({
         />
         {isClosed && (
           <div className="absolute w-full h-full flex justify-center items-center bg-black bg-opacity-40 z-10 rounded-sm">
-            <p className="text-white font-bold">마감되었어요 🫠</p>
+            <Typography className="text-white" fontWeight="bold">
+              마감되었어요 🫠
+            </Typography>
           </div>
         )}
       </div>
-      <h1 className="font-semibold text-sm truncate">{name}</h1>
-      <p className="font-semibold text-xs text-gray-600 mb-2">{price}원</p>
+      <Typography className="truncate" fontSize="p2" fontWeight="semibold">
+        {name}
+      </Typography>
+      <Typography
+        className="text-gray-600 mb-2"
+        fontSize="sm2"
+        fontWeight="semibold"
+      >
+        {price}원
+      </Typography>
       <span
         ref={tagWrapperRef}
         className="flex items-center gap-1.5 w-full my-1.5"
       >
         {visibleTags.map((hashtag) => (
-          <p key={hashtag.id}>{hashtag.name}</p>
+          <Tag key={hashtag.id}>{hashtag.name}</Tag>
         ))}
-        {hiddenTags.length > 0 && <p>...</p>}
+        {hiddenTags.length > 0 && <Tag noHash>...</Tag>}
       </span>
       <span className="flex justify-start items-center gap-0.5">
-        {isBookmarked && <BookmarkFilledIcon width={15} height={15} />}
-        {!isBookmarked && <BookmarkIcon width={15} height={15} />}
-        <p className="font-semibold text-[11px]">
+        {isBookmarked && <SVGIcon id="bookmark-fill" />}
+        {!isBookmarked && <SVGIcon id="bookmark" />}
+        <Typography className="text-[11px]" fontWeight="semibold">
           {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-        </p>
+        </Typography>
       </span>
     </div>
   );
