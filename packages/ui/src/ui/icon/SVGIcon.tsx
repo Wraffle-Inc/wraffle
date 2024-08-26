@@ -51,7 +51,7 @@ export const SVGIcon = ({
       <div
         className={clsx(
           'absolute flex items-center justify-center rounded-full bg-red-500 text-xs text-white',
-          badgeCount > 0 ? '-right-2 -top-2 h-4 w-4' : 'right-0 top-0 h-2 w-2',
+          badgeCount > 0 ? '-top-2 -right-2 w-4 h-4' : '-top-0 -right-1 w-2 h-2'
         )}
       >
         {badgeCount > 0 && badgeCount}
