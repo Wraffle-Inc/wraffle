@@ -13,3 +13,27 @@ import * as CalendarStories from './Calendar.stories';
 <Meta of={CalendarStories} />
 
 # Calendar
+
+CalendarForm 컴포넌트는 Popover태그를 사용하여 SingleDayPickCalendar 컴포넌트를 나타내는 컴포넌트 입니다.
+
+- [Overview](#overview)
+- [Props](#props)
+
+## Overview
+
+<Primary />
+
+## Description
+
+Calendar컴포넌트 같은 경우, option 중 mode로 Calendar안에서 Selection Modes를 single, multi, range 3가지중 고를 수 있으나,
+모드를 Props로 받지 않은 이유는 피그마상에서 날짜를 단일로 고르는 경우만 존재하는것 같아 굳이 Props로 받지 않기로 했습니다.
+
+그래서 SingleDayPickCalendar로 이름을 지었으나, 추후에 디자인 변경 or 추가가 있을 경우, 수정하겠습니다.
+
+컨테이너의 width에 따라 변경 가능하도록 width를 따로 고정값을 주지 않았습니다.
+
+응모기간을 생각해서 당일 이전의 날짜는 선택 불가하도록 구현하였습니다.
+
+## Props
+
+<Controls />
