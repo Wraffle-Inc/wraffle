@@ -1,5 +1,5 @@
-import '@/shared/styles/globals.css';
-import type {Preview} from '@storybook/react';
+import type { Preview } from "@storybook/react";
+import "@wds/shared/styles/globals.css";
 
 const preview: Preview = {
   parameters: {
