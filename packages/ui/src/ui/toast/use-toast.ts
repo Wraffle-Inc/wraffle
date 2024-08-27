@@ -4,14 +4,16 @@
 import * as React from 'react';
 import type {ToastProps} from '@/ui/toast/Toast';
 
+import type { ToastPrimitiveProps } from "@wds/ui/toast/Toast";
+
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 2000;
 
-type ToasterToast = ToastProps & {
-  id: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  icon?: 'check' | 'cross';
+type ToasterToast = ToastPrimitiveProps & {
+	id: string;
+	title?: React.ReactNode;
+	description?: React.ReactNode;
+	icon?: "check" | "cross";
 };
 
 const actionTypes = {
@@ -136,10 +138,10 @@ function dispatch(action: Action) {
   });
 }
 
-export type Toast = Omit<ToasterToast, 'id' | 'description'>;
+type ToastProps = Omit<ToasterToast, "id" | "description">;
 
-function toast({...props}: Toast) {
-  const id = genId();
+function toast({ ...props }: ToastProps) {
+	const id = genId();
 
   const update = (props: ToasterToast) =>
     dispatch({
@@ -187,4 +189,4 @@ function useToast() {
   };
 }
 
-export {useToast, toast};
+export { useToast };

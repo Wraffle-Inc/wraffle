@@ -145,16 +145,14 @@ const ToastDescription = React.forwardRef<
 ));
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 
-type ToastProps = React.ComponentPropsWithoutRef<typeof Toast> & {
-  icon?: 'check' | 'close';
-};
+type ToastPrimitiveProps = React.ComponentPropsWithoutRef<typeof Toast>;
 
 export {
-  type ToastProps,
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
+	type ToastPrimitiveProps,
+	ToastProvider,
+	ToastViewport,
+	Toast,
+	ToastTitle,
+	ToastDescription,
+	ToastClose
 };

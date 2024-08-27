@@ -9,9 +9,9 @@ const errorMessageVariants = cva(
 );
 
 export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof errorMessageVariants> {
-  isError: boolean;
+	extends React.HTMLAttributes<HTMLParagraphElement>,
+		VariantProps<typeof errorMessageVariants> {
+	isError: boolean;
 }
 
 const ErrorMessage = React.forwardRef<HTMLParagraphElement, ErrorMessageProps>(

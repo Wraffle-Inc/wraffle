@@ -1,13 +1,13 @@
 'use client';
 
 import {
-  Toast,
-  ToastClose,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-} from '@/ui/toast/Toast';
-import {useToast} from '@/ui/toast/use-toast';
+	Toast,
+	ToastClose,
+	ToastProvider,
+	ToastTitle,
+	ToastViewport
+} from "@wds/ui/toast/Toast";
+import { useToast } from "@wds/ui/toast/use-toast";
 
 export const Toaster = () => {
   const {toasts} = useToast();

@@ -1,10 +1,13 @@
-import {ErrorMessage} from '../errorMessage/ErrorMessage';
-import {Input} from '../input/Input';
-import {Label} from '../label/Label';
-import {findComponentFromChildren, findRestFromChildren} from '@/shared/utils';
+import {
+	findComponentFromChildren,
+	findRestFromChildren
+} from "@wds/shared/utils";
+import { ErrorMessage } from "../errorMessage/ErrorMessage";
+import { Input } from "../input/Input";
+import { Label } from "../label/Label";
 
 export interface InputFieldProps {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 const InputField = ({children}: InputFieldProps) => {
