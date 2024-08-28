@@ -8,15 +8,28 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["./src/app/*"],
-      "@/pages/*": ["./src/pages/*"],
-      "@/shared/*": ["./src/shared/*"],
-      "@/widgets/*": ["./src/widgets/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/entities/*": ["./src/entities/*"]
+      "@/app/*": [
+        "./src/app/*"
+      ],
+      "@/pages/*": [
+        "./src/pages/*"
+      ],
+      "@/shared/*": [
+        "./src/shared/*"
+      ],
+      "@/widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@/features/*": [
+        "./src/features/*"
+      ],
+      "@/entities/*": [
+        "./src/entities/*"
+      ]
     },
     "incremental": true,
-    "noEmit": true
+    "noEmit": true,
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
@@ -25,5 +38,7 @@
     ".next/types/**/*.ts",
     "postcss.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
