@@ -10,13 +10,19 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "prettier", "turbo"],
-  plugins: ["only-warn"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "turbo",
+  ],
+  plugins: ["@typescript-eslint"],
   globals: {
     React: true,
     JSX: true,
   },
   env: {
+    node: true,
     browser: true,
   },
   settings: {
@@ -36,4 +42,7 @@ module.exports = {
     // Force ESLint to detect .tsx files
     { files: ["*.js?(x)", "*.ts?(x)"] },
   ],
+  rules: {
+    "@typescript-eslint/consistent-type-imports": ["error"],
+  },
 };

@@ -14,7 +14,7 @@ export const Toaster = () => {
 
   return (
     <ToastProvider swipeDirection='up'>
-      {toasts.map(function ({id, title, description, ...props}) {
+      {toasts.map(function ({id, title, ...props}) {
         return (
           <Toast key={id} {...props}>
             <div className='grid gap-1'>

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import {SVGAttributes} from 'react';
+import type {SVGAttributes} from 'react';
 
 export type SvgIconId =
   | 'arrow-bottom'
