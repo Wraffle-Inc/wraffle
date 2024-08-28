@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import RadioGroup from './RadioGroup';
+import type {Meta, StoryObj} from '@storybook/react';
 
 const meta = {
   component: RadioGroup,
@@ -17,17 +17,17 @@ interface ItemProps {
 }
 
 const defaultButtonItems: ItemProps[] = [
-  { value: 'example1', label: 'Example1', disabled: false },
+  {value: 'example1', label: 'Example1', disabled: false},
 ];
 
 const disabledButtonItem: ItemProps[] = [
-  { value: 'example1', label: 'Example1', disabled: true },
+  {value: 'example1', label: 'Example1', disabled: true},
 ];
 
 const groupButtonItems: ItemProps[] = [
-  { value: 'example1', label: 'Example1', disabled: false },
-  { value: 'example2', label: 'Example2', disabled: false },
-  { value: 'example3', label: 'Disabled Button', disabled: true },
+  {value: 'example1', label: 'Example1', disabled: false},
+  {value: 'example2', label: 'Example2', disabled: false},
+  {value: 'example3', label: 'Disabled Button', disabled: true},
 ];
 
 export const RadioButtonDefault: Story = {

@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import {IoClose} from 'react-icons/io5';
-import {cn} from '@/shared/utils';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import {cn} from '@wds/shared/utils';
 
 const Dialog = DialogPrimitive.Root;
 

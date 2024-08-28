@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import {cn} from '@/shared/utils';
 import {
   CaretDownIcon,
   CheckIcon,
@@ -9,6 +8,7 @@ import {
   ChevronUpIcon,
 } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
+import {cn} from '@wds/shared/utils';
 
 const SelectRoot = SelectPrimitive.Root;
 
@@ -69,7 +69,7 @@ const SelectScrollDownButton = React.forwardRef<
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
-	SelectPrimitive.ScrollDownButton.displayName;
+  SelectPrimitive.ScrollDownButton.displayName;
 
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
@@ -150,14 +150,14 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export {
-	SelectRoot,
-	SelectGroup,
-	SelectValue,
-	SelectTrigger,
-	SelectContent,
-	SelectLabel,
-	SelectItem,
-	SelectSeparator,
-	SelectScrollUpButton,
-	SelectScrollDownButton
+  SelectRoot,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
 };

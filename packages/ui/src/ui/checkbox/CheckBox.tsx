@@ -1,7 +1,7 @@
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
+import {Label} from '../form';
 import clsx from 'clsx';
-import { Label } from '../form';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import {CheckIcon} from '@radix-ui/react-icons';
 
 interface CheckBoxProps {
   id: string;
@@ -23,9 +23,9 @@ const CheckBox = ({
   <div className='flex items-center gap-2'>
     <CheckboxPrimitive.Root
       className={clsx(
-        'shrink-0 w-4 h-4 rounded border-2 border-[#D1D5DB] flex items-center justify-center',
-        'data-[state=checked]:bg-[#1C2134] data-[state=checked]:border-none data-[state=checked]:text-white',
-        'disabled:bg-[#F1F5F9] disabled:cursor-not-allowed disabled:opacity-50'
+        'flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 border-[#D1D5DB]',
+        'data-[state=checked]:border-none data-[state=checked]:bg-[#1C2134] data-[state=checked]:text-white',
+        'disabled:cursor-not-allowed disabled:bg-[#F1F5F9] disabled:opacity-50',
       )}
       disabled={disabled}
       checked={checked}

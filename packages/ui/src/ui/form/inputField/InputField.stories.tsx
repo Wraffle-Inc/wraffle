@@ -1,6 +1,6 @@
-import { Select } from "@wds/ui/form";
-import { InputField } from "./InputField";
-import type { Meta } from "@storybook/react";
+import {InputField} from './InputField';
+import type {Meta} from '@storybook/react';
+import {Select} from '@wds/ui/form';
 
 const meta: Meta<typeof InputField> = {
   title: 'Form/InputField',

@@ -1,10 +1,10 @@
 import {Button} from '../button/Button';
 import {Toaster} from './Toaster';
-import {type Toast, useToast} from './use-toast';
+import {type ToastPrimitiveProps, useToast} from './use-toast';
 import {useEffect} from 'react';
-import type {Meta, StoryFn, StoryObj} from '@storybook/react';
+import type {Meta, StoryFn} from '@storybook/react';
 
-const meta: Meta<Toast> = {
+const meta: Meta<ToastPrimitiveProps> = {
   title: 'Components/Toast',
   decorators: [
     Story => (
