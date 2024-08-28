@@ -2,7 +2,8 @@
 
 import IconWithLabel from '../iconWithLabel/IconWithLabel';
 import {useState} from 'react';
-import {SVGIcon, SvgIconId} from '@wds/ui/icon/SVGIcon';
+import type {SvgIconId} from '@wds/ui/icon/SVGIcon';
+import {SVGIcon} from '@wds/ui/icon/SVGIcon';
 
 type ItemType = {
   id: SvgIconId;

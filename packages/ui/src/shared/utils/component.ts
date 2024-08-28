@@ -1,4 +1,5 @@
-import {Children, ReactElement, ReactNode, isValidElement} from 'react';
+import type {ReactElement, ReactNode} from 'react';
+import {Children, isValidElement} from 'react';
 
 export const findComponentFromChildren = (
   children: ReactNode,

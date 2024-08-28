@@ -1,4 +1,5 @@
-import {Input, InputProps} from './Input';
+import type {InputProps} from './Input';
+import {Input} from './Input';
 import type {Meta, StoryFn} from '@storybook/react';
 
 const meta: Meta<typeof Input> = {
