@@ -1,7 +1,7 @@
 "use client";
 
 import { Tag } from "../tag/Tag";
-import { Tag as TagType, useHiddenTags } from "./use-hiddenTag";
+import { type TagType, useHiddenTags } from "./use-hiddenTag";
 
 interface VisibleTagsProps {
   hashtags: TagType[];

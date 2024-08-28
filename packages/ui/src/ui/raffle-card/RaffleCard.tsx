@@ -1,7 +1,7 @@
 import { SVGIcon } from "@wds/ui/icon/SVGIcon";
 import { Typography } from "../typography/Typography";
 import { VisibleTags } from "./VisibleTags";
-import { Tag as TagType } from "./use-hiddenTag";
+import { type TagType } from "./use-hiddenTag";
 
 export interface RaffleCardProps {
   name: string;
