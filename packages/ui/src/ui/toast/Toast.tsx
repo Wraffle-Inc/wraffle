@@ -5,8 +5,8 @@ import * as React from 'react';
 import {FaCheckCircle} from 'react-icons/fa';
 import {IoMdCloseCircle} from 'react-icons/io';
 import {MdClose} from 'react-icons/md';
-import {cn} from '@/shared/utils';
 import * as ToastPrimitives from '@radix-ui/react-toast';
+import {cn} from '@wds/shared/utils';
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -148,11 +148,11 @@ ToastDescription.displayName = ToastPrimitives.Description.displayName;
 type ToastPrimitiveProps = React.ComponentPropsWithoutRef<typeof Toast>;
 
 export {
-	type ToastPrimitiveProps,
-	ToastProvider,
-	ToastViewport,
-	Toast,
-	ToastTitle,
-	ToastDescription,
-	ToastClose
+  type ToastPrimitiveProps,
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
 };

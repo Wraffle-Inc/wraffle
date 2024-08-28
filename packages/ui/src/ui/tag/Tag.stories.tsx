@@ -1,24 +1,24 @@
-import type { Meta, StoryFn } from "@storybook/react";
-import { Tag } from "./Tag";
+import {Tag} from './Tag';
+import type {Meta, StoryFn} from '@storybook/react';
 
 const meta: Meta<typeof Tag> = {
-  title: "Components/Tag",
+  title: 'Components/Tag',
   component: Tag,
   argTypes: {
     children: {
-      control: { type: "text" },
+      control: {type: 'text'},
     },
     noHash: {
-      control: { type: "boolean" },
+      control: {type: 'boolean'},
     },
   },
 };
 
 export default meta;
 
-const Template: StoryFn<typeof Tag> = (args) => <Tag {...args} />;
+const Template: StoryFn<typeof Tag> = args => <Tag {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: "Tag",
+  children: 'Tag',
 };

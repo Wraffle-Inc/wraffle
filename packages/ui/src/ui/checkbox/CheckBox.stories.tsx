@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import CheckBox from './CheckBox';
+import type {Meta, StoryObj} from '@storybook/react';
 
 const meta = {
   component: CheckBox,
@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const CheckBoxDefault: Story = {
   name: 'CheckBox',
-  args: { id: 'default', label: 'default', onCheckedChange: () => {} },
+  args: {id: 'default', label: 'default', onCheckedChange: () => {}},
 };
 
 export const CheckBoxDisabled: Story = {
@@ -58,7 +58,7 @@ export const CheckBoxWithLabel: Story = {
 
 export const CheckBoxGroup: Story = {
   name: 'CheckBox-Group',
-  args: { id: '', onCheckedChange: () => {} },
+  args: {id: '', onCheckedChange: () => {}},
   render: () => (
     <div className='flex flex-col gap-2'>
       <CheckBox id='group1' label='Option 1' onCheckedChange={() => {}} />
@@ -71,7 +71,7 @@ export const CheckBoxGroup: Story = {
 
 export const CheckBoxPreview: Story = {
   name: 'CheckBox-Preview',
-  args: { id: '', onCheckedChange: () => {} },
+  args: {id: '', onCheckedChange: () => {}},
   render: () => (
     <div className='flex flex-col gap-2'>
       <CheckBox id='group1' label='' onCheckedChange={() => {}} />
@@ -98,7 +98,7 @@ export const CheckBoxPreview: Story = {
         id='group5'
         label='label test'
         onCheckedChange={() => {}}
-        className='text-red-1 text-xl'
+        className='text-xl text-red-1'
       />
     </div>
   ),

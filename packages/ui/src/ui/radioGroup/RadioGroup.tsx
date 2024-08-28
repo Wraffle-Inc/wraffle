@@ -1,5 +1,5 @@
+import {Label} from '../form';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { Label } from '../form';
 
 interface RadioGroupProps {
   items: {
@@ -30,7 +30,7 @@ const RadioGroup = ({
     defaultValue={defaultValue}
     onValueChange={onValueChange}
   >
-    {items.map((item) => (
+    {items.map(item => (
       <RadioButton
         value={item.value}
         label={item.label}
@@ -42,15 +42,15 @@ const RadioGroup = ({
 
 export default RadioGroup;
 
-const RadioButton = ({ value, label, disabled }: RadioButtonProps) => (
+const RadioButton = ({value, label, disabled}: RadioButtonProps) => (
   <div className='flex items-center gap-3'>
     <RadioGroupPrimitive.Item
       disabled={disabled}
-      className='bg-white w-[22px] h-[22px] rounded-full border-2 border-solid  border-[#E5E8EB] disabled:cursor-not-allowed disabled:opacity-60 disabled:bg-[#F1F5F9]'
+      className='h-[22px] w-[22px] rounded-full border-2 border-solid border-[#E5E8EB] bg-white disabled:cursor-not-allowed disabled:bg-[#F1F5F9] disabled:opacity-60'
       value={value}
       id={value}
     >
-      <RadioGroupPrimitive.Indicator className='flex items-center justify-center w-full h-full relative after:w-3 after:h-3 after:rounded-full after:bg-black' />
+      <RadioGroupPrimitive.Indicator className='relative flex h-full w-full items-center justify-center after:h-3 after:w-3 after:rounded-full after:bg-black' />
     </RadioGroupPrimitive.Item>
     <Label htmlFor={value}>{label}</Label>
   </div>

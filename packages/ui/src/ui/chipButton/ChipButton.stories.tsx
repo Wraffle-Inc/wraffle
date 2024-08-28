@@ -1,30 +1,30 @@
-import type { Meta, StoryFn } from "@storybook/react";
-import { ChipButton } from "./ChipButton";
+import {ChipButton} from './ChipButton';
+import type {Meta, StoryFn} from '@storybook/react';
 
 const meta: Meta<typeof ChipButton> = {
-  title: "Components/ChipButton",
+  title: 'Components/ChipButton',
   component: ChipButton,
   argTypes: {
     selected: {
-      control: { type: "boolean" },
+      control: {type: 'boolean'},
     },
     children: {
-      control: { type: "text" },
+      control: {type: 'text'},
     },
   },
 };
 
 export default meta;
 
-const Template: StoryFn<typeof ChipButton> = (args) => <ChipButton {...args} />;
+const Template: StoryFn<typeof ChipButton> = args => <ChipButton {...args} />;
 
 export const ChipSelected = Template.bind({});
 ChipSelected.args = {
-  children: "Category",
+  children: 'Category',
   selected: true,
 };
 export const ChipNotSelected = Template.bind({});
 ChipNotSelected.args = {
-  children: "Category",
+  children: 'Category',
   selected: false,
 };

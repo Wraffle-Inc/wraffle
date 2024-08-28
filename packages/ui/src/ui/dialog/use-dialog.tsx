@@ -11,8 +11,8 @@ import {
   DialogDescription,
 } from './Dialog';
 import * as React from 'react';
-import {cn} from '@/shared/utils';
 import {DialogTrigger} from '@radix-ui/react-dialog';
+import {cn} from '@wds/shared/utils';
 
 type DialogProps = {
   title: React.ReactNode;

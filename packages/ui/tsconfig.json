@@ -1,18 +1,18 @@
 {
-	"extends": "@wraffle/typescript-config/storybook.json",
-	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		".storybook/**/*.ts",
-		".storybook/**/*.tsx"
-	],
-	"exclude": ["node_modules"],
-	"compilerOptions": {
-		"baseUrl": "./",
-		"paths": {
-			"@wds/ui/*": ["./src/ui/*"],
-			"@wds/shared/*": ["./src/shared/*"],
-			"@wds/widgets/*": ["./src/widgets/*"]
-		}
-	}
+  "extends": "@wraffle/typescript-config/storybook.json",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
+  ],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@wds/ui/*": ["./src/ui/*"],
+      "@wds/shared/*": ["./src/shared/*"],
+      "@wds/widgets/*": ["./src/widgets/*"]
+    }
+  }
 }

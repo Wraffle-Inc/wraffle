@@ -2,18 +2,16 @@
 
 // Inspired by react-hot-toast library
 import * as React from 'react';
-import type {ToastProps} from '@/ui/toast/Toast';
-
-import type { ToastPrimitiveProps } from "@wds/ui/toast/Toast";
+import type {ToastPrimitiveProps} from '@wds/ui/toast/Toast';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 2000;
 
 type ToasterToast = ToastPrimitiveProps & {
-	id: string;
-	title?: React.ReactNode;
-	description?: React.ReactNode;
-	icon?: "check" | "cross";
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  icon?: 'check' | 'cross';
 };
 
 const actionTypes = {
@@ -138,10 +136,10 @@ function dispatch(action: Action) {
   });
 }
 
-type ToastProps = Omit<ToasterToast, "id" | "description">;
+type ToastProps = Omit<ToasterToast, 'id' | 'description'>;
 
-function toast({ ...props }: ToastProps) {
-	const id = genId();
+function toast({...props}: ToastProps) {
+  const id = genId();
 
   const update = (props: ToasterToast) =>
     dispatch({
@@ -189,4 +187,4 @@ function useToast() {
   };
 }
 
-export { useToast };
+export {useToast, ToastPrimitiveProps};

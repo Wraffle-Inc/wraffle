@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from 'react';
 
 export interface TagType {
   id: number;
@@ -20,7 +20,7 @@ export const useHiddenTags = (tags: TagType[], letterSpace: number) => {
       const newVisibleTags: TagType[] = [];
       const newHiddenTags: TagType[] = [];
 
-      tags.forEach((tag) => {
+      tags.forEach(tag => {
         const tagWidth = tag.name.length * letterSpace;
         if (totalWidth + tagWidth <= containerWidth) {
           newVisibleTags.push(tag);
@@ -39,5 +39,5 @@ export const useHiddenTags = (tags: TagType[], letterSpace: number) => {
     checkAndManageTags();
   }, [tagWrapperRef.current]);
 
-  return { visibleTags, hiddenTags, tagWrapperRef };
+  return {visibleTags, hiddenTags, tagWrapperRef};
 };
