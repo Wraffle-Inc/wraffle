@@ -1,12 +1,10 @@
 import type {ReactNode} from 'react';
+import ProductLayout from '@/pages/products/[productId]/layout';
 
-type Props = {children: ReactNode};
-export default function Layout({children}: Props) {
-  return (
-    <>
-      <header className="mb-[25px] mt-[25px] h-[56px] bg-slate-700" />
-      <header className="mb-[25px] h-[34px] bg-slate-700" />
-      {children}
-    </>
-  );
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({children}: LayoutProps) {
+  return <ProductLayout>{children}</ProductLayout>;
 }
