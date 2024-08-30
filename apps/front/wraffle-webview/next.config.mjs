@@ -16,7 +16,11 @@ const nextConfig = {
         '../../../packages/ui/src/widgets',
       ),
     };
+
     return config;
+  },
+  images: {
+    domains: ['github.com'],
   },
 };
 
