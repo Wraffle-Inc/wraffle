@@ -16,6 +16,7 @@ const nextConfig = {
         '../../../packages/ui/src/widgets',
       ),
     };
+
     return config;
   },
   experimental: {
