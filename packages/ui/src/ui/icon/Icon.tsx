@@ -27,6 +27,7 @@ export type IconNameTypes =
 
 type IconProps = {
   name: IconNameTypes;
+  color?: string;
   width?: number | string;
   height?: number | string;
   showBadge?: boolean;
@@ -35,6 +36,7 @@ type IconProps = {
 
 export const Icon = ({
   name,
+  color = 'none',
   width = 20,
   height = 20,
   showBadge = false,
@@ -42,7 +44,7 @@ export const Icon = ({
   ...props
 }: IconProps) => (
   <div className={clsx(showBadge && 'absolute')}>
-    <svg fill='none' width={width} height={height} {...props}>
+    <svg fill={color} width={width} height={height} {...props}>
       <use href={`#${name}`} />
     </svg>
     {showBadge && (
