@@ -3,7 +3,7 @@ import clsx from 'clsx';
 interface IconWithLabelProps {
   Icon: React.ReactNode;
   label: string;
-  strokeColor: string;
+  strokeColor?: string;
   onClick?: () => void;
 }
 
