@@ -34,6 +34,12 @@ const meta = {
         ],
       },
     },
+    color: {
+      description: '아이콘의 색상',
+      table: {
+        type: {summary: 'string'},
+      },
+    },
     width: {
       description: '아이콘의 너비',
       table: {
