@@ -254,7 +254,3 @@ const IconLoader = (
 );
 
 export default IconLoader;
-
-// export default function GlobalSVGProvider() {
-//   return createPortal(spliteSvg, document.body);
-// }
