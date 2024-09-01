@@ -5,7 +5,7 @@ export * from './checkbox/CheckBox';
 export * from './chipButton/ChipButton';
 export * from './dialog/Dialog';
 export * from './form';
-export * from './icon/SVGIcon';
+export * from './icon/Icon';
 export * from './iconWithLabel/IconWithLabel';
 export * from './radioGroup/RadioGroup';
 export * from './raffle-card';
