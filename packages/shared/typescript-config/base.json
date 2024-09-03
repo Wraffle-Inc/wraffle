@@ -1,29 +1,30 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "Default",
-	"compilerOptions": {
-		"composite": false,
-		"declaration": true,
-		"declarationMap": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"allowImportingTsExtensions": true,
-		"noEmit": true,
-		"inlineSources": false,
-		"isolatedModules": true,
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"preserveWatchOutput": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"strictNullChecks": true,
-		"paths": {
-			"@wds/ui/*": ["packages/ui/src/ui/*"],
-			"@wds/shared/*": ["packages/ui/src/shared/*"],
-			"@wds/widgets/*": ["packages/ui/src/widgets/*"]
-		}
-	},
-	"exclude": ["node_modules"]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "paths": {
+      "@wds/ui/*": ["packages/ui/src/ui/*"],
+      "@wds/shared/*": ["packages/ui/src/shared/*"],
+      "@wds/widgets/*": ["packages/ui/src/widgets/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }
