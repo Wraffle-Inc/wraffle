@@ -116,12 +116,12 @@ const IconLoader = (
       width='14'
       height='14'
       viewBox='0 0 14 14'
-      fill='none'
+      fill='currentColor'
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
         d='M14 7.99805H8V13.998H6V7.99805H0V5.99805H6V-0.00195312H8V5.99805H14V7.99805Z'
-        fill='black'
+        stroke='currentColor'
       />
     </svg>
 
@@ -145,34 +145,8 @@ const IconLoader = (
       />
     </symbol>
 
-    <symbol id='bookmark-fill' viewBox='0 0 24 24'>
-      <path d='M0 0h24v24H0z' />
-      <path
-        fill='currentColor'
-        d='M6 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15l-6-6-6 6V6z'
-      />
-      <path
-        stroke='#000'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='1.5'
-        d='M6 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15l-6-6-6 6V6z'
-      />
-    </symbol>
-
     <symbol id='heart' viewBox='0 0 20 18'>
       <path
-        stroke='currentColor'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='1.5'
-        d='M2.331 9.047L10 17l7.669-7.953A4.804 4.804 0 0 0 19 5.714C19 3.111 16.965 1 14.454 1a4.465 4.465 0 0 0-3.214 1.38L10 3.668 8.76 2.38A4.465 4.465 0 0 0 5.546 1C3.036 1 1 3.11 1 5.714c0 1.25.479 2.45 1.331 3.333z'
-      />
-    </symbol>
-
-    <symbol id='heart-fill' viewBox='0 0 20 18'>
-      <path
-        fill='currentColor'
         stroke='currentColor'
         stroke-linecap='round'
         stroke-linejoin='round'
@@ -201,23 +175,23 @@ const IconLoader = (
     >
       <path
         d='M18.2353 14.1176H1.76471C0.823529 14.1176 0 13.2941 0 12.3529V1.76471C0 0.823529 0.823529 0 1.76471 0H18.2353C19.1765 0 20 0.823529 20 1.76471V12.3529C20 13.2941 19.1765 14.1176 18.2353 14.1176ZM1.76471 1.17647C1.41176 1.17647 1.17647 1.41176 1.17647 1.76471V12.3529C1.17647 12.7059 1.41176 12.9412 1.76471 12.9412H18.2353C18.5882 12.9412 18.8235 12.7059 18.8235 12.3529V1.76471C18.8235 1.41176 18.5882 1.17647 18.2353 1.17647H1.76471Z'
-        fill='black'
+        fill='currentColor'
       />
       <path
         d='M19.4118 2.70593H0.588257V3.8824H19.4118V2.70593Z'
-        fill='black'
+        fill='currentColor'
       />
       <path
         d='M19.4118 4.82349H0.588257V5.99996H19.4118V4.82349Z'
-        fill='black'
+        fill='currentColor'
       />
       <path
         d='M6.11764 8.70589H3.05882C2.70588 8.70589 2.47058 8.4706 2.47058 8.11765C2.47058 7.76471 2.70588 7.52942 3.05882 7.52942H6.11764C6.47058 7.52942 6.70588 7.76471 6.70588 8.11765C6.70588 8.4706 6.47058 8.70589 6.11764 8.70589Z'
-        fill='black'
+        fill='currentColor'
       />
       <path
         d='M10.2353 11.1765H3.05882C2.70588 11.1765 2.47058 10.9412 2.47058 10.5882C2.47058 10.2353 2.70588 10 3.05882 10H10.2353C10.5882 10 10.8235 10.2353 10.8235 10.5882C10.8235 10.9412 10.4706 11.1765 10.2353 11.1765Z'
-        fill='black'
+        fill='currentColor'
       />
     </svg>
 
