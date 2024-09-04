@@ -11,6 +11,7 @@ const Login = () => {
         width={136}
         height={75}
         className='mt-auto translate-y-1/2 animate-[fade-in-down-half] duration-700'
+        priority
       />
       <div className='mt-auto flex w-full flex-col items-center gap-5'>
         <Button className='animate-fade-in-down opacity-0 delay-200 duration-700 fill-mode-forwards'>
