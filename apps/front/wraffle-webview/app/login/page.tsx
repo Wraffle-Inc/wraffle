@@ -4,7 +4,7 @@ import {Button, Typography} from '@wraffle/ui';
 
 const Login = () => {
   return (
-    <div className='flex h-full flex-col items-center py-[78px]'>
+    <div className='container flex h-full flex-col items-center py-[78px]'>
       <Image
         src='/logo.png'
         alt='logo'
