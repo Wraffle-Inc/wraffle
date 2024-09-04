@@ -37,7 +37,7 @@ export default function BottomNavigation() {
             key={label}
             label={label}
             Icon={<Icon name={name} />}
-            stroke={isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'}
+            className={isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'}
             onClick={() => handleClickIcon(label)}
           />
         ))}
