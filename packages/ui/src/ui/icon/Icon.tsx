@@ -16,9 +16,7 @@ export type IconNameTypes =
   | 'plus'
   | 'bell'
   | 'bookmark'
-  | 'bookmark-fill'
   | 'heart'
-  | 'heart-fill'
   | 'user'
   | 'credit-card'
   | 'upload'
@@ -27,7 +25,8 @@ export type IconNameTypes =
 
 type IconProps = {
   name: IconNameTypes;
-  color?: string;
+  fill?: string;
+  stroke?: string;
   width?: number | string;
   height?: number | string;
   showBadge?: boolean;
@@ -36,7 +35,8 @@ type IconProps = {
 
 export const Icon = ({
   name,
-  color = 'none',
+  fill,
+  stroke,
   width = 20,
   height = 20,
   showBadge = false,
@@ -44,7 +44,13 @@ export const Icon = ({
   ...props
 }: IconProps) => (
   <div className={clsx(showBadge && 'absolute')}>
-    <svg fill={color} width={width} height={height} {...props}>
+    <svg
+      style={{color: fill ? fill : stroke}}
+      fill={fill ? fill : 'none'}
+      width={width}
+      height={height}
+      {...props}
+    >
       <use href={`#${name}`} />
     </svg>
     {showBadge && (

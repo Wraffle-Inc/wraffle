@@ -23,9 +23,7 @@ const meta = {
           'plus',
           'bell',
           'bookmark',
-          'bookmark-fill',
           'heart',
-          'heart-fill',
           'user',
           'credit-card',
           'upload',
@@ -34,11 +32,13 @@ const meta = {
         ],
       },
     },
-    color: {
+    fill: {
       description: '아이콘의 색상',
-      table: {
-        type: {summary: 'string'},
-      },
+      control: 'color',
+    },
+    stroke: {
+      description: '아이콘의 테두리 색상',
+      control: 'color',
     },
     width: {
       description: '아이콘의 너비',
@@ -101,4 +101,14 @@ export const IconWithBadge: Story = {
 export const IconWithBadgeCount: Story = {
   name: 'SVGIcon-BadgeCount',
   args: {name: 'cart', showBadge: true, badgeCount: 10},
+};
+
+export const IconWithFillColor: Story = {
+  name: 'HeartFillIcon',
+  args: {name: 'heart', fill: 'red'},
+};
+
+export const IconWithStrokeColor: Story = {
+  name: 'HeartStrokeIcon',
+  args: {name: 'heart', stroke: 'red'},
 };

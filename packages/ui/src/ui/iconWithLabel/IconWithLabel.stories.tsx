@@ -22,6 +22,10 @@ const meta: Meta<typeof IconWithLabel> = {
         type: {summary: 'string'},
       },
     },
+    stroke: {
+      description: '아이콘의 테두리 색상',
+      control: 'color',
+    },
   },
 };
 

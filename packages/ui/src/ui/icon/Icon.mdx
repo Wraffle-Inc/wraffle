@@ -1,12 +1,6 @@
-import {
-	Canvas,
-	Meta,
-	Primary,
-	Controls,
-	Description
-} from "@storybook/blocks";
+import {Canvas, Meta, Primary, Controls, Description} from '@storybook/blocks';
 
-import * as IconStories from "./Icon.stories";
+import * as IconStories from './Icon.stories';
 
 <Meta of={IconStories} />
 
@@ -35,3 +29,16 @@ Icon은 SVG 이미지를 렌더링하는 컴포넌트입니다.
 `showBadge`이 `true`이고 `badgeCount`의 값이 `0`보다 클 경우, 아이콘에 배지 카운트를 추가할 수 있습니다.
 
 <Canvas of={IconStories.IconWithBadgeCount} meta={IconStories} />
+
+## Icon with Fill Color
+
+`fill`의 값에 따라 아이콘의 색상을 변경할 수 있습니다.  
+`fill` 색상을 지정할 경우, `stroke` 색상은 `fill` 색상과 동일하게 바뀝니다.
+
+<Canvas of={IconStories.IconWithFillColor} meta={IconStories} />
+
+## Icon with Stroke Color
+
+`stroke`의 값에 따라 아이콘의 테두리 색상을 변경할 수 있습니다.
+
+<Canvas of={IconStories.IconWithStrokeColor} meta={IconStories} />
