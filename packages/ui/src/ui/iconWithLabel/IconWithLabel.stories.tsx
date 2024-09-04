@@ -4,14 +4,33 @@ import {Icon} from '@wds/ui/icon/Icon';
 
 const meta: Meta<typeof IconWithLabel> = {
   component: IconWithLabel,
+  argTypes: {
+    Icon: {
+      description: '아이콘',
+      control: {
+        value: {
+          defaultValue: <Icon name='search' />,
+        },
+      },
+      table: {
+        type: {summary: 'ReactNode'},
+      },
+    },
+    label: {
+      description: '라벨',
+      table: {
+        type: {summary: 'string'},
+      },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof IconWithLabel>;
 
-export const MenuIconWithLabel: Story = {
+export const SearchIconWithLabel: Story = {
   args: {
-    Icon: <Icon name='menu' width={20} height={20} />,
+    Icon: <Icon name='search' />,
     label: 'Search',
   },
 };
