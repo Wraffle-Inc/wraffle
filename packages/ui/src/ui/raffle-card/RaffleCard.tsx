@@ -52,7 +52,7 @@ const RaffleCard = ({
       </Typography>
       <VisibleTags hashtags={hashtags} letterSpace={20} />
       <span className='flex items-center justify-start gap-0.5'>
-        {isBookmarked && <Icon name='bookmark-fill' />}
+        {isBookmarked && <Icon name='bookmark' fill='black' />}
         {!isBookmarked && <Icon name='bookmark' />}
         <Typography className='text-[11px]' fontWeight='semibold'>
           {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}

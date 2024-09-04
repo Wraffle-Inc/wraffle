@@ -37,9 +37,7 @@ export default function BottomNavigation() {
             key={label}
             label={label}
             Icon={<Icon name={name} />}
-            strokeColor={
-              isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'
-            }
+            stroke={isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'}
             onClick={() => handleClickIcon(label)}
           />
         ))}
