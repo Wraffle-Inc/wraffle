@@ -32,7 +32,7 @@ const meta = {
         ],
       },
     },
-    fill: {
+    color: {
       description: '아이콘의 색상',
       control: 'color',
     },
@@ -105,7 +105,7 @@ export const IconWithBadgeCount: Story = {
 
 export const IconWithFillColor: Story = {
   name: 'HeartFillIcon',
-  args: {name: 'heart', fill: 'red'},
+  args: {name: 'heart', color: 'red'},
 };
 
 export const IconWithStrokeColor: Story = {
