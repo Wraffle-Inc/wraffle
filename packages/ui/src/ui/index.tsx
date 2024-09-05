@@ -1,5 +1,6 @@
 export * from './bottomNavigation/BottomNavigation';
 export * from './button/Button';
+export * from './calendar/Calendar';
 export * from './checkbox/CheckBox';
 export * from './chipButton/ChipButton';
 export * from './dialog/Dialog';
