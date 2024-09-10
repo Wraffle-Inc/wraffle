@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import {useEffect, useState, useRef} from 'react';
 import {sampleProductData} from '@/entities/product/product';
 import type {ProductData} from '@/entities/product/product';
 import {useMenu} from '@/features/product-menu/useMenu';
+import ProductImageList from '@/widgets/product-image-list/ProductImageList';
 import ProductInfoMenu from '@/widgets/product-info/ProductInfoMenu';
 import {Tag} from '@wraffle/ui/src/ui/tag/Tag';
 
@@ -63,15 +63,7 @@ export default function ProductPage() {
           ref={sectionsRef.current['상품']}
           className='relative w-full overflow-hidden rounded-lg'
         >
-          <Image
-            src={productData.images[0]}
-            alt='Product Images'
-            layout='responsive'
-            width={1000}
-            height={600}
-            objectFit='contain'
-            className='rounded-lg'
-          />
+          <ProductImageList images={productData.images} />
           <div className='flex flex-col gap-5 p-4'>
             {/* Tag와 Title, Price */}
             <div className='flex flex-col gap-2'>
@@ -92,7 +84,10 @@ export default function ProductPage() {
 
         <div className='h-1 w-full bg-[#F9FAFB]' />
 
-        <div ref={sectionsRef.current['응모 기간']} className='p-4'>
+        <div
+          ref={sectionsRef.current['응모 기간']}
+          className='flex flex-col gap-4 p-4'
+        >
           <p className='text-xl font-bold'>응모 기간</p>
           <p className='text-sm text-gray-600'>
             {formatDate(productData.startDate)} ~{' '}
@@ -102,7 +97,10 @@ export default function ProductPage() {
 
         <div className='h-1 w-full bg-[#F9FAFB]' />
 
-        <div ref={sectionsRef.current['당첨자 발표']} className='p-4'>
+        <div
+          ref={sectionsRef.current['당첨자 발표']}
+          className='flex flex-col gap-4 p-4'
+        >
           <p className='text-xl font-bold'>당첨자 발표</p>
           <p className='text-sm text-gray-600'>
             {formatDate(productData.announceAt)}
@@ -111,7 +109,10 @@ export default function ProductPage() {
 
         <div className='h-1 w-full bg-[#F9FAFB]' />
 
-        <div ref={sectionsRef.current['유의사항']} className='p-4'>
+        <div
+          ref={sectionsRef.current['유의사항']}
+          className='flex flex-col gap-4 p-4'
+        >
           <p className='text-xl font-bold'>유의사항</p>
           <p className='text-sm text-gray-600'>{productData.description}</p>
         </div>
