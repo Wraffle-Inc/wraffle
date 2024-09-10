@@ -14,12 +14,15 @@
     "@wraffle/ui": "workspace:*",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "@wraffle/eslint-config": "workspace:*",
     "@wraffle/prettier-config": "workspace:*",
     "@wraffle/tailwind-config": "workspace:*",
