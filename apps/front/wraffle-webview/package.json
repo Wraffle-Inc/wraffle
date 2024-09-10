@@ -27,6 +27,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "@wraffle/eslint-config": "workspace:*",
     "@wraffle/prettier-config": "workspace:*",
     "@wraffle/tailwind-config": "workspace:*",
