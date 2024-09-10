@@ -1,10 +1,16 @@
+'use client';
+
 import type {ReactNode} from 'react';
-import ProductLayout from '@/pages/products/[productId]/layout';
+import React from 'react';
 
-interface LayoutProps {
+type Props = {
   children: ReactNode;
-}
+};
 
-export default function RootLayout({children}: LayoutProps) {
-  return <ProductLayout>{children}</ProductLayout>;
+export default function Layout({children}: Props) {
+  return (
+    <>
+      <main>{children}</main>
+    </>
+  );
 }
