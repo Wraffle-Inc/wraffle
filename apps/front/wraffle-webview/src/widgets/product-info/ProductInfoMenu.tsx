@@ -1,11 +1,13 @@
 'use client';
 
+type MenuOption = '상품' | '응모 기간' | '당첨자 발표' | '유의사항';
+
 interface ProductInfoMenuProps {
-  selectedMenu: string;
-  onSelectMenu: (menu: string) => void;
+  selectedMenu: MenuOption;
+  onSelectMenu: (menu: MenuOption) => void;
 }
 
-const menus = ['상품', '응모 기간', '당첨자 발표', '유의사항'];
+const menus: MenuOption[] = ['상품', '응모 기간', '당첨자 발표', '유의사항'];
 
 export default function ProductInfoMenu({
   selectedMenu,
@@ -13,9 +15,9 @@ export default function ProductInfoMenu({
 }: ProductInfoMenuProps) {
   return (
     <nav className='mb-[21px] flex h-[34px] w-full items-center gap-5 px-5'>
-      {menus.map((menu, index) => (
+      {menus.map(menu => (
         <div
-          key={index}
+          key={menu}
           onClick={() => onSelectMenu(menu)}
           className={`relative cursor-pointer px-1 pb-3 text-sm font-semibold ${
             selectedMenu === menu ? 'text-black' : 'text-gray-400'
