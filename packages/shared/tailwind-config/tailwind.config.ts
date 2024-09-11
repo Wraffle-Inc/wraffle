@@ -6,7 +6,7 @@ const config: Omit<Config, "content"> = {
 	theme: {
 		container: {
 			center: true,
-			padding: "2rem",
+      padding: "20px",
 			screens: {
 				"2xl": "1400px"
 			}
@@ -190,23 +190,65 @@ const config: Omit<Config, "content"> = {
 				md: "calc(var(--radius) - 2px)",
 				sm: "calc(var(--radius) - 4px)"
 			},
-			keyframes: {
-				"accordion-down": {
-					from: { height: "0" },
-					to: { height: "var(--radix-accordion-content-height)" }
-				},
-				"accordion-up": {
-					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: "0" }
-				}
-			},
-			animation: {
-				"accordion-down": "accordion-down 0.2s ease-out",
-				"accordion-up": "accordion-up 0.2s ease-out"
-			}
-		}
-	},
-	plugins: [require("tailwindcss-animate")]
+      keyframes: {
+        "fade-in-down-half": {
+          "0%": {
+            opacity: 0,
+            transform: "translate3d(0, 25%, 0)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate3d(0, 50%, 0)",
+          },
+        },
+        "fade-in-down": {
+          "0%": {
+            opacity: 0,
+            transform: "translate3d(0, -25%, 0)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
+        "fade-in-up": {
+          "0%": {
+            opacity: 0,
+            transform: "translate3d(0, 25%, 0)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
+        "fade-out-down": {
+          "0%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+            transform: "translate3d(0, 25%, 0)",
+          },
+        },
+        "fade-out-up": {
+          "0%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+            transform: "translate3d(0, -25%, 0)",
+          },
+        },
+      },
+      animation: {
+        "fade-in-down": "fade-in-down 1s ease-in-out",
+        "fade-in-up": "fade-in-up 0.5s ease-in-out",
+        "fade-out-down": "fade-out-down 0.5s ease-in-out",
+        "fade-out-up": "fade-out-up 0.5s ease-in-out",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
 };
 
 export default config;
