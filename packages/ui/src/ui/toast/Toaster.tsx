@@ -16,7 +16,7 @@ export const Toaster = () => {
     <ToastProvider swipeDirection='up'>
       {toasts.map(function ({id, title, ...props}) {
         return (
-          <Toast key={id} {...props}>
+          <Toast className='bg-white' key={id} {...props}>
             <div className='grid gap-1'>
               {title && (
                 <ToastTitle variant={props.variant ?? 'success'}>

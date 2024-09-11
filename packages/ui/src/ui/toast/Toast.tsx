@@ -17,7 +17,7 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      'top-10% sm:top-10% fixed left-1/2 z-[100] flex w-[320px] -translate-x-1/2 transform flex-col-reverse p-4 sm:left-1/2 sm:-translate-x-1/2 sm:transform sm:flex-col',
+      'top-10% fixed left-1/2 z-[100] flex w-[320px] -translate-x-1/2 transform flex-col-reverse p-4',
       className,
     )}
     {...props}
@@ -44,9 +44,9 @@ const toastVariants = cva(
 const toastIconVariants = cva('h-4 w-4', {
   variants: {
     variant: {
-      success: 'text-green-4',
-      info: 'text-blue-4',
-      warning: 'text-red-4',
+      success: 'text-green-400',
+      info: 'text-blue-400',
+      warning: 'text-red-400',
     },
   },
 });
@@ -60,6 +60,7 @@ const Toast = React.forwardRef<
     <ToastPrimitives.Root
       ref={ref}
       className={cn(toastVariants({variant}), className)}
+      color={'#ffffff'}
       {...props}
     >
       <div className='flex items-center justify-center gap-2.5'>
@@ -79,9 +80,9 @@ Toast.displayName = ToastPrimitives.Root.displayName;
 const closeIconVariants = cva('h-4 w-4', {
   variants: {
     variant: {
-      success: 'text-green-4',
-      info: 'text-blue-4',
-      warning: 'text-red-4',
+      success: 'text-green-400',
+      info: 'text-blue-400',
+      warning: 'text-red-400',
     },
   },
 });
@@ -109,9 +110,9 @@ ToastClose.displayName = ToastPrimitives.Close.displayName;
 const titleVariants = cva('text-sm font-semibold [&+div]:text-xs', {
   variants: {
     variant: {
-      success: 'text-green-4',
-      info: 'text-blue-4',
-      warning: 'text-red-2',
+      success: 'text-green-400',
+      info: 'text-blue-400',
+      warning: 'text-red-400',
     },
   },
   defaultVariants: {
