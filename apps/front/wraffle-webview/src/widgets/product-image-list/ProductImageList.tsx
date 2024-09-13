@@ -1,11 +1,11 @@
 'use client';
 
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import Image from 'next/image';
 import React, {useState} from 'react';
 import type {FunctionComponent} from 'react';
-import Slider from 'react-slick';
 
 interface ProductImageListProps {
   images: string[];
@@ -16,24 +16,17 @@ const ProductImageList: FunctionComponent<ProductImageListProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-    arrows: false,
-    draggable: true,
-    beforeChange: (oldIndex: number, newIndex: number) =>
-      setCurrentIndex(newIndex),
-  };
-
   return (
     <div className='relative mx-auto w-full max-w-screen-lg'>
-      <Slider {...settings}>
+      <Swiper
+        spaceBetween={30}
+        slidesPerView={1}
+        slidesPerGroup={1}
+        loop={true}
+        onSlideChange={swiper => setCurrentIndex(swiper.realIndex)}
+      >
         {images.map((image, index) => (
-          <div key={index} className='w-full'>
+          <SwiperSlide key={index}>
             <Image
               src={image}
               alt={`Product Image ${index + 1}`}
@@ -43,9 +36,9 @@ const ProductImageList: FunctionComponent<ProductImageListProps> = ({
               objectFit='cover'
               className='rounded-lg'
             />
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
       <div className='absolute bottom-5 right-5 z-50 rounded-2xl bg-black bg-opacity-60 px-3 py-1 text-sm text-white'>
         {currentIndex + 1}/{images.length}
       </div>
