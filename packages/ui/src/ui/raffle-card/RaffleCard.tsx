@@ -40,11 +40,11 @@ const RaffleCard = ({
           </div>
         )}
       </div>
-      <Typography className='truncate' fontSize='p2' fontWeight='semibold'>
+      <Typography className='truncate text-[14px]' fontWeight='semibold'>
         {name}
       </Typography>
       <Typography
-        className='mb-2 text-gray-600'
+        className='mb-2 text-[12px] text-gray-600'
         fontSize='sm2'
         fontWeight='semibold'
       >
