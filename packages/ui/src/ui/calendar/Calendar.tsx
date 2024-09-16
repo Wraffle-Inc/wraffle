@@ -1,11 +1,10 @@
-import { DayPicker } from 'react-day-picker';
-
-import * as Popover from '@radix-ui/react-popover';
-import { CalendarIcon } from '@radix-ui/react-icons';
-import { Label } from '../form';
+import {Label} from '../form';
 import clsx from 'clsx';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import {format} from 'date-fns';
+import {ko} from 'date-fns/locale';
+import {DayPicker} from 'react-day-picker';
+import {CalendarIcon} from '@radix-ui/react-icons';
+import * as Popover from '@radix-ui/react-popover';
 
 interface CalendarFormProps {
   formLabel: string;
@@ -34,13 +33,13 @@ const CalendarForm = ({
         <Popover.Trigger asChild>
           <button
             className={clsx(
-              'flex w-full items-center gap-3 justify-between px-3 py-3.5',
+              'flex w-full items-center justify-between gap-3 px-3 py-3.5',
               selected ? 'font-normal' : 'font-medium text-[#ADB5BD]',
-              'border-2 border-solid text-sm truncate border-[#F5F5F7] rounded-lg bg-[#FAFAFB] hover:bg-accent hover:text-accent-foreground'
+              'truncate rounded-lg border-2 border-solid border-[#F5F5F7] bg-[#FAFAFB] text-sm hover:bg-accent hover:text-accent-foreground',
             )}
           >
-            {selected ? format(selected, 'PPP', { locale: ko }) : dateLabel}
-            <CalendarIcon className='w-5 h-5' />
+            {selected ? format(selected, 'PPP', {locale: ko}) : dateLabel}
+            <CalendarIcon className='h-5 w-5' />
           </button>
         </Popover.Trigger>
 
@@ -49,8 +48,8 @@ const CalendarForm = ({
             align='center'
             sideOffset={5}
             className={clsx(
-              'z-50 w-[--radix-popover-trigger-width] bg-white rounded-md border p-4 shadow-md outline-none ',
-              'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
+              'z-50 w-[--radix-popover-trigger-width] rounded-md border bg-white p-4 shadow-md outline-none',
+              'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
             )}
           >
             <SingleDayPickCalendar
@@ -66,7 +65,7 @@ const CalendarForm = ({
 
 export default CalendarForm;
 
-const SingleDayPickCalendar = ({ selected, setSelected }: CalendarProps) => {
+const SingleDayPickCalendar = ({selected, setSelected}: CalendarProps) => {
   return (
     <DayPicker
       mode='single'
