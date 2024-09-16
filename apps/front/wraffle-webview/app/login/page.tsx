@@ -17,7 +17,7 @@ const Login = () => {
         <Button className='animate-fade-in-down opacity-0 delay-200 duration-700 fill-mode-forwards'>
           <Typography fontSize='h6'>시작하기</Typography>
         </Button>
-        <span className='animate-fade-in-down flex gap-1 opacity-0 delay-500 duration-700 fill-mode-forwards'>
+        <span className='flex animate-fade-in-down gap-1 opacity-0 delay-500 duration-700 fill-mode-forwards'>
           <Typography fontSize='p4' fontWeight='semibold'>
             이미 계정이 있으신가요?
           </Typography>
