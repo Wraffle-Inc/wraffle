@@ -19,8 +19,8 @@ const nextConfig = {
 
     return config;
   },
-  images: {
-    domains: ['github.com'],
+  experimental: {
+    optimizePackageImports: ['@wraffle/ui'],
   },
 };
 
