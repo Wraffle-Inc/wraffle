@@ -153,9 +153,9 @@ const IconLoader = (
       />
       <path
         stroke='#000'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.5'
         d='M6 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15l-6-6-6 6V6z'
       />
     </symbol>
@@ -174,9 +174,9 @@ const IconLoader = (
       <path
         fill='currentColor'
         stroke='currentColor'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.5'
         d='M2.331 9.047L10 17l7.669-7.953A4.804 4.804 0 0 0 19 5.714C19 3.111 16.965 1 14.454 1a4.465 4.465 0 0 0-3.214 1.38L10 3.668 8.76 2.38A4.465 4.465 0 0 0 5.546 1C3.036 1 1 3.11 1 5.714c0 1.25.479 2.45 1.331 3.333z'
       />
     </symbol>
