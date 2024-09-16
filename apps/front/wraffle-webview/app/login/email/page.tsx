@@ -1,5 +1,6 @@
 'use client';
 
+import type {z} from 'zod';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
@@ -17,6 +18,9 @@ const EmailLogin = () => {
     resolver: zodResolver(loginSchema),
     defaultValues: getDefaults(loginSchema),
   });
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    console.log(data.email, data.password);
+  };
   return (
     <div>
       <Header>
@@ -26,20 +30,26 @@ const EmailLogin = () => {
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
         <section className='mt-7 w-full'>
           <Form {...form}>
-            <RHFInput
-              name='email'
-              label='이메일*'
-              placeholder='이메일을 입력해주세요.'
-            />
-            <RHFInput
-              type='password'
-              name='password'
-              label='비밀번호*'
-              placeholder='비밀번호를 입력해주세요.'
-            />
-            <Button className='mt-10 text-[15px]' type='submit'>
-              로그인
-            </Button>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <RHFInput
+                name='email'
+                label='이메일*'
+                placeholder='이메일을 입력해주세요.'
+              />
+              <RHFInput
+                type='password'
+                name='password'
+                label='비밀번호*'
+                placeholder='비밀번호를 입력해주세요.'
+              />
+              <Button
+                className='mt-10 text-[15px]'
+                type='submit'
+                disabled={!form.formState.isValid}
+              >
+                로그인
+              </Button>
+            </form>
           </Form>
         </section>
         <section className='mt-5 flex gap-[14px]'>
