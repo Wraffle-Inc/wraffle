@@ -3,17 +3,13 @@ import {getDefaults} from '@/shared/util';
 
 const passwordSchema = z
   .string()
-  .regex(/^(?=.*[A-Z])/, 'One uppercase letter.')
-  .regex(/^(?=.*[a-z])/, 'One lowercase letter.')
-  .regex(/^(?=.*\d)/, 'One digit.')
-  .regex(/^(?=.*[\W_])/, 'One special character.')
-  .min(8, {message: 'At least 8 characters.'})
+  .min(1, {message: '비밀번호를 입력해 주세요.'})
   .default('');
 
 const emailSchema = z
   .string()
-  .min(1, {message: 'Email required.'})
-  .email({message: 'Invalid email.'})
+  .min(1, {message: '이메일을 입력해 주세요.'})
+  .email({message: '유효하지 않은 이메일 형식입니다.'})
   .default('');
 
 export const loginSchema = z.object({
