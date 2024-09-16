@@ -18,11 +18,11 @@ const EmailLogin = () => {
     defaultValues: getDefaults(loginSchema),
   });
   return (
-    <div className='h-full'>
+    <div>
       <Header>
         <Header.BackButton onClick={router.back} />
       </Header>
-      <div className='container flex h-full flex-col items-center'>
+      <div className='flex h-full flex-col items-center px-5'>
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
         <section className='mt-7 w-full'>
           <Form {...form}>
@@ -37,20 +37,20 @@ const EmailLogin = () => {
               label='비밀번호*'
               placeholder='비밀번호를 입력해주세요.'
             />
-            <Button className='mt-10' type='submit'>
+            <Button className='mt-10 text-[15px]' type='submit'>
               로그인
             </Button>
           </Form>
         </section>
         <section className='mt-5 flex gap-[14px]'>
-          <Link href={'/'}>
-            <Typography className='font-medium text-zinc-500' fontSize='p4'>
+          <Link className='flex items-center' href={'/'}>
+            <Typography className='text-[13px] text-zinc-500'>
               비밀번호 찾기
             </Typography>
           </Link>
           <p className='text-zinc-500'>|</p>
-          <Link href={'/'}>
-            <Typography className='font-medium text-zinc-500' fontSize='p4'>
+          <Link className='flex items-center' href={'/'}>
+            <Typography className='text-[13px] text-zinc-500'>
               회원가입
             </Typography>
           </Link>

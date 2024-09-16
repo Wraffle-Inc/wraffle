@@ -42,7 +42,7 @@ const BackButton = ({onClick}: BackButtonProps) => {
       onClick={onClick}
       className='flex items-center justify-center text-black'
     >
-      <Icon name='arrow-left' showBadge />
+      <Icon name='arrow-left' />
     </button>
   );
 };
