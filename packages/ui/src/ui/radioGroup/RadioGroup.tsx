@@ -30,9 +30,9 @@ const RadioGroup = ({
     defaultValue={defaultValue}
     onValueChange={onValueChange}
   >
-    {items.map((item, idx) => (
+    {items.map(item => (
       <RadioButton
-        key={idx}
+        key={item.label}
         value={item.value}
         label={item.label}
         disabled={item.disabled}
