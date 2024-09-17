@@ -18,9 +18,12 @@ const EmailLogin = () => {
     resolver: zodResolver(loginSchema),
     defaultValues: getDefaults(loginSchema),
   });
+
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    //!TODO: 로그인 로직 구현
     console.log(data.email, data.password);
   };
+
   return (
     <div>
       <Header>
