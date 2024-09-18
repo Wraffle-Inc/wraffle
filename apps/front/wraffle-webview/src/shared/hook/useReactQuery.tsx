@@ -7,7 +7,11 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-function makeQueryClient() {
+interface ReactQueryProvidersProps {
+  children: ReactNode;
+}
+
+const makeQueryClient = () => {
   return new QueryClient({
     defaultOptions: {
       queries: {
@@ -15,23 +19,25 @@ function makeQueryClient() {
       },
     },
   });
-}
+};
 
 let browserQueryClient: QueryClient | undefined = undefined;
 
-function getQueryClient() {
+const getQueryClient = () => {
   if (isServer) {
     return makeQueryClient();
   } else {
     if (!browserQueryClient) browserQueryClient = makeQueryClient();
     return browserQueryClient;
   }
-}
+};
 
-export default function ReactQueryProviders({children}: {children: ReactNode}) {
+const ReactQueryProviders = ({children}: ReactQueryProvidersProps) => {
   const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
-}
+};
+
+export default ReactQueryProviders;
