@@ -4,7 +4,7 @@ export interface ProductTag {
 }
 
 export interface ProductData {
-  id: string;
+  id: number;
   title: string;
   price: number;
   startDate: string;
@@ -22,7 +22,7 @@ export interface ProductData {
 }
 
 export const sampleProductData: ProductData = {
-  id: '1',
+  id: 1,
   title: '[Vans] 올드스쿨',
   price: 78000,
   startDate: '2024-07-31T00:00:00.000Z',

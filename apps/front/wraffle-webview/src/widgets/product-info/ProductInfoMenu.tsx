@@ -14,7 +14,7 @@ export default function ProductInfoMenu({
   onSelectMenu,
 }: ProductInfoMenuProps) {
   return (
-    <nav className='mb-[21px] flex h-[34px] w-full items-center gap-5 px-5'>
+    <nav className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 px-5'>
       {menus.map(menu => (
         <div
           key={menu}

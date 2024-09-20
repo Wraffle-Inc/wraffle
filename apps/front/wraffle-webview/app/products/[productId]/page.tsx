@@ -1,14 +1,17 @@
 'use client';
 
+import {useRouter} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
 import {sampleProductData} from '@/entities/product/product';
 import type {ProductData} from '@/entities/product/product';
 import {useMenu} from '@/features/product-menu/useMenu';
+import {Header} from '@/shared/ui';
 import ProductImageList from '@/widgets/product-image-list/ProductImageList';
 import ProductInfoMenu from '@/widgets/product-info/ProductInfoMenu';
-import {Tag} from '@wraffle/ui/src/ui/tag/Tag';
+import {Tag} from '@wraffle/ui';
+import {Icon} from '@wraffle/ui';
 
-function formatDate(dateString: string) {
+const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -17,9 +20,10 @@ function formatDate(dateString: string) {
   const seconds = date.getSeconds().toString().padStart(2, '0');
 
   return `${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
-}
+};
 
-export default function ProductPage() {
+const ProductPage = () => {
+  const router = useRouter();
   const {selectedMenu, selectMenu} = useMenu('상품');
   const [productData, setProductData] = useState<ProductData | null>(null);
   const sectionsRef = useRef({
@@ -51,7 +55,16 @@ export default function ProductPage() {
   return (
     <>
       <div className='sticky top-0 z-50 bg-white'>
-        <header className='mb-[25px] h-[56px] bg-slate-700' />
+        <Header>
+          <Header.Left>
+            <Header.BackButton onClick={router.back} />
+          </Header.Left>
+          <Header.Right>
+            <div className='flex w-full justify-end'>
+              <Icon name='upload' />
+            </div>
+          </Header.Right>
+        </Header>
         <ProductInfoMenu
           selectedMenu={selectedMenu}
           onSelectMenu={selectMenu}
@@ -119,4 +132,6 @@ export default function ProductPage() {
       </main>
     </>
   );
-}
+};
+
+export default ProductPage;
