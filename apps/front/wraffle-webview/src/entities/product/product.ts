@@ -31,8 +31,8 @@ export const sampleProductData: ProductData = {
   description:
     '제작 박스로 준비해드립니다. 오후 3시 이전 결제 완료 시 택배 출고 드립니다. 당일 상품 출고 마감 시간 3시입니다.',
   etc: '유의사항',
-  clipCount: 0,
-  status: 'waiting',
+  clipCount: 53,
+  status: 'before',
   applyCount: 0,
   createUserId: 1,
   type: 'RAFFLE',
