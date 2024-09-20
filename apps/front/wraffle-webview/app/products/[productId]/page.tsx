@@ -4,12 +4,12 @@ import {useRouter} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
 import {sampleProductData} from '@/entities/product/product';
 import type {ProductData} from '@/entities/product/product';
+import ParticipateButton from '@/features/participate/ParticipateButton';
 import {useMenu} from '@/features/product-menu/useMenu';
 import {Header} from '@/shared/ui';
 import ProductImageList from '@/widgets/product-image-list/ProductImageList';
 import ProductInfoMenu from '@/widgets/product-info/ProductInfoMenu';
-import {Tag} from '@wraffle/ui';
-import {Icon} from '@wraffle/ui';
+import {Tag, Icon} from '@wraffle/ui';
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -74,7 +74,7 @@ const ProductPage = () => {
       <main>
         <div
           ref={sectionsRef.current['상품']}
-          className='relative w-full overflow-hidden rounded-lg'
+          className='relative z-10 w-full overflow-hidden rounded-lg'
         >
           <ProductImageList images={productData.images} />
           <div className='flex flex-col gap-5 p-4'>
@@ -130,8 +130,14 @@ const ProductPage = () => {
           <p className='text-sm text-gray-600'>{productData.description}</p>
         </div>
       </main>
+
+      <div className='sticky bottom-0 z-50 w-full bg-[#F9FAFB]'>
+        <ParticipateButton
+          status={productData.status}
+          clipCount={productData.clipCount}
+        />
+      </div>
     </>
   );
 };
-
 export default ProductPage;
