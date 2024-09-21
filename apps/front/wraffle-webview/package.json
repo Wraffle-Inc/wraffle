@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@use-funnel/core": "^0.0.5",
     "@wraffle/ui": "workspace:*",
     "next": "14.2.5",
     "react": "^18",
