@@ -1,6 +1,6 @@
 import './globals.css';
 import type {Metadata} from 'next';
-import ReactQueryProviders from '@/shared/hook/useReactQuery';
+import {ReactQueryProviders} from '@/app/providers';
 import {pretendard} from '@/shared/util/font';
 import IconLoader from '@wraffle/ui/src/ui/icon/IconLoader';
 

@@ -32,12 +32,10 @@ const getQueryClient = () => {
   }
 };
 
-const ReactQueryProviders = ({children}: ReactQueryProvidersProps) => {
+export const ReactQueryProviders = ({children}: ReactQueryProvidersProps) => {
   const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
-export default ReactQueryProviders;
