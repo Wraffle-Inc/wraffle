@@ -1,6 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
 import {Header} from '@/shared/ui/header/core/Header';
 import {Button, Input, Typography} from '@wraffle/ui';
 
@@ -13,15 +14,12 @@ function FindPasswordPage() {
   };
 
   return (
-    <div>
+    <div className='h-full'>
       <Header>
         <Header.BackButton onClick={router.back} />
         <Header.Middle>비밀번호 찾기</Header.Middle>
       </Header>
-      <div
-        className='container flex flex-col justify-between'
-        style={{height: 'calc(100dvh - 60px)'}}
-      >
+      <div className='container flex flex-col'>
         <section className='flex-col justify-start'>
           <Typography className='my-5 text-h2'>
             비밀번호 설정을 위해 <br />
@@ -37,7 +35,7 @@ function FindPasswordPage() {
           </Typography>
         </section>
 
-        <section className='flex-col justify-end'>
+        <BottomFixedBox>
           <div className='flex flex-col items-center py-2'>
             <Typography className='text-sm text-[#6D7684]'>
               고객센터 문의
@@ -45,7 +43,7 @@ function FindPasswordPage() {
           </div>
 
           <Button onClick={handleSendEmail}>이메일 발송</Button>
-        </section>
+        </BottomFixedBox>
       </div>
     </div>
   );
