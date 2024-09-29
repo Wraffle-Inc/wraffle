@@ -2,20 +2,20 @@
 
 import IconWithLabel from '../iconWithLabel/IconWithLabel';
 import {useState} from 'react';
-import type {SvgIconId} from '@wds/ui/icon/SVGIcon';
-import {SVGIcon} from '@wds/ui/icon/SVGIcon';
+import type {IconNameTypes} from '@wds/ui/icon/Icon';
+import {Icon} from '@wds/ui/icon/Icon';
 
 type ItemType = {
-  id: SvgIconId;
+  name: IconNameTypes;
   label: string;
 };
 
 const menuItems: ItemType[] = [
-  {id: 'menu', label: '카테고리'},
-  {id: 'search', label: '검색'},
-  {id: 'home', label: '홈'},
-  {id: 'gift', label: '래플'},
-  {id: 'user-circle', label: '내정보'},
+  {name: 'menu', label: '카테고리'},
+  {name: 'search', label: '검색'},
+  {name: 'home', label: '홈'},
+  {name: 'gift', label: '래플'},
+  {name: 'user-circle', label: '내정보'},
 ];
 
 export default function BottomNavigation() {
@@ -32,14 +32,12 @@ export default function BottomNavigation() {
   return (
     <div className='fixed bottom-0 left-0 z-50 w-full border-t bg-[#F9FAFB]'>
       <nav className='flex justify-around py-3'>
-        {menuItems.map(({id, label}) => (
+        {menuItems.map(({name, label}) => (
           <IconWithLabel
             key={label}
             label={label}
-            Icon={<SVGIcon id={id} />}
-            strokeColor={
-              isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'
-            }
+            Icon={<Icon name={name} />}
+            className={isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'}
             onClick={() => handleClickIcon(label)}
           />
         ))}

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {type ReactNode} from 'react';
-import {SVGIcon} from '@wraffle/ui/src/ui/icon/SVGIcon';
+import {Icon} from '@wraffle/ui/src/ui/icon/Icon';
 import {Typography} from '@wraffle/ui/src/ui/typography/Typography';
 
 interface HeaderProps {
@@ -42,7 +42,7 @@ const BackButton = ({onClick}: BackButtonProps) => {
       onClick={onClick}
       className='flex items-center justify-center text-black'
     >
-      <SVGIcon id='arrow-left' withBadge />
+      <Icon name='arrow-left' />
     </button>
   );
 };

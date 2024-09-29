@@ -98,7 +98,7 @@ export const CheckBoxPreview: Story = {
         id='group5'
         label='label test'
         onCheckedChange={() => {}}
-        className='text-xl text-red-1'
+        className='text-xl text-red-500'
       />
     </div>
   ),

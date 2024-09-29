@@ -30,7 +30,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({className, variant, asChild = false, disabled, ...props}, ref) => {
     const Comp = asChild ? Slot : 'button';
     return (
-      <div style={{display: 'flex', justifyContent: 'center'}}>
+      <div className='flex min-h-[50px] w-full justify-center'>
         <Comp
           className={cn(buttonVariants({variant, className}), {
             'ring-0 ring-transparent': disabled, // 조건부 스타일: disabled 상태일 때 ring 스타일 제거

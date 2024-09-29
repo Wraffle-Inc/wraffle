@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type {SVGAttributes} from 'react';
 
-export type SvgIconId =
+export type IconNameTypes =
   | 'arrow-bottom'
   | 'arrow-right'
   | 'arrow-left'
@@ -16,42 +16,50 @@ export type SvgIconId =
   | 'plus'
   | 'bell'
   | 'bookmark'
-  | 'bookmark-fill'
   | 'heart'
-  | 'heart-fill'
   | 'user'
   | 'credit-card'
   | 'upload'
   | 'calendar'
   | 'write';
 
-type SvgIconProps = {
-  id: SvgIconId;
+type IconProps = {
+  name: IconNameTypes;
+  color?: string;
+  stroke?: string;
   width?: number | string;
   height?: number | string;
-  withBadge?: boolean;
   showBadge?: boolean;
   badgeCount?: number;
 } & SVGAttributes<SVGSVGElement>;
 
-export const SVGIcon = ({
-  id,
+export const Icon = ({
+  name,
+  color,
+  stroke,
   width = 20,
   height = 20,
-  withBadge,
   showBadge = false,
   badgeCount = 0,
   ...props
-}: SvgIconProps) => (
-  <div className={clsx(withBadge && 'absolute')}>
-    <svg fill='none' width={width} height={height} {...props}>
-      <use href={`/icon.svg#icon-${id}`} />
+}: IconProps) => (
+  <div className={clsx(showBadge && 'absolute')}>
+    <svg
+      style={{color: color ? color : stroke}}
+      fill={color ? color : 'none'}
+      width={width}
+      height={height}
+      {...props}
+    >
+      <use href={`#${name}`} />
     </svg>
     {showBadge && (
       <div
         className={clsx(
           'absolute flex items-center justify-center rounded-full bg-red-500 text-xs text-white',
-          badgeCount > 0 ? '-right-2 -top-2 h-4 w-4' : 'right-0 top-0 h-2 w-2',
+          badgeCount > 0
+            ? '-right-2 -top-2 h-4 w-4'
+            : '-right-1 -top-1 h-2 w-2',
         )}
       >
         {badgeCount > 0 && badgeCount}

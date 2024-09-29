@@ -32,6 +32,7 @@ const RadioGroup = ({
   >
     {items.map(item => (
       <RadioButton
+        key={item.label}
         value={item.value}
         label={item.label}
         disabled={item.disabled}

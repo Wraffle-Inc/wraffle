@@ -1,8 +1,8 @@
 import './globals.css';
 import type {Metadata} from 'next';
-import {Inter} from 'next/font/google';
-
-const inter = Inter({subsets: ['latin']});
+import ReactQueryProviders from '@/shared/hook/useReactQuery';
+import {pretendard} from '@/shared/util/font';
+import IconLoader from '@wraffle/ui/src/ui/icon/IconLoader';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,8 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <div className='h-screen min-h-screen'>{children}</div>
+      <body className={`${pretendard.variable} font-pretendard`}>
+        <div className='container h-screen min-h-screen'>
+          <ReactQueryProviders>
+            {IconLoader}
+            {children}
+          </ReactQueryProviders>
+        </div>
       </body>
     </html>
   );

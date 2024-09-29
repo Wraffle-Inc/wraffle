@@ -1,9 +1,8 @@
-import {SVGIcon} from './SVGIcon';
+import {Icon} from './Icon';
 import type {Meta, StoryObj} from '@storybook/react';
 
 const meta = {
-  component: SVGIcon,
-  title: 'shared/SVGIcon',
+  component: Icon,
   argTypes: {
     id: {
       description: '아이콘의 아이디',
@@ -24,9 +23,7 @@ const meta = {
           'plus',
           'bell',
           'bookmark',
-          'bookmark-fill',
           'heart',
-          'heart-fill',
           'user',
           'credit-card',
           'upload',
@@ -34,6 +31,14 @@ const meta = {
           'write',
         ],
       },
+    },
+    color: {
+      description: '아이콘의 색상',
+      control: 'color',
+    },
+    stroke: {
+      description: '아이콘의 테두리 색상',
+      control: 'color',
     },
     width: {
       description: '아이콘의 너비',
@@ -59,13 +64,6 @@ const meta = {
         },
       },
     },
-    withBadge: {
-      description:
-        '뱃지를 표시할 경우, 아이콘을 절대 위치로 설정하기 위해 필요한 속성',
-      table: {
-        type: {summary: 'boolean'},
-      },
-    },
     showBadge: {
       description: '아이콘 오른쪽 상단에 뱃지를 표시할지 여부',
       table: {
@@ -84,7 +82,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof SVGIcon>;
+} satisfies Meta<typeof Icon>;
 
 export default meta;
 
@@ -92,15 +90,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: 'Default',
-  args: {id: 'home', withBadge: true},
+  args: {name: 'home'},
 };
 
-export const SVGIconWithBadge: Story = {
+export const IconWithBadge: Story = {
   name: 'SVGIcon-Badge',
-  args: {id: 'bell', withBadge: true, showBadge: true},
+  args: {name: 'bell', showBadge: true},
 };
 
-export const SVGIconWithBadgeCount: Story = {
+export const IconWithBadgeCount: Story = {
   name: 'SVGIcon-BadgeCount',
-  args: {id: 'cart', withBadge: true, showBadge: true, badgeCount: 10},
+  args: {name: 'cart', showBadge: true, badgeCount: 10},
+};
+
+export const IconWithFillColor: Story = {
+  name: 'HeartFillIcon',
+  args: {name: 'heart', color: 'red'},
+};
+
+export const IconWithStrokeColor: Story = {
+  name: 'HeartStrokeIcon',
+  args: {name: 'heart', stroke: 'red'},
 };

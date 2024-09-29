@@ -1,7 +1,7 @@
 import {Typography} from '../typography/Typography';
 import {VisibleTags} from './VisibleTags';
 import {type TagType} from './use-hiddenTag';
-import {SVGIcon} from '@wds/ui/icon/SVGIcon';
+import {Icon} from '@wds/ui/icon/Icon';
 
 export interface RaffleCardProps {
   name: string;
@@ -40,11 +40,11 @@ const RaffleCard = ({
           </div>
         )}
       </div>
-      <Typography className='truncate' fontSize='p2' fontWeight='semibold'>
+      <Typography className='truncate text-[14px]' fontWeight='semibold'>
         {name}
       </Typography>
       <Typography
-        className='mb-2 text-gray-600'
+        className='mb-2 text-[12px] text-gray-600'
         fontSize='sm2'
         fontWeight='semibold'
       >
@@ -52,8 +52,8 @@ const RaffleCard = ({
       </Typography>
       <VisibleTags hashtags={hashtags} letterSpace={20} />
       <span className='flex items-center justify-start gap-0.5'>
-        {isBookmarked && <SVGIcon id='bookmark-fill' />}
-        {!isBookmarked && <SVGIcon id='bookmark' />}
+        {isBookmarked && <Icon name='bookmark' color='black' />}
+        {!isBookmarked && <Icon name='bookmark' />}
         <Typography className='text-[11px]' fontWeight='semibold'>
           {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </Typography>
