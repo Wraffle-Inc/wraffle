@@ -19,7 +19,7 @@ interface CalendarProps {
   setSelected: (selected: Date | undefined) => void;
 }
 
-const CalendarForm = ({
+export const CalendarForm = ({
   formLabel,
   className,
   dateLabel,
@@ -39,7 +39,7 @@ const CalendarForm = ({
             )}
           >
             {selected ? format(selected, 'PPP', {locale: ko}) : dateLabel}
-            <CalendarIcon className='h-5 w-5' />
+            <CalendarIcon className='h-5 w-5 text-black' />
           </button>
         </Popover.Trigger>
 
@@ -62,8 +62,6 @@ const CalendarForm = ({
     </div>
   );
 };
-
-export default CalendarForm;
 
 const SingleDayPickCalendar = ({selected, setSelected}: CalendarProps) => {
   return (
