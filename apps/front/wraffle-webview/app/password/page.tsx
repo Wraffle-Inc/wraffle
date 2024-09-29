@@ -10,17 +10,17 @@ function FindPasswordPage() {
 
   const handleSendEmail = () => {
     // TODO: 비밀번호 찾기 이메일 발송 API 호출 후, 완료되면 이메일 발송 성공 페이지로 이동
-    // router.push('/password/send-success');
   };
 
   return (
-    <div className='h-full'>
+    <div>
       <Header>
         <Header.BackButton onClick={router.back} />
         <Header.Middle>비밀번호 찾기</Header.Middle>
       </Header>
-      <div className='container flex flex-col'>
-        <section className='flex-col justify-start'>
+
+      <div className='container'>
+        <div>
           <Typography className='my-5 text-h2'>
             비밀번호 설정을 위해 <br />
             가입한 이메일을 입력해주세요.
@@ -33,7 +33,7 @@ function FindPasswordPage() {
             *이메일이 수신되지 않거나, 이메일주소가 기억나지 않을 경우
             고객센터로 문의주시기 바랍니다.
           </Typography>
-        </section>
+        </div>
 
         <BottomFixedBox>
           <div className='flex flex-col items-center py-2'>
