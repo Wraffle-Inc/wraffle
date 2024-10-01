@@ -20,6 +20,7 @@ export interface GroupSelectItem {
 
 export interface BaseSelectProps {
   placeholder: string;
+  onChange: (value: string) => void;
 }
 
 export interface GroupSelectProps extends BaseSelectProps {
@@ -38,9 +39,9 @@ const isGroupSelect = (
   return (items as GroupSelectItem[])[0]?.groupName !== undefined;
 };
 
-const Select = ({placeholder, items}: SelectProps) => {
+const Select = ({placeholder, items, onChange}: SelectProps) => {
   return (
-    <SelectRoot>
+    <SelectRoot onValueChange={onChange}>
       <SelectTrigger>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
