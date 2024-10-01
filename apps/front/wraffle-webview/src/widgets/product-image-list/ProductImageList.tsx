@@ -39,7 +39,7 @@ const ProductImageList: FunctionComponent<ProductImageListProps> = ({
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className='absolute bottom-5 right-5 z-50 rounded-2xl bg-black bg-opacity-60 px-3 py-1 text-sm text-white'>
+      <div className='absolute bottom-5 right-5 z-10 rounded-2xl bg-black bg-opacity-60 px-3 py-1 text-sm text-white'>
         {currentIndex + 1}/{images.length}
       </div>
     </div>
