@@ -15,6 +15,7 @@ export interface ProductData {
   clipCount: number;
   status: string;
   applyCount: number;
+  applyStatus: boolean;
   createUserId: number;
   type: string;
   tags: ProductTag[];
@@ -34,6 +35,7 @@ export const sampleProductData: ProductData = {
   clipCount: 53,
   status: 'before',
   applyCount: 0,
+  applyStatus: false,
   createUserId: 1,
   type: 'RAFFLE',
   tags: [
