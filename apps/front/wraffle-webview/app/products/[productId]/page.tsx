@@ -6,6 +6,7 @@ import {sampleProductData} from '@/entities/product/product';
 import type {ProductData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ParticipateButton';
 import {useMenu} from '@/features/product-menu/useMenu';
+import ShareModal from '@/features/share-product-link/ShareModal';
 import {Header} from '@/shared/ui';
 import ProductImageList from '@/widgets/product-image-list/ProductImageList';
 import ProductInfoMenu from '@/widgets/product-info/ProductInfoMenu';
@@ -26,6 +27,8 @@ const ProductPage = () => {
   const router = useRouter();
   const {selectedMenu, selectMenu} = useMenu('상품');
   const [productData, setProductData] = useState<ProductData | null>(null);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
   const sectionsRef = useRef({
     상품: useRef<HTMLDivElement>(null),
     '응모 기간': useRef<HTMLDivElement>(null),
@@ -52,16 +55,24 @@ const ProductPage = () => {
     return <div>Loading...</div>;
   }
 
+  const openShareModal = () => {
+    setIsShareModalOpen(true);
+  };
+
+  const closeShareModal = () => {
+    setIsShareModalOpen(false);
+  };
+
   return (
     <>
-      <div className='sticky top-0 z-50 bg-white'>
+      <div className='sticky top-0 z-20 bg-white'>
         <Header>
           <Header.Left>
             <Header.BackButton onClick={router.back} />
           </Header.Left>
           <Header.Right>
             <div className='flex w-full justify-end'>
-              <Icon name='upload' />
+              <Icon name='upload' onClick={openShareModal} />
             </div>
           </Header.Right>
         </Header>
@@ -74,11 +85,10 @@ const ProductPage = () => {
       <main>
         <div
           ref={sectionsRef.current['상품']}
-          className='relative z-10 w-full overflow-hidden rounded-lg'
+          className='relative w-full overflow-hidden rounded-lg'
         >
           <ProductImageList images={productData.images} />
           <div className='flex flex-col gap-5 p-4'>
-            {/* Tag와 Title, Price */}
             <div className='flex flex-col gap-2'>
               <div className='flex flex-row items-start gap-2'>
                 {productData.tags.map(tag => (
@@ -131,13 +141,16 @@ const ProductPage = () => {
         </div>
       </main>
 
-      <div className='sticky bottom-0 z-50 w-full bg-[#F9FAFB]'>
+      <div className='fixed inset-x-0 bottom-0 z-20 w-full bg-[#F9FAFB] p-4'>
         <ParticipateButton
           status={productData.status}
           clipCount={productData.clipCount}
         />
       </div>
+
+      <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />
     </>
   );
 };
+
 export default ProductPage;
