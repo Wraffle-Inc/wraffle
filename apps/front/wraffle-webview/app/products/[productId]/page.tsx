@@ -145,6 +145,7 @@ const ProductPage = () => {
         <ParticipateButton
           status={productData.status}
           clipCount={productData.clipCount}
+          applyStatus={productData.applyStatus}
         />
       </div>
 
