@@ -146,6 +146,7 @@ const ProductPage = () => {
           status={productData.status}
           clipCount={productData.clipCount}
           applyStatus={productData.applyStatus}
+          productImage={productData.images[0]}
         />
       </div>
 

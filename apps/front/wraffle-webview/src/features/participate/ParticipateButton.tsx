@@ -1,5 +1,6 @@
 'use client';
 
+import ApplyCompleteModal from './\bApplyCompleteModal';
 import React, {useState} from 'react';
 import {Button, Icon} from '@wraffle/ui';
 
@@ -7,17 +8,31 @@ interface ParticipateButtonProps {
   status: string;
   clipCount: number;
   applyStatus: boolean;
+  productImage: string;
 }
 
 const ParticipateButton: React.FC<ParticipateButtonProps> = ({
   status,
   clipCount,
-  applyStatus,
+  applyStatus: initialApplyStatus,
+  productImage,
 }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isApplyCompleteModalOpen, setIsApplyCompleteModalOpen] =
+    useState(false);
+  const [applyStatus, setApplyStatus] = useState(initialApplyStatus);
 
   const handleBookmark = () => {
     setIsBookmarked(prev => !prev);
+  };
+
+  const handleApply = () => {
+    setApplyStatus(true); // 응모 상태로 변경
+    setIsApplyCompleteModalOpen(true); // 이후 응모 완료 모달 열기
+  };
+
+  const closeApplyCompleteModal = () => {
+    setIsApplyCompleteModalOpen(false);
   };
 
   if (status === 'after') {
@@ -39,8 +54,15 @@ const ParticipateButton: React.FC<ParticipateButtonProps> = ({
       {applyStatus ? (
         <Button variant='gray'>응모를 완료하였습니다</Button>
       ) : (
-        <Button variant='default'>응모하기</Button>
+        <Button variant='default' onClick={handleApply}>
+          응모하기
+        </Button>
       )}
+      <ApplyCompleteModal
+        isOpen={isApplyCompleteModalOpen}
+        onClose={closeApplyCompleteModal}
+        image={productImage}
+      />
     </div>
   );
 };
