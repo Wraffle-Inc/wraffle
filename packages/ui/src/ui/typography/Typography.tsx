@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {Slot} from '@radix-ui/react-slot';
-import {cn} from '@wds/shared/utils';
+import { Slot } from '@radix-ui/react-slot';
+import { colorStyles, sizeStyles } from '@wds/shared/utils/typography';
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
-  fontSize?: string;
-  fontWeight?: string;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div' | 'p' | 'label';
+  size?: keyof typeof sizeStyles;
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   lineHeight?: string;
+  textColor?: keyof typeof colorStyles;
   asChild?: boolean;
 }
 
@@ -13,34 +15,38 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   (
     {
       className,
-      fontSize = 'p1',
-      fontWeight,
-      lineHeight,
+      as = 'p',
+      size = 'p1',
+      weight = 'regular',
+      lineHeight = '1.4',
+      textColor = 'brand1',
       asChild = false,
       ...props
     },
-    ref,
+    ref
   ) => {
-    const isHeading = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(fontSize);
-    const Comp: React.ElementType = asChild
-      ? Slot
-      : isHeading
-        ? (fontSize as React.ElementType)
-        : 'p';
+    const Comp: React.ElementType = asChild ? Slot : as;
 
-    return (
-      <Comp
-        className={cn(
-          `text-${fontSize}`,
-          fontWeight && `font-${fontWeight}`,
-          lineHeight && `leading-${lineHeight}`,
-          className,
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
+    const sizeClass = size ? sizeStyles[size] : sizeStyles['p1'];
+    const weightClass = weight ? `font-${weight}` : '';
+    const colorClass = textColor ? colorStyles[textColor] : '';
+
+    const finalClassName = [
+      sizeClass,
+      weightClass,
+      colorClass,
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const finalStyle = {
+      lineHeight, 
+      ...props.style, 
+    };
+
+    return <Comp className={finalClassName} ref={ref} style={finalStyle} {...props} />;
+  }
 );
 
 Typography.displayName = 'Typography';
