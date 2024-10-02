@@ -6,7 +6,34 @@ const meta: Meta<TypographyProps> = {
   title: 'Foundations/Typography',
   component: Typography,
   argTypes: {
-    fontSize: {
+    as: {
+      description: '태그 이름',
+      table: {
+        type: {
+          summary: 'h1 | h2 | h3 | h4 | h5 | h6 | span | div | p | label',
+        },
+      },
+      control: {
+        type: 'select',
+        options: [
+          'h1',
+          'h2',
+          'h3',
+          'h4',
+          'h5',
+          'h6',
+          'span',
+          'div',
+          'p',
+          'label',
+        ],
+      },
+    },
+    size: {
+      description: '텍스트 사이즈',
+      table: {
+        type: {summary: 'enum'},
+      },
       control: {
         type: 'select',
         options: [
@@ -25,9 +52,46 @@ const meta: Meta<TypographyProps> = {
         ],
       },
     },
+    weight: {
+      description: '텍스트 굵기',
+      table: {
+        type: {summary: 'regular | medium | semibold | bold'},
+      },
+      control: {
+        type: 'select',
+        options: ['regular', 'medium', 'semibold', 'bold'],
+      },
+    },
+    lineHeight: {
+      description: '텍스트 라인 높이',
+      table: {
+        type: {summary: 'string'},
+      },
+      control: {
+        type: 'text',
+      },
+    },
+    textColor: {
+      description: '텍스트 색상',
+      table: {
+        type: {summary: 'enum'},
+      },
+      control: {
+        type: 'select',
+        options: ['red', 'blue', 'green'],
+      },
+    },
     children: {
       control: {
         type: 'text',
+      },
+    },
+    asChild: {
+      table: {
+        disable: true,
+      },
+      control: {
+        disable: true,
       },
     },
   },
