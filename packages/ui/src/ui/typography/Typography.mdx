@@ -30,14 +30,15 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
 
 `Typography`는 아래와 같이 사용하시면 됩니다:
 
-- `Typography` 컴포넌트는 h1부터 h6까지의 스타일은 기존의 `<h>` 태그에 매핑되고, p1부터 p4, sm1부터 sm2까지의 스타일은 `<p>` 태그에 매핑됩니다.
+- `'as'` prop은 의미론적이며 시각적 변형은 되지 않습니다.
+- 지정된 타입 외에 세부적인 조정이 필요하다면 `className` 속성을 사용하여 Tailwind CSS 스타일을 적용하세요.
 
   따라서, 각 스타일이 적용되는 태그를 유념하여 사용해 주세요.
 
 ```tsx
-<h2 class="text-h2">This is a heading 2</h2>
-<p class="text-p1">This is a paragraph with p1 styling</p>
-<p class="text-sm2">This is a small text with sm2 styling</p>
+<Typography as='h1' size='h1' weight='bold' lineHeight='1.4' textColor='brand1'>
+  Raffle
+</Typography>
 ```
 
 ## Font Size
@@ -166,6 +167,9 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
     </div>
   ))}
 </div>
+```tsx
+<Typography size='h1'>Raffle</Typography>
+```
 
 ## Font Weight
 
@@ -181,6 +185,11 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
   }}
 >
   {[
+    {
+      label: 'regular',
+      weight: 400,
+      text: 'Raffle',
+    },
     {
       label: 'medium',
       weight: 500,
@@ -249,6 +258,9 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
     </div>
   ))}
 </div>
+```tsx
+<Typography weight='bold'>Raffle</Typography>
+```
 
 ## Line Height
 
@@ -265,7 +277,7 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
 >
   {[
     {
-      label: 'tight',
+      label: '1.4',
       value: '1.4',
       text: 'Raffle',
     },
@@ -323,8 +335,12 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
     </div>
   ))}
 </div>
+```tsx
+<Typography lineHeight='1.4'>Raffle</Typography>
+```
 
 ## Colors
+- 일부 색상만 문서화되어있기에 자세한 색상 정보는 `typography.ts 혹은 tailwind.config.ts`를 참고하시길 바랍니다.
 
 <div
   style={{
@@ -380,13 +396,13 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
       code: 'colors.zinc[400]',
       description: 'Use as text in disabled components',
     },
-  ].map(({color, label, code, description}, index) => (
+  ].map(({ color, label, code, description }, index) => (
     <div
       style={{
         display: 'grid',
         gridTemplateColumns: 'minmax(50px, auto) 1fr',
         columnGap: '20px',
-        marginBottom: index === 6 ? '0' : '20px', // index 사용하여 마지막 항목의 margin 제거
+        marginBottom: index === 6 ? '0' : '20px', 
         alignItems: 'center',
       }}
       key={label}
@@ -400,7 +416,7 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
         }}
       ></div>
       <div>
-        <div style={{display: 'flex', alignItems: 'center'}}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <strong>{label}</strong>
           <div
             style={{
@@ -439,6 +455,9 @@ import {Meta, Story, Controls, Canvas, Primary} from '@storybook/blocks';
     </div>
   ))}
 </div>
+```tsx
+<Typography textColor='brand1'>Raffle</Typography>
+```
 
 ## Usage
 
