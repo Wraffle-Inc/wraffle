@@ -9,10 +9,10 @@ interface ProductInfoMenuProps {
 
 const menus: MenuOption[] = ['상품', '응모 기간', '당첨자 발표', '유의사항'];
 
-export default function ProductInfoMenu({
+export const ProductInfoMenu: React.FC<ProductInfoMenuProps> = ({
   selectedMenu,
   onSelectMenu,
-}: ProductInfoMenuProps) {
+}) => {
   return (
     <nav className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 px-5'>
       {menus.map(menu => (
@@ -34,4 +34,4 @@ export default function ProductInfoMenu({
       ))}
     </nav>
   );
-}
+};
