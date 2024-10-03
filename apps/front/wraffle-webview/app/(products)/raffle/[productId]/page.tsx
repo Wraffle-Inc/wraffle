@@ -8,20 +8,14 @@ import ParticipateButton from '@/features/participate/ParticipateButton';
 import {useMenu} from '@/features/product-menu/useMenu';
 import ShareModal from '@/features/share-product-link/ShareModal';
 import {Header} from '@/shared/ui';
-import ProductImageList from '@/widgets/product-image-list/ProductImageList';
-import ProductInfoMenu from '@/widgets/product-info/ProductInfoMenu';
-import {Tag, Icon} from '@wraffle/ui';
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getSeconds().toString().padStart(2, '0');
-
-  return `${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
-};
+import {
+  ProductInfoMenu,
+  ProductMainSection,
+  ProductApplyPeriodSection,
+  ProductAnnouncementSection,
+  ProductNoticeSection,
+} from '@/widgets/product-info';
+import {Icon} from '@wraffle/ui';
 
 const ProductPage = () => {
   const router = useRouter();
@@ -64,7 +58,7 @@ const ProductPage = () => {
   };
 
   return (
-    <>
+    <div className='flex min-h-screen flex-col'>
       <div className='sticky top-0 z-20 bg-white'>
         <Header>
           <Header.Left>
@@ -82,66 +76,31 @@ const ProductPage = () => {
         />
       </div>
 
-      <main>
-        <div
-          ref={sectionsRef.current['상품']}
-          className='relative w-full overflow-hidden rounded-lg'
-        >
-          <ProductImageList images={productData.images} />
-          <div className='flex flex-col gap-5 p-4'>
-            <div className='flex flex-col gap-2'>
-              <div className='flex flex-row items-start gap-2'>
-                {productData.tags.map(tag => (
-                  <Tag key={tag.id}>{tag.name}</Tag>
-                ))}
-              </div>
-              <div className='flex flex-col gap-1'>
-                <p className='text-xl font-bold'>{productData.title}</p>
-                <p className='text-xl font-bold'>
-                  {productData.price.toLocaleString()}원
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      {/* 메인 컨텐츠 */}
+      <main className='flex-1 overflow-y-auto'>
+        <ProductMainSection
+          productData={productData}
+          sectionRef={sectionsRef.current['상품']}
+        />
         <div className='h-1 w-full bg-[#F9FAFB]' />
-
-        <div
-          ref={sectionsRef.current['응모 기간']}
-          className='flex flex-col gap-4 p-4'
-        >
-          <p className='text-xl font-bold'>응모 기간</p>
-          <p className='text-sm text-gray-600'>
-            {formatDate(productData.startDate)} ~{' '}
-            {formatDate(productData.endDate)}
-          </p>
-        </div>
-
+        <ProductApplyPeriodSection
+          productData={productData}
+          sectionRef={sectionsRef.current['응모 기간']}
+        />
         <div className='h-1 w-full bg-[#F9FAFB]' />
-
-        <div
-          ref={sectionsRef.current['당첨자 발표']}
-          className='flex flex-col gap-4 p-4'
-        >
-          <p className='text-xl font-bold'>당첨자 발표</p>
-          <p className='text-sm text-gray-600'>
-            {formatDate(productData.announceAt)}
-          </p>
-        </div>
-
+        <ProductAnnouncementSection
+          productData={productData}
+          sectionRef={sectionsRef.current['당첨자 발표']}
+        />
         <div className='h-1 w-full bg-[#F9FAFB]' />
-
-        <div
-          ref={sectionsRef.current['유의사항']}
-          className='flex flex-col gap-4 p-4'
-        >
-          <p className='text-xl font-bold'>유의사항</p>
-          <p className='text-sm text-gray-600'>{productData.description}</p>
-        </div>
+        <ProductNoticeSection
+          productData={productData}
+          sectionRef={sectionsRef.current['유의사항']}
+        />
       </main>
 
-      <div className='fixed inset-x-0 bottom-0 z-20 w-full bg-[#F9FAFB] p-4'>
+      {/* 하단 고정 Participate 버튼 */}
+      <div className='sticky bottom-0 z-20 bg-[#F9FAFB] p-4'>
         <ParticipateButton
           status={productData.status}
           clipCount={productData.clipCount}
@@ -151,7 +110,7 @@ const ProductPage = () => {
       </div>
 
       <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />
-    </>
+    </div>
   );
 };
 
