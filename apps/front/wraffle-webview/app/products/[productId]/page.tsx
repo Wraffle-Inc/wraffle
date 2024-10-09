@@ -1,9 +1,9 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
-import {sampleProductData} from '@/entities/product/product';
-import type {ProductData} from '@/entities/product/product';
+import {sampleRaffleData, sampleEventData} from '@/entities/product/product';
+import type {RaffleData, EventData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ParticipateButton';
 import {useMenu} from '@/features/product-menu/useMenu';
 import ShareModal from '@/features/share-product-link/ShareModal';
@@ -15,24 +15,45 @@ import {
   ProductAnnouncementSection,
   ProductNoticeSection,
 } from '@/widgets/product-info';
+import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
 import {Icon} from '@wraffle/ui';
 
 const ProductPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type'); // 쿼리스트링에서 'type' 값 가져오기
   const {selectedMenu, selectMenu} = useMenu('상품');
-  const [productData, setProductData] = useState<ProductData | null>(null);
+  const [productData, setProductData] = useState<RaffleData | EventData | null>(
+    null,
+  );
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const sectionsRef = useRef({
+  const sectionsRef = useRef<{
+    [key: string]: React.RefObject<HTMLDivElement>;
+  }>({
     상품: useRef<HTMLDivElement>(null),
     '응모 기간': useRef<HTMLDivElement>(null),
     '당첨자 발표': useRef<HTMLDivElement>(null),
+    '추첨 상품': useRef<HTMLDivElement>(null),
     유의사항: useRef<HTMLDivElement>(null),
   });
 
+  // 타입에 따라 메뉴 리스트를 정의
+  const menus =
+    type === 'event'
+      ? ['상품', '응모 기간', '당첨자 발표', '추첨 상품', '유의사항']
+      : ['상품', '응모 기간', '당첨자 발표', '유의사항'];
+
   useEffect(() => {
-    setProductData(sampleProductData);
-  }, []);
+    // 쿼리스트링의 타입에 따라 데이터 로드
+    if (type === 'raffle') {
+      setProductData(sampleRaffleData);
+    } else if (type === 'event') {
+      setProductData(sampleEventData);
+    } else {
+      router.push('/404');
+    }
+  }, [type]);
 
   useEffect(() => {
     const section = sectionsRef.current[selectedMenu];
@@ -71,13 +92,13 @@ const ProductPage = () => {
           </Header.Right>
         </Header>
         <ProductInfoMenu
+          menus={menus}
           selectedMenu={selectedMenu}
           onSelectMenu={selectMenu}
         />
       </div>
 
-      {/* 메인 컨텐츠 */}
-      <main className='flex-1 overflow-y-auto'>
+      <main className='mb-[80px] flex-1 overflow-y-auto'>
         <ProductMainSection
           productData={productData}
           sectionRef={sectionsRef.current['상품']}
@@ -93,13 +114,21 @@ const ProductPage = () => {
           sectionRef={sectionsRef.current['당첨자 발표']}
         />
         <div className='h-1 w-full bg-[#F9FAFB]' />
+        {type === 'event' && (
+          <>
+            <ProductEventSection
+              productData={productData as EventData}
+              sectionRef={sectionsRef.current['추첨 상품']}
+            />
+            <div className='h-1 w-full bg-[#F9FAFB]' />
+          </>
+        )}
         <ProductNoticeSection
           productData={productData}
           sectionRef={sectionsRef.current['유의사항']}
         />
       </main>
 
-      {/* 하단 고정 Participate 버튼 */}
       <div className='sticky bottom-0 z-20 bg-[#F9FAFB] p-4'>
         <ParticipateButton
           status={productData.status}

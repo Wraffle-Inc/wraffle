@@ -1,20 +1,19 @@
-'use client';
-
-type MenuOption = '상품' | '응모 기간' | '당첨자 발표' | '유의사항';
-
-interface ProductInfoMenuProps {
-  selectedMenu: MenuOption;
-  onSelectMenu: (menu: MenuOption) => void;
-}
-
-const menus: MenuOption[] = ['상품', '응모 기간', '당첨자 발표', '유의사항'];
+type ProductInfoMenuProps = {
+  menus: string[];
+  selectedMenu: string;
+  onSelectMenu: (menu: string) => void;
+};
 
 export const ProductInfoMenu: React.FC<ProductInfoMenuProps> = ({
+  menus,
   selectedMenu,
   onSelectMenu,
 }) => {
   return (
-    <nav className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 px-5'>
+    <nav
+      className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5'
+      style={{scrollbarWidth: 'none'}}
+    >
       {menus.map(menu => (
         <div
           key={menu}
