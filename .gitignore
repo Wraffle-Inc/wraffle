@@ -44,3 +44,14 @@ yarn-error.log*
 .idea
 *storybook.log
 storybook-static
+
+.easignore
+
+# eas build
+/android
+/ios
+
+### EASINCLUDE! ###
+### BELOW THIS LINE WILL NOT BE IGNORED BY EAS ###
+google-services.json
+GoogleService-Info.plist
