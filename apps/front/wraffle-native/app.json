@@ -13,9 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "googleServicesFile": "/Users/jangdonghyeon/Desktop/wraffle/apps/front/wraffle-native/firebase/GoogleService-Info.plist",
+      "bundleIdentifier": "com.ww8007.wraffle",
+      "supportsTablet": false
     },
     "android": {
+      "googleServicesFile": "/Users/jangdonghyeon/Desktop/wraffle/apps/front/wraffle-native/firebase/google-services.json",
+      "package": "com.ww8007.wraffle",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,9 +30,30 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router", "expo-font"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2ee4d84c-352b-4e08-aacf-9885abf9b09a"
+      }
     }
   }
 }
