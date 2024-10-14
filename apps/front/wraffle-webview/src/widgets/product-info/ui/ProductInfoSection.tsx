@@ -87,22 +87,22 @@ export const ProductEventSection: React.FC<{
   return (
     <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
       <p className='text-xl font-bold'>추첨 상품</p>
-      <div className='grid grid-cols-2 gap-4'>
+      <div
+        className='grid justify-center gap-[20px]'
+        style={{
+          gridTemplateColumns: 'repeat(auto-fit, 160px)',
+        }}
+      >
         {productData.products.map(product => (
-          <div className='flex justify-center'>
-            <RaffleCard
-              key={product.id}
-              hashtags={product.tags.map(tag => ({
-                id: Number(tag.id),
-                name: tag.name,
-              }))}
-              isBookmarked={false}
-              name={product.name}
-              price={product.price.toLocaleString()}
-              scrapCount={3100}
-              thumbnailUrl={product.imageUrl}
-            />
-          </div>
+          <RaffleCard
+            key={product.id}
+            hashtags={product.tags.map(tag => ({
+              id: Number(tag.id),
+              name: tag.name,
+            }))}
+            name={product.name}
+            thumbnailUrl={product.imageUrl}
+          />
         ))}
       </div>
     </div>
