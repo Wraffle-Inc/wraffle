@@ -5,12 +5,12 @@ import {Icon} from '@wds/ui/icon/Icon';
 
 export interface RaffleCardProps {
   name: string;
-  price: string;
+  price?: string;
   hashtags: TagType[];
-  scrapCount: number;
+  scrapCount?: number;
   thumbnailUrl: string;
   endDate?: string;
-  isBookmarked: boolean;
+  isBookmarked?: boolean;
 }
 
 const RaffleCard = ({
@@ -25,7 +25,7 @@ const RaffleCard = ({
   const isClosed = (endDate && new Date(endDate) < new Date()) || false;
 
   return (
-    <div className='h-[267px] w-[160px]'>
+    <div className='w-[160px]'>
       <div className='relative mb-2 flex h-[160px] w-full items-center justify-center rounded-sm backdrop-brightness-90'>
         <img
           src={thumbnailUrl}
@@ -43,21 +43,28 @@ const RaffleCard = ({
       <Typography className='truncate text-[14px]' fontWeight='semibold'>
         {name}
       </Typography>
-      <Typography
-        className='mb-2 text-[12px] text-gray-600'
-        fontSize='sm2'
-        fontWeight='semibold'
-      >
-        {price}원
-      </Typography>
-      <VisibleTags hashtags={hashtags} letterSpace={20} />
-      <span className='flex items-center justify-start gap-0.5'>
-        {isBookmarked && <Icon name='bookmark' color='black' />}
-        {!isBookmarked && <Icon name='bookmark' />}
-        <Typography className='text-[11px]' fontWeight='semibold'>
-          {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+      {price && (
+        <Typography
+          className='mb-2 text-[12px] text-gray-600'
+          fontSize='sm2'
+          fontWeight='semibold'
+        >
+          {price}원
         </Typography>
-      </span>
+      )}
+      <VisibleTags hashtags={hashtags} letterSpace={20} />
+      {scrapCount !== undefined && (
+        <span className='flex items-center justify-start gap-0.5'>
+          {isBookmarked ? (
+            <Icon name='bookmark' color='black' />
+          ) : (
+            <Icon name='bookmark' />
+          )}
+          <Typography className='text-[11px]' fontWeight='semibold'>
+            {scrapCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          </Typography>
+        </span>
+      )}
     </div>
   );
 };
