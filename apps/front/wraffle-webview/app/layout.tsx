@@ -1,7 +1,7 @@
 import './globals.css';
 import type {Metadata} from 'next';
 import ReactQueryProviders from '@/shared/hook/useReactQuery';
-import {pretendard} from '@/shared/util/font';
+import {pretendard} from '@/shared/util';
 import IconLoader from '@wraffle/ui/src/ui/icon/IconLoader';
 
 export const metadata: Metadata = {

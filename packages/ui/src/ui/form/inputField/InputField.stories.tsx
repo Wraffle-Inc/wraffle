@@ -33,6 +33,7 @@ export const WithSelectBox = () => (
   <InputField>
     <InputField.Label htmlFor='phone'>Phone Number</InputField.Label>
     <Select
+      onValueChange={() => {}}
       placeholder='선택'
       items={[
         {value: '010', name: '010'},
