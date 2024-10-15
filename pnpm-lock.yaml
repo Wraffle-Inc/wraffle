@@ -3518,6 +3518,16 @@ packages:
     peerDependencies:
       react: '>=16.8'
 
+  '@use-funnel/browser@0.0.7':
+    resolution: {integrity: sha512-f9MAUIglaO9b+0kMyZVaiKwPiNJLruc5GDRt2vfs6ExPb678dfpQSyPKbU8nik71hgO7GSjVwORbyx2AthWHzg==}
+    peerDependencies:
+      react: '>=16.8'
+
+  '@use-funnel/core@0.0.7':
+    resolution: {integrity: sha512-aInoq3dv5MSuYIPb1w1Y1pTJEAncQghoX99suMwsqnkMGunnCOw6UAPo131oyM4H52m2rbsoBnHBreDEDYmvzg==}
+    peerDependencies:
+      react: '>=16.8'
+
   '@vercel/style-guide@5.2.0':
     resolution: {integrity: sha512-fNSKEaZvSkiBoF6XEefs8CcgAV9K9e+MbcsDZjUsktHycKdA0jvjAzQi1W/FzLS+Nr5zZ6oejCwq/97dHUKe0g==}
     engines: {node: '>=16'}
