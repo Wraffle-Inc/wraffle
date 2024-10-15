@@ -20,8 +20,8 @@ const InputField = ({children}: InputFieldProps) => {
   return (
     <div>
       <div className='mb-2'>{labelComponent}</div>
-      <div className='inline-flex gap-4'>{restComponents}</div>
-      <div className='min-h-6'>{errorMessageComponent}</div>
+      <div className='inline-flex w-full gap-4'>{restComponents}</div>
+      <div className='mt-1 min-h-6'>{errorMessageComponent}</div>
     </div>
   );
 };
