@@ -13,6 +13,13 @@ const Name = ({onNext}: NameProps) => {
     formState: {errors},
   } = useFormContext<JoinPayload>();
 
+  const name = getValues('name');
+  const nickname = getValues('nickname');
+
+  const isDisabled = () => {
+    return !name || !nickname || !!errors.name || !!errors.nickname;
+  };
+
   return (
     <div>
       <div className='mb-5'>
@@ -32,17 +39,7 @@ const Name = ({onNext}: NameProps) => {
       />
 
       <div className='fixed inset-x-0 bottom-0 bg-white p-5'>
-        <Button
-          onClick={() => onNext(getValues('name'), getValues('nickname'))}
-          disabled={
-            !!(
-              getValues('name') === '' ||
-              getValues('nickname') === '' ||
-              errors.name ||
-              errors.nickname
-            )
-          }
-        >
+        <Button onClick={() => onNext(name, nickname)} disabled={isDisabled()}>
           다음
         </Button>
       </div>
