@@ -5,25 +5,24 @@ import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
 import {Header} from '@/shared/ui/header/core/Header';
 import {Button, Typography} from '@wraffle/ui';
 
-function SendEmailSuccessPage() {
+const SendEmailSuccessPage = () => {
   const router = useRouter();
 
   const handleResendEmail = () => {
-    // TODO: 이메일 재발송 API 호출
+    // TODO: 이메일 재발송 API 호출? 혹은 이메일 재발송 페이지로 이동?
   };
 
   const handleGoHome = () => {
-    // TODO: 홈(로그인 페이지)으로 이동
+    router.push('/login');
   };
 
   return (
     <div>
       <Header>
         <Header.BackButton onClick={router.back} />
-        <Header.Middle>비밀번호 찾기</Header.Middle>
       </Header>
 
-      <div className='container'>
+      <div className='px-5'>
         <div className='mt-5'>
           <Typography className='mb-5 text-h2'>
             비밀번호 재설정 <br />
@@ -45,6 +44,6 @@ function SendEmailSuccessPage() {
       </div>
     </div>
   );
-}
+};
 
 export default SendEmailSuccessPage;

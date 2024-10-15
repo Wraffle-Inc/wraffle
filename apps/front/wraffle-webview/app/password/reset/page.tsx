@@ -1,16 +1,48 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
+import {useResetPassword} from 'features/password/api/password';
+import {useRouter, useSearchParams} from 'next/navigation';
+import {useForm} from 'react-hook-form';
+import {type PasswordPayload, passwordObjectSchema} from '@/entities/auth';
+import {Form, RHFInput} from '@/shared/ui';
 import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
 import {Header} from '@/shared/ui/header/core/Header';
-import {Button, Input, Typography} from '@wraffle/ui';
+import {getDefaults} from '@/shared/util';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Button, Typography} from '@wraffle/ui';
 
-function ResetPasswordPage() {
+const ResetPasswordPage = () => {
   const router = useRouter();
+  const requestResetPassword = useResetPassword();
 
-  const handleResetPassword = () => {
-    // TODO: 비밀번호 재설정 API 호출 후, 완료되면 로그인 페이지로 이동
+  const params = useSearchParams();
+  const code = params.get('code') || '';
+  const email = params.get('email') || '';
+
+  const form = useForm<PasswordPayload>({
+    resolver: zodResolver(passwordObjectSchema),
+    defaultValues: getDefaults(passwordObjectSchema),
+  });
+
+  const onSubmit = (data: PasswordPayload) => {
+    requestResetPassword(
+      {
+        code,
+        email,
+        resetPassword: data.password,
+      },
+      {
+        onSuccess: () => {
+          router.push('/login');
+        },
+        onError: (error: Error) => {
+          console.error(error);
+        },
+      },
+    );
   };
+
+  const isFormEmpty = !form.watch('password');
 
   return (
     <div>
@@ -18,23 +50,30 @@ function ResetPasswordPage() {
         <Header.BackButton onClick={router.back} />
       </Header>
 
-      <div className='container'>
-        <div>
-          <Typography className='my-5 text-h2'>새로운 비밀번호 입력</Typography>
+      <Form {...form}>
+        <form className='px-5' onSubmit={form.handleSubmit(onSubmit)}>
+          <div>
+            <Typography className='my-5 text-h2'>
+              새로운 비밀번호 입력
+            </Typography>
 
-          <Typography className='text-p4'>새 비밀번호</Typography>
-          <Input
-            className='my-1.5'
-            placeholder='새로운 비밀번호를 입력해주세요.'
-          />
-        </div>
+            <RHFInput
+              name='password'
+              type='password'
+              label='새 비밀번호'
+              placeholder='새로운 비밀번호를 입력해주세요.'
+            />
+          </div>
 
-        <BottomFixedBox>
-          <Button onClick={handleResetPassword}>비밀번호 재설정하기</Button>
-        </BottomFixedBox>
-      </div>
+          <BottomFixedBox>
+            <Button type='submit' disabled={isFormEmpty}>
+              비밀번호 재설정하기
+            </Button>
+          </BottomFixedBox>
+        </form>
+      </Form>
     </div>
   );
-}
+};
 
 export default ResetPasswordPage;
