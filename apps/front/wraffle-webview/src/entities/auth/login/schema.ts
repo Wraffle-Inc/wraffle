@@ -20,12 +20,6 @@ const emailSchema = z
   .string()
   .min(1, {message: '이메일을 입력해 주세요.'})
   .email({message: '유효하지 않은 이메일 형식입니다.'})
-  .refine(
-    value => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(value),
-    {
-      message: '유효하지 않은 이메일 형식입니다.',
-    },
-  )
   .default('');
 
 export const loginSchema = z.object({
