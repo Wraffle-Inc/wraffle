@@ -16,10 +16,14 @@ const nextConfig = {
         '../../../packages/ui/src/widgets',
       ),
     };
+
     return config;
   },
   experimental: {
     optimizePackageImports: ['@wraffle/ui'],
+  },
+  images: {
+    domains: ['github.com'],
   },
 };
 

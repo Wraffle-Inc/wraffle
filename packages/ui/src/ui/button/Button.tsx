@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        gray: 'bg-gray-400 text-white hover:bg-gray-600',
+        gray: 'bg-gray-400 text-white cursor-not-allowed',
         stroke:
           'ring-1 ring-[#18181B] ring-inset text-primary hover:bg-primary hover:text-white',
       },
