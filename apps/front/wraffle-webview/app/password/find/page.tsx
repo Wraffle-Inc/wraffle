@@ -9,10 +9,11 @@ import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
 import {Header} from '@/shared/ui/header/core/Header';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button, Typography} from '@wraffle/ui';
+import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
 
 const FindPasswordPage = () => {
   const router = useRouter();
+  const {toast} = useToast();
   const requestSendEmail = useSendEmail();
 
   const form = useForm<EmailPayload>({
@@ -20,13 +21,22 @@ const FindPasswordPage = () => {
     defaultValues: getDefaults(emailObjectSchema),
   });
 
+  const handleContactCustomerCenter = () => {
+    // TODO: 추후 작업할 예정 (고객센터 링크 추가하기)
+  };
+
   const onSubmit = (data: EmailPayload) => {
     requestSendEmail(data.email, {
       onSuccess: () => {
-        router.push('/password/send-success');
+        router.push('/password/sent');
       },
       onError: (error: Error) => {
-        console.error(error.message);
+        toast({
+          title: error.message,
+          duration: 2000,
+          variant: 'warning',
+          icon: 'close',
+        });
       },
     });
   };
@@ -35,6 +45,7 @@ const FindPasswordPage = () => {
 
   return (
     <div>
+      <Toaster />
       <Header>
         <Header.BackButton onClick={router.back} />
         <Header.Middle>비밀번호 찾기</Header.Middle>
@@ -61,7 +72,10 @@ const FindPasswordPage = () => {
           </div>
 
           <BottomFixedBox>
-            <div className='flex flex-col items-center py-2'>
+            <div
+              className='flex flex-col items-center py-2'
+              onClick={handleContactCustomerCenter}
+            >
               <Typography className='text-sm text-[#6D7684]'>
                 고객센터 문의
               </Typography>

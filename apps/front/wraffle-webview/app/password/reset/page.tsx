@@ -9,10 +9,11 @@ import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
 import {Header} from '@/shared/ui/header/core/Header';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button, Typography} from '@wraffle/ui';
+import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
+  const {toast} = useToast();
   const requestResetPassword = useResetPassword();
 
   const params = useSearchParams();
@@ -33,10 +34,24 @@ const ResetPasswordPage = () => {
       },
       {
         onSuccess: () => {
-          router.push('/login');
+          toast({
+            title: '비밀번호 변경이 완료되었습니다.',
+            duration: 2000,
+            variant: 'success',
+            icon: 'check',
+          });
+
+          setTimeout(() => {
+            router.push('/login');
+          }, 2000);
         },
         onError: (error: Error) => {
-          console.error(error);
+          toast({
+            title: error.message,
+            duration: 2000,
+            variant: 'warning',
+            icon: 'close',
+          });
         },
       },
     );
@@ -46,6 +61,7 @@ const ResetPasswordPage = () => {
 
   return (
     <div>
+      <Toaster />
       <Header>
         <Header.BackButton onClick={router.back} />
       </Header>
