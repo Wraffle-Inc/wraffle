@@ -96,10 +96,6 @@ export const ProductEventSection: React.FC<{
         {productData.products.map(product => (
           <RaffleCard
             key={product.id}
-            hashtags={product.tags.map(tag => ({
-              id: Number(tag.id),
-              name: tag.name,
-            }))}
             name={product.name}
             thumbnailUrl={product.imageUrl}
           />
