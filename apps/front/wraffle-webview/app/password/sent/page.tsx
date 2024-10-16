@@ -9,11 +9,11 @@ const SendEmailSuccessPage = () => {
   const router = useRouter();
 
   const handleResendEmail = () => {
-    // TODO: 이메일 재발송 API 호출? 혹은 이메일 재발송 페이지로 이동?
+    router.back();
   };
 
   const handleGoHome = () => {
-    router.push('/login');
+    router.push('/login/email');
   };
 
   return (
