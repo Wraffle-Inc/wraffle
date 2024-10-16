@@ -30,20 +30,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font",
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth",
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "useFrameworks": "static"
-          }
-        }
-      ]
-    ],
+    "plugins": ["expo-router", "expo-font", "@react-native-firebase/app"],
     "experiments": {
       "typedRoutes": true
     },
