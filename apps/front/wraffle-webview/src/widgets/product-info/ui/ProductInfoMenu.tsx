@@ -24,10 +24,7 @@ export const ProductInfoMenu: React.FC<ProductInfoMenuProps> = ({
         >
           {menu}
           {selectedMenu === menu && (
-            <div
-              className='absolute bottom-0 left-0 h-0.5 bg-red-600'
-              style={{width: '100%', zIndex: 1}}
-            />
+            <div className='z-1 absolute bottom-0 left-0 h-0.5 w-full bg-red-600' />
           )}
         </div>
       ))}
