@@ -8,7 +8,7 @@ export interface Product {
   name: string;
   price: number;
   imageUrl: string;
-  tags: Tag[];
+  tags?: Tag[];
 }
 
 export interface BaseProductData {
@@ -29,7 +29,9 @@ export interface BaseProductData {
   images: string[];
 }
 
-export interface RaffleData extends BaseProductData {}
+export interface RaffleData extends BaseProductData {
+  tags: Tag[];
+}
 
 export interface EventData extends BaseProductData {
   products: Product[];
@@ -89,10 +91,6 @@ export const sampleEventData: EventData = {
       price: 2210000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 2,
@@ -100,10 +98,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 3,
@@ -111,10 +105,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 4,
@@ -122,10 +112,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 5,
@@ -133,10 +119,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 6,
@@ -144,10 +126,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
     {
       id: 7,
@@ -155,10 +133,6 @@ export const sampleEventData: EventData = {
       price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
-      tags: [
-        {id: '1', name: 'Vans'},
-        {id: '2', name: '래플'},
-      ],
     },
   ],
 };

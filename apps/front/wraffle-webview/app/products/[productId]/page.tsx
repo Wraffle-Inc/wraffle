@@ -7,7 +7,7 @@ import type {RaffleData, EventData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ParticipateButton';
 import {useMenu} from '@/features/product-menu/useMenu';
 import ShareModal from '@/features/share-product-link/ShareModal';
-import {Header} from '@/shared/ui';
+import {Header, Divider} from '@/shared/ui';
 import {
   ProductInfoMenu,
   ProductMainSection,
@@ -21,7 +21,7 @@ import {Icon} from '@wraffle/ui';
 const ProductPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const type = searchParams.get('type'); // 쿼리스트링에서 'type' 값 가져오기
+  const type = searchParams.get('type');
   const {selectedMenu, selectMenu} = useMenu('상품');
   const [productData, setProductData] = useState<RaffleData | EventData | null>(
     null,
@@ -103,24 +103,24 @@ const ProductPage = () => {
           productData={productData}
           sectionRef={sectionsRef.current['상품']}
         />
-        <div className='h-1 w-full bg-[#F9FAFB]' />
+        <Divider />
         <ProductApplyPeriodSection
           productData={productData}
           sectionRef={sectionsRef.current['응모 기간']}
         />
-        <div className='h-1 w-full bg-[#F9FAFB]' />
+        <Divider />
         <ProductAnnouncementSection
           productData={productData}
           sectionRef={sectionsRef.current['당첨자 발표']}
         />
-        <div className='h-1 w-full bg-[#F9FAFB]' />
+        <Divider />
         {type === 'event' && (
           <>
             <ProductEventSection
               productData={productData as EventData}
               sectionRef={sectionsRef.current['추첨 상품']}
             />
-            <div className='h-1 w-full bg-[#F9FAFB]' />
+            <Divider />
           </>
         )}
         <ProductNoticeSection

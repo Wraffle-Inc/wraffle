@@ -6,7 +6,7 @@ import {Icon} from '@wds/ui/icon/Icon';
 export interface RaffleCardProps {
   name: string;
   price?: string;
-  hashtags: TagType[];
+  hashtags?: TagType[];
   scrapCount?: number;
   thumbnailUrl: string;
   endDate?: string;
@@ -52,7 +52,9 @@ const RaffleCard = ({
           {price}원
         </Typography>
       )}
-      <VisibleTags hashtags={hashtags} letterSpace={20} />
+      {hashtags && hashtags.length > 0 && (
+        <VisibleTags hashtags={hashtags} letterSpace={20} />
+      )}
       {scrapCount !== undefined && (
         <span className='flex items-center justify-start gap-0.5'>
           {isBookmarked ? (
