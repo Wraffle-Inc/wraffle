@@ -61,6 +61,7 @@ const FindPasswordPage = () => {
 
             <RHFInput
               name='email'
+              type='email'
               label='이메일'
               placeholder='you@example.com'
             />
