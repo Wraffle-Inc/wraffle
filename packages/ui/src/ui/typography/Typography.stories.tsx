@@ -1,5 +1,4 @@
-import type {TypographyProps} from './Typography';
-import {Typography} from './Typography';
+import {Typography, TypographyProps} from './Typography';
 import type {Meta, StoryFn} from '@storybook/react';
 
 const meta: Meta<TypographyProps> = {
@@ -78,7 +77,7 @@ const meta: Meta<TypographyProps> = {
       },
       control: {
         type: 'select',
-        options: ['red', 'blue', 'green'],
+        options: colorList,
       },
     },
     children: {
@@ -105,12 +104,60 @@ export const Heading = Template.bind({});
 Heading.args = {
   children: (
     <>
-      <Typography fontSize='h1'>Heading 1 (32px, Bold, 140%)</Typography>
-      <Typography fontSize='h2'>Heading 2 (24px, Bold, 140%)</Typography>
-      <Typography fontSize='h3'>Heading 3 (20px, Semi Bold, 140%)</Typography>
-      <Typography fontSize='h4'>Heading 4 (17px, Semi Bold, 140%)</Typography>
-      <Typography fontSize='h5'>Heading 5 (16px, Semi Bold, 140%)</Typography>
-      <Typography fontSize='h6'>Heading 6 (15px, Semi Bold, 140%)</Typography>
+      <Typography
+        as='h1'
+        size='h1'
+        weight='bold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 1 (32px, Bold, 140%)
+      </Typography>
+      <Typography
+        as='h2'
+        size='h2'
+        weight='bold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 2 (24px, Bold, 140%)
+      </Typography>
+      <Typography
+        as='h3'
+        size='h3'
+        weight='semibold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 3 (20px, Semi Bold, 140%)
+      </Typography>
+      <Typography
+        as='h4'
+        size='h4'
+        weight='semibold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 4 (17px, Semi Bold, 140%)
+      </Typography>
+      <Typography
+        as='h5'
+        size='h5'
+        weight='semibold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 5 (16px, Semi Bold, 140%)
+      </Typography>
+      <Typography
+        as='h6'
+        size='h6'
+        weight='semibold'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Heading 6 (15px, Semi Bold, 140%)
+      </Typography>
     </>
   ),
 };
@@ -119,10 +166,42 @@ export const Paragraph = Template.bind({});
 Paragraph.args = {
   children: (
     <>
-      <Typography fontSize='p1'>Paragraph 1 (16px, Medium, 140%)</Typography>
-      <Typography fontSize='p2'>Paragraph 2 (14px, Medium, 140%)</Typography>
-      <Typography fontSize='p3'>Paragraph 3 (14px, Medium, 140%)</Typography>
-      <Typography fontSize='p4'>Paragraph 4 (13px, Medium, 140%)</Typography>
+      <Typography
+        as='p'
+        size='p1'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Paragraph 1 (16px, Medium, 140%)
+      </Typography>
+      <Typography
+        as='p'
+        size='p2'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Paragraph 2 (14px, Medium, 140%)
+      </Typography>
+      <Typography
+        as='p'
+        size='p3'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Paragraph 3 (14px, Medium, 140%)
+      </Typography>
+      <Typography
+        as='p'
+        size='p4'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Paragraph 4 (13px, Medium, 140%)
+      </Typography>
     </>
   ),
 };
@@ -131,8 +210,24 @@ export const SmallText = Template.bind({});
 SmallText.args = {
   children: (
     <>
-      <Typography fontSize='sm1'>Small Text 1 (12px, Medium, 140%)</Typography>
-      <Typography fontSize='sm2'>Small Text 2 (10px, Medium, 140%)</Typography>
+      <Typography
+        as='p'
+        size='sm1'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Small Text 1 (12px, Medium, 140%)
+      </Typography>
+      <Typography
+        as='p'
+        size='sm2'
+        weight='medium'
+        lineHeight='1.4'
+        textColor='brand1'
+      >
+        Small Text 2 (10px, Medium, 140%)
+      </Typography>
     </>
   ),
 };
