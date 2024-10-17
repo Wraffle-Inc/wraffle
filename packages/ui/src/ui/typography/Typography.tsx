@@ -1,52 +1,46 @@
+import type {Colors} from './prop/color.prop';
+import {colorStyles} from './prop/color.prop';
+import type {As, Sizes} from './prop/text.prop';
+import {getTypographyClassName} from './util/typo';
 import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { colorStyles, sizeStyles } from '@wds/shared/utils/typography';
+import {Slot} from '@radix-ui/react-slot';
+import {cn} from '@wds/shared/utils';
 
-export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div' | 'p' | 'label';
-  size?: keyof typeof sizeStyles;
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold';
-  lineHeight?: string;
-  textColor?: keyof typeof colorStyles;
+type TextElement = React.ElementRef<'span'>;
+
+interface TypographyProps extends React.HTMLAttributes<HTMLSpanElement> {
+  as?: As;
+  size?: Sizes;
+  color?: Colors;
   asChild?: boolean;
+  children: React.ReactNode;
 }
 
-export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
+export const Typography = React.forwardRef<TextElement, TypographyProps>(
   (
     {
-      className,
-      as = 'p',
+      as: Tag = 'span',
       size = 'p1',
-      weight = 'regular',
-      lineHeight = '1.4',
-      textColor = 'brand1',
+      color = 'zinc900',
       asChild = false,
-      ...props
+      children,
+      ...textProps
     },
-    ref
+    forwardedRef,
   ) => {
-    const Comp: React.ElementType = asChild ? Slot : as;
-
-    const sizeClass = size ? sizeStyles[size] : sizeStyles['p1'];
-    const weightClass = weight ? `font-${weight}` : '';
-    const colorClass = textColor ? colorStyles[textColor] : '';
-
-    const finalClassName = [
-      sizeClass,
-      weightClass,
-      colorClass,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    const finalStyle = {
-      lineHeight, 
-      ...props.style, 
-    };
-
-    return <Comp className={finalClassName} ref={ref} style={finalStyle} {...props} />;
-  }
+    return (
+      <Slot
+        data-accent-color={color}
+        className={cn(getTypographyClassName(size), colorStyles[color])}
+        {...textProps}
+        ref={forwardedRef}
+      >
+        {asChild ? children : <Tag>{children}</Tag>}
+      </Slot>
+    );
+  },
 );
 
 Typography.displayName = 'Typography';
+
+export type {TypographyProps};
