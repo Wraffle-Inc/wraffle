@@ -24,6 +24,7 @@ export const Typography = React.forwardRef<TextElement, TypographyProps>(
       color = 'zinc900',
       asChild = false,
       children,
+      className,
       ...textProps
     },
     forwardedRef,
@@ -31,7 +32,11 @@ export const Typography = React.forwardRef<TextElement, TypographyProps>(
     return (
       <Slot
         data-accent-color={color}
-        className={cn(getTypographyClassName(size), colorStyles[color])}
+        className={cn(
+          getTypographyClassName(size),
+          colorStyles[color],
+          className,
+        )}
         {...textProps}
         ref={forwardedRef}
       >
