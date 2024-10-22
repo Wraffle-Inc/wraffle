@@ -30,6 +30,8 @@ const meta = {
           'upload',
           'calendar',
           'write',
+          'divider-large',
+          'social-instagram',
         ],
       },
     },
