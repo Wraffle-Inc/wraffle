@@ -22,7 +22,9 @@ export type IconNameTypes =
   | 'credit-card'
   | 'upload'
   | 'calendar'
-  | 'write';
+  | 'write'
+  | 'divider-large'
+  | 'social-instagram';
 
 type IconProps = {
   name: IconNameTypes;
