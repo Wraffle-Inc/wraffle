@@ -9,9 +9,10 @@ const meta = {
       control: {
         type: 'select',
         options: [
-          'arrow-bottom',
           'arrow-right',
           'arrow-left',
+          'chevron-right',
+          'chevron-bottom',
           'menu',
           'search',
           'home',

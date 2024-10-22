@@ -2,9 +2,10 @@ import clsx from 'clsx';
 import type {SVGAttributes} from 'react';
 
 export type IconNameTypes =
-  | 'arrow-bottom'
   | 'arrow-right'
   | 'arrow-left'
+  | 'chevron-right'
+  | 'chevron-bottom'
   | 'menu'
   | 'search'
   | 'home'

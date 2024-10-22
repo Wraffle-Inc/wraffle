@@ -20,7 +20,17 @@ const IconLoader = (
       />
     </symbol>
 
-    <symbol id='arrow-bottom' viewBox='0 0 12 7'>
+    <symbol id='chevron-right' viewBox='0 0 7 12'>
+      <path
+        stroke='currentColor'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke-width='1.5'
+        d='M1 11l5-5-5-5'
+      />
+    </symbol>
+
+    <symbol id='chevron-bottom' viewBox='0 0 12 7'>
       <path
         stroke='currentColor'
         strokeLinecap='round'
