@@ -1,4 +1,21 @@
+import {type ReactNode} from 'react';
 import {Icon, Typography} from '@wraffle/ui';
+
+const InfoBox = ({children}: {children: ReactNode}) => {
+  return (
+    <div className='flex h-24 items-center rounded-lg bg-[#F9FAFB]'>
+      {children}
+    </div>
+  );
+};
+
+export const SingleInfoBox = ({children}: {children: ReactNode}) => {
+  return (
+    <InfoBox>
+      <div className='flex w-full items-center justify-center'>{children}</div>
+    </InfoBox>
+  );
+};
 
 interface DualInfoBoxProps {
   leftLabel: string;
@@ -14,24 +31,18 @@ export const DualInfoBox = ({
   rightValue,
 }: DualInfoBoxProps) => {
   return (
-    <div className='flex h-24 items-center rounded-lg bg-[#F9FAFB]'>
+    <InfoBox>
       <div className='flex flex-1 flex-col items-center'>
         <Typography size='p4'>{leftLabel}</Typography>
-        <Typography size='h3' className='font-bold'>
-          {leftValue}
-        </Typography>
+        <Typography size='h3'>{leftValue}</Typography>
       </div>
 
       <Icon name='divider-large' stroke='#E5E8EB' />
 
       <div className='flex flex-1 flex-col items-center'>
         <Typography size='p4'>{rightLabel}</Typography>
-        <Typography size='h3' className='font-bold'>
-          {rightValue}
-        </Typography>
+        <Typography size='h3'>{rightValue}</Typography>
       </div>
-    </div>
+    </InfoBox>
   );
 };
-
-export const SingleInfoBox = () => {};
