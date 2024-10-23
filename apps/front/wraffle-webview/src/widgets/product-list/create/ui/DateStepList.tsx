@@ -1,5 +1,5 @@
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/create/model/createEventSchema';
+import type {CreateEventPayload} from '@/entities/create/model';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {getTypeText, handleMaxLength, winnerLimit} from '@/shared/util';
 import {

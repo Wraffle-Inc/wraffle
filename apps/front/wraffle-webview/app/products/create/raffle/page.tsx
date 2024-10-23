@@ -51,7 +51,7 @@ const RaffleCreate = () => {
     },
   });
 
-  const RaffleStepIndex = 4;
+  const RaffleTotalStepIndex = 4;
 
   // TODO
   // 생성 api 연결
@@ -60,12 +60,12 @@ const RaffleCreate = () => {
 
   return (
     <div>
-      {funnel.index < RaffleStepIndex && (
+      {funnel.index < RaffleTotalStepIndex && (
         <div className='py-5'>
           <Header>
             <Header.BackButton onClick={() => funnel.history.back()} />
           </Header>
-          <ProgressBar totalSteps={RaffleStepIndex} index={funnel.index} />
+          <ProgressBar totalSteps={RaffleTotalStepIndex} index={funnel.index} />
         </div>
       )}
 
