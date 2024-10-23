@@ -1,12 +1,6 @@
 {/* Calendar.mdx */}
 
-import {
-  Canvas,
-  Meta,
-  Primary,
-  Controls,
-  Description,
-} from '@storybook/blocks';
+import {Canvas, Meta, Primary, Controls, Description} from '@storybook/blocks';
 
 import * as CalendarStories from './Calendar.stories';
 
@@ -39,6 +33,12 @@ Calendar컴포넌트 같은 경우, option 중 mode로 Calendar안에서 Selecti
 <Controls />
 
 ## Stories
+
+### Calendar With FromDate
+
+고를수 있는 시작일을 fromDate를 통해 설정할 수 있습니다.(예시. 오늘부터)
+
+<Canvas of={CalendarStories.CalendarWithFromDate} meta={CalendarStories} />
 
 ### Selected Calendar Form
 
