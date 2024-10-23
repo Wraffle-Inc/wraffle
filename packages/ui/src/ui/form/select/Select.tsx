@@ -19,8 +19,10 @@ export interface GroupSelectItem {
 }
 
 export interface BaseSelectProps {
+  className: string;
   placeholder: string;
-  onChange: (value: string) => void;
+  onValueChange: (value: string) => void;
+  defaultValue?: string;
 }
 
 export interface GroupSelectProps extends BaseSelectProps {
@@ -39,10 +41,16 @@ const isGroupSelect = (
   return (items as GroupSelectItem[])[0]?.groupName !== undefined;
 };
 
-const Select = ({placeholder, items, onChange}: SelectProps) => {
+const Select = ({
+  className,
+  placeholder,
+  items,
+  onValueChange,
+  defaultValue,
+}: SelectProps) => {
   return (
-    <SelectRoot onValueChange={onChange}>
-      <SelectTrigger>
+    <SelectRoot onValueChange={onValueChange} defaultValue={defaultValue}>
+      <SelectTrigger className={className}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
