@@ -62,7 +62,7 @@ const EventCreate = () => {
     },
   });
 
-  const EventStepIndex = 5;
+  const EventTotalStepIndex = 5;
 
   // TODO
   // 생성 api 연동
@@ -70,16 +70,14 @@ const EventCreate = () => {
     console.log('go : ', data);
   };
 
-  console.log(funnel.context);
-
   return (
     <div>
-      {funnel.index < EventStepIndex && (
+      {funnel.index < EventTotalStepIndex && (
         <div className='py-5'>
           <Header>
             <Header.BackButton onClick={() => funnel.history.back()} />
           </Header>
-          <ProgressBar totalSteps={EventStepIndex} index={funnel.index} />
+          <ProgressBar totalSteps={EventTotalStepIndex} index={funnel.index} />
         </div>
       )}
 
