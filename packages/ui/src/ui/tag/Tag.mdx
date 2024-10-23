@@ -1,8 +1,8 @@
-import { Meta, Story, Controls, Canvas } from "@storybook/addon-docs/blocks";
+import {Meta, Story, Controls, Canvas} from '@storybook/addon-docs/blocks';
 
-import * as stories from "./Tag.stories";
+import * as stories from './Tag.stories';
 
-<Meta title="Components/Tag" component={stories.Tag} of={stories} />
+<Meta title='Components/Tag' component={stories.Tag} of={stories} />
 
 # Tag Component
 
@@ -26,10 +26,15 @@ import * as stories from "./Tag.stories";
 ## Description
 
 `Tag` 컴포넌트는 시각적 식별자 역할을 하며, 사용자가 정보를 빠르게 분류하고 이해할 수 있도록 돕습니다. <br/>
-`#` 기호는 태그가 정보의 카테고리나 특성을 나타내는 데 사용되는 표준 컨벤션을 따릅니다.
+`#` 기호는 태그가 정보의 카테고리나 특성을 나타내는 데 사용되는 표준 컨벤션을 따릅니다.<br/>
+태그를 삭제하는 handleRemoveTag 함수를 옵셔널로 받아 태그를 삭제할 수 있는 close 버튼이 보여집니다.
 
 ## Usage
 
 ### Default Tag
 
 <Canvas of={stories.Primary} />
+
+### Tag With Remove Button
+
+<Canvas of={stories.TagWithRemoveButton} />
