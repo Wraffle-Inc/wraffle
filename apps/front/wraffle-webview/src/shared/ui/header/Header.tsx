@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import {type ReactNode} from 'react';
+import {findComponentFromChildren} from '@wraffle/ui';
 import {Icon} from '@wraffle/ui/src/ui/icon/Icon';
+import type {TypographyProps} from '@wraffle/ui/src/ui/typography/Typography';
 import {Typography} from '@wraffle/ui/src/ui/typography/Typography';
 
 interface HeaderProps {
@@ -9,9 +11,18 @@ interface HeaderProps {
 }
 
 const HeaderPrimitive = ({children}: HeaderProps) => {
+  const leftComponent = findComponentFromChildren(children, Left);
+  const middleComponent = findComponentFromChildren(children, Middle);
+  const rightComponent = findComponentFromChildren(children, Right);
   return (
     <div className='flex h-[52px] items-center justify-between px-5'>
-      {children}
+      <div className='flex flex-1 items-center gap-4'>{leftComponent}</div>
+      {!!middleComponent && (
+        <div className='flex flex-1 items-center justify-center gap-4'>
+          {middleComponent}
+        </div>
+      )}
+      <div className='flex flex-1 items-center gap-4'>{rightComponent}</div>
     </div>
   );
 };
@@ -21,19 +32,19 @@ type WithChildren = {
 };
 
 const Left = ({children}: WithChildren) => {
-  return <div className='flex flex-1 items-center gap-4'>{children}</div>;
+  return <>{children}</>;
 };
 
 const Middle = ({children}: WithChildren) => {
-  return <div className='flex flex-1 items-center gap-4'>{children}</div>;
+  return <>{children}</>;
 };
 
 const Right = ({children}: WithChildren) => {
-  return <div className='flex flex-1 items-center gap-4'>{children}</div>;
+  return <>{children}</>;
 };
 
 interface BackButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const BackButton = ({onClick}: BackButtonProps) => {
@@ -55,12 +66,16 @@ const Logo = () => {
   );
 };
 
-interface TitleProps {
+interface TitleProps extends TypographyProps {
   children: string;
 }
 
-const Title = ({children}: TitleProps) => {
-  return <Typography fontSize='h1'>{children}</Typography>;
+const Title = ({children, size = 'h4', ...props}: TitleProps) => {
+  return (
+    <Typography size={size} {...props}>
+      {children}
+    </Typography>
+  );
 };
 
 HeaderPrimitive.Left = Left;
