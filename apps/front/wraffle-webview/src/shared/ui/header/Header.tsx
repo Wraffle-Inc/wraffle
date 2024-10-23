@@ -1,9 +1,8 @@
-import Image from 'next/image';
+import {BackButton} from './core/BackButton';
+import {Logo} from './core/Logo';
+import {Title} from './core/Title';
 import {type ReactNode} from 'react';
 import {findComponentFromChildren} from '@wraffle/ui';
-import {Icon} from '@wraffle/ui/src/ui/icon/Icon';
-import type {TypographyProps} from '@wraffle/ui/src/ui/typography/Typography';
-import {Typography} from '@wraffle/ui/src/ui/typography/Typography';
 
 interface HeaderProps {
   withBackButton?: boolean;
@@ -41,41 +40,6 @@ const Middle = ({children}: WithChildren) => {
 
 const Right = ({children}: WithChildren) => {
   return <>{children}</>;
-};
-
-interface BackButtonProps {
-  onClick?: () => void;
-}
-
-const BackButton = ({onClick}: BackButtonProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className='flex items-center justify-center text-black'
-    >
-      <Icon name='arrow-left' />
-    </button>
-  );
-};
-
-const Logo = () => {
-  return (
-    <div className='flex items-center justify-center'>
-      <Image src='/logo.png' alt='logo' width={100} height={100} />
-    </div>
-  );
-};
-
-interface TitleProps extends TypographyProps {
-  children: string;
-}
-
-const Title = ({children, size = 'h4', ...props}: TitleProps) => {
-  return (
-    <Typography size={size} {...props}>
-      {children}
-    </Typography>
-  );
 };
 
 HeaderPrimitive.Left = Left;
