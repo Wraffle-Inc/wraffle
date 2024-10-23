@@ -11,6 +11,7 @@ const meta: Meta<typeof Tag> = {
     noHash: {
       control: {type: 'boolean'},
     },
+    handleRemoveTag: {},
   },
 };
 
@@ -21,4 +22,14 @@ const Template: StoryFn<typeof Tag> = args => <Tag {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   children: 'Tag',
+  noHash: false,
+};
+
+export const TagWithRemoveButton = Template.bind({});
+TagWithRemoveButton.args = {
+  children: 'Removable Tag',
+  noHash: true,
+  handleRemoveTag: (tag: string) => {
+    console.log(`Removing tag: ${tag}`);
+  },
 };
