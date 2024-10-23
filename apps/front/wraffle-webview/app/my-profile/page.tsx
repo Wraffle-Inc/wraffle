@@ -19,11 +19,12 @@ const MyProfilePage = () => {
         <Header.Middle>마이페이지</Header.Middle>
       </Header>
 
-      <div className='flex flex-col py-8'>
+      <div className='py-8'>
         <div className='px-8'>
           <Typography size='h2'>홍길동님</Typography>
         </div>
 
+        {/* TODO: w-full이 되어있음 이거 해결해야 됨 */}
         <div className='mt-1 flex items-center px-8 hover:cursor-pointer'>
           <Typography size='p3' color='zinc500'>
             내정보 수정

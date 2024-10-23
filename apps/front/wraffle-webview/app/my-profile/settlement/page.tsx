@@ -18,7 +18,7 @@ const SettlementPage = () => {
         <Header.Middle>내 정산금 관리</Header.Middle>
       </Header>
 
-      <div className='flex flex-col p-8'>
+      <div className='p-8'>
         <div className='flex'>
           <div>
             <Typography size='h2'>홍길동님</Typography>
