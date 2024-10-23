@@ -3,7 +3,7 @@ import {SingleInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Button, Typography} from '@wraffle/ui';
 
 const SettlementAccountPage = () => {
-  const isAccountExist = true;
+  const isAccountExist = false;
 
   const title = isAccountExist ? '정산 계좌 수정' : '정산 계좌 등록';
 
@@ -13,7 +13,7 @@ const SettlementAccountPage = () => {
         <Header.Middle>{title}</Header.Middle>
       </Header>
 
-      <div className='flex flex-col p-8'>
+      <div className='p-8'>
         <div className='flex'>
           <div>
             <Typography size='h2'>홍길동님</Typography>
