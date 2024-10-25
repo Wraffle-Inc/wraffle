@@ -1,5 +1,6 @@
 'use client';
 
+import type {RaffleCreateState} from '@/entities/create/model';
 import {
   createRaffleDefaultValues,
   createRaffleSchema,
@@ -15,19 +16,6 @@ import {
 } from '@/widgets/product-list/create/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {createFunnelSteps, useFunnel} from '@use-funnel/browser';
-
-export interface RaffleCreateState {
-  title?: string;
-  categoryId?: string;
-  tagIds?: number[];
-  price?: string;
-  startDate?: Date;
-  endDate?: Date;
-  announceAt?: Date;
-  winnerCount?: string;
-  images?: string[];
-  etc?: string;
-}
 
 const steps = createFunnelSteps<RaffleCreateState>()
   .extends('titleStep')

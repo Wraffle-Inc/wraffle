@@ -1,9 +1,8 @@
 import {ProductImageStep} from './ProductImageStepList';
 import {ProductListStep} from './ProductListStep';
 import {ProductTitleStep} from './ProductTitleStepList';
-import type {Product} from 'app/products/create/event/page';
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/create/model';
+import type {CreateEventPayload, Product} from '@/entities/create/model';
 import {useFunnel} from '@use-funnel/browser';
 
 interface listState {
