@@ -36,8 +36,8 @@ export const CalendarForm = ({
           onClick={onClick}
           className={clsx(
             'flex w-full items-center justify-between gap-3 px-3 py-3.5',
-            selected ? 'font-normal' : 'font-medium text-[#ADB5BD]',
-            'truncate rounded-lg border-2 border-solid border-[#F5F5F7] bg-[#FAFAFB] text-sm hover:bg-accent hover:text-accent-foreground',
+            selected ? 'text-black' : 'text-[#ADB5BD]',
+            'truncate rounded-lg border-2 border-solid border-[#F5F5F7] bg-[#FAFAFB] text-sm font-medium hover:bg-accent hover:text-accent-foreground',
           )}
         >
           {selected ? format(selected, 'PPP', {locale: ko}) : dateLabel}
