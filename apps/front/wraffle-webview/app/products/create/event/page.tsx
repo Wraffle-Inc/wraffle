@@ -1,5 +1,6 @@
 'use client';
 
+import type {EventCreateState} from '@/entities/create/model';
 import {
   createEventDefaultValues,
   createEventSchema,
@@ -16,26 +17,6 @@ import {
 } from '@/widgets/product-list/create/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {createFunnelSteps, useFunnel} from '@use-funnel/browser';
-
-export interface Product {
-  title: string;
-  tagIds: number[];
-  imageUrl: string;
-}
-
-export interface EventCreateState {
-  title?: string;
-  categoryId?: string;
-  tagIds?: number[];
-  price?: string;
-  startDate?: Date;
-  endDate?: Date;
-  announceAt?: Date;
-  winnerCount?: string;
-  products?: Product[];
-  images?: string[];
-  etc?: string;
-}
 
 const steps = createFunnelSteps<EventCreateState>()
   .extends('titleStep')

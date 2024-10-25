@@ -1,4 +1,4 @@
-import type {Product} from 'app/products/create/event/page';
+import type {Product} from '@/entities/create/model';
 import {ThumbnailCard} from '@/entities/create/ui';
 import {Button, Label, Typography} from '@wraffle/ui';
 
