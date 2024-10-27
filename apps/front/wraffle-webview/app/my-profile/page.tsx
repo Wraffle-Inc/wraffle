@@ -24,8 +24,7 @@ const MyProfilePage = () => {
           <Typography size='h2'>홍길동님</Typography>
         </div>
 
-        {/* TODO: w-full이 되어있음 이거 해결해야 됨 */}
-        <div className='mt-1 flex items-center px-8 hover:cursor-pointer'>
+        <div className='ml-8 mt-1 inline-flex items-center hover:cursor-pointer'>
           <Typography size='p3' color='zinc500'>
             내정보 수정
           </Typography>
