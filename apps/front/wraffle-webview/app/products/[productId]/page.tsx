@@ -5,7 +5,6 @@ import {useEffect, useState, useRef} from 'react';
 import {sampleRaffleData, sampleEventData} from '@/entities/product/product';
 import type {RaffleData, EventData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ParticipateButton';
-import {useMenu} from '@/features/product-menu/useMenu';
 import ShareModal from '@/features/share-product-link/ShareModal';
 import {Header, Divider} from '@/shared/ui';
 import {
@@ -18,6 +17,19 @@ import {
 import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/constants';
 import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
 import {Icon} from '@wraffle/ui';
+
+const useMenu = (initialMenu: string) => {
+  const [selectedMenu, setSelectedMenu] = useState<string>(initialMenu);
+
+  const selectMenu = (menu: string) => {
+    setSelectedMenu(menu);
+  };
+
+  return {
+    selectedMenu,
+    selectMenu,
+  };
+};
 
 const ProductPage = () => {
   const router = useRouter();
@@ -39,7 +51,6 @@ const ProductPage = () => {
     유의사항: useRef<HTMLDivElement>(null),
   });
 
-  // 타입에 따라 메뉴 리스트를 정의
   const menus = type === 'event' ? EVENT_MENUS : RAFFLE_MENUS;
 
   const data: {
