@@ -15,6 +15,7 @@ import {
   ProductAnnouncementSection,
   ProductNoticeSection,
 } from '@/widgets/product-info';
+import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/constants';
 import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
 import {Icon} from '@wraffle/ui';
 
@@ -39,17 +40,19 @@ const ProductPage = () => {
   });
 
   // 타입에 따라 메뉴 리스트를 정의
-  const menus =
-    type === 'event'
-      ? ['상품', '응모 기간', '당첨자 발표', '추첨 상품', '유의사항']
-      : ['상품', '응모 기간', '당첨자 발표', '유의사항'];
+  const menus = type === 'event' ? EVENT_MENUS : RAFFLE_MENUS;
+
+  const data: {
+    raffle: RaffleData;
+    event: EventData;
+  } = {
+    raffle: sampleRaffleData,
+    event: sampleEventData,
+  };
 
   useEffect(() => {
-    // 쿼리스트링의 타입에 따라 데이터 로드
-    if (type === 'raffle') {
-      setProductData(sampleRaffleData);
-    } else if (type === 'event') {
-      setProductData(sampleEventData);
+    if (type === 'raffle' || type === 'event') {
+      setProductData(data[type]);
     } else {
       router.push('/404');
     }
@@ -133,7 +136,7 @@ const ProductPage = () => {
         <ParticipateButton
           status={productData.status}
           clipCount={productData.clipCount}
-          applyStatus={productData.applyStatus}
+          isApplied={productData.isApplied}
           productImage={productData.images[0]}
         />
       </div>
