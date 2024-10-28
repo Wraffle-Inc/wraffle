@@ -23,7 +23,7 @@ export interface BaseProductData {
   clipCount: number;
   status: string;
   applyCount: number;
-  applyStatus: boolean;
+  isApplied: boolean;
   createUserId: number;
   tags: Tag[];
   images: string[];
@@ -50,7 +50,7 @@ export const sampleRaffleData: RaffleData = {
   clipCount: 53,
   status: 'before',
   applyCount: 0,
-  applyStatus: false,
+  isApplied: false,
   createUserId: 1,
   tags: [
     {id: '1', name: 'Vans'},
@@ -74,7 +74,7 @@ export const sampleEventData: EventData = {
   clipCount: 10,
   applyCount: 10,
   status: 'waiting',
-  applyStatus: false,
+  isApplied: false,
   createUserId: 1,
   tags: [
     {id: '1', name: 'Vans'},

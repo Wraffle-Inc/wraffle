@@ -7,27 +7,27 @@ import {Button, Icon} from '@wraffle/ui';
 interface ParticipateButtonProps {
   status: string;
   clipCount: number;
-  applyStatus: boolean;
+  isApplied: boolean;
   productImage: string;
 }
 
 const ParticipateButton: React.FC<ParticipateButtonProps> = ({
   status,
   clipCount,
-  applyStatus: initialApplyStatus,
+  isApplied: initialApplyStatus,
   productImage,
 }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isApplyCompleteModalOpen, setIsApplyCompleteModalOpen] =
     useState(false);
-  const [applyStatus, setApplyStatus] = useState(initialApplyStatus);
+  const [isApplied, setIsApplied] = useState(initialApplyStatus);
 
   const handleBookmark = () => {
     setIsBookmarked(prev => !prev);
   };
 
   const handleApply = () => {
-    setApplyStatus(true); // 응모 상태로 변경
+    setIsApplied(true); // 응모 상태로 변경
     setIsApplyCompleteModalOpen(true); // 이후 응모 완료 모달 열기
   };
 
@@ -51,7 +51,7 @@ const ParticipateButton: React.FC<ParticipateButtonProps> = ({
           <span>{isBookmarked ? `${clipCount + 1}` : `${clipCount}`}</span>
         </div>
       </button>
-      {applyStatus ? (
+      {isApplied ? (
         <Button variant='gray'>응모를 완료하였습니다</Button>
       ) : (
         <Button variant='default' onClick={handleApply}>
