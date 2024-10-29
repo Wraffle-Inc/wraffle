@@ -1,8 +1,8 @@
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/create/model';
-import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {getTypeText, priceLimit, tagLimit, titleLimit} from '@/shared/util';
-import {Button, Icon, Input, Label, Select, Tag, Typography} from '@wraffle/ui';
+import type {CreateEventPayload} from '@/entities/product-form/model';
+import {CategoryForm, PriceForm, TitleForm} from '@/entities/product-form/ui';
+import {getTypeText, tagLimit} from '@/shared/util';
+import {Button, Icon, Input, Label, Tag, Typography} from '@wraffle/ui';
 
 // TODO
 // 카테고리 api 연동
@@ -63,84 +63,14 @@ export const TitleStep = ({
         </Typography>
       </div>
 
-      <FormField
+      <TitleForm
         control={control}
-        name='title'
-        render={({field}) => (
-          <FormItem>
-            <FormLabel htmlFor='title' className='text-xl font-bold'>
-              제목*
-            </FormLabel>
-            <FormControl>
-              <Input
-                className='border-[#F5F5F7] bg-[#FAFAFB] placeholder:text-[#ADB5BD]'
-                id='title'
-                type='text'
-                maxLength={titleLimit}
-                placeholder={eventOrRaffleText.placeholder}
-                {...field}
-              />
-            </FormControl>
-          </FormItem>
-        )}
+        placeholder={eventOrRaffleText.placeholder}
       />
 
-      <FormField
-        control={control}
-        name='price'
-        render={({field}) => (
-          <FormItem>
-            <FormLabel htmlFor='price' className='text-xl font-bold'>
-              응모 금액*
-            </FormLabel>
-            <FormControl>
-              <div className='relative w-full'>
-                <Input
-                  className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 placeholder:text-[#ADB5BD]'
-                  id='price'
-                  type='text'
-                  inputMode='numeric'
-                  maxLength={priceLimit}
-                  placeholder='응모 금액을 입력해주세요.'
-                  value={
-                    field.value ? Number(field.value).toLocaleString() : ''
-                  }
-                  onChange={e => {
-                    const value = e.target.value.replace(/,/g, '');
-                    if (!isNaN(Number(value))) {
-                      field.onChange(value);
-                    }
-                  }}
-                  ref={field.ref}
-                  onBlur={field.onBlur}
-                />
-                <div className='absolute inset-y-3 right-0 flex items-center pr-4'>
-                  <span className='text-xl font-bold text-zinc-900'>원</span>
-                </div>
-              </div>
-            </FormControl>
-          </FormItem>
-        )}
-      />
+      <PriceForm control={control} />
 
-      <FormField
-        control={control}
-        name='categoryId'
-        render={({field}) => (
-          <FormItem>
-            <FormLabel className='text-xl font-bold'>카테고리*</FormLabel>
-            <FormControl>
-              <Select
-                className='border-[#F5F5F7] bg-[#FAFAFB]'
-                placeholder='카테고리를 선택해주세요.'
-                items={categoryItems}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              />
-            </FormControl>
-          </FormItem>
-        )}
-      />
+      <CategoryForm control={control} categoryItems={categoryItems} />
 
       <div className='flex flex-col'>
         <Label className='text-xl font-bold'>태그</Label>

@@ -1,7 +1,6 @@
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/create/model';
-import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {etcLimit} from '@/shared/util';
+import type {CreateEventPayload} from '@/entities/product-form/model';
+import {EtcForm} from '@/entities/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
@@ -20,31 +19,7 @@ export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
         </Typography>
       </div>
 
-      <FormField
-        control={control}
-        name='etc'
-        render={({field}) => (
-          <FormItem>
-            <FormLabel
-              htmlFor='etc'
-              className='text-xl font-bold text-[#18181B]'
-            >
-              유의사항*
-              <span className='text-[0.625rem] font-medium'>최대 400자</span>
-            </FormLabel>
-            <FormControl>
-              <textarea
-                id='etc'
-                className='w-full resize-none rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] p-3 text-sm font-medium placeholder:text-[#ADB5BD]'
-                rows={7}
-                maxLength={etcLimit}
-                placeholder='유의사항을 작성해주세요'
-                {...field}
-              />
-            </FormControl>
-          </FormItem>
-        )}
-      />
+      <EtcForm control={control} />
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button
