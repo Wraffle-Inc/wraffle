@@ -1,15 +1,10 @@
 import type {CreateEventPayload} from '../model';
-import type {Control} from 'react-hook-form';
+import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm, useToast} from '@wraffle/ui';
 
-export const EndDateForm = ({
-  control,
-  fromDate: startDate,
-}: {
-  control: Control<CreateEventPayload>;
-  fromDate: Date;
-}) => {
+export const EndDateForm = ({fromDate: startDate}: {fromDate: Date}) => {
+  const {control} = useFormContext<CreateEventPayload>();
   const {toast} = useToast();
   return (
     <FormField

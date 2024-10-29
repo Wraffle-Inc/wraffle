@@ -21,7 +21,7 @@ export const TitleStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {getValues, control} = useFormContext<CreateEventPayload>();
+  const {getValues} = useFormContext<CreateEventPayload>();
 
   const title = getValues('title');
   const category = getValues('categoryId');
@@ -63,14 +63,11 @@ export const TitleStep = ({
         </Typography>
       </div>
 
-      <TitleForm
-        control={control}
-        placeholder={eventOrRaffleText.placeholder}
-      />
+      <TitleForm placeholder={eventOrRaffleText.placeholder} />
 
-      <PriceForm control={control} />
+      <PriceForm />
 
-      <CategoryForm control={control} categoryItems={categoryItems} />
+      <CategoryForm categoryItems={categoryItems} />
 
       <div className='flex flex-col'>
         <Label className='text-xl font-bold'>태그</Label>
