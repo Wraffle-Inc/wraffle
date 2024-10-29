@@ -51,7 +51,9 @@ const RaffleCreate = () => {
       {funnel.index < RaffleTotalStepIndex && (
         <div className='py-5'>
           <Header>
-            <Header.BackButton onClick={() => funnel.history.back()} />
+            <Header.Left>
+              <Header.BackButton onClick={() => funnel.history.back()} />
+            </Header.Left>
           </Header>
           <ProgressBar totalSteps={RaffleTotalStepIndex} index={funnel.index} />
         </div>
