@@ -1,10 +1,10 @@
 'use client';
 
-import type {EventCreateState} from '@/entities/create/model';
+import type {EventCreateState} from '@/entities/product-form/model';
 import {
   createEventDefaultValues,
   createEventSchema,
-} from '@/entities/create/model';
+} from '@/entities/product-form/model';
 import {Header, ProgressBar} from '@/shared/ui';
 import GenericForm from '@/shared/ui/form/GenericForm';
 import {
