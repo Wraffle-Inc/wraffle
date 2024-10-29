@@ -4,7 +4,7 @@ import {EtcForm} from '@/entities/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
-  const {getValues, control} = useFormContext<CreateEventPayload>();
+  const {getValues} = useFormContext<CreateEventPayload>();
 
   const etc = getValues('etc');
 
@@ -19,7 +19,7 @@ export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
         </Typography>
       </div>
 
-      <EtcForm control={control} />
+      <EtcForm />
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button

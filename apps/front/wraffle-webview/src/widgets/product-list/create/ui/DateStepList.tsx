@@ -23,7 +23,7 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {getValues, control} = useFormContext<CreateEventPayload>();
+  const {getValues} = useFormContext<CreateEventPayload>();
 
   const startDate = getValues('startDate');
   const endDate = getValues('endDate');
@@ -48,19 +48,15 @@ export const DateStep = ({
 
       <div>
         <Typography className='text-xl font-bold'>응모 기간</Typography>
-        <StartDateForm control={control} />
+        <StartDateForm />
 
         <div className='h-2.5'></div>
-        <EndDateForm control={control} fromDate={startDate} />
+        <EndDateForm fromDate={startDate} />
       </div>
 
-      <AnnounceAtForm
-        control={control}
-        fromDate={endDate}
-        startDate={startDate}
-      />
+      <AnnounceAtForm fromDate={endDate} startDate={startDate} />
 
-      <WinnerCountForm control={control} />
+      <WinnerCountForm />
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button

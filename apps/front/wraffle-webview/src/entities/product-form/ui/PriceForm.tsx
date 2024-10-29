@@ -1,47 +1,46 @@
 import type {CreateEventPayload} from '../model';
-import type {Control} from 'react-hook-form';
+import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {priceLimit} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
-export const PriceForm = ({
-  control,
-}: {
-  control: Control<CreateEventPayload>;
-}) => (
-  <FormField
-    control={control}
-    name='price'
-    render={({field}) => (
-      <FormItem>
-        <FormLabel htmlFor='price' className='text-xl font-bold'>
-          응모 금액*
-        </FormLabel>
-        <FormControl>
-          <div className='relative w-full'>
-            <Input
-              className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 placeholder:text-[#ADB5BD]'
-              id='price'
-              type='text'
-              inputMode='numeric'
-              maxLength={priceLimit}
-              placeholder='응모 금액을 입력해주세요.'
-              value={field.value ? Number(field.value).toLocaleString() : ''}
-              onChange={e => {
-                const value = e.target.value.replace(/,/g, '');
-                if (!isNaN(Number(value))) {
-                  field.onChange(value);
-                }
-              }}
-              ref={field.ref}
-              onBlur={field.onBlur}
-            />
-            <div className='absolute inset-y-3 right-0 flex items-center pr-4'>
-              <span className='text-xl font-bold text-zinc-900'>원</span>
+export const PriceForm = () => {
+  const {control} = useFormContext<CreateEventPayload>();
+  return (
+    <FormField
+      control={control}
+      name='price'
+      render={({field}) => (
+        <FormItem>
+          <FormLabel htmlFor='price' className='text-xl font-bold'>
+            응모 금액*
+          </FormLabel>
+          <FormControl>
+            <div className='relative w-full'>
+              <Input
+                className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 placeholder:text-[#ADB5BD]'
+                id='price'
+                type='text'
+                inputMode='numeric'
+                maxLength={priceLimit}
+                placeholder='응모 금액을 입력해주세요.'
+                value={field.value ? Number(field.value).toLocaleString() : ''}
+                onChange={e => {
+                  const value = e.target.value.replace(/,/g, '');
+                  if (!isNaN(Number(value))) {
+                    field.onChange(value);
+                  }
+                }}
+                ref={field.ref}
+                onBlur={field.onBlur}
+              />
+              <div className='absolute inset-y-3 right-0 flex items-center pr-4'>
+                <span className='text-xl font-bold text-zinc-900'>원</span>
+              </div>
             </div>
-          </div>
-        </FormControl>
-      </FormItem>
-    )}
-  />
-);
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
