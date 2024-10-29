@@ -1,1 +1,0 @@
-export {ThumbnailCard} from './ThumbnailCard';
