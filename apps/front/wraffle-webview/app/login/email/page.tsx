@@ -4,7 +4,6 @@ import type {z} from 'zod';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import type {LoginPayload} from '@/entities/auth';
 import {loginDefaultValues, loginSchema} from '@/entities/auth';
 import {Header} from '@/shared/ui';
 import GenericForm from '@/shared/ui/form/GenericForm';
@@ -28,7 +27,7 @@ const EmailLogin = () => {
       <div className='flex h-full flex-col items-center px-5'>
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
         <section className='mt-7 w-full'>
-          <GenericForm<LoginPayload>
+          <GenericForm
             onSubmit={onSubmit}
             formOptions={{
               mode: 'onChange',
