@@ -4,8 +4,10 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {Select} from '@wraffle/ui';
 
 export const CategoryForm = ({
+  defaultValue,
   categoryItems,
 }: {
+  defaultValue: string;
   categoryItems: {
     value: string;
     name: string;
@@ -25,7 +27,7 @@ export const CategoryForm = ({
               placeholder='카테고리를 선택해주세요.'
               items={categoryItems}
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              defaultValue={defaultValue}
             />
           </FormControl>
         </FormItem>
