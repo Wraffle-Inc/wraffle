@@ -1,25 +1,16 @@
 'use client';
 
-import {useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
 import {Divider} from '@/shared/ui';
 import {Button, Icon, Input, Label, Tag} from '@wraffle/ui';
 
 export const EditList = ({product}) => {
-  const {setValue} = useFormContext();
+  const {watch} = useFormContext();
 
-  useEffect(() => {
-    setValue('title', product.title);
-    setValue('category', product.category);
-    setValue('tags', product.tags);
-    setValue('images', product.images);
-    setValue('price', product.price);
-    setValue('startDate', product.startDate);
-    setValue('endDate', product.endDate);
-    setValue('announceAt', product.announceAt);
-    setValue('winnerCount', product.winnerCount);
-    setValue('etc', product.etc);
-  }, []);
+  const startDate = watch('startDate');
+  const endDate = watch('endDate');
+
+  const tags = ['tag1', 'tag2'];
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-24'>
