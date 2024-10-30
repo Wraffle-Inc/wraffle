@@ -21,7 +21,9 @@ const HeaderPrimitive = ({children}: HeaderProps) => {
           {middleComponent}
         </div>
       )}
-      <div className='flex flex-1 items-center gap-4'>{rightComponent}</div>
+      <div className='flex flex-1 items-center justify-end gap-4'>
+        {rightComponent}
+      </div>
     </div>
   );
 };
