@@ -56,7 +56,9 @@ const EventCreate = () => {
       {funnel.index < EventTotalStepIndex && (
         <div className='py-5'>
           <Header>
-            <Header.BackButton onClick={() => funnel.history.back()} />
+            <Header.Left>
+              <Header.BackButton onClick={() => funnel.history.back()} />
+            </Header.Left>
           </Header>
           <ProgressBar totalSteps={EventTotalStepIndex} index={funnel.index} />
         </div>
