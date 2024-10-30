@@ -42,4 +42,4 @@ const CheckBox = ({
   </div>
 );
 
-export default CheckBox;
+export {CheckBox};
