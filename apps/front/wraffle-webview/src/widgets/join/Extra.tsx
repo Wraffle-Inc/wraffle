@@ -31,8 +31,10 @@ const Extra = () => {
   return (
     <div>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>약관 동의</Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='h2'>
+          약관 동의
+        </Typography>
+        <Typography as='p' size='p3' color='zinc400'>
           약관 동의
         </Typography>
       </div>
