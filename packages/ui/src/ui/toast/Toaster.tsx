@@ -3,6 +3,7 @@
 import {
   Toast,
   ToastClose,
+  ToastDescription,
   ToastProvider,
   ToastTitle,
   ToastViewport,
@@ -22,6 +23,11 @@ export const Toaster = () => {
                 <ToastTitle variant={props.variant ?? 'success'}>
                   {title}
                 </ToastTitle>
+              )}
+              {props.description && (
+                <ToastDescription className='text-gray-600'>
+                  {props.description}
+                </ToastDescription>
               )}
             </div>
 
