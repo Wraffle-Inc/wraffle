@@ -6,15 +6,18 @@ import {findComponentFromChildren} from '@wraffle/ui';
 
 interface HeaderProps {
   withBackButton?: boolean;
+  withUnderline?: boolean;
   children: ReactNode;
 }
 
-const HeaderPrimitive = ({children}: HeaderProps) => {
+const HeaderPrimitive = ({withUnderline, children}: HeaderProps) => {
   const leftComponent = findComponentFromChildren(children, Left);
   const middleComponent = findComponentFromChildren(children, Middle);
   const rightComponent = findComponentFromChildren(children, Right);
   return (
-    <div className='flex h-[52px] items-center justify-between px-5'>
+    <div
+      className={`flex h-[52px] items-center justify-between px-5 ${withUnderline && 'border-b-2 border-zinc-100'}`}
+    >
       <div className='flex flex-1 items-center gap-4'>{leftComponent}</div>
       {!!middleComponent && (
         <div className='flex flex-1 items-center justify-center gap-4'>
