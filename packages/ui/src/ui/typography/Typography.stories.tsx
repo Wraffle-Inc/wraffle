@@ -1,4 +1,5 @@
 import {Typography, TypographyProps} from './Typography';
+import {colorStyles} from './prop/color.prop';
 import type {Meta, StoryFn} from '@storybook/react';
 
 const meta: Meta<TypographyProps> = {
@@ -51,46 +52,19 @@ const meta: Meta<TypographyProps> = {
         ],
       },
     },
-    weight: {
-      description: '텍스트 굵기',
-      table: {
-        type: {summary: 'regular | medium | semibold | bold'},
-      },
-      control: {
-        type: 'select',
-        options: ['regular', 'medium', 'semibold', 'bold'],
-      },
-    },
-    lineHeight: {
-      description: '텍스트 라인 높이',
-      table: {
-        type: {summary: 'string'},
-      },
-      control: {
-        type: 'text',
-      },
-    },
-    textColor: {
+    color: {
       description: '텍스트 색상',
       table: {
         type: {summary: 'enum'},
       },
       control: {
         type: 'select',
-        options: colorList,
+        options: Object.keys(colorStyles),
       },
     },
     children: {
       control: {
         type: 'text',
-      },
-    },
-    asChild: {
-      table: {
-        disable: true,
-      },
-      control: {
-        disable: true,
       },
     },
   },
@@ -104,59 +78,23 @@ export const Heading = Template.bind({});
 Heading.args = {
   children: (
     <>
-      <Typography
-        as='h1'
-        size='h1'
-        weight='bold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 1 (32px, Bold, 140%)
+      <Typography as='h1' size='h1' color='brand100'>
+        Heading 1 (32px, Bold)
       </Typography>
-      <Typography
-        as='h2'
-        size='h2'
-        weight='bold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 2 (24px, Bold, 140%)
+      <Typography as='h2' size='h2' color='brand100'>
+        Heading 2 (24px, Bold)
       </Typography>
-      <Typography
-        as='h3'
-        size='h3'
-        weight='semibold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 3 (20px, Semi Bold, 140%)
+      <Typography as='h3' size='h3' color='brand100'>
+        Heading 3 (20px, Semi Bold)
       </Typography>
-      <Typography
-        as='h4'
-        size='h4'
-        weight='semibold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 4 (17px, Semi Bold, 140%)
+      <Typography as='h4' size='h4' color='brand100'>
+        Heading 4 (17px, Semi Bold)
       </Typography>
-      <Typography
-        as='h5'
-        size='h5'
-        weight='semibold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 5 (16px, Semi Bold, 140%)
+      <Typography as='h5' size='h5' color='brand100'>
+        Heading 5 (16px, Semi Bold)
       </Typography>
-      <Typography
-        as='h6'
-        size='h6'
-        weight='semibold'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Heading 6 (15px, Semi Bold, 140%)
+      <Typography as='h6' size='h6' color='brand100'>
+        Heading 6 (15px, Semi Bold)
       </Typography>
     </>
   ),
@@ -166,41 +104,17 @@ export const Paragraph = Template.bind({});
 Paragraph.args = {
   children: (
     <>
-      <Typography
-        as='p'
-        size='p1'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Paragraph 1 (16px, Medium, 140%)
+      <Typography as='p' size='p1' color='brand100'>
+        Paragraph 1 (16px)
       </Typography>
-      <Typography
-        as='p'
-        size='p2'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Paragraph 2 (14px, Medium, 140%)
+      <Typography as='p' size='p2' color='brand100'>
+        Paragraph 2 (14px)
       </Typography>
-      <Typography
-        as='p'
-        size='p3'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Paragraph 3 (14px, Medium, 140%)
+      <Typography as='p' size='p3' color='brand100'>
+        Paragraph 3 (14px)
       </Typography>
-      <Typography
-        as='p'
-        size='p4'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Paragraph 4 (13px, Medium, 140%)
+      <Typography as='p' size='p4' color='brand100'>
+        Paragraph 4 (13px)
       </Typography>
     </>
   ),
@@ -210,23 +124,11 @@ export const SmallText = Template.bind({});
 SmallText.args = {
   children: (
     <>
-      <Typography
-        as='p'
-        size='sm1'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Small Text 1 (12px, Medium, 140%)
+      <Typography as='p' size='sm1' color='brand100'>
+        Small Text 1 (12px)
       </Typography>
-      <Typography
-        as='p'
-        size='sm2'
-        weight='medium'
-        lineHeight='1.4'
-        textColor='brand1'
-      >
-        Small Text 2 (10px, Medium, 140%)
+      <Typography as='p' size='sm2' color='brand100'>
+        Small Text 2 (10px)
       </Typography>
     </>
   ),
