@@ -4,9 +4,9 @@ import {EtcForm} from '@/entities/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
-  const {getValues} = useFormContext<CreateEventPayload>();
+  const {watch} = useFormContext<CreateEventPayload>();
 
-  const etc = getValues('etc');
+  const etc = watch('etc');
 
   return (
     <div className='flex h-full flex-col px-5 pb-20'>

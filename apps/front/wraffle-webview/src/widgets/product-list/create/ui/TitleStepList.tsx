@@ -21,12 +21,12 @@ export const TitleStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {getValues} = useFormContext<CreateEventPayload>();
+  const {watch} = useFormContext<CreateEventPayload>();
 
-  const title = getValues('title');
-  const category = getValues('categoryId');
-  const tagIds = getValues('tagIds');
-  const price = getValues('price');
+  const title = watch('title');
+  const category = watch('categoryId');
+  const tagIds = watch('tagIds');
+  const price = watch('price');
 
   const idDisabled = !title || !category || !price;
 

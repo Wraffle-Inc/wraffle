@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product-form/model';
 import {
@@ -7,7 +8,7 @@ import {
   WinnerCountForm,
 } from '@/entities/product-form/ui';
 import {getTypeText} from '@/shared/util';
-import {Button, Toaster, Typography} from '@wraffle/ui';
+import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
 
 export const DateStep = ({
   type,
@@ -23,14 +24,38 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {getValues} = useFormContext<CreateEventPayload>();
+  const {watch, setValue} = useFormContext<CreateEventPayload>();
 
-  const startDate = getValues('startDate');
-  const endDate = getValues('endDate');
-  const announceAt = getValues('announceAt');
-  const winnerCount = getValues('winnerCount');
+  const {toast} = useToast();
+
+  const startDate = watch('startDate');
+  const endDate = watch('endDate');
+  const announceAt = watch('announceAt');
+  const winnerCount = watch('winnerCount');
 
   const disabled = !startDate || !endDate || !announceAt || !winnerCount;
+
+  useEffect(() => {
+    if (endDate < startDate) {
+      setValue('endDate', startDate);
+      toast({
+        title: '응모 마감 일정은',
+        description: '응모 시작 일정 이후로 설정해주세요.',
+        duration: 10000,
+        variant: 'warning',
+      });
+    }
+
+    if (announceAt < endDate) {
+      setValue('announceAt', endDate);
+      toast({
+        title: '당첨자 발표 일정은',
+        description: '응모 마감 일정 이후로 설정해주세요.',
+        duration: 10000,
+        variant: 'warning',
+      });
+    }
+  }, [startDate, endDate, announceAt]);
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-20'>
