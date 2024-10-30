@@ -2,8 +2,7 @@ import {useFormContext} from 'react-hook-form';
 import {terms} from '@/entities/auth/join';
 import type {JoinPayload} from '@/entities/auth/join/schema';
 import {FormControl, FormField, FormItem} from '@/shared/ui';
-import {Button, ErrorMessage, Icon, Typography} from '@wraffle/ui';
-import CheckBox from '@wraffle/ui/src/ui/checkbox/CheckBox';
+import {Button, ErrorMessage, Icon, Typography, CheckBox} from '@wraffle/ui';
 
 const Extra = () => {
   const {control, setValue, watch, trigger, clearErrors} =
