@@ -67,7 +67,7 @@ export const TitleStep = ({
 
       <PriceForm />
 
-      <CategoryForm categoryItems={categoryItems} />
+      <CategoryForm defaultValue={category} categoryItems={categoryItems} />
 
       <div className='flex flex-col'>
         <Label className='text-xl font-bold'>태그</Label>
