@@ -40,7 +40,7 @@ const EmailLogin = () => {
         </section>
         <section className='mt-5 flex gap-[14px]'>
           <Link className='flex items-center' href={'/'}>
-            <Typography className='text-[13px] text-zinc-500'>
+            <Typography size='p4' color='zinc500'>
               비밀번호 찾기
             </Typography>
           </Link>
