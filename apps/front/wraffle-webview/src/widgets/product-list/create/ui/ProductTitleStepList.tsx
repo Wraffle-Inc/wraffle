@@ -10,10 +10,10 @@ export const ProductTitleStep = ({
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           추첨상품을 추가해볼까요?
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           추첨 상품에 대해 알려주세요.
         </Typography>
       </div>

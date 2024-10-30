@@ -25,7 +25,7 @@ export const ThumbnailCard = ({title, url}: {title?: string; url: string}) => {
           className='h-full w-full object-cover'
         />
       </div>
-      <Typography className='text-sm font-semibold text-zinc-900'>
+      <Typography as='p' size='p2'>
         {title}
       </Typography>
     </div>

@@ -63,16 +63,18 @@ export const DateStep = ({
         <Toaster />
       </div>
       <div>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           {eventOrRaffleText.dateStep}
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           상세 일정을 입력해주세요.
         </Typography>
       </div>
 
       <div>
-        <Typography className='text-xl font-bold'>응모 기간</Typography>
+        <Typography as='h3' size='h3'>
+          응모 기간
+        </Typography>
         <StartDateForm />
 
         <div className='h-2.5'></div>

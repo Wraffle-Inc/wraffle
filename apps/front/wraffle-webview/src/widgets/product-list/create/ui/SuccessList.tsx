@@ -17,11 +17,11 @@ export const SuccessList = ({
   return (
     <div className='flex h-full flex-col items-center px-4 py-6'>
       <div className='mb-24 w-full text-left'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           {eventOrRaffleText.successWithoutReview}
         </Typography>
 
-        <Typography className='text-sm font-medium'>
+        <Typography as='p' size='p3' color='zinc400'>
           지금 바로 확인해보러 갈까요?
         </Typography>
       </div>

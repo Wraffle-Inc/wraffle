@@ -11,10 +11,10 @@ export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           마지막으로 유의사항 한마디.
         </Typography>
-        <Typography className='text-sm font-medium text-[#c1c2c3]'>
+        <Typography as='p' size='p3' color='zinc400'>
           유의사항은 400자까지 작성이 가능해요!
         </Typography>
       </div>
