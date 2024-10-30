@@ -1,4 +1,7 @@
+'use client';
+
 import {Header} from '@/shared/ui';
+import GenericForm from '@/shared/ui/form/GenericForm';
 import {EditList} from '@/widgets/product-list/edit/ui';
 import {Typography} from '@wraffle/ui';
 
@@ -22,12 +25,16 @@ const Edit = ({
     etc: 'test ETC',
   };
 
+  const onSubmit = data => {
+    console.log(data);
+  };
+
   return (
     <div>
       <div className='py-5'>
         <Header>
           <Header.Left>
-            <Header.BackButton></Header.BackButton>
+            <Header.BackButton />
           </Header.Left>
           <Header.Middle>
             <Typography className='text-sm font-semibold text-[#191F28]'>
@@ -38,7 +45,9 @@ const Edit = ({
         <div className='h-px w-full bg-zinc-200'></div>
       </div>
 
-      <EditList product={product} />
+      <GenericForm onSubmit={onSubmit} formOptions={{defaultValues: product}}>
+        <EditList product={product} />
+      </GenericForm>
     </div>
   );
 };
