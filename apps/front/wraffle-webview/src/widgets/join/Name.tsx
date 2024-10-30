@@ -23,10 +23,10 @@ const Name = ({onNext}: NameProps) => {
   return (
     <div>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='p' size='h2'>
           쓰고 싶은 닉네임이 있나요?
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           이름과 닉네임을 알려주세요!
         </Typography>
       </div>

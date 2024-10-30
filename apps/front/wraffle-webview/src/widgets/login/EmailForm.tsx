@@ -1,7 +1,7 @@
 import {useFormContext} from 'react-hook-form';
 import type {LoginPayload} from '@/entities/auth';
 import {RHFInput} from '@/shared/ui';
-import {Button, Typography} from '@wraffle/ui';
+import {Button} from '@wraffle/ui';
 
 const EmailForm = () => {
   const {formState} = useFormContext<LoginPayload>();
@@ -24,9 +24,7 @@ const EmailForm = () => {
         type='submit'
         disabled={!formState.isValid}
       >
-        <Typography size='h6' color='white'>
-          로그인
-        </Typography>
+        로그인
       </Button>
     </>
   );

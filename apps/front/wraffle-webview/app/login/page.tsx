@@ -14,10 +14,8 @@ const Login = () => {
         priority
       />
       <div className='mt-auto flex w-full flex-col items-center gap-5'>
-        <Button className='animate-fade-in-down opacity-0 delay-200 duration-700 fill-mode-forwards'>
-          <Typography size='h6' color='white'>
-            시작하기
-          </Typography>
+        <Button className='animate-fade-in-down font-semibold opacity-0 delay-200 duration-700 fill-mode-forwards'>
+          시작하기
         </Button>
         <span className='flex animate-fade-in-down gap-1 opacity-0 delay-500 duration-700 fill-mode-forwards'>
           <Typography size='p4'>이미 계정이 있으신가요?</Typography>
