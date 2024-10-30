@@ -9,16 +9,16 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           이미지가 있으면 좋을거 같아요!
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           이미지는 최대 4장까지 추가 가능해요
         </Typography>
       </div>
 
       <div className='mb-4 flex items-end'>
-        <Typography className='text-xl font-bold text-zinc-900'>
+        <Typography as='h3' size='h3'>
           이미지*
         </Typography>
         <Label className='pb-0.5 text-[0.625rem] font-medium text-zinc-900'>

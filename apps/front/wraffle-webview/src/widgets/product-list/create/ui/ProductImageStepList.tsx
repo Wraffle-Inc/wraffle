@@ -21,16 +21,16 @@ export const ProductImageStep = ({
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
       <div className='mb-5'>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           추첨상품 이미지가 필요해요!
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           추첨 상품 이미지를 추가해주세요!
         </Typography>
       </div>
 
       <div className='mb-4 flex items-end'>
-        <Typography className='text-xl font-bold text-zinc-900'>
+        <Typography as='h3' size='h3'>
           이미지*
         </Typography>
       </div>

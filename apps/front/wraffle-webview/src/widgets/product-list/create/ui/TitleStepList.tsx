@@ -55,10 +55,10 @@ export const TitleStep = ({
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-20'>
       <div>
-        <Typography className='text-2xl font-bold'>
+        <Typography as='h2' size='h2'>
           {eventOrRaffleText.titleStep}
         </Typography>
-        <Typography className='text-sm font-medium text-[#ADB5BD]'>
+        <Typography as='p' size='p3' color='zinc400'>
           기본 정보를 입력해주세요.
         </Typography>
       </div>
