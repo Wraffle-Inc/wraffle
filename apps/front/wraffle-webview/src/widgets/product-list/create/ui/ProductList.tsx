@@ -1,3 +1,5 @@
+'use client';
+
 import {ProductImageStep} from './ProductImageStepList';
 import {ProductListStep} from './ProductListStep';
 import {ProductTitleStep} from './ProductTitleStepList';
