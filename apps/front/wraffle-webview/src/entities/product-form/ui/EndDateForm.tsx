@@ -3,7 +3,13 @@ import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm, useToast} from '@wraffle/ui';
 
-export const EndDateForm = ({fromDate: startDate}: {fromDate: Date}) => {
+export const EndDateForm = ({
+  defaultValue,
+  fromDate: startDate,
+}: {
+  defaultValue: Date;
+  fromDate: Date;
+}) => {
   const {control} = useFormContext<CreateEventPayload>();
   const {toast} = useToast();
   return (
@@ -16,7 +22,7 @@ export const EndDateForm = ({fromDate: startDate}: {fromDate: Date}) => {
           <FormControl>
             <CalendarForm
               dateLabel='응모 마감 시간을 입력해주세요.'
-              selected={field.value}
+              selected={defaultValue}
               setSelected={field.onChange}
               fromDate={startDate}
               onClick={e => {

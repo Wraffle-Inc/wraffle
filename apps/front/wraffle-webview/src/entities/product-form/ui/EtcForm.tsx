@@ -3,7 +3,7 @@ import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {etcLimit} from '@/shared/util';
 
-export const EtcForm = () => {
+export const EtcForm = ({defaultValue}: {defaultValue: string}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -22,7 +22,8 @@ export const EtcForm = () => {
               rows={7}
               maxLength={etcLimit}
               placeholder='유의사항을 작성해주세요'
-              {...field}
+              value={defaultValue}
+              onChange={field.onChange}
             />
           </FormControl>
         </FormItem>

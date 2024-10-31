@@ -75,15 +75,19 @@ export const DateStep = ({
         <Typography as='h3' size='h3'>
           응모 기간
         </Typography>
-        <StartDateForm />
+        <StartDateForm defaultValue={startDate} />
 
         <div className='h-2.5'></div>
-        <EndDateForm fromDate={startDate} />
+        <EndDateForm defaultValue={endDate} fromDate={startDate} />
       </div>
 
-      <AnnounceAtForm fromDate={endDate} startDate={startDate} />
+      <AnnounceAtForm
+        defaultValue={announceAt}
+        fromDate={endDate}
+        startDate={startDate}
+      />
 
-      <WinnerCountForm />
+      <WinnerCountForm defaultValue={winnerCount} />
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button

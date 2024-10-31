@@ -4,7 +4,13 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {titleLimit} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
-export const TitleForm = ({placeholder}: {placeholder: string}) => {
+export const TitleForm = ({
+  defaultValue,
+  placeholder,
+}: {
+  defaultValue: string;
+  placeholder: string;
+}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -22,7 +28,8 @@ export const TitleForm = ({placeholder}: {placeholder: string}) => {
               type='text'
               maxLength={titleLimit}
               placeholder={placeholder}
-              {...field}
+              value={defaultValue}
+              onChange={field.onChange}
             />
           </FormControl>
         </FormItem>

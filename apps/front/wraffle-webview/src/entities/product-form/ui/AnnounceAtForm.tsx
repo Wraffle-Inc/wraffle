@@ -4,9 +4,11 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm, useToast} from '@wraffle/ui';
 
 export const AnnounceAtForm = ({
+  defaultValue,
   fromDate: endDate,
   startDate,
 }: {
+  defaultValue: Date;
   fromDate: Date;
   startDate: Date;
 }) => {
@@ -22,7 +24,7 @@ export const AnnounceAtForm = ({
           <FormControl>
             <CalendarForm
               dateLabel='당첨자 발표 시간을 입력해주세요.'
-              selected={field.value}
+              selected={defaultValue}
               setSelected={field.onChange}
               fromDate={endDate}
               onClick={e => {

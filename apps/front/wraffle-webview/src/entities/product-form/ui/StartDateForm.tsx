@@ -3,7 +3,7 @@ import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm} from '@wraffle/ui';
 
-export const StartDateForm = () => {
+export const StartDateForm = ({defaultValue}: {defaultValue: Date}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -15,7 +15,7 @@ export const StartDateForm = () => {
           <FormControl>
             <CalendarForm
               dateLabel='응모 시작 시간을 입력해주세요.'
-              selected={field.value}
+              selected={defaultValue}
               setSelected={field.onChange}
               fromDate={new Date()}
             />
