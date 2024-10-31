@@ -1,3 +1,5 @@
+'use client';
+
 import {useFormContext} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product-form/model';
 import {EtcForm} from '@/entities/product-form/ui';
