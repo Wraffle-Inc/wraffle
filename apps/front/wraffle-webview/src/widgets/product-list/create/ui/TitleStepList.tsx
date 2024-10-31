@@ -63,9 +63,12 @@ export const TitleStep = ({
         </Typography>
       </div>
 
-      <TitleForm placeholder={eventOrRaffleText.placeholder} />
+      <TitleForm
+        defaultValue={title}
+        placeholder={eventOrRaffleText.placeholder}
+      />
 
-      <PriceForm />
+      <PriceForm defaultValue={price} />
 
       <CategoryForm defaultValue={category} categoryItems={categoryItems} />
 

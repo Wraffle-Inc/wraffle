@@ -19,7 +19,7 @@ export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
         </Typography>
       </div>
 
-      <EtcForm />
+      <EtcForm defaultValue={etc} />
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button

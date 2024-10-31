@@ -4,7 +4,7 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {handleMaxLength, winnerLimit} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
-export const WinnerCountForm = () => {
+export const WinnerCountForm = ({defaultValue}: {defaultValue: string}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -24,7 +24,8 @@ export const WinnerCountForm = () => {
               maxLength={winnerLimit}
               onInput={handleMaxLength}
               placeholder='담첨자 수를 입력해주세요. (최대 100명)'
-              {...field}
+              value={defaultValue}
+              onChange={field.onChange}
             />
           </FormControl>
         </FormItem>

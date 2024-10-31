@@ -4,7 +4,7 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {priceLimit} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
-export const PriceForm = () => {
+export const PriceForm = ({defaultValue}: {defaultValue: string}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -24,7 +24,11 @@ export const PriceForm = () => {
                 inputMode='numeric'
                 maxLength={priceLimit}
                 placeholder='응모 금액을 입력해주세요.'
-                value={field.value ? Number(field.value).toLocaleString() : ''}
+                value={
+                  field.value
+                    ? Number(field.value).toLocaleString()
+                    : defaultValue
+                }
                 onChange={e => {
                   const value = e.target.value.replace(/,/g, '');
                   if (!isNaN(Number(value))) {
