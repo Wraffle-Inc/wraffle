@@ -14,7 +14,7 @@ interface ShareModalProps {
   onClose: () => void;
 }
 
-const ShareModal: React.FC<ShareModalProps> = ({isOpen, onClose}) => {
+const ShareModal = ({isOpen, onClose}: ShareModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

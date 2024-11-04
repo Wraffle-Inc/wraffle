@@ -4,6 +4,7 @@ export * from './calendar/Calendar';
 export * from './checkbox/CheckBox';
 export * from './chipButton/ChipButton';
 export * from './dialog/Dialog';
+export * from './dialog/use-dialog';
 export * from './form';
 export * from './icon/Icon';
 export * from './icon/IconLoader';

@@ -20,11 +20,11 @@ interface ApplyCompleteModalProps {
   image: string;
 }
 
-const ApplyCompleteModal: React.FC<ApplyCompleteModalProps> = ({
+const ApplyCompleteModal = ({
   isOpen,
   onClose,
   image,
-}) => {
+}: ApplyCompleteModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
