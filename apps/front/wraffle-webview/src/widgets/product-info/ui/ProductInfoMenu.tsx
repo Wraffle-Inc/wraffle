@@ -4,11 +4,11 @@ type ProductInfoMenuProps = {
   onSelectMenu: (menu: string) => void;
 };
 
-export const ProductInfoMenu: React.FC<ProductInfoMenuProps> = ({
+export const ProductInfoMenu = ({
   menus,
   selectedMenu,
   onSelectMenu,
-}) => {
+}: ProductInfoMenuProps) => {
   return (
     <nav
       className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5'

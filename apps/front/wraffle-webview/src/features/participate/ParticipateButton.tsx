@@ -1,6 +1,6 @@
 'use client';
 
-import ApplyCompleteModal from './\bApplyCompleteModal';
+import ApplyCompleteModal from './ApplyCompleteModal';
 import React, {useState} from 'react';
 import {Button, Icon} from '@wraffle/ui';
 
@@ -11,12 +11,12 @@ interface ParticipateButtonProps {
   productImage: string;
 }
 
-const ParticipateButton: React.FC<ParticipateButtonProps> = ({
+const ParticipateButton = ({
   status,
   clipCount,
   isApplied: initialApplyStatus,
   productImage,
-}) => {
+}: ParticipateButtonProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isApplyCompleteModalOpen, setIsApplyCompleteModalOpen] =
     useState(false);

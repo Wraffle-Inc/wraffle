@@ -7,10 +7,13 @@ import {Tag, RaffleCard} from '@wraffle/ui';
 type ProductData = RaffleData | EventData;
 
 // 이미지, 타이틀, 가격
-export const ProductMainSection: React.FC<{
+export const ProductMainSection = ({
+  productData,
+  sectionRef,
+}: {
   productData: ProductData;
   sectionRef: React.RefObject<HTMLDivElement>;
-}> = ({productData, sectionRef}) => {
+}) => {
   return (
     <div
       ref={sectionRef}
@@ -37,10 +40,13 @@ export const ProductMainSection: React.FC<{
 };
 
 // 응모 기간
-export const ProductApplyPeriodSection: React.FC<{
+export const ProductApplyPeriodSection = ({
+  productData,
+  sectionRef,
+}: {
   productData: ProductData;
   sectionRef: React.RefObject<HTMLDivElement>;
-}> = ({productData, sectionRef}) => {
+}) => {
   return (
     <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
       <p className='text-xl font-bold'>응모 기간</p>
@@ -52,10 +58,13 @@ export const ProductApplyPeriodSection: React.FC<{
 };
 
 // 당첨자 발표
-export const ProductAnnouncementSection: React.FC<{
+export const ProductAnnouncementSection = ({
+  productData,
+  sectionRef,
+}: {
   productData: ProductData;
   sectionRef: React.RefObject<HTMLDivElement>;
-}> = ({productData, sectionRef}) => {
+}) => {
   return (
     <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
       <p className='text-xl font-bold'>당첨자 발표</p>
@@ -67,10 +76,13 @@ export const ProductAnnouncementSection: React.FC<{
 };
 
 // 유의사항
-export const ProductNoticeSection: React.FC<{
+export const ProductNoticeSection = ({
+  productData,
+  sectionRef,
+}: {
   productData: ProductData;
   sectionRef: React.RefObject<HTMLDivElement>;
-}> = ({productData, sectionRef}) => {
+}) => {
   return (
     <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
       <p className='text-xl font-bold'>유의사항</p>
@@ -80,10 +92,13 @@ export const ProductNoticeSection: React.FC<{
 };
 
 // 추첨 상품
-export const ProductEventSection: React.FC<{
+export const ProductEventSection = ({
+  productData,
+  sectionRef,
+}: {
   productData: EventData;
   sectionRef: React.RefObject<HTMLDivElement>;
-}> = ({productData, sectionRef}) => {
+}) => {
   return (
     <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
       <p className='text-xl font-bold'>추첨 상품</p>
