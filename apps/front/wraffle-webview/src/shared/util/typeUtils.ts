@@ -2,7 +2,9 @@ export const getTypeText = (type: 'event' | 'raffle') => {
   const texts = {
     raffle: {
       titleStep: '래플을 생성해볼까요?',
-      placeholder: '래플 제목을 입력해주세요',
+      titlePlaceholder: '래플 제목을 입력해주세요',
+      priceLabel: '상품 금액*',
+      pricePlaceholder: '상품 금액을 입력해주세요',
       dateStep: '래플 일정은 어떻게 되나요?',
       successWithReview: '래플 생성 요청이<br /> 정상적으로 전달되었어요!',
       successWithReviewButton: '다른 래플 구경하기',
@@ -11,7 +13,9 @@ export const getTypeText = (type: 'event' | 'raffle') => {
     },
     event: {
       titleStep: '이벤트를 생성해볼까요?',
-      placeholder: '이벤트 제목을 입력해주세요',
+      titlePlaceholder: '이벤트 제목을 입력해주세요',
+      priceLabel: '응모 금액*',
+      pricePlaceholder: '응모 금액을 입력해주세요',
       dateStep: '이벤트 일정은 어떻게 되나요?',
       successWithReview: '이벤트 생성 요청이<br /> 정상적으로 전달되었어요!',
       successWithReviewButton: '다른 이벤트 구경하기',

@@ -6,7 +6,15 @@ import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {priceLimit} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
-export const PriceForm = ({defaultValue}: {defaultValue: string}) => {
+export const PriceForm = ({
+  label,
+  placeholder,
+  defaultValue,
+}: {
+  label: string;
+  placeholder: string;
+  defaultValue: string;
+}) => {
   const {control} = useFormContext<CreateEventPayload>();
   return (
     <FormField
@@ -15,7 +23,7 @@ export const PriceForm = ({defaultValue}: {defaultValue: string}) => {
       render={({field}) => (
         <FormItem>
           <FormLabel htmlFor='price' className='text-xl font-bold'>
-            응모 금액*
+            {label}
           </FormLabel>
           <FormControl>
             <div className='relative w-full'>
@@ -25,7 +33,7 @@ export const PriceForm = ({defaultValue}: {defaultValue: string}) => {
                 type='text'
                 inputMode='numeric'
                 maxLength={priceLimit}
-                placeholder='응모 금액을 입력해주세요.'
+                placeholder={placeholder}
                 value={
                   field.value
                     ? Number(field.value).toLocaleString()

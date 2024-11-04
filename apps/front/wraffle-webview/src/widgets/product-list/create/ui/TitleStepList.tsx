@@ -67,10 +67,14 @@ export const TitleStep = ({
 
       <TitleForm
         defaultValue={title}
-        placeholder={eventOrRaffleText.placeholder}
+        placeholder={eventOrRaffleText.titlePlaceholder}
       />
 
-      <PriceForm defaultValue={price} />
+      <PriceForm
+        label={eventOrRaffleText.priceLabel}
+        placeholder={eventOrRaffleText.pricePlaceholder}
+        defaultValue={price}
+      />
 
       <CategoryForm defaultValue={category} categoryItems={categoryItems} />
 
