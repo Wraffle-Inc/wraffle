@@ -1,4 +1,3 @@
-export {ThumbnailCard} from './ThumbnailCard';
 export {TitleForm} from './TitleForm';
 export {PriceForm} from './PriceForm';
 export {CategoryForm} from './CategoryForm';

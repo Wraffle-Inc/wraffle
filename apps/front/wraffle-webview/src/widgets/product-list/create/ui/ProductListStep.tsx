@@ -1,5 +1,5 @@
-import type {Product} from '@/entities/product-form/model';
-import {ThumbnailCard} from '@/entities/product-form/ui';
+import type {Product} from '@/entities/product/model';
+import {ThumbnailCard} from '@/entities/product/ui';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 // api 연동
