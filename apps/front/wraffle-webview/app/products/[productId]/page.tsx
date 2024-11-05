@@ -18,6 +18,8 @@ import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/constants';
 import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
 import {Icon} from '@wraffle/ui';
 
+const HEADER_OFFSET = 115;
+
 const useMenu = (initialMenu: string) => {
   const [selectedMenu, setSelectedMenu] = useState<string>(initialMenu);
 
@@ -69,16 +71,22 @@ const ProductPage = () => {
     }
   }, [type]);
 
-  useEffect(() => {
-    const section = sectionsRef.current[selectedMenu];
+  // 메뉴 선택 시 스크롤 이동 함수
+  const scrollToSection = (menu: string) => {
+    const section = sectionsRef.current[menu];
     if (section && section.current) {
-      const headerOffset = 115;
       window.scrollTo({
-        top: section.current.offsetTop - headerOffset,
+        top: section.current.offsetTop - HEADER_OFFSET,
         behavior: 'smooth',
       });
     }
-  }, [selectedMenu]);
+  };
+
+  // 메뉴 클릭 시 메뉴를 선택하고 해당 섹션으로 스크롤 이동
+  const handleMenuSelect = (menu: string) => {
+    selectMenu(menu);
+    scrollToSection(menu);
+  };
 
   if (!productData) {
     return <div>Loading...</div>;
@@ -108,7 +116,7 @@ const ProductPage = () => {
         <ProductInfoMenu
           menus={menus}
           selectedMenu={selectedMenu}
-          onSelectMenu={selectMenu}
+          onSelectMenu={handleMenuSelect}
         />
       </div>
 
