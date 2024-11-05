@@ -1,11 +1,13 @@
 'use client';
 
-import {useWatch} from 'react-hook-form';
+import {useFormContext, useWatch} from 'react-hook-form';
+import type {CreateEventPayload} from '@/entities/product/model';
 import {EtcForm} from '@/features/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
-  const etc = useWatch({name: 'etc'});
+  const {control} = useFormContext<CreateEventPayload>();
+  const etc = useWatch({control, name: 'etc'});
 
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
