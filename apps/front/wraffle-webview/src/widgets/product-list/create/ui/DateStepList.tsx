@@ -2,13 +2,13 @@
 
 import {useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/product-form/model';
+import type {CreateEventPayload} from '@/entities/product/model';
 import {
   AnnounceAtForm,
   EndDateForm,
   StartDateForm,
   WinnerCountForm,
-} from '@/entities/product-form/ui';
+} from '@/features/product-form/ui';
 import {getTypeText} from '@/shared/util';
 import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
 

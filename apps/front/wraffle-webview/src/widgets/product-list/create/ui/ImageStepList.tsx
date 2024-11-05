@@ -1,4 +1,4 @@
-import {ThumbnailCard} from '@/entities/product-form/ui';
+import {ThumbnailCard} from '@/entities/product/ui';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 // TODO

@@ -1,8 +1,8 @@
 'use client';
 
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/product-form/model';
-import {EtcForm} from '@/entities/product-form/ui';
+import type {CreateEventPayload} from '@/entities/product/model';
+import {EtcForm} from '@/features/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {

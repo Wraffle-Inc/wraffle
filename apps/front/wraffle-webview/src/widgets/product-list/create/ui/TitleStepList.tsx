@@ -1,8 +1,8 @@
 'use client';
 
 import {useFormContext} from 'react-hook-form';
-import type {CreateEventPayload} from '@/entities/product-form/model';
-import {CategoryForm, PriceForm, TitleForm} from '@/entities/product-form/ui';
+import type {CreateEventPayload} from '@/entities/product/model';
+import {CategoryForm, PriceForm, TitleForm} from '@/features/product-form/ui';
 import {getTypeText, tagLimit} from '@/shared/util';
 import {Button, Icon, Input, Label, Tag, Typography} from '@wraffle/ui';
 

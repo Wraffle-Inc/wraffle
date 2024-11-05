@@ -1,5 +1,5 @@
 import type {UseFormSetValue} from 'react-hook-form';
-import type {CreateEventPayload, Product} from '@/entities/product-form/model';
+import type {CreateEventPayload, Product} from '@/entities/product/model';
 import {Button, Typography} from '@wraffle/ui';
 
 // TODO

@@ -1,10 +1,10 @@
 'use client';
 
-import type {RaffleCreateState} from '@/entities/product-form/model';
+import type {RaffleCreateState} from '@/entities/product/model';
 import {
   createRaffleDefaultValues,
   createRaffleSchema,
-} from '@/entities/product-form/model';
+} from '@/entities/product/model';
 import {Header, ProgressBar} from '@/shared/ui';
 import GenericForm from '@/shared/ui/form/GenericForm';
 import {

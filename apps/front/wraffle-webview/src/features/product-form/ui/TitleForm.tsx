@@ -1,6 +1,6 @@
 'use client';
 
-import type {CreateEventPayload} from '../model';
+import type {CreateEventPayload} from '../../../entities/product/model';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {titleLimit} from '@/shared/util';
