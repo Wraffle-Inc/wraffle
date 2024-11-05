@@ -1,6 +1,6 @@
 import type {ReactNode} from 'react';
 import React from 'react';
-import Footer from '@/widgets/my-profile/ui/Footer';
+// import Footer from '@/widgets/my-profile/ui/Footer';
 import BottomNavigation from '@wraffle/ui/src/ui/bottomNavigation/BottomNavigation';
 
 type Props = {
@@ -12,7 +12,7 @@ export default function Layout({children}: Props) {
     <>
       <main>
         {children}
-        <Footer />
+        {/* <Footer /> */}
 
         <BottomNavigation />
       </main>

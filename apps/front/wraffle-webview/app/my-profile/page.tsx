@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
@@ -25,9 +26,11 @@ const MyProfilePage = () => {
         </div>
 
         <div className='ml-8 mt-1 inline-flex items-center hover:cursor-pointer'>
-          <Typography size='p3' color='zinc500'>
-            내정보 수정
-          </Typography>
+          <Link href='/my-profile/edit'>
+            <Typography size='p3' color='zinc500'>
+              내정보 수정
+            </Typography>
+          </Link>
           <Icon name='chevron-right' stroke='#4E5968' width={14} height={14} />
         </div>
 
