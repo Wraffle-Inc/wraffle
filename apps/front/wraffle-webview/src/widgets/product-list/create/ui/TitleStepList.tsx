@@ -1,6 +1,7 @@
 'use client';
 
-import {useWatch} from 'react-hook-form';
+import {useFormContext, useWatch} from 'react-hook-form';
+import type {CreateEventPayload} from '@/entities/product/model';
 import {CategoryForm, PriceForm, TitleForm} from '@/features/product-form/ui';
 import {getTypeText, TAG_LIMIT} from '@/shared/util';
 import {Button, Icon, Input, Label, Tag, Typography} from '@wraffle/ui';
@@ -22,7 +23,10 @@ export const TitleStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
+  const {control} = useFormContext<CreateEventPayload>();
+
   const [title, category, tagIds, price] = useWatch({
+    control,
     name: ['title', 'categoryId', 'tagIds', 'price'],
   });
 

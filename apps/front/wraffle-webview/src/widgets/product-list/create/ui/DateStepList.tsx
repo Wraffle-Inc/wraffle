@@ -26,9 +26,10 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {setValue} = useFormContext<CreateEventPayload>();
+  const {setValue, control} = useFormContext<CreateEventPayload>();
 
   const [startDate, endDate, announceAt, winnerCount] = useWatch({
+    control,
     name: ['startDate', 'endDate', 'announceAt', 'winnerCount'],
   });
 
