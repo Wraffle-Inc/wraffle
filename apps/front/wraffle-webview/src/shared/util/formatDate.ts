@@ -1,10 +1,15 @@
-export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getSeconds().toString().padStart(2, '0');
+import dayjs from 'dayjs';
 
-  return `${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
+export const formatDate = (
+  dateString: string,
+  format: string = 'M월 D일 HH:mm:ss',
+): string => {
+  return dayjs(dateString).format(format);
 };
+
+/*
+  사용 예시
+  formatDate("2021-08-05T00:00:00.000Z"); // 기본 포맷: "8월 5일 00:00:00"
+  formatDate("2021-08-05T00:00:00.000Z", "YYYY.MM.DD HH:mm"); // "2021.08.05 00:00"
+  formatDate("2021-08-05T00:00:00.000Z", "YYYY-MM-DD"); // "2021-08-05"
+ */
