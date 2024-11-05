@@ -3,7 +3,7 @@
 import type {CreateEventPayload} from '../../../entities/product/model';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {handleMaxLength, winnerLimit} from '@/shared/util';
+import {handleMaxLength, WINNER_LIMIT} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
 export const WinnerCountForm = ({defaultValue}: {defaultValue: string}) => {
@@ -23,7 +23,7 @@ export const WinnerCountForm = ({defaultValue}: {defaultValue: string}) => {
               id='winnerCount'
               type='number'
               inputMode='numeric'
-              maxLength={winnerLimit}
+              maxLength={WINNER_LIMIT}
               onInput={handleMaxLength}
               placeholder='담첨자 수를 입력해주세요. (최대 100명)'
               value={defaultValue}

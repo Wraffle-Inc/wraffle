@@ -3,7 +3,7 @@
 import type {CreateEventPayload} from '../../../entities/product/model';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {priceLimit} from '@/shared/util';
+import {PRICE_LIMIT} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
 export const PriceForm = ({
@@ -32,7 +32,7 @@ export const PriceForm = ({
                 id='price'
                 type='text'
                 inputMode='numeric'
-                maxLength={priceLimit}
+                maxLength={PRICE_LIMIT}
                 placeholder={placeholder}
                 value={
                   field.value

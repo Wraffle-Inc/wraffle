@@ -2,7 +2,7 @@
 
 import {useWatch} from 'react-hook-form';
 import {CategoryForm, PriceForm, TitleForm} from '@/features/product-form/ui';
-import {getTypeText, tagLimit} from '@/shared/util';
+import {getTypeText, TAG_LIMIT} from '@/shared/util';
 import {Button, Icon, Input, Label, Tag, Typography} from '@wraffle/ui';
 
 // TODO
@@ -80,7 +80,7 @@ export const TitleStep = ({
           <Input
             className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 placeholder:text-[#ADB5BD]'
             placeholder='태그명을 입력해주세요. (최대 5개)'
-            maxLength={tagLimit}
+            maxLength={TAG_LIMIT}
             disabled={tags.length === 5} // 태그 조회 api 연동하며 작업 예정
           />
           <button className='absolute inset-y-3 right-0 flex items-center pr-4'>
