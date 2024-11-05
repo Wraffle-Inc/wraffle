@@ -3,7 +3,7 @@
 import type {CreateEventPayload} from '../../../entities/product/model';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {titleLimit} from '@/shared/util';
+import {TITLE_LIMIT} from '@/shared/util';
 import {Input} from '@wraffle/ui';
 
 export const TitleForm = ({
@@ -28,7 +28,7 @@ export const TitleForm = ({
               className='border-[#F5F5F7] bg-[#FAFAFB] placeholder:text-[#ADB5BD]'
               id='title'
               type='text'
-              maxLength={titleLimit}
+              maxLength={TITLE_LIMIT}
               placeholder={placeholder}
               value={defaultValue}
               onChange={field.onChange}

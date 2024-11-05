@@ -3,7 +3,7 @@
 import type {CreateEventPayload} from '../../../entities/product/model';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {etcLimit} from '@/shared/util';
+import {ETC_LIMIT} from '@/shared/util';
 
 export const EtcForm = ({defaultValue}: {defaultValue: string}) => {
   const {control} = useFormContext<CreateEventPayload>();
@@ -22,7 +22,7 @@ export const EtcForm = ({defaultValue}: {defaultValue: string}) => {
               id='etc'
               className='w-full resize-none rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] p-3 text-sm font-medium placeholder:text-[#ADB5BD]'
               rows={7}
-              maxLength={etcLimit}
+              maxLength={ETC_LIMIT}
               placeholder='유의사항을 작성해주세요'
               value={defaultValue}
               onChange={field.onChange}
