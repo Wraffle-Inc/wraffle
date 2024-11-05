@@ -41,6 +41,8 @@ const RaffleCreate = () => {
 
   const RaffleTotalStepIndex = 4;
 
+  console.log(funnel.context);
+
   // TODO
   // 생성 api 연결
   const onSubmit = (data: RaffleCreateState) =>
