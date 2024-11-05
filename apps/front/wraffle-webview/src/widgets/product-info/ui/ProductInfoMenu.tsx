@@ -10,10 +10,7 @@ export const ProductInfoMenu = ({
   onSelectMenu,
 }: ProductInfoMenuProps) => {
   return (
-    <nav
-      className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5'
-      style={{scrollbarWidth: 'none'}}
-    >
+    <nav className='scrollbar-hide mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5'>
       {menus.map(menu => (
         <div
           key={menu}

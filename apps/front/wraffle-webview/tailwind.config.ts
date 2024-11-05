@@ -2,7 +2,7 @@
 import type {Config} from 'tailwindcss';
 import sharedConfig from '@wraffle/tailwind-config';
 
-const config: Pick<Config, 'content' | 'presets' | 'extends'> = {
+const config: Pick<Config, 'content' | 'presets' | 'extends' | 'plugins'> = {
   content: ['**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
   presets: [sharedConfig],
   extends: {
@@ -10,6 +10,7 @@ const config: Pick<Config, 'content' | 'presets' | 'extends'> = {
       pretendard: ['var(--font-pretendard)'],
     },
   },
+  plugins: [require('tailwind-scrollbar-hide')],
 };
 
 export default config;
