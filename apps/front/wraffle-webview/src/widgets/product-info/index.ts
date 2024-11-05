@@ -1,8 +1,2 @@
-export {
-  ProductMainSection,
-  ProductApplyPeriodSection,
-  ProductAnnouncementSection,
-  ProductNoticeSection,
-} from './ui/ProductInfoSection';
-
-export {ProductInfoMenu} from './ui/ProductInfoMenu';
+export * from './ui/ProductInfoSection';
+export * from './ui/ProductInfoMenu';
