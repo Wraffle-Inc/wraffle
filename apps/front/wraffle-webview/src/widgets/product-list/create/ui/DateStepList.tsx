@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect} from 'react';
-import {useFormContext} from 'react-hook-form';
+import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {
   AnnounceAtForm,
@@ -26,14 +26,13 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {watch, setValue} = useFormContext<CreateEventPayload>();
+  const {setValue} = useFormContext<CreateEventPayload>();
+
+  const [startDate, endDate, announceAt, winnerCount] = useWatch({
+    name: ['startDate', 'endDate', 'announceAt', 'winnerCount'],
+  });
 
   const {toast} = useToast();
-
-  const startDate = watch('startDate');
-  const endDate = watch('endDate');
-  const announceAt = watch('announceAt');
-  const winnerCount = watch('winnerCount');
 
   const disabled = !startDate || !endDate || !announceAt || !winnerCount;
 
