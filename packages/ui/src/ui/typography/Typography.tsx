@@ -19,7 +19,7 @@ interface TypographyProps extends React.HTMLAttributes<HTMLSpanElement> {
 export const Typography = React.forwardRef<TextElement, TypographyProps>(
   (
     {
-      as: Tag = 'span',
+      as: Tag = 'p',
       size = 'p1',
       color = 'zinc900',
       asChild = false,
