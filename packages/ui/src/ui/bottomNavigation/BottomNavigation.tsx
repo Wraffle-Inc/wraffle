@@ -18,7 +18,7 @@ const menuItems: ItemType[] = [
   {name: 'user-circle', label: '내정보'},
 ];
 
-export default function BottomNavigation() {
+const BottomNavigation = () => {
   const [selectedIcon, setSelectedIcon] = useState<string>('홈');
 
   const handleClickIcon = (label: string) => {
@@ -44,4 +44,6 @@ export default function BottomNavigation() {
       </nav>
     </div>
   );
-}
+};
+
+export {BottomNavigation};
