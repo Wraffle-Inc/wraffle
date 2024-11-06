@@ -29,7 +29,7 @@ const meta: Meta<typeof RaffleCard> = {
   },
   args: {
     name: '[Vans] 올드스쿨',
-    price: '78,000',
+    price: 78000,
     hashtags: [
       {
         id: 1,

@@ -5,7 +5,7 @@ import {Icon} from '@wds/ui/icon/Icon';
 
 export interface RaffleCardProps {
   name: string;
-  price: string;
+  price: number;
   hashtags: TagType[];
   scrapCount: number;
   thumbnailUrl: string;
@@ -40,10 +40,10 @@ const RaffleCard = ({
           </div>
         )}
       </div>
-      <Typography className='truncate' size='p2'>
+      <Typography className='truncate' as='h1' size='p2'>
         {name}
       </Typography>
-      <Typography className='mb-2' size='sm2' color='zinc600'>
+      <Typography className='mb-2' as='p' size='sm1' color='zinc600'>
         {price}원
       </Typography>
       <VisibleTags hashtags={hashtags} letterSpace={20} />
