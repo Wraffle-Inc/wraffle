@@ -69,7 +69,7 @@ const ResetPasswordPage = () => {
       <Form {...form}>
         <form className='px-5' onSubmit={form.handleSubmit(onSubmit)}>
           <div>
-            <Typography className='my-5 text-h2'>
+            <Typography size='h2' className='my-5'>
               새로운 비밀번호 입력
             </Typography>
 
