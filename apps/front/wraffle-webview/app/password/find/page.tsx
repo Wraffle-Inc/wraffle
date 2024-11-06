@@ -1,9 +1,9 @@
 'use client';
 
-import {useSendEmail} from 'features/password/api/password';
 import {useRouter} from 'next/navigation';
 import {useForm} from 'react-hook-form';
 import {type EmailPayload, emailObjectSchema} from '@/entities/auth';
+import {useSendEmail} from '@/features/password/api/password';
 import {Form, RHFInput} from '@/shared/ui';
 import {Header} from '@/shared/ui';
 import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';

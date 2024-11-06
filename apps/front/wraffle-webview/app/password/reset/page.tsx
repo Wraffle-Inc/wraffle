@@ -1,9 +1,9 @@
 'use client';
 
-import {useResetPassword} from 'features/password/api/password';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useForm} from 'react-hook-form';
 import {type PasswordPayload, passwordObjectSchema} from '@/entities/auth';
+import {useResetPassword} from '@/features/password/api/password';
 import {Form, RHFInput} from '@/shared/ui';
 import {Header} from '@/shared/ui';
 import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
