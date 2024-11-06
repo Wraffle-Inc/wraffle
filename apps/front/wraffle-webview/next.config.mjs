@@ -21,6 +21,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@wraffle/ui'],
   },
+  // !TODO: API 연동 후 삭제
+  images: {
+    domains: ['image.vans.co.kr', '*'],
+  },
 };
 
 export default nextConfig;
