@@ -1,8 +1,13 @@
 'use client';
 
+import {
+  createRaffleSchema,
+  type CreateRafflePayload,
+} from '@/entities/product/model';
 import {Header} from '@/shared/ui';
 import GenericForm from '@/shared/ui/form/GenericForm';
 import {EditList} from '@/widgets/product-list/edit/ui';
+import {zodResolver} from '@hookform/resolvers/zod';
 import {Typography} from '@wraffle/ui';
 
 const Edit = ({
@@ -12,27 +17,28 @@ const Edit = ({
   params: {id: string};
   searchParams: {type: 'raffle' | 'event'};
 }) => {
+  // 조회 api 연결시 삭제할 코드 입니다
   const product = {
     title: 'test Title',
-    category: 'category 1',
-    tags: ['tag1', 'tag2'],
-    images: ['1', '2'],
-    price: 999999,
+    categoryId: '1',
+    tagIds: [1, 2],
+    images: ['1', '2', '3'],
+    price: '999999',
     startDate: new Date(),
     endDate: new Date(),
     announceAt: new Date(),
-    winnerCount: 99,
+    winnerCount: '99',
     etc: 'test ETC',
   };
 
-  const onSubmit = data => {
+  const onSubmit = (data: CreateRafflePayload) => {
     console.log(data);
   };
 
   return (
     <div>
-      <div className='py-5'>
-        <Header>
+      <div className='my-5'>
+        <Header withUnderline>
           <Header.Left>
             <Header.BackButton />
           </Header.Left>
@@ -42,11 +48,17 @@ const Edit = ({
             </Typography>
           </Header.Middle>
         </Header>
-        <div className='h-px w-full bg-zinc-200'></div>
       </div>
 
-      <GenericForm onSubmit={onSubmit} formOptions={{defaultValues: product}}>
-        <EditList product={product} />
+      <GenericForm
+        onSubmit={onSubmit}
+        formOptions={{
+          mode: 'onSubmit',
+          resolver: zodResolver(createRaffleSchema),
+          defaultValues: product,
+        }}
+      >
+        <EditList type={type} />
       </GenericForm>
     </div>
   );

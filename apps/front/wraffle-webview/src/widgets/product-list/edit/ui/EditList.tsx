@@ -1,22 +1,83 @@
 'use client';
 
-import {useFormContext} from 'react-hook-form';
+import {useDateValidation} from '../../lib/hooks';
+import {useFormContext, useWatch} from 'react-hook-form';
+import type {CreateRafflePayload} from '@/entities/product/model';
+import {
+  AnnounceAtForm,
+  CategoryForm,
+  EndDateForm,
+  EtcForm,
+  PriceForm,
+  StartDateForm,
+  TitleForm,
+  WinnerCountForm,
+} from '@/features/product-form/ui';
 import {Divider} from '@/shared/ui';
-import {Button, Icon, Input, Label, Tag} from '@wraffle/ui';
+import {getTypeText} from '@/shared/util';
+import {Button, Icon, Input, Label, Tag, Toaster} from '@wraffle/ui';
 
-export const EditList = ({product}) => {
-  const {watch} = useFormContext();
+/**
+ * images와 tags 부분은 조회 api 연동하며 수정될 임시 코드 입니다.
+ */
+export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
+  const eventOrRaffleText = getTypeText(type);
+  const {control} = useFormContext<CreateRafflePayload>();
 
-  const startDate = watch('startDate');
-  const endDate = watch('endDate');
+  const [
+    title,
+    categoryId,
+    price,
+    startDate,
+    endDate,
+    announceAt,
+    winnerCount,
+    images,
+    etc,
+  ] = useWatch({
+    control,
+    name: [
+      'title',
+      'categoryId',
+      'price',
+      'startDate',
+      'endDate',
+      'announceAt',
+      'winnerCount',
+      'images',
+      'etc',
+    ],
+  });
 
-  const tags = ['tag1', 'tag2'];
+  // tag api 연동할 때 삭제될 코드 입니다
+  const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
+
+  const disabled =
+    !title ||
+    !categoryId ||
+    !price ||
+    !startDate ||
+    !endDate ||
+    !announceAt ||
+    !winnerCount ||
+    !etc;
+
+  useDateValidation({startDate, endDate, announceAt});
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-24'>
-      <TitleForm placeholder='adsf' />
+      <div className='fixed top-5 z-10'>
+        <Toaster />
+      </div>
+
+      <TitleForm
+        defaultValue={title}
+        placeholder={eventOrRaffleText.titlePlaceholder}
+      />
+
       <CategoryForm
-        defaultValue={product.categoryId}
+        defaultValue={categoryId}
+        // category 조회 api 연동 후 수정될 코드 입니다
         categoryItems={[
           {
             value: '1',
@@ -37,9 +98,9 @@ export const EditList = ({product}) => {
         ]}
       />
 
-      <div className='flex flex-col'>
+      <div>
         <Label className='text-xl font-bold text-zinc-900'>태그</Label>
-        <div className='mb-2 flex gap-1.5'>
+        <div className='mb-2 flex gap-1.5 overflow-x-scroll'>
           {tags.map((tag, i) => (
             <Tag key={i}>{tag}</Tag>
           ))}
@@ -49,10 +110,7 @@ export const EditList = ({product}) => {
             placeholder='태그명을 입력해주세요.'
             className='border border-solid border-[#F5F5F7] bg-[#FAFAFB] pr-10 text-sm font-medium text-zinc-900 placeholder:text-[#ADB5BD]'
           />
-          <button
-            className='absolute inset-y-3 right-0 flex items-center pr-4'
-            onClick={() => console.log('test')}
-          >
+          <button className='absolute inset-y-3 right-0 flex items-center pr-4'>
             <Icon name='search' />
           </button>
         </div>
@@ -64,11 +122,18 @@ export const EditList = ({product}) => {
         <Label className='text-xl font-bold text-zinc-900'>
           이미지*<span className='text-[0.625rem] font-medium'>최대4장</span>
         </Label>
-        <div className='flex gap-2'>
-          {product.images.map((image, i) => (
+        <div className='flex gap-2 overflow-x-scroll'>
+          {images.length < 4 && (
+            <div className='relative flex aspect-square h-[7.5rem] w-[7.5rem] rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] sm:max-h-52 sm:max-w-52'>
+              <div className='flex h-full w-full items-center justify-center rounded-lg text-center text-sm font-medium text-[#ADB5BD]'>
+                이미지 추가
+              </div>
+            </div>
+          )}
+          {images.map((image, i) => (
             <div
               key={i}
-              className='relative h-[7.5rem] w-[7.5rem] rounded-lg bg-blue-100'
+              className='aspect-square h-[7.5rem] w-[7.5rem] rounded-lg bg-blue-100'
             >
               {image}
             </div>
@@ -78,30 +143,41 @@ export const EditList = ({product}) => {
 
       <Divider />
 
-      <PriceForm />
+      <PriceForm
+        defaultValue={price}
+        label={eventOrRaffleText.priceLabel}
+        placeholder={eventOrRaffleText.pricePlaceholder}
+      />
 
       <Divider />
 
       <div>
         <Label className='text-xl font-bold text-zinc-900'>응모 기간*</Label>
-        <StartDateForm />
-        <EndDateForm fromDate={startDate} />
+        <StartDateForm defaultValue={startDate} />
+        <div className='h-2.5'></div>
+        <EndDateForm defaultValue={endDate} fromDate={startDate} />
       </div>
 
       <Divider />
 
-      <AnnounceAtForm fromDate={endDate} startDate={startDate} />
+      <AnnounceAtForm
+        defaultValue={announceAt}
+        fromDate={endDate}
+        startDate={startDate}
+      />
 
       <Divider />
 
-      <WinnerCountForm />
+      <WinnerCountForm defaultValue={winnerCount} />
 
       <Divider />
 
-      <EtcForm />
+      <EtcForm defaultValue={etc} />
 
       <div className='fixed inset-x-0 bottom-0 bg-[#F9FAFB] px-4'>
         <Button
+          type='submit'
+          disabled={disabled}
           className='mb-5 mt-3 disabled:text-[#A1A1AA]'
           onClick={() => {}}
         >
