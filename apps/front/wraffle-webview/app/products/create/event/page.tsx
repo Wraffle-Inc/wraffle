@@ -53,7 +53,7 @@ const EventCreate = () => {
   return (
     <div>
       {funnel.index < EventTotalStepIndex && (
-        <div className='py-5'>
+        <div className='my-5'>
           <Header>
             <Header.Left>
               <Header.BackButton onClick={() => funnel.history.back()} />
