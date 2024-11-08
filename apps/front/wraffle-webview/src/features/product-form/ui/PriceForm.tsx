@@ -28,7 +28,7 @@ export const PriceForm = ({
           <FormControl>
             <div className='relative w-full'>
               <Input
-                className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 placeholder:text-[#ADB5BD]'
+                className='border-[#F5F5F7] bg-[#FAFAFB] pr-10 text-right text-base font-medium placeholder:text-left placeholder:text-[#ADB5BD]'
                 id='price'
                 type='text'
                 inputMode='numeric'
