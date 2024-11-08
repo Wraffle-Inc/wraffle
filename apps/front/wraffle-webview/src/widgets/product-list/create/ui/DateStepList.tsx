@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect} from 'react';
+import {useDateValidation} from '../../lib/hooks';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {
@@ -26,38 +26,16 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {setValue, control} = useFormContext<CreateEventPayload>();
+  const {control} = useFormContext<CreateEventPayload>();
 
   const [startDate, endDate, announceAt, winnerCount] = useWatch({
     control,
     name: ['startDate', 'endDate', 'announceAt', 'winnerCount'],
   });
 
-  const {toast} = useToast();
-
   const disabled = !startDate || !endDate || !announceAt || !winnerCount;
 
-  useEffect(() => {
-    if (endDate < startDate) {
-      setValue('endDate', startDate);
-      toast({
-        title: '응모 마감 일정은',
-        description: '응모 시작 일정 이후로 설정해주세요.',
-        duration: 10000,
-        variant: 'warning',
-      });
-    }
-
-    if (announceAt < endDate) {
-      setValue('announceAt', endDate);
-      toast({
-        title: '당첨자 발표 일정은',
-        description: '응모 마감 일정 이후로 설정해주세요.',
-        duration: 10000,
-        variant: 'warning',
-      });
-    }
-  }, [startDate, endDate, announceAt]);
+  useDateValidation({startDate, endDate, announceAt});
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-20'>
