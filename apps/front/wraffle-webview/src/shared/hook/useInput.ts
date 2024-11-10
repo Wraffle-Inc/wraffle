@@ -18,4 +18,4 @@ const useInput = <T>(initialData: T): ReturnTypes<T> => {
   return [value, handler, setValue];
 };
 
-export default useInput;
+export {useInput};

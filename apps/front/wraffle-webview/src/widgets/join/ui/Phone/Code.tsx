@@ -1,9 +1,8 @@
-import {useEffect} from 'react';
+import type {JoinPayload} from '../../config';
 import {useFormContext} from 'react-hook-form';
-import type {JoinPayload} from '@/entities/auth/join/schema';
-import useInput from '@/shared/hook/useInput';
+import {VerifyCode} from '@/features/validate-phone/ui/VerifyCode';
 import {Timer} from '@/shared/ui';
-import {Input, Typography} from '@wraffle/ui';
+import {Typography} from '@wraffle/ui';
 
 interface CodeProps {
   onNext(code: string): void;
@@ -12,14 +11,9 @@ interface CodeProps {
 const Code = ({onNext}: CodeProps) => {
   const {getValues} = useFormContext<JoinPayload>();
 
-  const [code, handleCode] = useInput('');
-
-  useEffect(() => {
-    // !TODO: 인증번호 API 응답에 따라 onNext 실행
-    if (code.length === 4) {
-      onNext(getValues('phoneNumber'));
-    }
-  }, [code]);
+  const handleVerify = () => {
+    onNext(getValues('phoneNumber'));
+  };
 
   return (
     <div>
@@ -32,7 +26,7 @@ const Code = ({onNext}: CodeProps) => {
         </Typography>
       </div>
 
-      <Input value={code} onChange={handleCode} />
+      <VerifyCode onSuccess={handleVerify} />
       <div className='flex justify-end pr-2 pt-1'>
         <Timer timerSecond={180} />
       </div>

@@ -23,4 +23,4 @@ const useAutoFocus = (
   return [ref, handleKeyUp];
 };
 
-export default useAutoFocus;
+export {useAutoFocus};

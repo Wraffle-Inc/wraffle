@@ -1,5 +1,5 @@
+import type {LoginPayload} from '../config/schema';
 import {useFormContext} from 'react-hook-form';
-import type {LoginPayload} from '@/entities/auth';
 import {RHFInput} from '@/shared/ui';
 import {Button, Typography} from '@wraffle/ui';
 

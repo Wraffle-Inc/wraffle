@@ -1,23 +1,10 @@
 import {z} from 'zod';
+import {
+  emailSchema,
+  passwordRegex,
+  passwordSchema,
+} from '@/entities/auth/schema';
 import {getDefaults} from '@/shared/util';
-
-const passwordRegex = new RegExp(
-  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~@#$!%*?&])[a-zA-Z\d~@#$!%*?&]{8,}$/,
-);
-
-const emailSchema = z
-  .string()
-  .min(1, {message: '이메일을 입력해 주세요.'})
-  .email({message: '유효하지 않은 이메일 형식입니다.'})
-  .default('');
-
-const passwordSchema = z
-  .string()
-  .regex(
-    passwordRegex,
-    '비밀번호는 영문, 숫자, 특수문자 조합으로 8자 이상 형식입니다.',
-  )
-  .default('');
 
 const confirmPasswordSchema = z
   .string()
