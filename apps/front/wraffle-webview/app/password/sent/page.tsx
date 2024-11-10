@@ -1,8 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import {Header} from '@/shared/ui';
-import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
+import {BottomFixedBox, Header} from '@/shared/ui';
 import {Button, Typography} from '@wraffle/ui';
 
 const SendEmailSuccessPage = () => {

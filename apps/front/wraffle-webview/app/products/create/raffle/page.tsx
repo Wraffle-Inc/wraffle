@@ -1,12 +1,11 @@
 'use client';
 
-import type {RaffleCreateState} from '@/entities/product/model';
 import {
   createRaffleDefaultValues,
   createRaffleSchema,
+  type RaffleCreateState,
 } from '@/entities/product/model';
-import {Header, ProgressBar} from '@/shared/ui';
-import GenericForm from '@/shared/ui/form/GenericForm';
+import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
   EtcStep,

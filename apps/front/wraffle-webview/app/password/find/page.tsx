@@ -2,11 +2,10 @@
 
 import {useRouter} from 'next/navigation';
 import {useForm} from 'react-hook-form';
-import {type EmailPayload, emailObjectSchema} from '@/entities/auth';
-import {useSendEmail} from '@/features/password/api/password';
-import {Form, RHFInput} from '@/shared/ui';
-import {Header} from '@/shared/ui';
-import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
+import type {EmailPayload} from '@/entities/auth';
+import {emailObjectSchema} from '@/entities/auth';
+import {useSendEmail} from '@/features/password/api';
+import {BottomFixedBox, Form, Header, RHFInput} from '@/shared/ui';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
@@ -82,9 +81,7 @@ const FindPasswordPage = () => {
               </Typography>
             </div>
 
-            <Button type='submit' disabled={isFormEmpty}>
-              이메일 발송
-            </Button>
+            <Button disabled={isFormEmpty}>이메일 발송</Button>
           </BottomFixedBox>
         </form>
       </Form>
