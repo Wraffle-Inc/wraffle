@@ -1,3 +1,5 @@
+'use client';
+
 import {Form} from './RHF/core/Form';
 import type {SubmitHandler, UseFormProps, FieldValues} from 'react-hook-form';
 import {useForm} from 'react-hook-form';
@@ -22,4 +24,4 @@ const GenericForm = <TFormData extends FieldValues>({
   );
 };
 
-export default GenericForm;
+export {GenericForm};

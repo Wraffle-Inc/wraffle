@@ -1,6 +1,6 @@
+import type {JoinPayload} from '../config';
+import {terms} from '../config';
 import {useFormContext} from 'react-hook-form';
-import {terms} from '@/entities/auth/join';
-import type {JoinPayload} from '@/entities/auth/join/schema';
 import {FormControl, FormField, FormItem} from '@/shared/ui';
 import {Button, ErrorMessage, Icon, Typography, CheckBox} from '@wraffle/ui';
 
@@ -93,9 +93,7 @@ const Extra = () => {
       />
 
       <div className='fixed inset-x-0 bottom-0 bg-white p-5'>
-        <Button type='submit' disabled={!allAgreed}>
-          회원가입
-        </Button>
+        <Button disabled={!allAgreed}>회원가입</Button>
       </div>
     </div>
   );

@@ -39,7 +39,12 @@ const RHFInput = ({
             <FormLabel className='text-[#333D4B]'>{label}</FormLabel>
           </div>
           <FormControl>
-            <Input placeholder={placeholder} {...field} type={type} />
+            <Input
+              placeholder={placeholder}
+              {...field}
+              type={type}
+              autoComplete='off'
+            />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage className='mt-1 min-h-6' />

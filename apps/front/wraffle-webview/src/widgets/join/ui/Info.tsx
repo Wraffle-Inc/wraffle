@@ -1,6 +1,6 @@
+import type {JoinPayload} from '../config';
 import {useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
-import type {JoinPayload} from '@/entities/auth/join/schema';
 import {RHFInput} from '@/shared/ui';
 import {Button, Typography} from '@wraffle/ui';
 
@@ -11,13 +11,13 @@ interface InfoProps {
 const Info = ({onNext}: InfoProps) => {
   const {
     formState: {errors, touchedFields},
-    watch,
+    getValues,
     trigger,
   } = useFormContext<JoinPayload>();
 
-  const email = watch('email');
-  const password = watch('password');
-  const confirmPassword = watch('confirmPassword');
+  const email = getValues('email');
+  const password = getValues('password');
+  const confirmPassword = getValues('confirmPassword');
 
   const isDisabled = () => {
     return (
@@ -66,7 +66,11 @@ const Info = ({onNext}: InfoProps) => {
       />
 
       <div className='fixed inset-x-0 bottom-0 bg-white p-5'>
-        <Button onClick={() => onNext(email, password)} disabled={isDisabled()}>
+        <Button
+          type='button'
+          onClick={() => onNext(email, password)}
+          disabled={isDisabled()}
+        >
           다음
         </Button>
       </div>

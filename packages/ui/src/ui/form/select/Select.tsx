@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './PrimitiveSelect';
+import {cn} from '@wds/shared/utils';
 
 export interface SelectItem {
   value: string;
@@ -19,7 +20,7 @@ export interface GroupSelectItem {
 }
 
 export interface BaseSelectProps {
-  className: string;
+  className?: string;
   placeholder: string;
   onValueChange: (value: string) => void;
   defaultValue?: string;
@@ -50,7 +51,7 @@ const Select = ({
 }: SelectProps) => {
   return (
     <SelectRoot onValueChange={onValueChange} defaultValue={defaultValue}>
-      <SelectTrigger className={className}>
+      <SelectTrigger className={cn(className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

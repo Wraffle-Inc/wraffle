@@ -1,11 +1,10 @@
 'use client';
 
 import type {z} from 'zod';
-import {joinDefaultValues, joinSchema} from '@/entities/auth/join/schema';
-import type {JoinStep} from '@/entities/auth/join/type';
-import {Header, ProgressBar} from '@/shared/ui';
-import GenericForm from '@/shared/ui/form/GenericForm';
-import {Info, Name, Extra, PhoneFunnel} from '@/widgets/join';
+import {Header, ProgressBar, GenericForm} from '@/shared/ui';
+import type {JoinStep} from '@/widgets/join/config';
+import {joinDefaultValues, joinSchema} from '@/widgets/join/config';
+import {Info, Name, Extra, PhoneFunnel} from '@/widgets/join/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useFunnel} from '@use-funnel/browser';
 

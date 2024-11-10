@@ -4,10 +4,9 @@ import type {z} from 'zod';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import {loginDefaultValues, loginSchema} from '@/entities/auth';
-import {Header} from '@/shared/ui';
-import GenericForm from '@/shared/ui/form/GenericForm';
-import {EmailForm} from '@/widgets/login/EmailForm';
+import {GenericForm, Header} from '@/shared/ui';
+import {loginDefaultValues, loginSchema} from '@/widgets/login/config';
+import {EmailForm} from '@/widgets/login/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Typography} from '@wraffle/ui';
 
