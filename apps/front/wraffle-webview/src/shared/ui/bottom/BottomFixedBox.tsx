@@ -18,4 +18,4 @@ function BottomFixedBox({children, className}: BottomFixedBoxProps) {
   );
 }
 
-export default BottomFixedBox;
+export {BottomFixedBox};

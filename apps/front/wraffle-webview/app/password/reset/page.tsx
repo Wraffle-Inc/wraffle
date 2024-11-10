@@ -2,11 +2,10 @@
 
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useForm} from 'react-hook-form';
-import {type PasswordPayload, passwordObjectSchema} from '@/entities/auth';
-import {useResetPassword} from '@/features/password/api/password';
-import {Form, RHFInput} from '@/shared/ui';
-import {Header} from '@/shared/ui';
-import BottomFixedBox from '@/shared/ui/bottom/BottomFixedBox';
+import type {PasswordPayload} from '@/entities/auth';
+import {passwordObjectSchema} from '@/entities/auth';
+import {useResetPassword} from '@/features/password/api';
+import {BottomFixedBox, Form, Header, RHFInput} from '@/shared/ui';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
@@ -82,9 +81,7 @@ const ResetPasswordPage = () => {
           </div>
 
           <BottomFixedBox>
-            <Button type='submit' disabled={isFormEmpty}>
-              비밀번호 재설정하기
-            </Button>
+            <Button disabled={isFormEmpty}>비밀번호 재설정하기</Button>
           </BottomFixedBox>
         </form>
       </Form>

@@ -5,15 +5,14 @@ import {
   createEventDefaultValues,
   createEventSchema,
 } from '@/entities/product/model';
-import {Header, ProgressBar} from '@/shared/ui';
-import GenericForm from '@/shared/ui/form/GenericForm';
+import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
-  ImageStep,
   EtcStep,
-  TitleStep,
+  ImageStep,
   ProductList,
   SuccessList,
+  TitleStep,
 } from '@/widgets/product-list/create/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {createFunnelSteps, useFunnel} from '@use-funnel/browser';
