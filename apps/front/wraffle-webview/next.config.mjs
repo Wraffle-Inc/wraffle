@@ -23,7 +23,12 @@ const nextConfig = {
   },
   // !TODO: API 연동 후 삭제
   images: {
-    domains: ['image.vans.co.kr', '*'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'image.vans.co.kr',
+      },
+    ],
   },
 };
 

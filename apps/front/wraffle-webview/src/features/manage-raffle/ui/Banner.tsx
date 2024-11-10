@@ -1,8 +1,8 @@
 'use client';
 
+import type {RecentRaffle} from '../model';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import type {RecentRaffle} from '@/entities/banner/type';
 import {Typography} from '@wraffle/ui';
 
 interface BannerProps {
@@ -30,4 +30,4 @@ const Banner = ({recentRaflle}: BannerProps) => {
   );
 };
 
-export default Banner;
+export {Banner};

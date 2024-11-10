@@ -1,7 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import type {CategoryItem} from '@/entities/category/type';
+import type {CategoryItem} from '@/entities/category';
 import {Typography} from '@wraffle/ui';
 
 interface CategoryButtonProps {
@@ -22,4 +22,4 @@ const CategoryButton = ({category}: CategoryButtonProps) => {
   );
 };
 
-export default CategoryButton;
+export {CategoryButton};

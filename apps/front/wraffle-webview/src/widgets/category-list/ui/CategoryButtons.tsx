@@ -1,5 +1,5 @@
 import type {CategoryItem} from '@/entities/category/type';
-import CategoryButton from '@/features/get-category/ui/CategoryButton';
+import {CategoryButton} from '@/features/get-category/ui';
 
 interface CategoryButtonsProps {
   categories: CategoryItem[];
@@ -17,4 +17,4 @@ const CategoryButtons = ({categories}: CategoryButtonsProps) => {
   );
 };
 
-export default CategoryButtons;
+export {CategoryButtons};

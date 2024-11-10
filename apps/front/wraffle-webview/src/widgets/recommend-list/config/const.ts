@@ -1,4 +1,4 @@
-import type {RecommendRaffle} from './type';
+import type {RecommendRaffle} from '@/features/manage-raffle/model';
 
 export const recommendItems: RecommendRaffle[] = [
   {
