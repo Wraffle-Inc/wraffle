@@ -1,4 +1,4 @@
-import type {RecentRaffle} from './type';
+import type {RecentRaffle} from '../model';
 
 export const RecentRaffles: RecentRaffle = {
   id: 1,

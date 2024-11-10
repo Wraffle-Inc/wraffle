@@ -1,4 +1,4 @@
-import type {RecommendRaffle} from '@/entities/raffle/recommend/type';
+import type {RecommendRaffle} from '@/features/manage-raffle/model';
 import {RaffleCard, Typography} from '@wraffle/ui';
 
 interface RecommendListProps {
@@ -27,4 +27,4 @@ const RecommendList = ({recommendItems}: RecommendListProps) => {
   );
 };
 
-export default RecommendList;
+export {RecommendList};
