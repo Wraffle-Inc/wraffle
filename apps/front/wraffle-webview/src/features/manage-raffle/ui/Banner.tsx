@@ -6,11 +6,11 @@ import {useRouter} from 'next/navigation';
 import {Typography} from '@wraffle/ui';
 
 interface BannerProps {
-  recentRaflle: RecentRaffle;
+  recentRaffle: RecentRaffle;
 }
 
-const Banner = ({recentRaflle}: BannerProps) => {
-  const {id, title, subTitle, imageUrl, toGoUrl} = recentRaflle;
+const Banner = ({recentRaffle}: BannerProps) => {
+  const {id, title, subTitle, imageUrl, toGoUrl} = recentRaffle;
   const router = useRouter();
   return (
     <div

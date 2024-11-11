@@ -19,14 +19,8 @@ const EmailForm = () => {
         label='비밀번호*'
         placeholder='비밀번호를 입력해주세요.'
       />
-      <Button
-        className='mt-10 text-[15px]'
-        type='submit'
-        disabled={!formState.isValid}
-      >
-        <Typography size='h6' color='white'>
-          로그인
-        </Typography>
+      <Button className='mt-10 text-[15px]' disabled={!formState.isValid}>
+        로그인
       </Button>
     </>
   );

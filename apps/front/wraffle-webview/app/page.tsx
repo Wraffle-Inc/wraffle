@@ -19,7 +19,7 @@ export default function Home() {
         </Header.Right>
       </Header>
       <section className='my-4'>
-        <Banner recentRaflle={RecentRaffles} />
+        <Banner recentRaffle={RecentRaffles} />
       </section>
       <section className='mb-4 flex justify-center'>
         <CategoryButtons categories={categories} />
