@@ -4,8 +4,8 @@ import {useRouter, useSearchParams} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
 import {sampleRaffleData, sampleEventData} from '@/entities/product/product';
 import type {RaffleData, EventData} from '@/entities/product/product';
-import ParticipateButton from '@/features/participate/ParticipateButton';
-import ShareModal from '@/features/share-product-link/ShareModal';
+import ParticipateButton from '@/features/participate/ui/ParticipateButton';
+import ShareDialog from '@/features/share-product-link/ShareDialog';
 import {Header, Divider} from '@/shared/ui';
 import {
   ProductInfoMenu,
@@ -16,7 +16,6 @@ import {
 } from '@/widgets/product-info';
 import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/constants';
 import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
-import {Icon} from '@wraffle/ui';
 
 const HEADER_OFFSET = 115;
 
@@ -41,7 +40,6 @@ const ProductPage = () => {
   const [productData, setProductData] = useState<RaffleData | EventData | null>(
     null,
   );
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const sectionsRef = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
@@ -92,14 +90,6 @@ const ProductPage = () => {
     return <div>Loading...</div>;
   }
 
-  const openShareModal = () => {
-    setIsShareModalOpen(true);
-  };
-
-  const closeShareModal = () => {
-    setIsShareModalOpen(false);
-  };
-
   return (
     <div className='flex min-h-screen flex-col'>
       <div className='sticky top-0 z-20 bg-white'>
@@ -108,9 +98,7 @@ const ProductPage = () => {
             <Header.BackButton onClick={router.back} />
           </Header.Left>
           <Header.Right>
-            <div className='flex w-full justify-end'>
-              <Icon name='upload' onClick={openShareModal} />
-            </div>
+            <ShareDialog />
           </Header.Right>
         </Header>
         <ProductInfoMenu
@@ -159,8 +147,6 @@ const ProductPage = () => {
           productImage={productData.images[0]}
         />
       </div>
-
-      <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />
     </div>
   );
 };
