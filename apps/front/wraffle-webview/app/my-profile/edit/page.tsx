@@ -25,6 +25,14 @@ const EditProfilePage = () => {
     resolver: zodResolver(editUserSchema),
     defaultValues: getDefaults(editUserSchema),
   });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value.length > 4) {
+      event.target.value = value.slice(0, 4);
+    }
+  };
+
   const onSubmit: SubmitHandler<EditUserPayload> = formValues => {
     console.log('formValues', formValues);
   };
@@ -55,6 +63,7 @@ const EditProfilePage = () => {
             label='이메일*'
             placeholder='이메일을 입력해주세요.'
           />
+
           <InputField>
             <InputField.Label htmlFor='phoneNumber'>
               휴대폰 번호*
@@ -65,12 +74,14 @@ const EditProfilePage = () => {
               placeholder=''
               type='number'
               maxLength={4}
+              onChange={handleInputChange}
             />
             <InputField.Input
               id='last'
               placeholder=''
               type='number'
               maxLength={4}
+              onChange={handleInputChange}
             />
           </InputField>
           <Button variant='stroke'>인증번호 재전송</Button>
