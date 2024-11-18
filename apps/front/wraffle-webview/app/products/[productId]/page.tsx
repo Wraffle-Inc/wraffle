@@ -7,36 +7,27 @@ import type {RaffleData, EventData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ui/ParticipateButton';
 import ShareDialog from '@/features/share-product-link/ShareDialog';
 import {Header, Divider} from '@/shared/ui';
+import {formatDate} from '@/shared/util/formatDate';
 import {
   ProductInfoMenu,
   ProductMainSection,
-  ProductApplyPeriodSection,
-  ProductAnnouncementSection,
-  ProductNoticeSection,
+  ProductInfoSection,
 } from '@/widgets/product-info';
-import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/constants';
+import {RAFFLE_MENUS, EVENT_MENUS} from '@/widgets/product-info/config/const';
+import {
+  type RaffleMenu,
+  type EventMenu,
+} from '@/widgets/product-info/config/const';
+import {useMenu} from '@/widgets/product-info/hook/useMenu';
 import {ProductEventSection} from '@/widgets/product-info/ui/ProductInfoSection';
 
 const HEADER_OFFSET = 115;
-
-const useMenu = (initialMenu: string) => {
-  const [selectedMenu, setSelectedMenu] = useState<string>(initialMenu);
-
-  const selectMenu = (menu: string) => {
-    setSelectedMenu(menu);
-  };
-
-  return {
-    selectedMenu,
-    selectMenu,
-  };
-};
 
 const ProductPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
-  const {selectedMenu, selectMenu} = useMenu('상품');
+  const {selectedMenu, selectMenu} = useMenu('상품' as RaffleMenu | EventMenu);
   const [productData, setProductData] = useState<RaffleData | EventData | null>(
     null,
   );
@@ -51,7 +42,7 @@ const ProductPage = () => {
     유의사항: useRef<HTMLDivElement>(null),
   });
 
-  const menus = type === 'event' ? EVENT_MENUS : RAFFLE_MENUS;
+  const menus = type === 'event' ? [...EVENT_MENUS] : [...RAFFLE_MENUS];
 
   const data: {
     raffle: RaffleData;
@@ -70,7 +61,7 @@ const ProductPage = () => {
   }, [type]);
 
   // 메뉴 선택 시 스크롤 이동 함수
-  const scrollToSection = (menu: string) => {
+  const scrollToSection = (menu: RaffleMenu | EventMenu) => {
     const section = sectionsRef.current[menu];
     if (section && section.current) {
       window.scrollTo({
@@ -81,7 +72,7 @@ const ProductPage = () => {
   };
 
   // 메뉴 클릭 시 메뉴를 선택하고 해당 섹션으로 스크롤 이동
-  const handleMenuSelect = (menu: string) => {
+  const handleMenuSelect = (menu: RaffleMenu | EventMenu) => {
     selectMenu(menu);
     scrollToSection(menu);
   };
@@ -114,14 +105,16 @@ const ProductPage = () => {
           sectionRef={sectionsRef.current['상품']}
         />
         <Divider />
-        <ProductApplyPeriodSection
-          productData={productData}
-          sectionRef={sectionsRef.current['응모 기간']}
+        <ProductInfoSection
+          label='응모 기간'
+          data={`${formatDate(productData.startDate)} ~ ${formatDate(productData.endDate)}`}
+          sectionsRef={sectionsRef}
         />
         <Divider />
-        <ProductAnnouncementSection
-          productData={productData}
-          sectionRef={sectionsRef.current['당첨자 발표']}
+        <ProductInfoSection
+          label='당첨자 발표'
+          data={formatDate(productData.announceAt)}
+          sectionsRef={sectionsRef}
         />
         <Divider />
         {type === 'event' && (
@@ -133,9 +126,10 @@ const ProductPage = () => {
             <Divider />
           </>
         )}
-        <ProductNoticeSection
-          productData={productData}
-          sectionRef={sectionsRef.current['유의사항']}
+        <ProductInfoSection
+          label='유의사항'
+          data={productData.description}
+          sectionsRef={sectionsRef}
         />
       </main>
 
