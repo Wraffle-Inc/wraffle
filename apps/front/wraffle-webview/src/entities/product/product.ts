@@ -6,9 +6,7 @@ export interface Tag {
 export interface Product {
   id: number;
   name: string;
-  price: number;
   imageUrl: string;
-  tags?: Tag[];
 }
 
 export interface BaseProductData {
@@ -88,49 +86,42 @@ export const sampleEventData: EventData = {
     {
       id: 1,
       name: '1번 상품',
-      price: 2210000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 2,
       name: '2번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 3,
       name: '3번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 4,
       name: '4번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 5,
       name: '5번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 6,
       name: '6번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },
     {
       id: 7,
       name: '7번 상품',
-      price: 10000,
       imageUrl:
         'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     },

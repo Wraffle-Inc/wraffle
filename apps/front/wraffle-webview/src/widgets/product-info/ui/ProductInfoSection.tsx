@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {type MutableRefObject, type RefObject} from 'react';
 import type {RaffleData, EventData} from '@/entities/product/product';
-import {formatDate} from '@/shared/util/formatDate';
 import ProductImageList from '@/widgets/product-image-list/ProductImageList';
 import {Tag, RaffleCard} from '@wraffle/ui';
 
@@ -39,54 +38,22 @@ export const ProductMainSection = ({
   );
 };
 
-// 응모 기간
-export const ProductApplyPeriodSection = ({
-  productData,
-  sectionRef,
+// 공용으로 사용되는 상품 정보 섹션
+export const ProductInfoSection = ({
+  label,
+  data,
+  sectionsRef,
 }: {
-  productData: ProductData;
-  sectionRef: React.RefObject<HTMLDivElement>;
+  label: string;
+  data: string;
+  sectionsRef: MutableRefObject<{
+    [key: string]: RefObject<HTMLDivElement>;
+  }>;
 }) => {
   return (
-    <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
-      <p className='text-xl font-bold'>응모 기간</p>
-      <p className='text-sm text-gray-600'>
-        {formatDate(productData.startDate)} ~ {formatDate(productData.endDate)}
-      </p>
-    </div>
-  );
-};
-
-// 당첨자 발표
-export const ProductAnnouncementSection = ({
-  productData,
-  sectionRef,
-}: {
-  productData: ProductData;
-  sectionRef: React.RefObject<HTMLDivElement>;
-}) => {
-  return (
-    <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
-      <p className='text-xl font-bold'>당첨자 발표</p>
-      <p className='text-sm text-gray-600'>
-        {formatDate(productData.announceAt)}
-      </p>
-    </div>
-  );
-};
-
-// 유의사항
-export const ProductNoticeSection = ({
-  productData,
-  sectionRef,
-}: {
-  productData: ProductData;
-  sectionRef: React.RefObject<HTMLDivElement>;
-}) => {
-  return (
-    <div ref={sectionRef} className='flex flex-col gap-4 p-4'>
-      <p className='text-xl font-bold'>유의사항</p>
-      <p className='text-sm text-gray-600'>{productData.description}</p>
+    <div ref={sectionsRef.current[label]} className='flex flex-col gap-4 p-4'>
+      <p className='text-xl font-bold'>{label}</p>
+      <p className='text-sm text-gray-600'>{data}</p>
     </div>
   );
 };
