@@ -67,7 +67,7 @@ const History = () => {
         categoryList={CATEGORY_LISTS}
         category={category}
         setCategory={setCategory}
-        BlockComponent={Block}
+        block={product => <Block key={product.id} product={product} />}
       />
     </div>
   );

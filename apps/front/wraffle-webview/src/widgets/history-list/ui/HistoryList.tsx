@@ -12,7 +12,7 @@ export const HistoryList = <T,>({
   categoryList,
   category,
   setCategory,
-  BlockComponent,
+  block,
 }: {
   raffles: T[];
   events: T[];
@@ -21,7 +21,7 @@ export const HistoryList = <T,>({
   categoryList: string[];
   category: string;
   setCategory: (category: string) => void;
-  BlockComponent: React.ComponentType<{product: T}>;
+  block: (product: T) => React.ReactNode;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -96,9 +96,7 @@ export const HistoryList = <T,>({
           </div>
 
           {raffles.length > 0 ? (
-            raffles.map((raffle, index) => (
-              <BlockComponent key={index} product={raffle} />
-            ))
+            raffles.map(raffle => block(raffle))
           ) : (
             <div className='flex flex-col items-center justify-center py-10'>
               <p className='text-gray-500'>아직 내역이 없어요 🥶</p>
@@ -122,9 +120,7 @@ export const HistoryList = <T,>({
           </div>
 
           {events.length > 0 ? (
-            events.map((event, index) => (
-              <BlockComponent key={index} product={event} />
-            ))
+            events.map(event => block(event))
           ) : (
             <div className='flex flex-col items-center justify-center py-10'>
               <p className='text-gray-500'>아직 내역이 없어요 🥶</p>
