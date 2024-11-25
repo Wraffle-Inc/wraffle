@@ -1,4 +1,4 @@
-import {ThumbnailCard} from '@/entities/product/ui';
+import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 // TODO
@@ -26,16 +26,21 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
         </Label>
       </div>
 
-      <div className='grid w-full max-w-[21rem] grid-cols-2 gap-4 sm:max-w-[55rem] sm:grid-cols-4'>
-        {images.map((url, i) => (
-          <ThumbnailCard key={i} url={url} />
+      <div className='flex flex-wrap gap-4'>
+        {images.map(url => (
+          <ImageCardWithDelete
+            key={url}
+            url={url}
+            onClick={() => {}}
+            className='h-40 w-40'
+          />
         ))}
         {images.length < 4 && (
-          <div className='relative flex aspect-square max-h-40 w-full max-w-40 rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] sm:max-h-52 sm:max-w-52'>
-            <div className='flex h-full w-full items-center justify-center rounded-lg text-center text-sm font-medium text-[#ADB5BD]'>
-              이미지 추가
-            </div>
-          </div>
+          <AddItemCard
+            label='이미지 추가'
+            onClick={() => {}}
+            className='h-40 w-40'
+          />
         )}
       </div>
 
