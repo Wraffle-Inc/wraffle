@@ -18,6 +18,9 @@ import {Divider} from '@/shared/ui';
 import {getTypeText} from '@/shared/util';
 import {Button, Icon, Input, Label, Tag, Toaster} from '@wraffle/ui';
 
+// tag api 연동할 때 삭제될 코드 입니다
+const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
+
 /**
  * images와 tags 부분은 조회 api 연동하며 수정될 임시 코드 입니다.
  */
@@ -49,9 +52,6 @@ export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
       'etc',
     ],
   });
-
-  // tag api 연동할 때 삭제될 코드 입니다
-  const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
 
   const disabled =
     !title ||
