@@ -3,6 +3,7 @@
 import {useDateValidation} from '../../lib/hooks';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateRafflePayload} from '@/entities/product/model';
+import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
 import {
   AnnounceAtForm,
   CategoryForm,
@@ -124,19 +125,19 @@ export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
         </Label>
         <div className='flex gap-2 overflow-x-scroll'>
           {images.length < 4 && (
-            <div className='relative flex aspect-square h-[7.5rem] w-[7.5rem] rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] sm:max-h-52 sm:max-w-52'>
-              <div className='flex h-full w-full items-center justify-center rounded-lg text-center text-sm font-medium text-[#ADB5BD]'>
-                이미지 추가
-              </div>
-            </div>
+            <AddItemCard
+              label='이미지 추가'
+              onClick={() => {}}
+              className='h-[7.5rem] w-[7.5rem]'
+            />
           )}
-          {images.map((image, i) => (
-            <div
-              key={i}
-              className='aspect-square h-[7.5rem] w-[7.5rem] rounded-lg bg-blue-100'
-            >
-              {image}
-            </div>
+          {images.map(image => (
+            <ImageCardWithDelete
+              key={image}
+              url={'/'}
+              onClick={() => {}}
+              className='h-[7.5rem] w-[7.5rem]'
+            />
           ))}
         </div>
       </div>

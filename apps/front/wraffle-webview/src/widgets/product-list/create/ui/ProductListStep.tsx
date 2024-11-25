@@ -1,5 +1,5 @@
 import type {Product} from '@/entities/product/model';
-import {ThumbnailCard} from '@/entities/product/ui';
+import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 // api 연동
@@ -32,23 +32,25 @@ export const ProductListStep = ({
         </Label>
       </div>
 
-      <div className='grid w-full max-w-[21rem] grid-cols-2 gap-4 sm:max-w-[55rem] sm:grid-cols-4'>
-        {products.map((product, i) => (
-          <ThumbnailCard
-            key={i}
-            url={product.imageUrl}
-            title={product.title ?? ''}
-          />
+      <div className='flex flex-wrap gap-4'>
+        {products.map(product => (
+          <div key={product.imageUrl} className='flex flex-col gap-2'>
+            <ImageCardWithDelete
+              url={product.imageUrl}
+              onClick={() => {}}
+              className='h-40 w-40'
+            />
+            <Typography as='p' size='p2'>
+              {product.title}
+            </Typography>
+          </div>
         ))}
         {products.length < 5 && (
-          <div className='relative flex aspect-square max-h-40 w-full max-w-40 rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB] sm:max-h-52 sm:max-w-52'>
-            <div
-              className='flex h-full w-full items-center justify-center rounded-lg text-center text-sm font-medium text-[#ADB5BD]'
-              onClick={onCreate}
-            >
-              상품 추가
-            </div>
-          </div>
+          <AddItemCard
+            label='상품 추가'
+            onClick={onCreate}
+            className='h-40 w-40'
+          />
         )}
       </div>
 
