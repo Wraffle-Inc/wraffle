@@ -1,6 +1,7 @@
 'use client';
 
-import {useDateValidation} from '../../lib/hooks';
+import {useDateValidationWithToast} from '../../lib/hooks';
+import {useEffect} from 'react';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateRafflePayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
@@ -26,7 +27,7 @@ const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
  */
 export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
   const eventOrRaffleText = getTypeText(type);
-  const {control} = useFormContext<CreateRafflePayload>();
+  const {control, setValue} = useFormContext<CreateRafflePayload>();
 
   const [
     title,
@@ -63,7 +64,16 @@ export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
     !winnerCount ||
     !etc;
 
-  useDateValidation({startDate, endDate, announceAt});
+  useDateValidationWithToast({startDate, endDate, announceAt});
+
+  useEffect(() => {
+    if (endDate < startDate) {
+      setValue('endDate', startDate);
+    }
+    if (announceAt < endDate) {
+      setValue('announceAt', endDate);
+    }
+  }, [startDate, endDate]);
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-24'>

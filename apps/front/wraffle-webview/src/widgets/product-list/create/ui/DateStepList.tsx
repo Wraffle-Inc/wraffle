@@ -1,6 +1,7 @@
 'use client';
 
-import {useDateValidation} from '../../lib/hooks';
+import {useDateValidationWithToast} from '../../lib/hooks';
+import {useEffect} from 'react';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {
@@ -26,7 +27,7 @@ export const DateStep = ({
 }) => {
   const eventOrRaffleText = getTypeText(type);
 
-  const {control} = useFormContext<CreateEventPayload>();
+  const {control, setValue} = useFormContext<CreateEventPayload>();
 
   const [startDate, endDate, announceAt, winnerCount] = useWatch({
     control,
@@ -35,7 +36,16 @@ export const DateStep = ({
 
   const disabled = !startDate || !endDate || !announceAt || !winnerCount;
 
-  useDateValidation({startDate, endDate, announceAt});
+  useDateValidationWithToast({startDate, endDate, announceAt});
+
+  useEffect(() => {
+    if (endDate < startDate) {
+      setValue('endDate', startDate);
+    }
+    if (announceAt < endDate) {
+      setValue('announceAt', endDate);
+    }
+  }, [startDate, endDate]);
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-20'>
