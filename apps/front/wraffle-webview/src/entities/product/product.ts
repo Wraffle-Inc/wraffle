@@ -27,9 +27,7 @@ export interface BaseProductData {
   images: string[];
 }
 
-export interface RaffleData extends BaseProductData {
-  tags: Tag[];
-}
+export interface RaffleData extends BaseProductData {}
 
 export interface EventData extends BaseProductData {
   products: Product[];

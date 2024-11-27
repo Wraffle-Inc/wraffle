@@ -86,7 +86,7 @@ const ProductPage = () => {
       <div className='sticky top-0 z-20 bg-white'>
         <Header>
           <Header.Left>
-            <Header.BackButton onClick={router.back} />
+            <Header.BackButton />
           </Header.Left>
           <Header.Right>
             <ShareDialog />

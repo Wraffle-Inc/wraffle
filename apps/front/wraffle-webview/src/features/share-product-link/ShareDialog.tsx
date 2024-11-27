@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {
   Dialog,
   DialogContent,
@@ -10,13 +9,6 @@ import {
 } from '@wraffle/ui';
 
 const ShareDialog = () => {
-  useEffect(() => {
-    document.body.style.overflow = 'unset';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
   return (
     <Dialog>
       <DialogTrigger>
