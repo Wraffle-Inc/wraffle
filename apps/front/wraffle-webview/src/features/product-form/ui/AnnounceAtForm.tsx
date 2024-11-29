@@ -10,7 +10,7 @@ export const AnnounceAtForm = ({
   fromDate: endDate,
   startDate,
 }: {
-  defaultValue: Date;
+  defaultValue: Date | undefined;
   fromDate: Date;
   startDate: Date;
 }) => {
@@ -27,7 +27,7 @@ export const AnnounceAtForm = ({
             <CalendarForm
               dateLabel='당첨자 발표 시간을 입력해주세요.'
               selected={defaultValue}
-              setSelected={field.onChange}
+              onSelect={field.onChange}
               fromDate={endDate}
               onClick={e => {
                 if (!startDate || !endDate) {
