@@ -1,12 +1,21 @@
 'use client';
 
 import type {CreateEventPayload} from '../../../entities/product/model';
+import {STARTDATE_IS_OVER_ENDDATE} from '../config/const';
+import {validateDate} from '../config/validateDate';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
-import {CalendarForm} from '@wraffle/ui';
+import {CalendarForm, useToast} from '@wraffle/ui';
 
-export const StartDateForm = ({defaultValue}: {defaultValue: Date}) => {
+export const StartDateForm = ({
+  defaultValue,
+  referenceDate: endDate,
+}: {
+  defaultValue: Date | undefined;
+  referenceDate: Date | undefined;
+}) => {
   const {control} = useFormContext<CreateEventPayload>();
+  const {toast} = useToast();
   return (
     <FormField
       control={control}
@@ -18,7 +27,13 @@ export const StartDateForm = ({defaultValue}: {defaultValue: Date}) => {
             <CalendarForm
               dateLabel='응모 시작 시간을 입력해주세요.'
               selected={defaultValue}
-              setSelected={field.onChange}
+              onSelect={date => {
+                if (validateDate(date, endDate)) {
+                  field.onChange(date);
+                } else {
+                  toast(STARTDATE_IS_OVER_ENDDATE);
+                }
+              }}
               fromDate={new Date()}
             />
           </FormControl>
