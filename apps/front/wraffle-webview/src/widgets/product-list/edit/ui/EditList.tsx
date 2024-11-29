@@ -1,7 +1,5 @@
 'use client';
 
-import {useDateValidationWithToast} from '../../lib/hooks';
-import {useEffect} from 'react';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateRafflePayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
@@ -27,7 +25,7 @@ const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
  */
 export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
   const eventOrRaffleText = getTypeText(type);
-  const {control, setValue} = useFormContext<CreateRafflePayload>();
+  const {control} = useFormContext<CreateRafflePayload>();
 
   const [
     title,
@@ -63,17 +61,6 @@ export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
     !announceAt ||
     !winnerCount ||
     !etc;
-
-  useDateValidationWithToast({startDate, endDate, announceAt});
-
-  useEffect(() => {
-    if (endDate < startDate) {
-      setValue('endDate', startDate);
-    }
-    if (announceAt < endDate) {
-      setValue('announceAt', endDate);
-    }
-  }, [startDate, endDate]);
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-24'>
@@ -164,9 +151,13 @@ export const EditList = ({type}: {type: 'raffle' | 'event'}) => {
 
       <div>
         <Label className='text-xl font-bold text-zinc-900'>응모 기간*</Label>
-        <StartDateForm defaultValue={startDate} />
+        <StartDateForm defaultValue={startDate} referenceDate={endDate} />
         <div className='h-2.5'></div>
-        <EndDateForm defaultValue={endDate} fromDate={startDate} />
+        <EndDateForm
+          defaultValue={endDate}
+          fromDate={startDate}
+          referenceDate={announceAt}
+        />
       </div>
 
       <Divider />
