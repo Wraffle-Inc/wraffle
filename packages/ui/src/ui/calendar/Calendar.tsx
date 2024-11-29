@@ -9,14 +9,14 @@ import * as Popover from '@radix-ui/react-popover';
 interface CalendarFormProps {
   dateLabel: string;
   selected: Date | undefined;
-  setSelected: (selected: Date | undefined) => void;
+  onSelect: (selected: Date | undefined) => void;
   fromDate: Date;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface CalendarProps {
   selected: Date | undefined;
-  setSelected: (selected: Date | undefined) => void;
+  onSelect: (selected: Date | undefined) => void;
   setCalendarOpen: (calendarOpen: boolean) => void;
   fromDate: Date;
 }
@@ -24,7 +24,7 @@ interface CalendarProps {
 export const CalendarForm = ({
   dateLabel,
   selected,
-  setSelected,
+  onSelect,
   fromDate,
   onClick,
 }: CalendarFormProps) => {
@@ -56,7 +56,7 @@ export const CalendarForm = ({
         >
           <SingleDayPickCalendar
             selected={selected}
-            setSelected={setSelected}
+            onSelect={onSelect}
             setCalendarOpen={setCalendarOpen}
             fromDate={fromDate}
           />
@@ -68,7 +68,7 @@ export const CalendarForm = ({
 
 const SingleDayPickCalendar = ({
   selected,
-  setSelected,
+  onSelect,
   setCalendarOpen,
   fromDate,
 }: CalendarProps) => {
@@ -77,7 +77,7 @@ const SingleDayPickCalendar = ({
       mode='single'
       selected={selected}
       onSelect={date => {
-        setSelected(date);
+        onSelect(date);
         setCalendarOpen(false);
       }}
       required
