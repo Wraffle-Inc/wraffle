@@ -1,9 +1,9 @@
 'use client';
 
 import type {z} from 'zod';
+import {signIn} from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
 import {GenericForm, Header} from '@/shared/ui';
 import {loginDefaultValues, loginSchema} from '@/widgets/login/config';
 import {EmailForm} from '@/widgets/login/ui';
@@ -11,17 +11,18 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {Typography} from '@wraffle/ui';
 
 const EmailLogin = () => {
-  const router = useRouter();
-
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    //!TODO: 로그인 로직 구현
-    console.log(data.email, data.password);
+    signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      redirectTo: '/',
+    });
   };
 
   return (
     <div>
       <Header>
-        <Header.BackButton onClick={router.back} />
+        <Header.BackButton />
       </Header>
       <div className='flex h-full flex-col items-center px-5'>
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
