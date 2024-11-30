@@ -22,7 +22,6 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
           {email: string; password: string}
         >('/auth/login', {
           body: {email, password},
-          withAuth: true,
         });
 
         if ('data' in response) {
