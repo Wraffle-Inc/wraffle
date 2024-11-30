@@ -14,6 +14,7 @@ const RecommendList = ({recommendItems}: RecommendListProps) => {
       <div className='grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] justify-items-center gap-4'>
         {recommendItems.map(item => (
           <RaffleCard
+            key={item.id}
             name={item.title}
             price={item.price}
             hashtags={item.hashtags}
