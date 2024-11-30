@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
   const {nextUrl} = req;
   const session = await auth();
 
-  const isAuthenticated = !!session?.user;
+  const isAuthenticated = !!session;
 
   const isPublicRoute = PUBLIC_ROUTES.find(route =>
     nextUrl.pathname.startsWith(route),
@@ -28,5 +28,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api).*)'],
 };
