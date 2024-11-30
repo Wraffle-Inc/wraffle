@@ -1,3 +1,4 @@
+import apiClient from '../api/apiClient';
 import {ACCESS_TOKEN_EXPIRES_IN} from './const';
 import NextAuth from 'next-auth';
 import type {JWT} from 'next-auth/jwt';
@@ -16,23 +17,18 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
       authorize: async credentials => {
         const {email, password} = await loginSchema.parseAsync(credentials);
 
-        const response = await fetch(
-          'https://wraffle-api.justsloth.com/v1/auth/login',
-          {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password}),
-          },
-        );
+        const response = await apiClient.post<
+          {accessToken: string; refreshToken: string},
+          {email: string; password: string}
+        >('/auth/login', {
+          body: {email, password},
+          withAuth: true,
+        });
 
-        const user = await response.json();
-
-        if (!response.ok) {
-          throw new Error('Wrong username or password!');
-        }
-
-        if (response.ok && user) {
-          return user.data;
+        if ('data' in response) {
+          return response.data;
+        } else {
+          console.error('Error', response.message);
         }
 
         return null;
@@ -64,28 +60,18 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
 });
 
 async function refreshAccessToken(token: JWT) {
-  try {
-    const response = await fetch(
-      'https://wraffle-api.justsloth.com/v1/auth/refresh',
-      {
-        method: 'POST',
-        body: JSON.stringify({refreshToken: token.refreshToken}),
-        headers: {'Content-Type': 'application/json'},
-      },
-    );
+  const response = await apiClient.post<
+    {accessToken: string},
+    {refreshToken: string}
+  >('/auth/refresh', {withAuth: true});
 
-    const newTokens = await response.json();
-
-    if (!response.ok) throw newTokens;
-
+  if ('data' in response) {
     return {
       ...token,
-      accessToken: newTokens.accessToken,
+      accessToken: response.data.accessToken,
       accessTokenExpires: Date.now() + ACCESS_TOKEN_EXPIRES_IN * 1000,
-      refreshToken: newTokens.refreshToken ?? token.refreshToken,
     };
-  } catch (error) {
-    console.error('Error refreshing access token:', error);
+  } else {
     return {...token, error: 'RefreshAccessTokenError'};
   }
 }
