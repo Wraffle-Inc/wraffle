@@ -28,7 +28,9 @@ const Join = () => {
     <div>
       <section className='py-5'>
         <Header>
-          <Header.BackButton onClick={() => funnel.history.back()} />
+          <Header.Left>
+            <Header.BackButton onClick={() => funnel.history.back()} />
+          </Header.Left>
         </Header>
         <ProgressBar totalSteps={4} index={funnel.index} />
       </section>
