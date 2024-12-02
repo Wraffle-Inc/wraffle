@@ -62,7 +62,10 @@ async function refreshAccessToken(token: JWT) {
   const response = await apiClient.post<
     {accessToken: string},
     {refreshToken: string}
-  >('/auth/refresh', {withAuth: true});
+  >('/auth/refresh', {
+    body: {refreshToken: token.refreshToken},
+    withAuth: true,
+  });
 
   if ('data' in response) {
     return {
@@ -71,6 +74,7 @@ async function refreshAccessToken(token: JWT) {
       accessTokenExpires: Date.now() + ACCESS_TOKEN_EXPIRES_IN * 1000,
     };
   } else {
+    signOut();
     return {...token, error: 'RefreshAccessTokenError'};
   }
 }
