@@ -22,7 +22,9 @@ const EmailLogin = () => {
   return (
     <div>
       <Header>
-        <Header.BackButton />
+        <Header.Left>
+          <Header.BackButton />
+        </Header.Left>
       </Header>
       <div className='flex h-full flex-col items-center px-5'>
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
