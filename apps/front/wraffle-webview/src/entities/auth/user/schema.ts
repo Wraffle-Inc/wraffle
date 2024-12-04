@@ -1,11 +1,6 @@
 import {z} from 'zod';
 import {getDefaults} from '@/shared/util';
 
-const nameSchema = z
-  .string()
-  .min(1, {message: '이름을 입력해 주세요.'})
-  .default('');
-
 const nicknameSchema = z
   .string()
   .min(1, {message: '닉네임을 입력해 주세요.'})
@@ -18,7 +13,6 @@ const emailSchema = z
   .default('');
 
 export const editUserSchema = z.object({
-  name: nameSchema,
   nickname: nicknameSchema,
   email: emailSchema,
 });

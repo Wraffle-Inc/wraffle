@@ -52,7 +52,6 @@ const EditProfilePage = () => {
   const form = useForm<EditUserPayload>({
     resolver: zodResolver(editUserSchema),
     defaultValues: {
-      name: '',
       nickname: nickname,
       email: email,
     },
@@ -118,11 +117,6 @@ const EditProfilePage = () => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='mt-6 px-5'>
-          <RHFInput
-            name='name'
-            label='이름*'
-            placeholder='이름을 입력해주세요.'
-          />
           <RHFInput
             name='nickname'
             label='닉네임*'

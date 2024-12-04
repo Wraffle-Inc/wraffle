@@ -29,7 +29,6 @@ export const useGetUserInfo = () => {
 };
 
 interface EditUserRequest {
-  name: string;
   nickname: string;
   email: string;
   phoneNumber: string;
