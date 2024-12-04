@@ -1,16 +1,25 @@
 'use client';
 
-import {useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 import type {SubmitHandler} from 'react-hook-form';
 import {useForm} from 'react-hook-form';
 import {
   editUserSchema,
   type EditUserPayload,
 } from '@/entities/auth/user/schema';
+import {useGetUserInfo, usePutUserInfo} from '@/features/my-profile/api/user';
 import {Header, RHFInput, Form} from '@/shared/ui';
-import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button, Input, InputField, Select, Typography} from '@wraffle/ui';
+import {
+  Button,
+  Input,
+  InputField,
+  Select,
+  Toaster,
+  Typography,
+  useToast,
+} from '@wraffle/ui';
 
 const PHONE_AREA_CODES = [
   {value: '010', name: '010'},
@@ -20,25 +29,82 @@ const PHONE_AREA_CODES = [
 ];
 
 const EditProfilePage = () => {
-  const [first, setFirst] = useState(''); // TODO: 추후 수정 필요
+  const router = useRouter();
+  const {toast} = useToast();
+  const {data: userInfoResponse} = useGetUserInfo();
+
+  const nickname = userInfoResponse?.nickname || '';
+  const email = userInfoResponse?.email || '';
+  const phoneNumber = userInfoResponse?.phoneNumber || '';
+
+  const [first, setFirst] = useState('');
+  const [middle, setMiddle] = useState('');
+  const [last, setLast] = useState('');
+
+  useEffect(() => {
+    if (phoneNumber) {
+      setFirst(phoneNumber.slice(0, 3));
+      setMiddle(phoneNumber.slice(3, 7));
+      setLast(phoneNumber.slice(7, 11));
+    }
+  }, [phoneNumber]);
+
   const form = useForm<EditUserPayload>({
     resolver: zodResolver(editUserSchema),
-    defaultValues: getDefaults(editUserSchema),
+    defaultValues: {
+      name: '',
+      nickname: nickname,
+      email: email,
+    },
   });
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    setState: React.Dispatch<React.SetStateAction<string>>,
+    maxLength: number,
+  ) => {
     const value = event.target.value;
-    if (value.length > 4) {
-      event.target.value = value.slice(0, 4);
+    if (value.length > maxLength) {
+      event.target.value = value.slice(0, maxLength);
     }
+    setState(event.target.value);
   };
+  const requestEditUserInfo = usePutUserInfo();
 
   const onSubmit: SubmitHandler<EditUserPayload> = formValues => {
-    console.log('formValues', formValues);
+    requestEditUserInfo(
+      {
+        ...formValues,
+        phoneNumber: `${first}${middle}${last}`,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            title: '내정보 수정이 완료되었습니다.',
+            duration: 1000,
+            variant: 'success',
+            icon: 'check',
+          });
+
+          setTimeout(() => {
+            router.push('/my-profile');
+          }, 1000);
+        },
+        onError: (error: Error) => {
+          toast({
+            title: `${error.message}`,
+            duration: 2000,
+            variant: 'warning',
+            icon: 'cross',
+          });
+        },
+      },
+    );
   };
 
   return (
     <div>
+      <Toaster />
       <Header>
         <Header.Left>
           <Header.BackButton />
@@ -75,6 +141,7 @@ const EditProfilePage = () => {
             <Select
               placeholder='선택'
               items={PHONE_AREA_CODES}
+              defaultValue={first}
               className='' // TODO: Select 컴포넌트에 className 꼭 필수로 넣어야 하는지 확인
               onValueChange={value => setFirst(value)}
             />
@@ -82,15 +149,17 @@ const EditProfilePage = () => {
               id='middle'
               placeholder=''
               type='number'
+              value={middle}
               maxLength={4}
-              onChange={handleInputChange}
+              onChange={e => handleInputChange(e, setMiddle, 4)}
             />
             <InputField.Input
               id='last'
               placeholder=''
               type='number'
+              value={last}
               maxLength={4}
-              onChange={handleInputChange}
+              onChange={e => handleInputChange(e, setLast, 4)}
             />
           </InputField>
           <Button variant='stroke'>인증번호 재전송</Button>

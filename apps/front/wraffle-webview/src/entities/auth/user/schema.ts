@@ -17,16 +17,10 @@ const emailSchema = z
   .email({message: '유효하지 않은 이메일 형식입니다.'})
   .default('');
 
-const phoneNumberSchema = z
-  .string()
-  .min(1, {message: '전화번호를 입력해 주세요.'})
-  .default('');
-
 export const editUserSchema = z.object({
   name: nameSchema,
   nickname: nicknameSchema,
   email: emailSchema,
-  phoneNumber: phoneNumberSchema,
 });
 
 export type EditUserPayload = z.infer<typeof editUserSchema>;

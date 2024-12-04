@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import {useGetUserInfo} from '@/features/my-profile/api/user';
 import {Header} from '@/shared/ui';
-import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Icon, Typography} from '@wraffle/ui';
 import IconWithLabel from '@wraffle/ui/src/ui/iconWithLabel/IconWithLabel';
 
 const MyProfilePage = () => {
+  const {data: userInfoResponse} = useGetUserInfo();
+  const nickname = userInfoResponse?.nickname || '';
+
   return (
     <div>
       <Header>
@@ -19,7 +22,7 @@ const MyProfilePage = () => {
 
       <div className='py-8'>
         <div className='px-8'>
-          <Typography size='h2'>홍길동님</Typography>
+          <Typography size='h2'>{nickname}님</Typography>
         </div>
 
         <Link
@@ -32,14 +35,15 @@ const MyProfilePage = () => {
           <Icon name='chevron-right' stroke='#4E5968' width={14} height={14} />
         </Link>
 
-        <div className='mt-6 px-8'>
+        {/* TODO: 2차 개발 때 진행할 예정 */}
+        {/* <div className='mt-6 px-8'>
           <DualInfoBox
             leftLabel='적립금'
             leftValue='1,000원'
             rightLabel='쿠폰'
             rightValue='0개'
           />
-        </div>
+        </div> */}
 
         <div className='mx-5 mt-4 flex h-16 items-center justify-between px-8'>
           <IconWithLabel Icon={<Icon name='gift' />} label='내 래플' />

@@ -1,14 +1,21 @@
 'use client';
 
 import Link from 'next/link';
+import {useGetUserInfo} from '@/features/my-profile/api/user';
 import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Button, Typography} from '@wraffle/ui';
 
 const SettlementPage = () => {
+  const {data: userInfoResponse} = useGetUserInfo();
+  const nickname = userInfoResponse?.nickname || '';
+
   return (
     <div>
       <Header>
+        <Header.Left>
+          <Header.BackButton />
+        </Header.Left>
         <Header.Middle>
           <Typography size='h4' color='zinc700'>
             내 정산금 관리
@@ -19,7 +26,7 @@ const SettlementPage = () => {
       <div className='p-8'>
         <div className='flex'>
           <div>
-            <Typography size='h2'>홍길동님</Typography>
+            <Typography size='h2'>{nickname}님</Typography>
             <Typography size='h3'>의 정산</Typography>
           </div>
 
