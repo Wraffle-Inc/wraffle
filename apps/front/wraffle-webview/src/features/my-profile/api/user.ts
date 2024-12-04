@@ -1,8 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczMzI4ODQ1NywiZXhwIjoxNzMzODkzMjU3fQ.2ump3jjnzEHgz_ne0piEio8MPF80kLZK4MaxtIjRuqk';
-
 const USER_API_PREFIX = 'https://wraffle-api.justsloth.com/v1/users/me';
 
 /**
@@ -17,7 +14,7 @@ export const useGetUserInfo = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       });
 
@@ -50,7 +47,7 @@ export const usePutUserInfo = () => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(query),
       });
