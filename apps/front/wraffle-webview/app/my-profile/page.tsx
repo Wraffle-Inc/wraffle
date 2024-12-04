@@ -1,23 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
 import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Icon, Typography} from '@wraffle/ui';
 import IconWithLabel from '@wraffle/ui/src/ui/iconWithLabel/IconWithLabel';
 
 const MyProfilePage = () => {
-  const router = useRouter();
-
-  const handleSettlement = () => {
-    router.push('/my-profile/settlement');
-  };
-
   return (
     <div>
       <Header>
-        <Header.Middle>마이페이지</Header.Middle>
+        <Header.Middle>
+          <Typography size='h4' color='zinc700'>
+            마이페이지
+          </Typography>
+        </Header.Middle>
       </Header>
 
       <div className='py-8'>
@@ -25,14 +22,15 @@ const MyProfilePage = () => {
           <Typography size='h2'>홍길동님</Typography>
         </div>
 
-        <div className='ml-8 mt-1 inline-flex items-center hover:cursor-pointer'>
-          <Link href='/my-profile/edit'>
-            <Typography size='p3' color='zinc500'>
-              내정보 수정
-            </Typography>
-          </Link>
+        <Link
+          href='/my-profile/edit'
+          className='ml-8 mt-1 inline-flex items-center'
+        >
+          <Typography size='p3' color='zinc500'>
+            내정보 수정
+          </Typography>
           <Icon name='chevron-right' stroke='#4E5968' width={14} height={14} />
-        </div>
+        </Link>
 
         <div className='mt-6 px-8'>
           <DualInfoBox
@@ -56,20 +54,19 @@ const MyProfilePage = () => {
         <div className='mt-4 h-2.5 border border-zinc-200 bg-zinc-100' />
 
         <ul className='px-8'>
-          <li
-            className='flex h-14 items-center border-b-2 border-b-zinc-100 hover:cursor-pointer'
-            onClick={handleSettlement}
-          >
-            <Typography size='p3' color='zinc700'>
-              내 정산금 관리
-            </Typography>
+          <li className='flex h-14 items-center border-b-2 border-b-zinc-100'>
+            <Link href='/my-profile/settlement'>
+              <Typography size='p3' color='zinc700'>
+                내 정산금 관리
+              </Typography>
+            </Link>
           </li>
-          <li className='flex h-14 items-center border-b-2 border-b-zinc-100 hover:cursor-pointer'>
+          <li className='flex h-14 items-center border-b-2 border-b-zinc-100'>
             <Typography size='p3' color='zinc700'>
               공지사항
             </Typography>
           </li>
-          <li className='flex h-14 items-center border-b-2 border-b-zinc-100 hover:cursor-pointer'>
+          <li className='flex h-14 items-center border-b-2 border-b-zinc-100'>
             <Typography size='p3' color='zinc700'>
               로그아웃
             </Typography>

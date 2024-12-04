@@ -1,21 +1,19 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
+import Link from 'next/link';
 import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Button, Typography} from '@wraffle/ui';
 
 const SettlementPage = () => {
-  const router = useRouter();
-
-  const handleSettlementAccount = () => {
-    router.push('/my-profile/settlement/account');
-  };
-
   return (
     <div>
       <Header>
-        <Header.Middle>내 정산금 관리</Header.Middle>
+        <Header.Middle>
+          <Typography size='h4' color='zinc700'>
+            내 정산금 관리
+          </Typography>
+        </Header.Middle>
       </Header>
 
       <div className='p-8'>
@@ -25,14 +23,11 @@ const SettlementPage = () => {
             <Typography size='h3'>의 정산</Typography>
           </div>
 
-          <div
-            className='ml-auto mt-3 hover:cursor-pointer'
-            onClick={handleSettlementAccount}
-          >
+          <Link href='/my-profile/settlement/account' className='ml-auto mt-3'>
             <Typography size='p3' color='zinc600'>
               정산계좌 확인
             </Typography>
-          </div>
+          </Link>
         </div>
 
         <div className='mt-1'>

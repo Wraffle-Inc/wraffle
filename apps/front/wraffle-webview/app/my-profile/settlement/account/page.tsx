@@ -10,15 +10,17 @@ const SettlementAccountPage = () => {
   return (
     <div>
       <Header>
-        <Header.Middle>{title}</Header.Middle>
+        <Header.Middle>
+          <Typography size='h4' color='zinc700'>
+            {title}
+          </Typography>
+        </Header.Middle>
       </Header>
 
       <div className='p-8'>
         <div className='flex'>
-          <div>
-            <Typography size='h2'>홍길동님</Typography>
-            <Typography size='h3'>의 정산 계좌</Typography>
-          </div>
+          <Typography size='h2'>홍길동님</Typography>
+          <Typography size='h3'>의 정산 계좌</Typography>
         </div>
 
         <div className='mt-1'>

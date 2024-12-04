@@ -1,6 +1,6 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
+import {useState} from 'react';
 import type {SubmitHandler} from 'react-hook-form';
 import {useForm} from 'react-hook-form';
 import {
@@ -10,7 +10,7 @@ import {
 import {Header, RHFInput, Form} from '@/shared/ui';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button, Input, InputField, Select} from '@wraffle/ui';
+import {Button, Input, InputField, Select, Typography} from '@wraffle/ui';
 
 const PHONE_AREA_CODES = [
   {value: '010', name: '010'},
@@ -20,7 +20,7 @@ const PHONE_AREA_CODES = [
 ];
 
 const EditProfilePage = () => {
-  const router = useRouter();
+  const [first, setFirst] = useState(''); // TODO: 추후 수정 필요
   const form = useForm<EditUserPayload>({
     resolver: zodResolver(editUserSchema),
     defaultValues: getDefaults(editUserSchema),
@@ -41,9 +41,13 @@ const EditProfilePage = () => {
     <div>
       <Header>
         <Header.Left>
-          <Header.BackButton onClick={() => router.back()} />
+          <Header.BackButton />
         </Header.Left>
-        <Header.Middle>내정보 수정</Header.Middle>
+        <Header.Middle>
+          <Typography size='h4' color='zinc700'>
+            내정보 수정
+          </Typography>
+        </Header.Middle>
       </Header>
 
       <Form {...form}>
@@ -68,7 +72,12 @@ const EditProfilePage = () => {
             <InputField.Label htmlFor='phoneNumber'>
               휴대폰 번호*
             </InputField.Label>
-            <Select placeholder='선택' items={PHONE_AREA_CODES} />
+            <Select
+              placeholder='선택'
+              items={PHONE_AREA_CODES}
+              className='' // TODO: Select 컴포넌트에 className 꼭 필수로 넣어야 하는지 확인
+              onValueChange={value => setFirst(value)}
+            />
             <InputField.Input
               id='middle'
               placeholder=''
