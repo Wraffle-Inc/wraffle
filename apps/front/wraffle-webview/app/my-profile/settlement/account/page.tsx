@@ -19,8 +19,10 @@ const SettlementAccountPage = () => {
 
       <div className='p-8'>
         <div className='flex'>
-          <Typography size='h2'>홍길동님</Typography>
-          <Typography size='h3'>의 정산 계좌</Typography>
+          <div>
+            <Typography size='h2'>홍길동님</Typography>
+            <Typography size='h3'>의 정산 계좌</Typography>
+          </div>
         </div>
 
         <div className='mt-1'>
