@@ -1,9 +1,10 @@
+import {Icon} from '@wraffle/ui';
+
 export default function SideBarTab({children}: {children: React.ReactNode}) {
   return (
-    <div className='flex flex-row justify-between'>
+    <div className='flex flex-row items-center justify-between'>
       <p className='p-2 text-[#4E5968]'>{children}</p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src='/chevron-down.svg' alt='chevron-down' />
+      <Icon name='arrow-bottom' stroke='#B0B8C1' width={12} height={12} />
     </div>
   );
 }

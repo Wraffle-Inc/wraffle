@@ -18,6 +18,9 @@ const nextConfig = {
     };
     return config;
   },
+  experimental: {
+    optimizePackageImports: ['@wraffle/ui'],
+  },
 };
 
 export default nextConfig;
