@@ -1,7 +1,8 @@
+import {useRouter} from 'next/navigation';
 import React, {type MutableRefObject, type RefObject} from 'react';
 import type {RaffleData, EventData} from '@/entities/product/product';
 import ProductImageList from '@/widgets/product-image-list/ProductImageList';
-import {Tag, RaffleCard} from '@wraffle/ui';
+import {Tag, RaffleCard, Icon} from '@wraffle/ui';
 
 type ProductData = RaffleData | EventData;
 
@@ -15,6 +16,8 @@ export const ProductMainSection = ({
   sectionRef: React.RefObject<HTMLDivElement>;
   isCreator: boolean;
 }) => {
+  const router = useRouter();
+
   return (
     <div
       ref={sectionRef}
@@ -23,10 +26,15 @@ export const ProductMainSection = ({
       <ProductImageList images={productData.images} />
       <div className='flex flex-col gap-5 p-4'>
         <div className='flex flex-col gap-2'>
-          <div className='flex flex-row items-start gap-2'>
-            {productData.tags.map(tag => (
-              <Tag key={tag.id}>{tag.name}</Tag>
-            ))}
+          <div className='flex flex-row items-start justify-between gap-2'>
+            <div className='flex flex-row gap-2'>
+              {productData.tags.map(tag => (
+                <Tag key={tag.id}>{tag.name}</Tag>
+              ))}
+            </div>
+            <button onClick={() => router.push('/[id]/edit')}>
+              <Icon name='write' className='ml-auto' width={18} height={18} />
+            </button>
           </div>
           <div className='flex flex-col gap-1'>
             <p className='text-xl font-bold'>{productData.title}</p>
