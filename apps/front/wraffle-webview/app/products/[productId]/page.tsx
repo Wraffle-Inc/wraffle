@@ -103,11 +103,18 @@ const ProductPage = () => {
         <ProductMainSection
           productData={productData}
           sectionRef={sectionsRef.current['상품']}
+          isCreator={productData.isCreator}
         />
         <Divider />
         <ProductInfoSection
           label='응모 기간'
           data={`${formatDate(productData.startDate)} ~ ${formatDate(productData.endDate)}`}
+          sectionsRef={sectionsRef}
+        />
+        <Divider />
+        <ProductInfoSection
+          label='당첨자 수'
+          data={`${productData.winnerCount}명`}
           sectionsRef={sectionsRef}
         />
         <Divider />
@@ -139,6 +146,7 @@ const ProductPage = () => {
           clipCount={productData.clipCount}
           isApplied={productData.isApplied}
           productImage={productData.images[0]}
+          isCreator={productData.isCreator}
         />
       </div>
     </div>

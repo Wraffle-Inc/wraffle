@@ -30,6 +30,7 @@ const nextConfig = {
         hostname: 'image.vans.co.kr',
       },
     ],
+    domains: ['github.com'],
   },
 };
 

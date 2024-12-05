@@ -21,6 +21,8 @@ export interface BaseProductData {
   clipCount: number;
   status: string;
   applyCount: number;
+  winnerCount: number;
+  isCreator: boolean;
   isApplied: boolean;
   createUserId: number;
   tags: Tag[];
@@ -44,8 +46,10 @@ export const sampleRaffleData: RaffleData = {
     '제작 박스로 준비해드립니다. 오후 3시 이전 결제 완료 시 택배 출고 드립니다. 당일 상품 출고 마감 시간 3시입니다.',
   etc: '유의사항',
   clipCount: 53,
-  status: 'before',
-  applyCount: 0,
+  status: 'after',
+  applyCount: 10,
+  winnerCount: 2,
+  isCreator: true,
   isApplied: false,
   createUserId: 1,
   tags: [
@@ -70,6 +74,8 @@ export const sampleEventData: EventData = {
   clipCount: 10,
   applyCount: 10,
   status: 'waiting',
+  winnerCount: 2,
+  isCreator: false,
   isApplied: false,
   createUserId: 1,
   tags: [
