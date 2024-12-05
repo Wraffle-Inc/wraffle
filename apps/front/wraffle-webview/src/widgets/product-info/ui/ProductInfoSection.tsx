@@ -9,9 +9,11 @@ type ProductData = RaffleData | EventData;
 export const ProductMainSection = ({
   productData,
   sectionRef,
+  isCreator,
 }: {
   productData: ProductData;
   sectionRef: React.RefObject<HTMLDivElement>;
+  isCreator: boolean;
 }) => {
   return (
     <div
@@ -29,7 +31,9 @@ export const ProductMainSection = ({
           <div className='flex flex-col gap-1'>
             <p className='text-xl font-bold'>{productData.title}</p>
             <p className='text-xl font-bold'>
-              {productData.price.toLocaleString()}원
+              {isCreator
+                ? `총 ${productData.applyCount}명 응모`
+                : `${productData.price.toLocaleString()}원`}
             </p>
           </div>
         </div>

@@ -9,6 +9,7 @@ interface ParticipateButtonProps {
   clipCount: number;
   isApplied: boolean;
   productImage: string;
+  isCreator: boolean;
 }
 
 const ParticipateButton = ({
@@ -16,6 +17,7 @@ const ParticipateButton = ({
   clipCount,
   isApplied: initialApplyStatus,
   productImage,
+  isCreator,
 }: ParticipateButtonProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isApplied, setIsApplied] = useState(initialApplyStatus);
@@ -31,24 +33,30 @@ const ParticipateButton = ({
   if (status === 'after') {
     return (
       <div className='p-4'>
-        <Button variant='gray'>응모 마감</Button>
+        <Button variant='gray'>{isCreator ? '추첨 완료' : '응모 마감'}</Button>
       </div>
     );
   }
 
   return (
     <div className='flex gap-4 p-2'>
-      <button onClick={handleBookmark}>
-        <div className='flex flex-col items-center justify-center'>
-          <Icon name='bookmark' color={isBookmarked ? 'black' : ''} />
-          <span>{isBookmarked ? `${clipCount + 1}` : `${clipCount}`}</span>
-        </div>
-      </button>
-      <ParticipateDialog
-        isApplied={isApplied}
-        handleApply={handleApply}
-        productImage={productImage}
-      />
+      {isCreator ? (
+        <Button variant='default'>추첨하러 가기</Button>
+      ) : (
+        <>
+          <button onClick={handleBookmark}>
+            <div className='flex flex-col items-center justify-center'>
+              <Icon name='bookmark' color={isBookmarked ? 'black' : ''} />
+              <span>{isBookmarked ? `${clipCount + 1}` : `${clipCount}`}</span>
+            </div>
+          </button>
+          <ParticipateDialog
+            isApplied={isApplied}
+            handleApply={handleApply}
+            productImage={productImage}
+          />
+        </>
+      )}
     </div>
   );
 };
