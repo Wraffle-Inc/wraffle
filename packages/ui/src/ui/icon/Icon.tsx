@@ -4,6 +4,7 @@ import type {SVGAttributes} from 'react';
 export type IconNameTypes =
   | 'arrow-bottom'
   | 'arrow-right'
+  | 'arrow-right-2'
   | 'arrow-left'
   | 'menu'
   | 'search'
