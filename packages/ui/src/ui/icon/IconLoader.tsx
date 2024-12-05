@@ -10,12 +10,22 @@ const IconLoader = (
       />
     </symbol>
 
-    <symbol id='arrow-left' viewBox='0 0 12 10'>
+    <symbol id='arrow-right-2' viewBox='0 0 8 14'>
       <path
         stroke='currentColor'
         strokeLinecap='round'
         strokeLinejoin='round'
         strokeWidth='1.5'
+        d='M1 13L7 7L1 1'
+      />
+    </symbol>
+
+    <symbol id='arrow-left' viewBox='0 0 12 10'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.0'
         d='M1 5h10M1 5l4-4M1 5l4 4'
       />
     </symbol>
