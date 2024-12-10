@@ -2,6 +2,7 @@ import './globals.css';
 import type {Metadata} from 'next';
 import {ReactQueryProviders} from '@/app/providers';
 import {pretendard} from '@/shared/util/font';
+import {Toaster} from '@wraffle/ui';
 import IconLoader from '@wraffle/ui/src/ui/icon/IconLoader';
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={`${pretendard.variable} font-pretendard`}>
         <div className='container h-screen min-h-screen'>
           <ReactQueryProviders>
+            <Toaster />
             {IconLoader}
             {children}
           </ReactQueryProviders>

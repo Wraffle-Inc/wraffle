@@ -1,12 +1,22 @@
 import apiClient from '../api/apiClient';
+import type {Tokens} from '../api/type';
+import {isApiResponseError} from '../api/type';
 import {ACCESS_TOKEN_EXPIRES_IN} from './const';
-import NextAuth from 'next-auth';
+import NextAuth, {CredentialsSignin} from 'next-auth';
 import type {JWT} from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
 import {loginSchema} from '@/widgets/login/config';
 
+interface LoginRequestBody {
+  email: string;
+  password: string;
+}
+
 export const {handlers, signIn, signOut, auth} = NextAuth({
   trustHost: true,
+  pages: {
+    signIn: '/login/email',
+  },
   providers: [
     Credentials({
       name: 'credentials',
@@ -15,22 +25,28 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
         password: {label: 'Password', type: 'password'},
       },
       authorize: async credentials => {
-        const {email, password} = await loginSchema.parseAsync(credentials);
+        const validationFields = await loginSchema.safeParseAsync(credentials);
+        if (!validationFields.success) return null;
 
-        const response = await apiClient.post<
-          {accessToken: string; refreshToken: string},
-          {email: string; password: string}
-        >('/auth/login', {
-          body: {email, password},
-        });
+        const {email, password} = validationFields.data;
 
-        if ('data' in response) {
+        try {
+          const response = await apiClient.post<Tokens, LoginRequestBody>(
+            '/auth/login',
+            {
+              body: {email, password},
+            },
+          );
+
           return response.data;
-        } else {
-          console.error('Error', response.message);
+        } catch (error) {
+          const credentialsSignin = new CredentialsSignin();
+          if (isApiResponseError(error) && error.status === 401) {
+            credentialsSignin.code = error.code;
+            credentialsSignin.message = error.message;
+          }
+          throw credentialsSignin;
         }
-
-        return null;
       },
     }),
   ],

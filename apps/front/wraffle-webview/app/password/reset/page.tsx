@@ -8,7 +8,7 @@ import {useResetPassword} from '@/features/password/api';
 import {BottomFixedBox, Form, Header, RHFInput} from '@/shared/ui';
 import {getDefaults} from '@/shared/util';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
+import {Button, Typography, useToast} from '@wraffle/ui';
 
 const ResetPasswordPage = () => {
   const router = useRouter();
@@ -60,7 +60,6 @@ const ResetPasswordPage = () => {
 
   return (
     <div>
-      <Toaster />
       <Header>
         <Header.BackButton onClick={router.back} />
       </Header>
