@@ -75,21 +75,20 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
 });
 
 async function refreshAccessToken(token: JWT) {
-  const response = await apiClient.post<
-    {accessToken: string},
-    {refreshToken: string}
-  >('/auth/refresh', {
-    body: {refreshToken: token.refreshToken},
-    withAuth: true,
-  });
-
-  if ('data' in response) {
+  try {
+    const response = await apiClient.post<
+      {accessToken: string},
+      {refreshToken: string}
+    >('/auth/refresh', {
+      body: {refreshToken: token.refreshToken},
+      withAuth: true,
+    });
     return {
       ...token,
       accessToken: response.data.accessToken,
       accessTokenExpires: Date.now() + ACCESS_TOKEN_EXPIRES_IN * 1000,
     };
-  } else {
+  } catch (error) {
     signOut();
     return {...token, error: 'RefreshAccessTokenError'};
   }
