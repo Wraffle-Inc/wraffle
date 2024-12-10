@@ -1,10 +1,11 @@
 import {auth} from '../util/auth';
-import type {ApiResponseError, ApiResponseWithData} from './type';
+import {type ApiResponseError, type ApiResponseWithData} from './type';
 
 type FetchOptions<TBody = unknown> = Omit<RequestInit, 'headers' | 'body'> & {
   headers?: Record<string, string>;
   body?: TBody;
   withAuth?: boolean;
+  contentType?: string;
 };
 
 export class FetchClient {
@@ -17,40 +18,39 @@ export class FetchClient {
   private async request<TResponse, TBody = unknown>(
     url: string,
     options: FetchOptions<TBody>,
-  ): Promise<ApiResponseWithData<TResponse> | ApiResponseError> {
-    const {withAuth = false, headers, body, ...restOptions} = options;
+  ): Promise<ApiResponseWithData<TResponse>> {
+    const {
+      withAuth = false,
+      contentType = 'application/json',
+      headers,
+      body,
+      ...restOptions
+    } = options;
     const session = await auth();
 
     const allHeaders = new Headers(
       Object.assign(
         {
-          'Content-Type': 'application/json',
+          'Content-Type': contentType,
         },
         withAuth ? {Authorization: `Bearer ${session?.accessToken}`} : {},
         headers,
       ),
     );
 
-    try {
-      const response = await fetch(`${this.baseUrl}${url}`, {
-        ...restOptions,
-        headers: allHeaders,
-        body: body ? JSON.stringify(body) : undefined,
-      });
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      ...restOptions,
+      headers: allHeaders,
+      body: body ? JSON.stringify(body) : undefined,
+    });
 
-      const responseData = await response.json();
+    const responseData = await response.json();
 
-      if (response.ok) {
-        return responseData as ApiResponseWithData<TResponse>;
-      } else {
-        return responseData as ApiResponseError;
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Network error: ${error.message}`);
-      }
-      throw new Error('Unexpected error');
+    if (!response.ok) {
+      throw responseData as ApiResponseError;
     }
+
+    return responseData as ApiResponseWithData<TResponse>;
   }
 
   public get<TResponse>(url: string, options?: FetchOptions) {

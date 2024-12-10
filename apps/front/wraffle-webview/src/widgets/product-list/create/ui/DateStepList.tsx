@@ -10,7 +10,7 @@ import {
   WinnerCountForm,
 } from '@/features/product-form/ui';
 import {getTypeText} from '@/shared/util';
-import {Button, Toaster, Typography, useToast} from '@wraffle/ui';
+import {Button, Typography, useToast} from '@wraffle/ui';
 
 export const DateStep = ({
   type,
@@ -61,9 +61,6 @@ export const DateStep = ({
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-20'>
-      <div className='fixed top-5'>
-        <Toaster />
-      </div>
       <div>
         <Typography as='h2' size='h2'>
           {eventOrRaffleText.dateStep}

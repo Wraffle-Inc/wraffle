@@ -1,9 +1,11 @@
 'use client';
 
+import useLoginToast from './useLoginToast';
 import type {z} from 'zod';
 import {signIn} from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import {useSearchParams} from 'next/navigation';
 import {GenericForm, Header} from '@/shared/ui';
 import {loginDefaultValues, loginSchema} from '@/widgets/login/config';
 import {EmailForm} from '@/widgets/login/ui';
@@ -11,6 +13,7 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {Typography} from '@wraffle/ui';
 
 const EmailLogin = () => {
+  const params = useSearchParams();
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     signIn('credentials', {
       email: data.email,
@@ -18,6 +21,7 @@ const EmailLogin = () => {
       redirectTo: '/',
     });
   };
+  useLoginToast({code: params.get('code')});
 
   return (
     <div>
