@@ -1,8 +1,11 @@
 'use client';
 
 import type {CreateEventPayload} from '../../../entities/product/model';
-import {ENDDATE_IS_OVER_ANNOUNCEAT} from '../config/const';
-import {isDateBeforeReferenceDate} from '../config/isDateBeforeReferenceDate';
+import {
+  ENDDATE_IS_OVER_ANNOUNCEAT,
+  STARTDATE_IS_UNDEFINED,
+} from '../config/const';
+import {validateAndChangeDate} from '../config/validateAndChangeDate.ts';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm, useToast} from '@wraffle/ui';
@@ -30,23 +33,21 @@ export const EndDateForm = ({
             <CalendarForm
               dateLabel='응모 마감 시간을 입력해주세요.'
               selected={defaultValue}
-              onSelect={date => {
-                if (isDateBeforeReferenceDate(date, announceAt)) {
-                  field.onChange(date);
-                } else {
-                  toast(ENDDATE_IS_OVER_ANNOUNCEAT);
-                }
-              }}
+              onSelect={date =>
+                validateAndChangeDate({
+                  date,
+                  referenceDate: announceAt,
+                  onChange: field.onChange,
+                  toastInfo: ENDDATE_IS_OVER_ANNOUNCEAT,
+                  toast,
+                })
+              }
               fromDate={startDate}
               onClick={e => {
                 if (!startDate) {
                   e.preventDefault();
                   e.stopPropagation();
-                  toast({
-                    title: '응모 시작 일정 먼저 선택해주세요',
-                    duration: 2000,
-                    variant: 'info',
-                  });
+                  toast(STARTDATE_IS_UNDEFINED);
                 }
               }}
             />
