@@ -22,7 +22,7 @@ export const validateAndChangeDate = ({
   toastInfo,
   toast,
 }: ValidateAndChangeDateProps) => {
-  if (isDateBeforeReferenceDate(date, referenceDate)) {
+  if (isDateBeforeReferenceDate({date, referenceDate})) {
     onChange(date);
   } else {
     toast(toastInfo);
