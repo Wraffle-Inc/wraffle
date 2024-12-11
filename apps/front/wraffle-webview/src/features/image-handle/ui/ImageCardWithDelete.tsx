@@ -3,15 +3,17 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
+interface ImageCardWithDeleteProps {
+  url: string;
+  onClick: () => void;
+  className: string;
+}
+
 export const ImageCardWithDelete = ({
   url,
   onClick,
   className,
-}: {
-  url: string;
-  onClick: () => void;
-  className: string;
-}) => (
+}: ImageCardWithDeleteProps) => (
   <div
     className={clsx(
       'relative flex-none overflow-hidden rounded-lg bg-slate-100',

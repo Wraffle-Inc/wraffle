@@ -24,13 +24,20 @@ const product = {
   etc: 'test ETC',
 };
 
-const Edit = ({
-  params: {id},
-  searchParams: {type},
-}: {
-  params: {id: string};
-  searchParams: {type: 'raffle' | 'event'};
-}) => {
+interface Params {
+  id: string;
+}
+
+interface SearchParams {
+  type: 'raffle' | 'event';
+}
+
+interface EditProps {
+  params: Params;
+  searchParams: SearchParams;
+}
+
+const Edit = ({params: {id}, searchParams: {type}}: EditProps) => {
   const onSubmit = (data: CreateRafflePayload) => {
     console.log(data);
   };
