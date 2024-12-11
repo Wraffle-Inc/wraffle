@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.1",
     "@tanstack/react-query": "^5.53.1",
     "@use-funnel/browser": "^0.0.7",
     "@wraffle/ui": "workspace:*",
