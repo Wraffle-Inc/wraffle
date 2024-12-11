@@ -4942,6 +4942,11 @@ packages:
     peerDependencies:
       expo: '*'
 
+  expo-dev-client@4.0.28:
+    resolution: {integrity: sha512-wz5G4vY3Gbk5GuQTyijdqY4Hwr/NDt5OUTErbOu1vd4XRIAsI+8IkK5hsBUhGmqrdkYnP5NxxOxC/soFzX/9+w==}
+    peerDependencies:
+      expo: '*'
+
   expo-dev-launcher@4.0.28:
     resolution: {integrity: sha512-goE7jcaGVA2zu4gV3/hQ9RXqGhUZZAu339VYNLbwPdaNCzFaG6A8MZHg18gytCUnZ5QkRJsYi4q/8YcwUCASlQ==}
     peerDependencies:
