@@ -1,4 +1,4 @@
-export const validateDate = (
+export const isDateBeforeReferenceDate = (
   date: Date | undefined,
   referenceDate: Date | undefined,
 ) => {

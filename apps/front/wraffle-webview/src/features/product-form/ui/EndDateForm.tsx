@@ -2,7 +2,7 @@
 
 import type {CreateEventPayload} from '../../../entities/product/model';
 import {ENDDATE_IS_OVER_ANNOUNCEAT} from '../config/const';
-import {validateDate} from '../config/validateDate';
+import {isDateBeforeReferenceDate} from '../config/isDateBeforeReferenceDate';
 import {useFormContext} from 'react-hook-form';
 import {FormControl, FormField, FormItem, FormLabel} from '@/shared/ui';
 import {CalendarForm, useToast} from '@wraffle/ui';
@@ -31,7 +31,7 @@ export const EndDateForm = ({
               dateLabel='응모 마감 시간을 입력해주세요.'
               selected={defaultValue}
               onSelect={date => {
-                if (validateDate(date, announceAt)) {
+                if (isDateBeforeReferenceDate(date, announceAt)) {
                   field.onChange(date);
                 } else {
                   toast(ENDDATE_IS_OVER_ANNOUNCEAT);
