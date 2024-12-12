@@ -1,11 +1,3 @@
-import SideBar from './components/SideBar.tsx';
-
 export default function Home() {
-  return (
-    <main className='flex h-screen w-screen flex-col items-start justify-between bg-white'>
-      <div className='h-full w-[14%] min-w-[240px]'>
-        <SideBar />
-      </div>
-    </main>
-  );
+  return null;
 }

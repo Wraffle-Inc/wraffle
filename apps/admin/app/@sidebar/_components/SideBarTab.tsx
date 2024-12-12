@@ -1,0 +1,19 @@
+import Link from 'next/link';
+import {Icon} from '@wraffle/ui';
+
+export default function SideBarTab({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
+  return (
+    <Link href={href}>
+      <div className='flex flex-row items-center justify-between'>
+        <p className='p-2 text-[#4E5968]'>{children}</p>
+        <Icon name='arrow-bottom' stroke='#B0B8C1' width={12} height={12} />
+      </div>
+    </Link>
+  );
+}
