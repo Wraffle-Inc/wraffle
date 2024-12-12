@@ -11,15 +11,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  sidebar,
+  content,
+}: {
+  sidebar: React.ReactNode;
+  content: React.ReactNode;
+}) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        {IconLoader}
-        {children}
+        <div className='flex h-screen w-screen flex-row bg-white'>
+          {IconLoader}
+          {sidebar}
+          {content}
+        </div>
       </body>
     </html>
   );
