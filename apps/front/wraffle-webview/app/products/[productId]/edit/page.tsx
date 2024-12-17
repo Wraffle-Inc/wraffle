@@ -4,9 +4,8 @@ import {
   createRaffleSchema,
   type CreateRafflePayload,
 } from '@/entities/product/model';
-import {Header} from '@/shared/ui';
-import GenericForm from '@/shared/ui/form/GenericForm';
-import {EditList} from '@/widgets/product-list/edit/ui';
+import {GenericForm, Header} from '@/shared/ui';
+import {EditList} from '@/widgets/product-list/edit/ui/EditList';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Typography} from '@wraffle/ui';
 
