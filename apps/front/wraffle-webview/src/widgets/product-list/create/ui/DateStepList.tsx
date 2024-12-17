@@ -1,13 +1,9 @@
 'use client';
 
+import {DateSection} from '../../date/DateSection';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
-import {
-  AnnounceAtForm,
-  EndDateForm,
-  StartDateForm,
-  WinnerCountForm,
-} from '@/features/product-form/ui';
+import {WinnerCountForm} from '@/features/product-form/ui';
 import {getTypeText} from '@/shared/util';
 import {Button, Typography, useToast} from '@wraffle/ui';
 
@@ -45,24 +41,10 @@ export const DateStep = ({
         </Typography>
       </div>
 
-      <div>
-        <Typography as='h3' size='h3'>
-          응모 기간
-        </Typography>
-        <StartDateForm defaultValue={startDate} referenceDate={endDate} />
-
-        <div className='h-2.5'></div>
-        <EndDateForm
-          defaultValue={endDate}
-          fromDate={startDate}
-          referenceDate={announceAt}
-        />
-      </div>
-
-      <AnnounceAtForm
-        defaultValue={announceAt}
-        fromDate={endDate}
+      <DateSection
         startDate={startDate}
+        endDate={endDate}
+        announceAt={announceAt}
       />
 
       <WinnerCountForm defaultValue={winnerCount} />

@@ -10,7 +10,7 @@ interface CalendarFormProps {
   dateLabel: string;
   selected: Date | undefined;
   onSelect: (selected: Date | undefined) => void;
-  fromDate: Date;
+  fromDate: Date | undefined;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -18,7 +18,7 @@ interface CalendarProps {
   selected: Date | undefined;
   onSelect: (selected: Date | undefined) => void;
   setCalendarOpen: (calendarOpen: boolean) => void;
-  fromDate: Date;
+  fromDate: Date | undefined;
 }
 
 export const CalendarForm = ({

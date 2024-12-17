@@ -11,8 +11,8 @@ export const AnnounceAtForm = ({
   startDate,
 }: {
   defaultValue: Date | undefined;
-  fromDate: Date;
-  startDate: Date;
+  fromDate: Date | undefined;
+  startDate: Date | undefined;
 }) => {
   const {control} = useFormContext<CreateEventPayload>();
   const {toast} = useToast();
