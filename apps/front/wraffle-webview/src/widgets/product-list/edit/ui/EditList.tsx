@@ -1,32 +1,45 @@
 'use client';
 
+import {DateSection} from '../../date/DateSection';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateRafflePayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
 import {
-  AnnounceAtForm,
   CategoryForm,
-  EndDateForm,
   EtcForm,
   PriceForm,
-  StartDateForm,
   TitleForm,
   WinnerCountForm,
 } from '@/features/product-form/ui';
 import {Divider} from '@/shared/ui';
 import {getTypeText} from '@/shared/util';
-import {Button, Icon, Input, Label, Tag, Toaster} from '@wraffle/ui';
+import {Button, Icon, Input, Label, Tag} from '@wraffle/ui';
 
 // tag api 연동할 때 삭제될 코드 입니다
 const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
-
+// category 조회 api 연동 후 수정될 코드 입니다
+const categoryItems = [
+  {
+    value: '1',
+    name: '생활',
+  },
+  {
+    value: '2',
+    name: '가전-디지탈',
+  },
+  {
+    value: '3',
+    name: '행사',
+  },
+  {
+    value: '4',
+    name: '당일마감',
+  },
+];
 interface EditListProps {
   type: 'raffle' | 'event';
 }
 
-/**
- * images와 tags 부분은 조회 api 연동하며 수정될 임시 코드 입니다.
- */
 export const EditList = ({type}: EditListProps) => {
   const eventOrRaffleText = getTypeText(type);
   const {control} = useFormContext<CreateRafflePayload>();
@@ -68,58 +81,18 @@ export const EditList = ({type}: EditListProps) => {
 
   return (
     <div className='flex h-full flex-col gap-5 px-5 pb-24'>
-      <div className='fixed top-5 z-10'>
-        <Toaster />
-      </div>
-
       <TitleForm
         defaultValue={title}
         placeholder={eventOrRaffleText.titlePlaceholder}
       />
 
-      <CategoryForm
-        defaultValue={categoryId}
-        // category 조회 api 연동 후 수정될 코드 입니다
-        categoryItems={[
-          {
-            value: '1',
-            name: '생활',
-          },
-          {
-            value: '2',
-            name: '가전-디지탈',
-          },
-          {
-            value: '3',
-            name: '행사',
-          },
-          {
-            value: '4',
-            name: '당일마감',
-          },
-        ]}
-      />
+      <CategoryForm defaultValue={categoryId} categoryItems={categoryItems} />
 
-      <div>
-        <Label className='text-xl font-bold text-zinc-900'>태그</Label>
-        <div className='mb-2 flex gap-1.5 overflow-x-scroll'>
-          {tags.map((tag, i) => (
-            <Tag key={i}>{tag}</Tag>
-          ))}
-        </div>
-        <div className='relative'>
-          <Input
-            placeholder='태그명을 입력해주세요.'
-            className='border border-solid border-[#F5F5F7] bg-[#FAFAFB] pr-10 text-sm font-medium text-zinc-900 placeholder:text-[#ADB5BD]'
-          />
-          <button className='absolute inset-y-3 right-0 flex items-center pr-4'>
-            <Icon name='search' />
-          </button>
-        </div>
-      </div>
+      <TagSection tags={tags} />
 
       <Divider />
 
+      {/* 조회 API 연동시 수정 */}
       <div>
         <Label className='text-xl font-bold text-zinc-900'>
           이미지*<span className='text-[0.625rem] font-medium'>최대4장</span>
@@ -153,23 +126,10 @@ export const EditList = ({type}: EditListProps) => {
 
       <Divider />
 
-      <div>
-        <Label className='text-xl font-bold text-zinc-900'>응모 기간*</Label>
-        <StartDateForm defaultValue={startDate} referenceDate={endDate} />
-        <div className='h-2.5'></div>
-        <EndDateForm
-          defaultValue={endDate}
-          fromDate={startDate}
-          referenceDate={announceAt}
-        />
-      </div>
-
-      <Divider />
-
-      <AnnounceAtForm
-        defaultValue={announceAt}
-        fromDate={endDate}
+      <DateSection
         startDate={startDate}
+        endDate={endDate}
+        announceAt={announceAt}
       />
 
       <Divider />
@@ -189,6 +149,35 @@ export const EditList = ({type}: EditListProps) => {
         >
           수정하기
         </Button>
+      </div>
+    </div>
+  );
+};
+
+interface TagSectionProps {
+  tags: string[];
+}
+
+/**
+ * 조회 api 연동시 수정
+ */
+const TagSection = ({tags}: TagSectionProps) => {
+  return (
+    <div>
+      <Label className='text-xl font-bold text-zinc-900'>태그</Label>
+      <div className='mb-2 flex gap-1.5 overflow-x-scroll'>
+        {tags.map((tag, i) => (
+          <Tag key={i}>{tag}</Tag>
+        ))}
+      </div>
+      <div className='relative'>
+        <Input
+          placeholder='태그명을 입력해주세요.'
+          className='border border-solid border-[#F5F5F7] bg-[#FAFAFB] pr-10 text-sm font-medium text-zinc-900 placeholder:text-[#ADB5BD]'
+        />
+        <button className='absolute inset-y-3 right-0 flex items-center pr-4'>
+          <Icon name='search' />
+        </button>
       </div>
     </div>
   );
