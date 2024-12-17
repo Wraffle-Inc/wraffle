@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-query": "^5.53.1",
     "@use-funnel/browser": "^0.0.7",
+    "@wraffle/bridge": "workspace:*",
     "@wraffle/ui": "workspace:*",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

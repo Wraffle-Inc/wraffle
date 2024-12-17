@@ -1,0 +1,11 @@
+{
+  "extends": "@wraffle/typescript-config/react-library.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist",
+    "rootDir": "src",
+    "incremental": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
