@@ -98,7 +98,6 @@ importers:
         version: 5.0.2
       expo:
         specifier: ~51.0.35
-        specifier: ~51.0.35
         version: 51.0.35(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))
       expo-build-properties:
         specifier: ~0.12.5
@@ -1618,6 +1617,9 @@ packages:
 
   '@expo/config-plugins@8.0.10':
     resolution: {integrity: sha512-KG1fnSKRmsudPU9BWkl59PyE0byrE2HTnqbOrgwr2FAhqh7tfr9nRs6A9oLS/ntpGzmFxccTEcsV0L4apsuxxg==}
+
+  '@expo/config-plugins@8.0.8':
+    resolution: {integrity: sha512-Fvu6IO13EUw0R9WeqxUO37FkM62YJBNcZb9DyJAOgMz7Ez/vaKQGEjKt9cwT+Q6uirtCATMgaq6VWAW7YW8xXw==}
 
   '@expo/config-plugins@8.0.9':
     resolution: {integrity: sha512-dNCG45C7BbDPV9MdWvCbsFtJtVn4w/TJbb5b7Yr6FA8HYIlaaVM0wqUMzTPmGj54iYXw8X/Vge8uCPxg7RWgeA==}
@@ -10108,8 +10110,8 @@ snapshots:
 
   '@expo/prebuild-config@7.0.8(expo-modules-autolinking@1.11.2)':
     dependencies:
-      '@expo/config': 9.0.4
-      '@expo/config-plugins': 8.0.10
+      '@expo/config': 9.0.3
+      '@expo/config-plugins': 8.0.8
       '@expo/config-types': 51.0.2
       '@expo/image-utils': 0.5.1
       '@expo/json-file': 8.3.3
