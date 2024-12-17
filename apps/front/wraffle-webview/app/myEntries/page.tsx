@@ -1,7 +1,7 @@
 'use client';
 
 import {useState} from 'react';
-import {Block} from '@/features/manage-history/ui/Block';
+import {MyEntryBlock} from '@/features/manage-entries/ui/MyEntryBlock';
 import {Header} from '@/shared/ui';
 import {GenericTabs} from '@/shared/ui/tabs/GenericTabs';
 import {APPLY_EMPTY_INFO} from '@/widgets/history-list/config/const';
@@ -9,7 +9,7 @@ import {ProductList} from '@/widgets/history-list/ui/ProductList';
 import {Typography} from '@wraffle/ui';
 
 // api 연동시 사라질 코드 입니다. raffles, events
-const raffles = [
+const MOCK_RAFFLES = [
   {
     id: 1,
     title: '제목',
@@ -39,11 +39,11 @@ const raffles = [
   },
 ];
 
-const events = [];
+const MOCK_EVENTS = [];
 
 const APPLY_CATEGORY_LISTS = ['전체', '진행 중', '당첨', '미당첨'];
 
-const History = () => {
+const MyEntries = () => {
   const [activeTab, setActiveTab] = useState<string>('raffle');
   const [category, setCategory] = useState<string>('전체');
 
@@ -71,16 +71,20 @@ const History = () => {
       >
         <GenericTabs.Raffle>
           <ProductList
-            products={raffles}
-            block={product => <Block key={product.id} product={product} />}
+            products={MOCK_RAFFLES}
+            block={product => (
+              <MyEntryBlock key={product.id} product={product} />
+            )}
             emptyInfo={APPLY_EMPTY_INFO}
           />
         </GenericTabs.Raffle>
 
         <GenericTabs.Event>
           <ProductList
-            products={events}
-            block={product => <Block key={product.id} product={product} />}
+            products={MOCK_EVENTS}
+            block={product => (
+              <MyEntryBlock key={product.id} product={product} />
+            )}
             emptyInfo={APPLY_EMPTY_INFO}
           />
         </GenericTabs.Event>
@@ -89,4 +93,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default MyEntries;
