@@ -13,12 +13,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "googleServicesFile": "/Users/jangdonghyeon/Desktop/wraffle/apps/front/wraffle-native/firebase/GoogleService-Info.plist",
+      "googleServicesFile": "./ios/wrafflenative/GoogleService-Info.plist",
       "bundleIdentifier": "com.ww8007.wraffle",
       "supportsTablet": false
     },
     "android": {
-      "googleServicesFile": "/Users/jangdonghyeon/Desktop/wraffle/apps/front/wraffle-native/firebase/google-services.json",
+      "googleServicesFile": "./android/app/google-services.json",
       "package": "com.ww8007.wraffle",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",

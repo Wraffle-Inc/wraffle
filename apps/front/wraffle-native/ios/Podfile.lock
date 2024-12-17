@@ -8,16 +8,16 @@ PODS:
     - ExpoModulesCore
   - Expo (51.0.35):
     - ExpoModulesCore
-  - expo-dev-client (4.0.27):
+  - expo-dev-client (4.0.28):
     - EXManifests
     - expo-dev-launcher
     - expo-dev-menu
     - expo-dev-menu-interface
     - EXUpdatesInterface
-  - expo-dev-launcher (4.0.27):
+  - expo-dev-launcher (4.0.28):
     - DoubleConversion
     - EXManifests
-    - expo-dev-launcher/Main (= 4.0.27)
+    - expo-dev-launcher/Main (= 4.0.28)
     - expo-dev-menu
     - expo-dev-menu-interface
     - ExpoModulesCore
@@ -43,7 +43,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-launcher/Main (4.0.27):
+  - expo-dev-launcher/Main (4.0.28):
     - DoubleConversion
     - EXManifests
     - expo-dev-launcher/Unsafe
@@ -72,7 +72,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-launcher/Unsafe (4.0.27):
+  - expo-dev-launcher/Unsafe (4.0.28):
     - DoubleConversion
     - EXManifests
     - expo-dev-menu
@@ -100,10 +100,10 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu (5.0.21):
+  - expo-dev-menu (5.0.22):
     - DoubleConversion
-    - expo-dev-menu/Main (= 5.0.21)
-    - expo-dev-menu/ReactNativeCompatibles (= 5.0.21)
+    - expo-dev-menu/Main (= 5.0.22)
+    - expo-dev-menu/ReactNativeCompatibles (= 5.0.22)
     - glog
     - hermes-engine
     - RCT-Folly (= 2024.01.01.00)
@@ -124,7 +124,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - expo-dev-menu-interface (1.8.3)
-  - expo-dev-menu/Main (5.0.21):
+  - expo-dev-menu/Main (5.0.22):
     - DoubleConversion
     - EXManifests
     - expo-dev-menu-interface
@@ -150,7 +150,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/ReactNativeCompatibles (5.0.21):
+  - expo-dev-menu/ReactNativeCompatibles (5.0.22):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -171,7 +171,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/SafeAreaView (5.0.21):
+  - expo-dev-menu/SafeAreaView (5.0.22):
     - DoubleConversion
     - ExpoModulesCore
     - glog
@@ -193,7 +193,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/Vendored (5.0.21):
+  - expo-dev-menu/Vendored (5.0.22):
     - DoubleConversion
     - expo-dev-menu/SafeAreaView
     - glog
@@ -277,54 +277,24 @@ PODS:
   - EXUpdatesInterface (0.16.2):
     - ExpoModulesCore
   - FBLazyVector (0.74.5)
-  - Firebase/Auth (11.2.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 11.2.0)
   - Firebase/CoreOnly (11.2.0):
     - FirebaseCore (= 11.2.0)
-  - FirebaseAppCheckInterop (11.2.0)
-  - FirebaseAuth (11.2.0):
-    - FirebaseAppCheckInterop (~> 11.0)
-    - FirebaseAuthInterop (~> 11.0)
-    - FirebaseCore (~> 11.0)
-    - FirebaseCoreExtension (~> 11.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - GTMSessionFetcher/Core (~> 3.4)
-    - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthInterop (11.3.0)
   - FirebaseCore (11.2.0):
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
-  - FirebaseCoreExtension (11.2.0):
-    - FirebaseCore (~> 11.0)
   - FirebaseCoreInternal (11.2.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - fmt (9.1.0)
   - glog (0.3.5)
-  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Network
-    - GoogleUtilities/Privacy
   - GoogleUtilities/Environment (8.0.2):
     - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (8.0.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Network (8.0.2):
-    - GoogleUtilities/Logger
-    - "GoogleUtilities/NSData+zlib"
-    - GoogleUtilities/Privacy
-    - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (8.0.2)":
     - GoogleUtilities/Privacy
   - GoogleUtilities/Privacy (8.0.2)
-  - GoogleUtilities/Reachability (8.0.2):
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Privacy
-  - GTMSessionFetcher/Core (3.5.0)
   - hermes-engine (0.74.5):
     - hermes-engine/Pre-built (= 0.74.5)
   - hermes-engine/Pre-built (0.74.5)
@@ -1258,6 +1228,27 @@ PODS:
     - React-debug
   - react-native-safe-area-context (4.10.5):
     - React-Core
+  - react-native-webview (13.12.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - React-nativeconfig (0.74.5)
   - React-NativeModulesApple (0.74.5):
     - glog
@@ -1487,14 +1478,9 @@ PODS:
     - React-logger (= 0.74.5)
     - React-perflogger (= 0.74.5)
     - React-utils (= 0.74.5)
-  - RecaptchaInterop (100.0.0)
   - RNFBApp (21.0.0):
     - Firebase/CoreOnly (= 11.2.0)
     - React-Core
-  - RNFBAuth (21.0.0):
-    - Firebase/Auth (= 11.2.0)
-    - React-Core
-    - RNFBApp
   - RNGestureHandler (2.16.2):
     - DoubleConversion
     - glog
@@ -1614,6 +1600,7 @@ DEPENDENCIES:
   - React-logger (from `../../../../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../../../../node_modules/react-native/ReactCommon`)
   - react-native-safe-area-context (from `../../../../node_modules/react-native-safe-area-context`)
+  - react-native-webview (from `../../../../node_modules/react-native-webview`)
   - React-nativeconfig (from `../../../../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../../../../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../../../../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -1638,7 +1625,6 @@ DEPENDENCIES:
   - React-utils (from `../../../../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../../../../node_modules/react-native/ReactCommon`)
   - "RNFBApp (from `../../../../node_modules/@react-native-firebase/app`)"
-  - "RNFBAuth (from `../../../../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../../../../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../../../../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../../node_modules/react-native-screens`)
@@ -1647,15 +1633,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
-    - FirebaseAppCheckInterop
-    - FirebaseAuth
-    - FirebaseAuthInterop
     - FirebaseCore
-    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - GoogleUtilities
-    - GTMSessionFetcher
-    - RecaptchaInterop
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -1758,6 +1738,8 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/react-native/ReactCommon"
   react-native-safe-area-context:
     :path: "../../../../node_modules/react-native-safe-area-context"
+  react-native-webview:
+    :path: "../../../../node_modules/react-native-webview"
   React-nativeconfig:
     :path: "../../../../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -1806,8 +1788,6 @@ EXTERNAL SOURCES:
     :path: "../../../../node_modules/react-native/ReactCommon"
   RNFBApp:
     :path: "../../../../node_modules/@react-native-firebase/app"
-  RNFBAuth:
-    :path: "../../../../node_modules/@react-native-firebase/auth"
   RNGestureHandler:
     :path: "../../../../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -1824,9 +1804,9 @@ SPEC CHECKSUMS:
   EXJSONUtils: 30c17fd9cc364d722c0946a550dfbf1be92ef6a4
   EXManifests: c1fab4c3237675e7b0299ea8df0bcb14baca4f42
   Expo: 76d7e2a8badda285c79ae69d01b6a40b3ec75e5c
-  expo-dev-client: 85deba11af998ea86e62093b17fce56aa2c6f26b
-  expo-dev-launcher: fe4f2c0a0aa627449eeaec5f9f11e04090f97c40
-  expo-dev-menu: 5b14897ecce3a8cf9e9cf9109344c2c192a3766a
+  expo-dev-client: e25e1c63686cc097d9701354e475b2b60038b83b
+  expo-dev-launcher: 4de360c8a60e960164bc84d8e459b6d5c0bc6c5a
+  expo-dev-menu: d967c9c74e9ba53ea2aecd105c8a63042673fa0c
   expo-dev-menu-interface: be32c09f1e03833050f0ee290dcc86b3ad0e73e4
   ExpoAsset: 323700f291684f110fb55f0d4022a3362ea9f875
   ExpoFileSystem: 80bfe850b1f9922c16905822ecbf97acd711dc51
@@ -1840,16 +1820,11 @@ SPEC CHECKSUMS:
   EXUpdatesInterface: 996527fd7d1a5d271eb523258d603f8f92038f24
   FBLazyVector: ac12dc084d1c8ec4cc4d7b3cf1b0ebda6dab85af
   Firebase: 98e6bf5278170668a7983e12971a66b2cd57fc8c
-  FirebaseAppCheckInterop: ea21450529cf0ebd132788dd8916a0269abc684f
-  FirebaseAuth: 2a198b8cdbbbd457f08d74df7040feb0a0e7777a
-  FirebaseAuthInterop: c453b7ba7c49b88b2f519bb8d2e29edf7ada4a2a
   FirebaseCore: a282032ae9295c795714ded2ec9c522fc237f8da
-  FirebaseCoreExtension: cda74ddfb001224bd8fd1d6e74698b4ed07803de
   FirebaseCoreInternal: 0c569513412da9f3b31bd0b340013bbee8f295c5
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
-  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   hermes-engine: 8c1577f3fdb849cbe7729c2e7b5abc4b845e88f8
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 3afceddffa65aee666dafd6f0116f1d975db1584
@@ -1876,6 +1851,7 @@ SPEC CHECKSUMS:
   React-logger: 257858bd55f3a4e1bc0cf07ddc8fb9faba6f8c7c
   React-Mapbuffer: dce508662b995ffefd29e278a16b78217039d43d
   react-native-safe-area-context: a240ad4b683349e48b1d51fed1611138d1bdad97
+  react-native-webview: 8a5c6762dc026a3ad95a79fdd59227a0350548ff
   React-nativeconfig: f326487bc61eba3f0e328da6efb2711533dcac46
   React-NativeModulesApple: d89733f5baed8b9249ca5a8e497d63c550097312
   React-perflogger: ed4e0c65781521e0424f2e5e40b40cc7879d737e
@@ -1899,15 +1875,13 @@ SPEC CHECKSUMS:
   React-runtimescheduler: db7189185a2e5912b0d17194302e501f801a381e
   React-utils: 3f1fcffc14893afb9a7e5b7c736353873cc5fc95
   ReactCommon: f79ae672224dc1e6c2d932062176883c98eebd57
-  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RNFBApp: c1337749fc4a372b515ba0eb82058efbd064e10b
-  RNFBAuth: 64c5559b2f984a11ba4d360621224a15708912c0
   RNGestureHandler: 20a4307fd21cbff339abfcfa68192f3f0a6a518b
   RNReanimated: 31515b5828d95529cecc4688cd10ea9a14b8b2db
   RNScreens: 30249f9331c3b00ae7cb7922e11f58b3ed369c07
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
-  Yoga: 33622183a85805e12703cd618b2c16bfd18bfffb
+  Yoga: 1ab23c1835475da69cf14e211a560e73aab24cb0
 
 PODFILE CHECKSUM: cf5fd57121d0bdd252578a217f0a659ac5dae922
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

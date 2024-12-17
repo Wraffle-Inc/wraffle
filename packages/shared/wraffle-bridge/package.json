@@ -1,0 +1,34 @@
+{
+  "name": "@wraffle/bridge",
+  "version": "1.0.0",
+  "description": "Wraffle Webview Bridge",
+  "scripts": {
+    "build": "tsup src/**/** --format cjs,esm --dts",
+    "lint:es": "eslint '**/*.{ts,tsx}' --cache",
+    "lint:es:fix": "eslint '**/*.{ts,tsx}' --ext .ts --fix --cache",
+    "lint:etc": "prettier '**/*.{js,ts,tsx,json,yaml,md}' --check --cache",
+    "lint:etc:fix": "prettier '**/*.{js,ts,tsx,json,yaml,md}' --write --cache",
+    "lint": "pnpm lint:es && pnpm lint:etc",
+    "lint:fix": "pnpm lint:es:fix && pnpm lint:etc:fix"
+  },
+  "author": "Wraffle Team",
+  "license": "ISC",
+  "main": "./src/index.web.ts",
+  "react-native": "./src/index.native.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@webview-bridge/react": "^1.7.5",
+    "@webview-bridge/react-native": "^1.7.5",
+    "@webview-bridge/web": "^1.7.5",
+    "react": "^18",
+    "react-native-webview": "^13.12.5",
+    "tsup": "^8.3.5"
+  },
+  "devDependencies": {
+    "@wraffle/eslint-config": "workspace:*",
+    "@wraffle/prettier-config": "workspace:*",
+    "@wraffle/typescript-config": "workspace:*",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

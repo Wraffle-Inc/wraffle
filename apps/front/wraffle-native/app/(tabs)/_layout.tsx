@@ -1,8 +1,7 @@
-import { useColorScheme } from "@/shared/hooks/useColorScheme.web";
-import { TabBarIcon } from "@/shared/ui/tab-bar-icon/TabBarIcon";
-import { Tabs } from "expo-router";
-import React from "react";
-
+import {Tabs} from 'expo-router';
+import React from 'react';
+import {useColorScheme} from '@/shared/hooks/useColorScheme.web';
+import {TabBarIcon} from '@/shared/ui/tab-bar-icon/TabBarIcon';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -15,24 +14,24 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => (
+          title: 'Home',
+          tabBarIcon: ({color, focused}) => (
             <TabBarIcon
-              name={focused ? "home" : "home-outline"}
+              name={focused ? 'home' : 'home-outline'}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name='explore'
         options={{
-          title: "Explore",
-          tabBarIcon: ({ color, focused }) => (
+          title: 'Explore',
+          tabBarIcon: ({color, focused}) => (
             <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
+              name={focused ? 'code-slash' : 'code-slash-outline'}
               color={color}
             />
           ),
