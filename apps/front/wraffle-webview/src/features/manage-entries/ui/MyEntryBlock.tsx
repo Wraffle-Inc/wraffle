@@ -8,11 +8,11 @@ export interface Product {
   estimatePayAmount: number;
 }
 
-interface BlockProps {
+interface MyEntryBlockProps {
   product: Product;
 }
 
-export const Block = ({product}: BlockProps) => {
+export const MyEntryBlock = ({product}: MyEntryBlockProps) => {
   return (
     <div
       className='flex flex-col gap-3.5 border-b-4 border-[#F2F4F6] px-2 pb-8 pt-6'
