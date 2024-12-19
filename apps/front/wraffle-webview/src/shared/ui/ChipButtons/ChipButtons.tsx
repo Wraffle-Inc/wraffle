@@ -1,19 +1,18 @@
 import {ChipButton} from '@wraffle/ui';
 
-interface ChipButtons {
+interface ChipButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
   chipList: string[];
   category: string;
   setCategory: (category: string) => void;
-  className?: string;
 }
 
 export const ChipButtons = ({
   chipList,
   category,
   setCategory,
-  className,
-}: ChipButtons) => (
-  <div className={className}>
+  ...props
+}: ChipButtonsProps) => (
+  <div {...props}>
     {chipList.map(chip => (
       <ChipButton
         key={chip}
