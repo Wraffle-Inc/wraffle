@@ -72,9 +72,7 @@ const MyEntries = () => {
         <GenericTabs.Raffle>
           <ProductList
             products={MOCK_RAFFLES}
-            block={product => (
-              <MyEntryBlock key={product.id} product={product} />
-            )}
+            block={product => <MyEntryBlock product={product} />}
             emptyInfo={APPLY_EMPTY_INFO}
           />
         </GenericTabs.Raffle>
@@ -82,9 +80,7 @@ const MyEntries = () => {
         <GenericTabs.Event>
           <ProductList
             products={MOCK_EVENTS}
-            block={product => (
-              <MyEntryBlock key={product.id} product={product} />
-            )}
+            block={product => <MyEntryBlock product={product} />}
             emptyInfo={APPLY_EMPTY_INFO}
           />
         </GenericTabs.Event>
