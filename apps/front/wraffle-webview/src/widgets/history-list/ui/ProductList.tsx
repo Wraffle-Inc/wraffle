@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import {EmptyInfo} from '@/shared/ui/EmptyInfo/EmptyInfo';
 
 interface EmptyInfoProps {
@@ -6,21 +7,23 @@ interface EmptyInfoProps {
   linkLabel: string;
 }
 
-interface ProductListProps<T> {
+interface ProductListProps<T extends {id: number}> {
   products: T[];
   block: (product: T) => React.ReactNode;
   emptyInfo: EmptyInfoProps;
 }
 
-export const ProductList = <T,>({
+export const ProductList = <T extends {id: number}>({
   products,
   block,
   emptyInfo,
 }: ProductListProps<T>) => (
   <>
-    {products.length > 0 ? (
-      products.map(product => block(product))
-    ) : (
+    {products.length > 0 &&
+      products.map(product => (
+        <Fragment key={product.id}>block(product)</Fragment>
+      ))}
+    {products.length <= 0 && (
       <EmptyInfo
         description={emptyInfo.description}
         href={emptyInfo.href}
