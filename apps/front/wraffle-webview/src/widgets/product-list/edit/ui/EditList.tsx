@@ -12,6 +12,8 @@ import {
   WinnerCountForm,
 } from '@/features/product-form/ui';
 import {Divider} from '@/shared/ui';
+import {InputWithSearchIcon} from '@/shared/ui/input/InputWithSearchIcon';
+import {Tags} from '@/shared/ui/tag/Tags';
 import {getTypeText} from '@/shared/util';
 import {Button, Icon, Input, Label, Tag} from '@wraffle/ui';
 
@@ -88,7 +90,15 @@ export const EditList = ({type}: EditListProps) => {
 
       <CategoryForm defaultValue={categoryId} categoryItems={categoryItems} />
 
-      <TagSection tags={tags} />
+      {/* 조회 api 연동시 수정 */}
+      <div>
+        <Label className='text-xl font-bold text-zinc-900'>태그</Label>
+        <Tags tags={tags} className='mb-2 overflow-x-scroll' />
+        <InputWithSearchIcon
+          placeholder='태그명을 입력해주세요.'
+          onClick={() => {}}
+        />
+      </div>
 
       <Divider />
 
@@ -149,35 +159,6 @@ export const EditList = ({type}: EditListProps) => {
         >
           수정하기
         </Button>
-      </div>
-    </div>
-  );
-};
-
-interface TagSectionProps {
-  tags: string[];
-}
-
-/**
- * 조회 api 연동시 수정
- */
-const TagSection = ({tags}: TagSectionProps) => {
-  return (
-    <div>
-      <Label className='text-xl font-bold text-zinc-900'>태그</Label>
-      <div className='mb-2 flex gap-1.5 overflow-x-scroll'>
-        {tags.map((tag, i) => (
-          <Tag key={i}>{tag}</Tag>
-        ))}
-      </div>
-      <div className='relative'>
-        <Input
-          placeholder='태그명을 입력해주세요.'
-          className='border border-solid border-[#F5F5F7] bg-[#FAFAFB] pr-10 text-sm font-medium text-zinc-900 placeholder:text-[#ADB5BD]'
-        />
-        <button className='absolute inset-y-3 right-0 flex items-center pr-4'>
-          <Icon name='search' />
-        </button>
       </div>
     </div>
   );
