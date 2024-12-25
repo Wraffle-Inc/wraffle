@@ -4,7 +4,7 @@
   "tasks": {
     "build": {
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["AUTH_SECRET", "API_BASE_URL", "API_BASE_URL_DEV"]
+      "env": ["AUTH_SECRET"]
     }
   }
 }

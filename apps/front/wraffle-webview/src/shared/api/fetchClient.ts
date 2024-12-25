@@ -1,4 +1,4 @@
-import {auth} from '../util/auth';
+import {getSession} from '../util/auth/server';
 import {type ApiResponseError, type ApiResponseWithData} from './type';
 
 type FetchOptions<TBody = unknown> = Omit<RequestInit, 'headers' | 'body'> & {
@@ -26,14 +26,19 @@ export class FetchClient {
       body,
       ...restOptions
     } = options;
-    const session = await auth();
+
+    const session = withAuth ? await getSession() : null;
 
     const allHeaders = new Headers(
       Object.assign(
         {
           'Content-Type': contentType,
         },
-        withAuth ? {Authorization: `Bearer ${session?.accessToken}`} : {},
+        withAuth && session
+          ? {
+              Authorization: `Bearer ${session.accessToken}`,
+            }
+          : {},
         headers,
       ),
     );

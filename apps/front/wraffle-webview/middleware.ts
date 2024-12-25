@@ -1,6 +1,6 @@
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {auth} from '@/shared/util/auth';
+import {auth} from '@/shared/util/auth/auth';
 
 const PUBLIC_ROUTES = ['/login', '/join'];
 const LOGIN = '/login';
