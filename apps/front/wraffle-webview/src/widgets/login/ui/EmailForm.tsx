@@ -1,7 +1,7 @@
 import type {LoginPayload} from '../config/schema';
 import {useFormContext} from 'react-hook-form';
 import {RHFInput} from '@/shared/ui';
-import {Button, Typography} from '@wraffle/ui';
+import {Button} from '@wraffle/ui';
 
 const EmailForm = () => {
   const {formState} = useFormContext<LoginPayload>();

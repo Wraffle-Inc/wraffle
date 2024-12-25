@@ -1,7 +1,7 @@
-import apiClient from '../api/apiClient';
-import type {Tokens} from '../api/type';
-import {isApiResponseError} from '../api/type';
-import {ACCESS_TOKEN_EXPIRES_IN} from './const';
+import apiClient from '../../api/apiClient';
+import type {Tokens} from '../../api/type';
+import {isApiResponseError} from '../../api/type';
+import {ACCESS_TOKEN_EXPIRES_IN} from '../const';
 import NextAuth, {CredentialsSignin} from 'next-auth';
 import type {JWT} from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
