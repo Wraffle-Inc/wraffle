@@ -1,6 +1,6 @@
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {auth} from '@/shared/util/auth/auth';
+import {getSession} from '@/shared/util/auth/server';
 
 const PUBLIC_ROUTES = ['/login', '/join'];
 const LOGIN = '/login';
@@ -8,7 +8,7 @@ const MAIN = '/';
 
 export async function middleware(req: NextRequest) {
   const {nextUrl} = req;
-  const session = await auth();
+  const session = await getSession();
 
   const isAuthenticated = !!session;
 

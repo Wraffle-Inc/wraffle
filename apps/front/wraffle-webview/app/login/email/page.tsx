@@ -1,19 +1,33 @@
 'use client';
 
-import useLoginToast from './useLoginToast';
+import type {z} from 'zod';
 import Image from 'next/image';
 import Link from 'next/link';
-import {useSearchParams} from 'next/navigation';
+import {startTransition} from 'react';
 import {GenericForm, Header} from '@/shared/ui';
 import {signInWithCredentials} from '@/shared/util/auth/server';
 import {loginDefaultValues, loginSchema} from '@/widgets/login/config';
 import {EmailForm} from '@/widgets/login/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {Typography} from '@wraffle/ui';
+import {Typography, useToast} from '@wraffle/ui';
 
 const EmailLogin = () => {
-  const params = useSearchParams();
-  useLoginToast({code: params.get('code')});
+  const {toast} = useToast();
+
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    startTransition(async () => {
+      try {
+        await signInWithCredentials(data);
+      } catch (error) {
+        toast({
+          title: (error as Error).message,
+          duration: 2000,
+          variant: 'warning',
+          icon: 'close',
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -26,7 +40,7 @@ const EmailLogin = () => {
         <Image src='/logo.png' alt='logo' width={136} height={75} priority />
         <section className='mt-7 w-full'>
           <GenericForm
-            onSubmit={signInWithCredentials}
+            onSubmit={onSubmit}
             formOptions={{
               mode: 'onChange',
               resolver: zodResolver(loginSchema),
