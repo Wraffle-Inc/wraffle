@@ -15,10 +15,24 @@ export class FetchClient {
     this.baseUrl = baseUrl;
   }
 
+  /*
+  request 메소드 오버로드 정의
+  TResponse를 지정하는 경우 리턴 타입은 Promise<ApiResponseWithData<TResponse>>
+  TResponse를 지정하지 않는 경우 리턴 타입은 Promise<ApiResponseWithData<undefined> | null>
+  */
   private async request<TResponse, TBody = unknown>(
     url: string,
     options: FetchOptions<TBody>,
-  ): Promise<ApiResponseWithData<TResponse>> {
+  ): Promise<ApiResponseWithData<TResponse>>;
+  private async request<TBody = unknown>(
+    url: string,
+    options: FetchOptions<TBody>,
+  ): Promise<ApiResponseWithData<undefined> | null>;
+
+  private async request<TResponse = undefined, TBody = unknown>(
+    url: string,
+    options: FetchOptions<TBody>,
+  ): Promise<ApiResponseWithData<TResponse> | null> {
     const {
       withAuth = false,
       contentType = 'application/json',
@@ -48,6 +62,10 @@ export class FetchClient {
       headers: allHeaders,
       body: body ? JSON.stringify(body) : undefined,
     });
+
+    if (response.status === 204) {
+      return null;
+    }
 
     const responseData = await response.json();
 
