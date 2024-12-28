@@ -5,8 +5,7 @@ import {FormControl, FormField, FormItem} from '@/shared/ui';
 import {Button, ErrorMessage, Icon, Typography, CheckBox} from '@wraffle/ui';
 
 const Extra = () => {
-  const {control, setValue, watch, trigger, clearErrors} =
-    useFormContext<JoinPayload>();
+  const {control, setValue, watch, clearErrors} = useFormContext<JoinPayload>();
   const watchAllFields = watch();
 
   const allChecked = terms.every(term => watchAllFields[term.id]);
@@ -19,10 +18,8 @@ const Extra = () => {
 
   const handleAllCheckChange = (isChecked: boolean) => {
     terms.forEach(term => {
-      setValue(term.id, isChecked);
-      if (!isChecked) {
-        trigger();
-      } else {
+      setValue(term.id, isChecked, {shouldValidate: true});
+      if (isChecked) {
         clearErrors(term.id);
       }
     });

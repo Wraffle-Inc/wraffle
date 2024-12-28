@@ -1,3 +1,4 @@
+import {useRequestCode} from '../api/request';
 import type {Dispatch, SetStateAction} from 'react';
 import {useEffect, useState} from 'react';
 import type {FieldError} from 'react-hook-form';
@@ -26,6 +27,23 @@ const RequestCode = ({
   const [last, handleLast] = useInput('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const requestCode = useRequestCode();
+
+  const handleRequestCode = (phoneNumber: string) => {
+    requestCode(
+      {phoneNumber},
+      {
+        onSuccess: () => {
+          onChangeIsVerified(true);
+        },
+        onError: (error: Error) => {
+          setErrorMessage(error.message);
+          onChangeIsVerified(false);
+        },
+      },
+    );
+  };
+
   const isValid =
     first &&
     (middle.length === MAX_INPUT_LENGTH ||
@@ -38,12 +56,7 @@ const RequestCode = ({
     if (isValid) {
       const phoneNumber = first.concat(middle, last);
       onChangePhoneNumber(phoneNumber);
-      // !TODO: request API
-      // 성공 시 onChangeIsVerified(true)
-      onChangeIsVerified(true);
-      // 실패 시 setErrorMessage에 에러메세지
-      // setErrorMessage('이미 가입된 번호입니다.');
-      // onChangeIsVerified(false);
+      handleRequestCode(phoneNumber);
     }
   }, [first, middle, last]);
 
