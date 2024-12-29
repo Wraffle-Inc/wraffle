@@ -1,18 +1,22 @@
-import type {RequestCodeRequest} from '../config/type';
 import apiClient from '@/shared/api/apiClient';
 import {useMutation} from '@tanstack/react-query';
 
-export const useRequestCode = () => {
+interface VerifyCodeRequest {
+  phoneNumber: string;
+  code: string;
+}
+
+export const useVerifyCode = () => {
   const mutation = useMutation({
-    mutationFn: async (query: RequestCodeRequest) => {
-      await apiClient.post<null, RequestCodeRequest>('/phone-auth/request', {
+    mutationFn: async (query: VerifyCodeRequest) => {
+      await apiClient.post<null, VerifyCodeRequest>('/phone-auth/verify', {
         body: query,
       });
     },
   });
 
-  const requestCode = (
-    query: RequestCodeRequest,
+  const verifyCode = (
+    query: VerifyCodeRequest,
     {
       onSuccess,
       onError,
@@ -21,5 +25,5 @@ export const useRequestCode = () => {
     return mutation.mutate(query, {onSuccess, onError});
   };
 
-  return requestCode;
+  return verifyCode;
 };

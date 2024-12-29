@@ -1,4 +1,5 @@
 import {useRequestCode} from '../api/request';
+import type {RequestCodeRequest} from '../config/type';
 import type {Dispatch, SetStateAction} from 'react';
 import {useEffect, useState} from 'react';
 import type {FieldError} from 'react-hook-form';
@@ -29,7 +30,7 @@ const RequestCode = ({
 
   const requestCode = useRequestCode();
 
-  const handleRequestCode = (phoneNumber: string) => {
+  const handleRequestCode = ({phoneNumber}: RequestCodeRequest) => {
     requestCode(
       {phoneNumber},
       {
@@ -56,7 +57,7 @@ const RequestCode = ({
     if (isValid) {
       const phoneNumber = first.concat(middle, last);
       onChangePhoneNumber(phoneNumber);
-      handleRequestCode(phoneNumber);
+      handleRequestCode({phoneNumber});
     }
   }, [first, middle, last]);
 

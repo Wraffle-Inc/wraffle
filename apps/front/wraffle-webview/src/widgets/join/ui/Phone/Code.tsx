@@ -26,7 +26,10 @@ const Code = ({onNext}: CodeProps) => {
         </Typography>
       </div>
 
-      <VerifyCode onSuccess={handleVerify} />
+      <VerifyCode
+        phoneNumber={getValues('phoneNumber')}
+        onSuccess={handleVerify}
+      />
       <div className='flex justify-end pr-2 pt-1'>
         <Timer timerSecond={180} />
       </div>

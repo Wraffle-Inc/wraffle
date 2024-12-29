@@ -1,29 +1,45 @@
+import {useVerifyCode} from '../api/verify';
 import {DEFAULT_ERROR_MESSAGE, VERIFY_CODE_LENGTH} from '../config/const';
+import type {VerifyCodeRequest} from '../config/type';
 import {useEffect, useState} from 'react';
 import {useInput} from '@/shared/hook';
 import {InputField} from '@wraffle/ui';
 
 interface VerifyCodeProps {
+  phoneNumber: string;
   onSuccess: () => void;
 }
 
-const VerifyCode = ({onSuccess}: VerifyCodeProps) => {
+const VerifyCode = ({phoneNumber, onSuccess}: VerifyCodeProps) => {
   const [code, handleCode] = useInput('');
   const [errorMessage, setErrorMessage] = useState(DEFAULT_ERROR_MESSAGE);
+
+  const verifyCode = useVerifyCode();
+
+  const handleVerifyCode = ({phoneNumber, code}: VerifyCodeRequest) => {
+    verifyCode(
+      {phoneNumber, code},
+      {
+        onSuccess: () => {
+          onSuccess();
+        },
+        onError: (error: Error) => {
+          setErrorMessage(error.message);
+        },
+      },
+    );
+  };
 
   useEffect(() => {
     setErrorMessage(DEFAULT_ERROR_MESSAGE);
     if (code.length === VERIFY_CODE_LENGTH) {
-      // !TODO: reuqest API
-      // 성공 시 onSuccess();
-      onSuccess();
-      // 실패 시 setErrorMessage(MISMATCHED_CODE_ERROR_MESSAGE);
+      handleVerifyCode({phoneNumber, code});
     }
   }, [code]);
 
   return (
     <InputField>
-      <InputField.Input value={code} onChange={handleCode} />
+      <InputField.Input type='number' value={code} onChange={handleCode} />
       <InputField.ErrorMessage isError>{errorMessage}</InputField.ErrorMessage>
     </InputField>
   );
