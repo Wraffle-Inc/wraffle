@@ -3,6 +3,7 @@ import {DEFAULT_ERROR_MESSAGE, VERIFY_CODE_LENGTH} from '../config/const';
 import type {VerifyCodeRequest} from '../config/type';
 import {useEffect, useState} from 'react';
 import {useInput} from '@/shared/hook';
+import {handleMaxLength} from '@/shared/util';
 import {InputField} from '@wraffle/ui';
 
 interface VerifyCodeProps {
@@ -39,7 +40,13 @@ const VerifyCode = ({phoneNumber, onSuccess}: VerifyCodeProps) => {
 
   return (
     <InputField>
-      <InputField.Input type='number' value={code} onChange={handleCode} />
+      <InputField.Input
+        type='number'
+        maxLength={VERIFY_CODE_LENGTH}
+        value={code}
+        onChange={handleCode}
+        onInput={handleMaxLength}
+      />
       <InputField.ErrorMessage isError>{errorMessage}</InputField.ErrorMessage>
     </InputField>
   );

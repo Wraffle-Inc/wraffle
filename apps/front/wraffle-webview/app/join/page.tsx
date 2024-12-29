@@ -1,19 +1,43 @@
 'use client';
 
 import type {z} from 'zod';
+import {useRouter} from 'next/navigation';
+import {startTransition} from 'react';
 import {Header, ProgressBar, GenericForm} from '@/shared/ui';
+import {signUpUser} from '@/widgets/join/api/server';
 import type {JoinStep} from '@/widgets/join/config';
 import {joinDefaultValues, joinSchema} from '@/widgets/join/config';
 import {Info, Name, Extra, PhoneFunnel} from '@/widgets/join/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useFunnel} from '@use-funnel/browser';
+import {useToast} from '@wraffle/ui';
 
 const Join = () => {
+  const {toast} = useToast();
+  const router = useRouter();
+
   const onSubmit = (data: z.infer<typeof joinSchema>) => {
-    //!TODO: 회원가입 로직 구현
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {confirmPassword, ...userJoinData} = data;
-    console.log(userJoinData);
+    startTransition(async () => {
+      try {
+        const {confirmPassword, ...userJoinData} = data;
+        void confirmPassword;
+        await signUpUser(userJoinData);
+        toast({
+          title: '회원가입에 성공했습니다.',
+          duration: 2000,
+          variant: 'success',
+          icon: 'check',
+        });
+        router.push('/login');
+      } catch (error) {
+        toast({
+          title: (error as Error).message,
+          duration: 2000,
+          variant: 'warning',
+          icon: 'close',
+        });
+      }
+    });
   };
 
   const funnel = useFunnel<JoinStep>({
