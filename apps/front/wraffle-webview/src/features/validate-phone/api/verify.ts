@@ -25,5 +25,5 @@ export const useVerifyCode = () => {
     return mutation.mutate(query, {onSuccess, onError});
   };
 
-  return verifyCode;
+  return {verifyCode};
 };

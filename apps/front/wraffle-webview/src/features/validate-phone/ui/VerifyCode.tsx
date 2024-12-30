@@ -15,7 +15,7 @@ const VerifyCode = ({phoneNumber, onSuccess}: VerifyCodeProps) => {
   const [code, handleCode] = useInput('');
   const [errorMessage, setErrorMessage] = useState(DEFAULT_ERROR_MESSAGE);
 
-  const verifyCode = useVerifyCode();
+  const {verifyCode} = useVerifyCode();
 
   const handleVerifyCode = ({phoneNumber, code}: VerifyCodeRequest) => {
     verifyCode(

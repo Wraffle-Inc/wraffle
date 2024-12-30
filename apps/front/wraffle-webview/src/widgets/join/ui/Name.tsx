@@ -1,5 +1,6 @@
 import type {JoinPayload} from '../config';
 import {useFormContext} from 'react-hook-form';
+import {ValidateNicknameInput} from '@/features/validate-duplication/ui';
 import {RHFInput} from '@/shared/ui';
 import {Button, Typography} from '@wraffle/ui';
 
@@ -32,11 +33,7 @@ const Name = ({onNext}: NameProps) => {
       </div>
 
       <RHFInput name='name' label='이름*' placeholder='이름을 입력해주세요.' />
-      <RHFInput
-        name='nickname'
-        label='닉네임*'
-        placeholder='닉네임을 입력해주세요.'
-      />
+      <ValidateNicknameInput />
 
       <div className='fixed inset-x-0 bottom-0 bg-white p-5'>
         <Button
