@@ -21,5 +21,5 @@ export const useRequestCode = () => {
     return mutation.mutate(query, {onSuccess, onError});
   };
 
-  return requestCode;
+  return {requestCode};
 };

@@ -1,6 +1,7 @@
 import type {JoinPayload} from '../config';
 import {useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {ValidateEmailInput} from '@/features/validate-duplication/ui';
 import {RHFInput} from '@/shared/ui';
 import {Button, Typography} from '@wraffle/ui';
 
@@ -47,11 +48,7 @@ const Info = ({onNext}: InfoProps) => {
         </Typography>
       </div>
 
-      <RHFInput
-        name='email'
-        label='이메일*'
-        placeholder='이메일을 입력해주세요.'
-      />
+      <ValidateEmailInput />
       <RHFInput
         type='password'
         name='password'

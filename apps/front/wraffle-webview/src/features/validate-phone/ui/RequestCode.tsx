@@ -28,7 +28,7 @@ const RequestCode = ({
   const [last, handleLast] = useInput('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const requestCode = useRequestCode();
+  const {requestCode} = useRequestCode();
 
   const handleRequestCode = ({phoneNumber}: RequestCodeRequest) => {
     requestCode(
