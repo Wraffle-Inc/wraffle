@@ -1,7 +1,7 @@
 import {useVerifyCode} from '../api/verify';
 import {DEFAULT_ERROR_MESSAGE, VERIFY_CODE_LENGTH} from '../config/const';
 import type {VerifyCodeRequest} from '../config/type';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useInput} from '@/shared/hook';
 import {handleMaxLength} from '@/shared/util';
 import {InputField} from '@wraffle/ui';
@@ -17,26 +17,29 @@ const VerifyCode = ({phoneNumber, onSuccess}: VerifyCodeProps) => {
 
   const {verifyCode} = useVerifyCode();
 
-  const handleVerifyCode = ({phoneNumber, code}: VerifyCodeRequest) => {
-    verifyCode(
-      {phoneNumber, code},
-      {
-        onSuccess: () => {
-          onSuccess();
+  const handleVerifyCode = useCallback(
+    ({phoneNumber, code}: VerifyCodeRequest) => {
+      verifyCode(
+        {phoneNumber, code},
+        {
+          onSuccess: () => {
+            onSuccess();
+          },
+          onError: (error: Error) => {
+            setErrorMessage(error.message);
+          },
         },
-        onError: (error: Error) => {
-          setErrorMessage(error.message);
-        },
-      },
-    );
-  };
+      );
+    },
+    [onSuccess, verifyCode],
+  );
 
   useEffect(() => {
     setErrorMessage(DEFAULT_ERROR_MESSAGE);
     if (code.length === VERIFY_CODE_LENGTH) {
       handleVerifyCode({phoneNumber, code});
     }
-  }, [code]);
+  }, [code, handleVerifyCode, phoneNumber]);
 
   return (
     <InputField>

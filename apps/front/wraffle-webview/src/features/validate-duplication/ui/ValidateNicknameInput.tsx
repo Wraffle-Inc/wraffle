@@ -1,43 +1,33 @@
 import {useValidateDuplication} from '../api/validate';
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
 import {useDebounce} from '@/shared/hook';
 import {RHFInput} from '@/shared/ui';
-import type {JoinPayload} from '@/widgets/join/config';
+import {nicknameSchema, type JoinPayload} from '@/widgets/join/config';
 
 const ValidateNicknameInput = () => {
-  const {
-    formState: {errors},
-    trigger,
-    watch,
-    setError,
-    clearErrors,
-  } = useFormContext<JoinPayload>();
+  const {watch, setError, clearErrors, trigger} = useFormContext<JoinPayload>();
 
   const nickname = watch('nickname');
   const debouncedNickname = useDebounce(nickname);
 
-  const {validateDuplication: validateNicknameDuplication} =
-    useValidateDuplication();
+  const {validateDuplication: validateNicknameApi} = useValidateDuplication();
 
-  useEffect(() => {
-    const validateNicknameSchema = async () => {
-      const isValid = await trigger('nickname');
-      if (isValid && nickname) {
-        setError('nickname', {
-          type: 'validate',
-          message: '닉네임 중복 검사가 진행 중입니다.',
-        });
-      }
-    };
+  const validateNicknameSchema = useCallback(async () => {
+    const isValid = await trigger('nickname');
+    if (isValid) {
+      setError('nickname', {
+        type: 'validate',
+        message: '닉네임 중복 검사가 진행 중입니다.',
+      });
+    }
+  }, [setError, trigger]);
 
-    if (!nickname) return;
-    validateNicknameSchema();
-  }, [nickname]);
-
-  useEffect(() => {
-    if (debouncedNickname && errors.nickname?.type === 'validate') {
-      validateNicknameDuplication(
+  const validateEmailDuplication = useCallback(async () => {
+    const isValidSchema =
+      await nicknameSchema.safeParseAsync(debouncedNickname);
+    if (isValidSchema.success && debouncedNickname) {
+      validateNicknameApi(
         {nickname: debouncedNickname},
         {
           onSuccess: () => {
@@ -49,7 +39,16 @@ const ValidateNicknameInput = () => {
         },
       );
     }
-  }, [debouncedNickname]);
+  }, [clearErrors, debouncedNickname, setError, validateNicknameApi]);
+
+  useEffect(() => {
+    if (!nickname) return;
+    validateNicknameSchema();
+  }, [nickname, validateNicknameSchema]);
+
+  useEffect(() => {
+    validateEmailDuplication();
+  }, [validateEmailDuplication]);
 
   return (
     <RHFInput

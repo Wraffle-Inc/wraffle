@@ -14,17 +14,7 @@ export const useValidateDuplication = () => {
     },
   });
 
-  const validateDuplication = (
-    query: ValidateRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
-  ) => {
-    return mutation.mutate(query, {onSuccess, onError});
-  };
-
   return {
-    validateDuplication,
+    validateDuplication: mutation.mutate,
   };
 };
