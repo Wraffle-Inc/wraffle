@@ -44,21 +44,21 @@ const ProductPage = () => {
 
   const menus = type === 'event' ? [...EVENT_MENUS] : [...RAFFLE_MENUS];
 
-  const data: {
-    raffle: RaffleData;
-    event: EventData;
-  } = {
-    raffle: sampleRaffleData,
-    event: sampleEventData,
-  };
-
   useEffect(() => {
+    const data: {
+      raffle: RaffleData;
+      event: EventData;
+    } = {
+      raffle: sampleRaffleData,
+      event: sampleEventData,
+    };
+
     if (type === 'raffle' || type === 'event') {
       setProductData(data[type]);
     } else {
       router.push('/404');
     }
-  }, [type]);
+  }, [router, type]);
 
   // 메뉴 선택 시 스크롤 이동 함수
   const scrollToSection = (menu: RaffleMenu | EventMenu) => {

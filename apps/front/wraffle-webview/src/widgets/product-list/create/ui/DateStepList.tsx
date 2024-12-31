@@ -5,7 +5,7 @@ import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {WinnerCountForm} from '@/features/product-form/ui';
 import {getTypeText} from '@/shared/util';
-import {Button, Typography, useToast} from '@wraffle/ui';
+import {Button, Typography} from '@wraffle/ui';
 
 export const DateStep = ({
   type,

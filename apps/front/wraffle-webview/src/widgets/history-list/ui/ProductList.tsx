@@ -15,7 +15,6 @@ interface ProductListProps<T extends {id: number}> {
 
 export const ProductList = <T extends {id: number}>({
   products,
-  block,
   emptyInfo,
 }: ProductListProps<T>) => (
   <>

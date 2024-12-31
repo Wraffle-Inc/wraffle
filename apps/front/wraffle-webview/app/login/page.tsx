@@ -10,6 +10,7 @@ const Login = () => {
         alt='logo'
         width={136}
         height={75}
+        style={{width: 136, height: 75}}
         className='mt-auto translate-y-1/2 animate-[fade-in-down-half] duration-700'
         priority
       />

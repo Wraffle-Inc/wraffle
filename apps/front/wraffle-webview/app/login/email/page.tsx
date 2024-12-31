@@ -37,7 +37,14 @@ const EmailLogin = () => {
         </Header.Left>
       </Header>
       <div className='flex h-full flex-col items-center px-5'>
-        <Image src='/logo.png' alt='logo' width={136} height={75} priority />
+        <Image
+          src='/logo.png'
+          alt='logo'
+          width={136}
+          height={75}
+          style={{width: 136, height: 75}}
+          priority
+        />
         <section className='mt-7 w-full'>
           <GenericForm
             onSubmit={onSubmit}
