@@ -26,7 +26,7 @@ const ValidateEmailInput = () => {
 
   const validateEmailDuplication = useCallback(async () => {
     const isValidSchema = await emailSchema.safeParseAsync(debouncedEmail);
-    if (isValidSchema.success && debouncedEmail) {
+    if (isValidSchema.success) {
       validateEmailApi(
         {email: debouncedEmail},
         {

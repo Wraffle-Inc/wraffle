@@ -26,7 +26,7 @@ const ValidateNicknameInput = () => {
   const validateEmailDuplication = useCallback(async () => {
     const isValidSchema =
       await nicknameSchema.safeParseAsync(debouncedNickname);
-    if (isValidSchema.success && debouncedNickname) {
+    if (isValidSchema.success) {
       validateNicknameApi(
         {nickname: debouncedNickname},
         {
