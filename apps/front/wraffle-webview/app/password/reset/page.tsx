@@ -13,7 +13,7 @@ import {Button, Typography, useToast} from '@wraffle/ui';
 const ResetPasswordPage = () => {
   const router = useRouter();
   const {toast} = useToast();
-  const requestResetPassword = useResetPassword();
+  const {requestResetPassword} = useResetPassword();
 
   const params = useSearchParams();
   const code = params.get('code') || '';

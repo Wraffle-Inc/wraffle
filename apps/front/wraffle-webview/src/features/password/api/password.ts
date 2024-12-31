@@ -30,17 +30,7 @@ export const useResetPassword = () => {
     },
   });
 
-  const requestResetPassword = (
-    query: PasswordResetRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
-  ) => {
-    return mutation.mutate(query, {onSuccess, onError});
-  };
-
-  return requestResetPassword;
+  return {requestResetPassword: mutation.mutate};
 };
 
 /**
@@ -66,15 +56,5 @@ export const useSendEmail = () => {
     },
   });
 
-  const requestSendEmail = (
-    query: string,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
-  ) => {
-    return mutation.mutate(query, {onSuccess, onError});
-  };
-
-  return requestSendEmail;
+  return {requestSendEmail: mutation.mutate};
 };

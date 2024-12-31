@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -23,20 +24,22 @@ const ShareDialog = () => {
               onClick={() => console.log('Instagram Share')}
               className='flex items-center justify-center'
             >
-              <img
+              <Image
                 src='https://i.ibb.co/MDMTKFq/insta.png'
                 alt='Instagram'
-                className='h-[38px] w-[38px]'
+                width={38}
+                height={38}
               />
             </button>
             <button
               onClick={() => console.log('KakaoTalk Share')}
               className='flex items-center justify-center'
             >
-              <img
+              <Image
                 src='https://i.ibb.co/fv4T4x6/kakaotalk.png'
                 alt='Kakao'
-                className='h-[38px] w-[38px]'
+                width={38}
+                height={38}
               />
             </button>
             <button
@@ -45,10 +48,11 @@ const ShareDialog = () => {
               }
               className='flex items-center justify-center'
             >
-              <img
+              <Image
                 src='https://i.ibb.co/PjjqhMq/link.png'
                 alt='Copy Link'
-                className='h-[38px] w-[38px]'
+                width={38}
+                height={38}
               />
             </button>
           </div>
