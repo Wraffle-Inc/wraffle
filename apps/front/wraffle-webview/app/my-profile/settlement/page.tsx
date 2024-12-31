@@ -25,7 +25,7 @@ const SettlementPage = () => {
 
       <div className='p-8'>
         <div className='flex'>
-          <div>
+          <div className='flex items-center'>
             <Typography size='h2'>{nickname}님</Typography>
             <Typography size='h3'>의 정산</Typography>
           </div>

@@ -1,9 +1,10 @@
 'use client';
 
 import {useGetUserInfo} from '@/features/my-profile/api/user';
+import SettlementDialogButton from '@/features/my-profile/ui/SettlementDialogButton';
 import {Header} from '@/shared/ui';
 import {SingleInfoBox} from '@/widgets/my-profile/ui/InfoBox';
-import {Button, Typography} from '@wraffle/ui';
+import {Typography} from '@wraffle/ui';
 
 const SettlementAccountPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
@@ -13,7 +14,7 @@ const SettlementAccountPage = () => {
 
   const isAccountExist = bankName && bankAccount;
 
-  const title = isAccountExist ? '정산 계좌 수정' : '정산 계좌 등록';
+  const type = isAccountExist ? '수정' : '등록';
 
   return (
     <div>
@@ -23,14 +24,14 @@ const SettlementAccountPage = () => {
         </Header.Left>
         <Header.Middle>
           <Typography size='h4' color='zinc700'>
-            {title}
+            정산 계좌 {type}
           </Typography>
         </Header.Middle>
       </Header>
 
       <div className='p-8'>
         <div className='flex'>
-          <div>
+          <div className='flex items-center'>
             <Typography size='h2'>{nickname}님</Typography>
             <Typography size='h3'>의 정산 계좌</Typography>
           </div>
@@ -52,7 +53,11 @@ const SettlementAccountPage = () => {
         </div>
 
         <div className='mt-6'>
-          <Button>{title}하기</Button>
+          <SettlementDialogButton
+            type={type}
+            bankName={bankName}
+            bankAccount={bankAccount}
+          />
         </div>
       </div>
     </div>
