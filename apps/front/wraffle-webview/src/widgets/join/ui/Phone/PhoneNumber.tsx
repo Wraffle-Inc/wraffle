@@ -1,5 +1,5 @@
 import type {JoinPayload} from '../../config';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {useFormContext} from 'react-hook-form';
 import {RequestCode} from '@/features/validate-phone/ui/RequestCode';
 import {Button, Typography} from '@wraffle/ui';
@@ -17,9 +17,12 @@ const PhoneNumber = ({onNext}: PhoneNumberProps) => {
 
   const [isVerified, handleIsVerified] = useState(false);
 
-  const handlePhoneNumber = (phone: string) => {
-    setValue('phoneNumber', phone, {shouldValidate: true});
-  };
+  const handlePhoneNumber = useCallback(
+    (phone: string) => {
+      setValue('phoneNumber', phone, {shouldValidate: true});
+    },
+    [setValue],
+  );
 
   return (
     <div>

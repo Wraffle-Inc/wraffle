@@ -1,7 +1,7 @@
 import {useRequestCode} from '../api/request';
 import type {RequestCodeRequest} from '../config/type';
 import type {Dispatch, SetStateAction} from 'react';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import type {FieldError} from 'react-hook-form';
 import {useAutoFocus, useInput} from '@/shared/hook';
 import {handleMaxLength} from '@/shared/util';
@@ -30,20 +30,23 @@ const RequestCode = ({
 
   const {requestCode} = useRequestCode();
 
-  const handleRequestCode = ({phoneNumber}: RequestCodeRequest) => {
-    requestCode(
-      {phoneNumber},
-      {
-        onSuccess: () => {
-          onChangeIsVerified(true);
+  const handleRequestCode = useCallback(
+    ({phoneNumber}: RequestCodeRequest) => {
+      requestCode(
+        {phoneNumber},
+        {
+          onSuccess: () => {
+            onChangeIsVerified(true);
+          },
+          onError: (error: Error) => {
+            setErrorMessage(error.message);
+            onChangeIsVerified(false);
+          },
         },
-        onError: (error: Error) => {
-          setErrorMessage(error.message);
-          onChangeIsVerified(false);
-        },
-      },
-    );
-  };
+      );
+    },
+    [onChangeIsVerified, requestCode],
+  );
 
   const isValid =
     first &&
@@ -59,7 +62,15 @@ const RequestCode = ({
       onChangePhoneNumber(phoneNumber);
       handleRequestCode({phoneNumber});
     }
-  }, [first, middle, last]);
+  }, [
+    first,
+    handleRequestCode,
+    isValid,
+    last,
+    middle,
+    onChangeIsVerified,
+    onChangePhoneNumber,
+  ]);
 
   return (
     <InputField>

@@ -35,7 +35,7 @@ const Info = ({onNext}: InfoProps) => {
     if (touchedFields.password) {
       trigger('confirmPassword');
     }
-  }, [password]);
+  }, [password, touchedFields.password, trigger]);
 
   return (
     <div>

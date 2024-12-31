@@ -15,15 +15,5 @@ export const useVerifyCode = () => {
     },
   });
 
-  const verifyCode = (
-    query: VerifyCodeRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
-  ) => {
-    return mutation.mutate(query, {onSuccess, onError});
-  };
-
-  return {verifyCode};
+  return {verifyCode: mutation.mutate};
 };

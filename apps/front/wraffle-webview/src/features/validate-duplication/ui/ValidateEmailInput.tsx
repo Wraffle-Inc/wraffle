@@ -1,42 +1,33 @@
 import {useValidateDuplication} from '../api/validate';
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {emailSchema} from '@/entities/auth';
 import {useDebounce} from '@/shared/hook';
 import {RHFInput} from '@/shared/ui';
 import type {JoinPayload} from '@/widgets/join/config';
 
 const ValidateEmailInput = () => {
-  const {
-    formState: {errors},
-    trigger,
-    watch,
-    setError,
-    clearErrors,
-  } = useFormContext<JoinPayload>();
+  const {watch, setError, clearErrors, trigger} = useFormContext<JoinPayload>();
 
   const email = watch('email');
   const debouncedEmail = useDebounce(email);
 
-  const {validateDuplication: validateEmailDuplication} =
-    useValidateDuplication();
+  const {validateDuplication: validateEmailApi} = useValidateDuplication();
 
-  useEffect(() => {
-    const validateEmailSchema = async () => {
-      const isValid = await trigger('email');
-      if (isValid && email) {
-        setError('email', {
-          type: 'validate',
-          message: '이메일 중복 검사가 진행 중입니다.',
-        });
-      }
-    };
-    if (!email) return;
-    validateEmailSchema();
-  }, [email]);
+  const validateEmailSchema = useCallback(async () => {
+    const isValid = await trigger('email');
+    if (isValid) {
+      setError('email', {
+        type: 'validate',
+        message: '이메일 중복 검사가 진행 중입니다.',
+      });
+    }
+  }, [setError, trigger]);
 
-  useEffect(() => {
-    if (debouncedEmail && errors.email?.type === 'validate') {
-      validateEmailDuplication(
+  const validateEmailDuplication = useCallback(async () => {
+    const isValidSchema = await emailSchema.safeParseAsync(debouncedEmail);
+    if (isValidSchema.success && debouncedEmail) {
+      validateEmailApi(
         {email: debouncedEmail},
         {
           onSuccess: () => {
@@ -48,7 +39,16 @@ const ValidateEmailInput = () => {
         },
       );
     }
-  }, [debouncedEmail]);
+  }, [clearErrors, debouncedEmail, setError, validateEmailApi]);
+
+  useEffect(() => {
+    if (!email) return;
+    validateEmailSchema();
+  }, [email, validateEmailSchema]);
+
+  useEffect(() => {
+    validateEmailDuplication();
+  }, [validateEmailDuplication]);
 
   return (
     <RHFInput

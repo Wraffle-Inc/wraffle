@@ -6,7 +6,7 @@ import {
 } from '@/entities/auth/schema';
 import {getDefaults} from '@/shared/util';
 
-const confirmPasswordSchema = z
+export const confirmPasswordSchema = z
   .string()
   .regex(
     passwordRegex,
@@ -14,40 +14,40 @@ const confirmPasswordSchema = z
   )
   .default('');
 
-const nameSchema = z
+export const nameSchema = z
   .string()
   .min(1, {message: '이름을 입력해 주세요.'})
   .default('');
 
-const nicknameSchema = z
+export const nicknameSchema = z
   .string()
   .min(1, {message: '닉네임을 입력해 주세요.'})
   .default('');
 
-const phoneNumberSchema = z
+export const phoneNumberSchema = z
   .string()
   .min(1, {message: '전화번호를 입력해 주세요.'})
   .default('');
 
-const isAgreedSchema = z
+export const isAgreedSchema = z
   .boolean()
   .default(false)
   .refine(val => val === true, {
     message: '필수 선택입니다.',
   });
-const isPrivacyAgreedSchema = z
+export const isPrivacyAgreedSchema = z
   .boolean()
   .default(false)
   .refine(val => val === true, {
     message: '필수 선택입니다.',
   });
-const isThirdAgreedSchema = z
+export const isThirdAgreedSchema = z
   .boolean()
   .default(false)
   .refine(val => val === true, {
     message: '필수 선택입니다.',
   });
-const isMarketingAgreedSchema = z.boolean().optional().default(false);
+export const isMarketingAgreedSchema = z.boolean().optional().default(false);
 
 export const joinSchema = z
   .object({

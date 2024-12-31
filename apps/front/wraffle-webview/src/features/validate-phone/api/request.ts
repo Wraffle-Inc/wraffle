@@ -11,15 +11,5 @@ export const useRequestCode = () => {
     },
   });
 
-  const requestCode = (
-    query: RequestCodeRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
-  ) => {
-    return mutation.mutate(query, {onSuccess, onError});
-  };
-
-  return {requestCode};
+  return {requestCode: mutation.mutate};
 };
