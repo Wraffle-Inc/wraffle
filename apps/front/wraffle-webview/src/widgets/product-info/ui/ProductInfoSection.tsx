@@ -32,8 +32,16 @@ export const ProductMainSection = ({
                 <Tag key={tag.id}>{tag.name}</Tag>
               ))}
             </div>
-            <button onClick={() => router.push('/[id]/edit')}>
-              <Icon name='write' className='ml-auto' width={18} height={18} />
+            <button
+              onClick={() =>
+                router.push(
+                  `${productData.id}/edit?type=${'raffle' in productData ? 'raffle' : 'event'}`,
+                )
+              }
+            >
+              {isCreator ? (
+                <Icon name='write' className='ml-auto' width={18} height={18} />
+              ) : null}
             </button>
           </div>
           <div className='flex flex-col gap-1'>
