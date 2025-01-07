@@ -3,12 +3,12 @@ import {Header} from '@/shared/ui';
 import {CategoryList} from '@/widgets/category-list/ui';
 import {BottomNavigation, Icon, Typography} from '@wraffle/ui';
 
-export default function Home() {
+const CategoryPage = () => {
   return (
-    <main className='h-auto pb-16'>
+    <div className='h-auto pb-16'>
       <Header withUnderline>
         <Header.Left>
-          <Icon name='arrow-left' />
+          <Header.BackButton />
         </Header.Left>
         <Header.Middle>
           <Typography size='h6'>카테고리</Typography>
@@ -21,6 +21,8 @@ export default function Home() {
         <CategoryList categories={categories} />
       </section>
       <BottomNavigation />
-    </main>
+    </div>
   );
-}
+};
+
+export default CategoryPage;
