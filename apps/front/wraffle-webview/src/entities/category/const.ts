@@ -73,4 +73,28 @@ export const categories: CategoryItem[] = [
     parentId: null,
     depth: 1,
   },
+  {
+    id: 17,
+    name: 'Apple',
+    parentId: 1,
+    depth: 2,
+  },
+  {
+    id: 18,
+    name: 'Samsung',
+    parentId: 1,
+    depth: 2,
+  },
+  {
+    id: 19,
+    name: 'Xiao-Mi',
+    parentId: 1,
+    depth: 2,
+  },
+  {
+    id: 20,
+    name: 'LG',
+    parentId: 1,
+    depth: 2,
+  },
 ];
