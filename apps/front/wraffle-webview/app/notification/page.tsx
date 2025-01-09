@@ -1,6 +1,8 @@
 import {Suspense} from 'react';
+import {getNotificationInfiniteQueryOptions} from '@/features/get-notification/config';
+import {PrefetchBoundary} from '@/shared/context/query/PrefetchBoundary';
 import {Header} from '@/shared/ui';
-import {PrefetchNotificationList} from '@/widgets/notification-list/ui';
+import {NotificationList} from '@/widgets/notification-list/ui';
 import {Icon} from '@wraffle/ui';
 
 const NotificationPage = () => {
@@ -18,7 +20,11 @@ const NotificationPage = () => {
         </Header.Right>
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
-        <PrefetchNotificationList />
+        <PrefetchBoundary
+          prefetchOptions={getNotificationInfiniteQueryOptions({params: {}})}
+        >
+          <NotificationList />
+        </PrefetchBoundary>
       </Suspense>
     </>
   );
