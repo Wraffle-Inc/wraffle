@@ -21,7 +21,9 @@ const NotificationPage = () => {
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
         <PrefetchBoundary
-          prefetchOptions={getNotificationInfiniteQueryOptions({params: {}})}
+          prefetchOptions={getNotificationInfiniteQueryOptions({
+            params: {itemsPerPage: 10},
+          })}
         >
           <NotificationList />
         </PrefetchBoundary>

@@ -23,6 +23,7 @@ export const useHandleNotifications = ({params}: GetNotificationListParams) => {
 
   return {
     notificationData,
+    hasNextNotification,
     onFetchNextNotifications,
   };
 };

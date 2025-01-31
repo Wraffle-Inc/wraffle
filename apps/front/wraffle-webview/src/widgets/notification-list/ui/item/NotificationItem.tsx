@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {formatDate} from '@/shared/util';
 import {Typography} from '@wraffle/ui';
 
 interface NotificationItemProps {
@@ -25,7 +26,8 @@ export const NotificationItem = ({
       <div className='flex w-full flex-col justify-between'>
         <div className='flex flex-col items-start'>
           <Typography
-            className='line-clamp-1 text-ellipsis text-[16px] text-[#212121]'
+            className='line-clamp-1 text-ellipsis'
+            size='h5'
             color='zinc800'
           >
             {title}
@@ -38,7 +40,9 @@ export const NotificationItem = ({
             {description}
           </Typography>
         </div>
-        <Typography className='text-[10px] text-[#BDBDBD]'>{date}</Typography>
+        <Typography className='text-[#BDBDBD]' size='sm2'>
+          {formatDate(date, 'YYYY년 M월 D일')}
+        </Typography>
       </div>
 
       {!!imageUrl && (
