@@ -12,7 +12,7 @@ export const getNotificationInfiniteQueryOptions = ({
   params,
 }: GetNotificationListParams): BasicSuspenseInifniteQueryOptions<GetNotificationListResponse> => ({
   queryKey: GET_NOTIFICATION_LIST_KEY(params),
-  queryFn: ({pageParam = params.cursorId}) =>
+  queryFn: ({pageParam}) =>
     getNotificationListAPI({
       ...params,
       cursorId: pageParam as number | undefined,
