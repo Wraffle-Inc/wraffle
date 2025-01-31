@@ -5,10 +5,14 @@ import {NotificationItem} from '../item/NotificationItem';
 import {InfiniteScroll} from '@/shared/ui';
 
 export const NotificationList = () => {
-  const {notificationData, hasNextNotification, onFetchNextNotifications} =
-    useHandleNotifications({
-      params: {itemsPerPage: 10},
-    });
+  const {
+    notificationData,
+    hasNextNotification,
+    onReadNotification,
+    onFetchNextNotifications,
+  } = useHandleNotifications({
+    params: {itemsPerPage: 10},
+  });
   return (
     <div className='flex flex-col divide-y divide-[#E0E0E0]'>
       <InfiniteScroll
@@ -22,6 +26,8 @@ export const NotificationList = () => {
             title={notification.title}
             description={notification.content}
             date={notification.createdAt}
+            isRead={notification.isRead}
+            handleReadNotification={onReadNotification}
           />
         ))}
       </InfiniteScroll>

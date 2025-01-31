@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import {formatDate} from '@/shared/util';
-import {Typography} from '@wraffle/ui';
+import {cn, Typography} from '@wraffle/ui';
 
 interface NotificationItemProps {
   id: number;
@@ -9,6 +8,8 @@ interface NotificationItemProps {
   description: string;
   date: string;
   imageUrl?: string;
+  isRead: boolean;
+  handleReadNotification: (id: number) => void;
 }
 
 export const NotificationItem = ({
@@ -17,11 +18,16 @@ export const NotificationItem = ({
   description,
   date,
   imageUrl,
+  isRead,
+  handleReadNotification,
 }: NotificationItemProps) => {
   return (
-    <Link
-      href={`/notification/${id}`}
-      className='flex min-h-[70px] w-full flex-row items-center justify-between gap-[10px] px-5 py-1'
+    <div
+      className={cn(
+        'flex min-h-[70px] w-full flex-row items-center justify-between gap-[10px] px-5 py-1',
+        {'bg-[#E8F1FE]': !isRead},
+      )}
+      onClick={() => handleReadNotification(id)}
     >
       <div className='flex w-full flex-col justify-between'>
         <div className='flex flex-col items-start'>
@@ -56,6 +62,6 @@ export const NotificationItem = ({
           />
         </div>
       )}
-    </Link>
+    </div>
   );
 };

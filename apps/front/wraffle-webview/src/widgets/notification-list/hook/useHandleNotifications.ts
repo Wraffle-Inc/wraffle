@@ -1,8 +1,16 @@
-import {useMemo} from 'react';
+import {useRouter} from 'next/navigation';
+import {useCallback, useMemo} from 'react';
 import type {GetNotificationListParams} from '@/features/get-notification/api';
-import {useGETNotificationListQuery} from '@/features/get-notification/api';
+import {
+  useGETNotificationListQuery,
+  usePATCHNotificationQuery,
+} from '@/features/get-notification/api';
+import {useQueryClient} from '@tanstack/react-query';
 
 export const useHandleNotifications = ({params}: GetNotificationListParams) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const {
     data,
     fetchNextPage: fetchNextNotification,
@@ -10,20 +18,35 @@ export const useHandleNotifications = ({params}: GetNotificationListParams) => {
     isFetchingNextPage: isFetchingNextNotification,
   } = useGETNotificationListQuery({params});
 
+  const {readNotificatoin} = usePATCHNotificationQuery();
+
   const notificationData = useMemo(
     () => data.pages.flatMap(page => page.items),
     [data],
   );
 
-  const onFetchNextNotifications = () => {
+  const onReadNotification = useCallback(
+    (id: number) => {
+      readNotificatoin(id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({queryKey: ['GET_NOTIFICATION_LIST']});
+          router.push(`/notification/${id}`);
+        },
+      });
+    },
+    [queryClient, readNotificatoin, router],
+  );
+
+  const onFetchNextNotifications = useCallback(() => {
     if (hasNextNotification && !isFetchingNextNotification) {
       fetchNextNotification();
     }
-  };
+  }, [fetchNextNotification, hasNextNotification, isFetchingNextNotification]);
 
   return {
     notificationData,
     hasNextNotification,
+    onReadNotification,
     onFetchNextNotifications,
   };
 };

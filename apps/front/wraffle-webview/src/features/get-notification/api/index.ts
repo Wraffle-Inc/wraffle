@@ -2,7 +2,7 @@ import {getNotificationInfiniteQueryOptions} from '../config';
 import type {Notification} from '@/entities/notification';
 import type {CursorPagination} from '@/entities/pagination';
 import apiClient from '@/shared/api/apiClient';
-import {useSuspenseInfiniteQuery} from '@tanstack/react-query';
+import {useMutation, useSuspenseInfiniteQuery} from '@tanstack/react-query';
 
 export interface GetNotificationListRequest {
   itemsPerPage?: number;
@@ -38,6 +38,10 @@ export const getNotificationListAPI = async (
   return response.data;
 };
 
+export const patchNotificationAPI = async (notificationId: number) => {
+  await apiClient.patch(`/push-notices/${notificationId}`, {withAuth: true});
+};
+
 export const GET_NOTIFICATION_LIST_KEY = (
   params: GetNotificationListRequest,
 ) => ['GET_NOTIFICATION_LIST', params.cursorId, params.itemsPerPage];
@@ -54,4 +58,12 @@ export const useGETNotificationListQuery = ({
       return undefined;
     },
   });
+};
+
+export const usePATCHNotificationQuery = () => {
+  const mutation = useMutation({
+    mutationFn: patchNotificationAPI,
+  });
+
+  return {readNotificatoin: mutation.mutate};
 };

@@ -21,6 +21,7 @@ export interface Notification {
   updatedAt: string;
   deletedAt: string | null;
   isDeleted: boolean;
+  isRead: boolean;
   userId: number;
   title: string;
   content: string;
