@@ -3,9 +3,10 @@ import {RecentRaffles} from '@/features/manage-raffle/config';
 import {Banner} from '@/features/manage-raffle/ui';
 import {Header} from '@/shared/ui';
 import {CategoryButtons} from '@/widgets/category-list/ui';
+import {NotificationIcon} from '@/widgets/notification-list/ui';
 import {recommendItems} from '@/widgets/recommend-list/config';
 import {RecommendList} from '@/widgets/recommend-list/ui';
-import {BottomNavigation, Icon} from '@wraffle/ui';
+import {BottomNavigation} from '@wraffle/ui';
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
           <Header.Logo />
         </Header.Left>
         <Header.Right>
-          <Icon name='bell' />
+          <NotificationIcon path='/notification' />
         </Header.Right>
       </Header>
       <section className='my-4'>

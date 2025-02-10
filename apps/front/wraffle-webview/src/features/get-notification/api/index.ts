@@ -6,7 +6,7 @@ import {useMutation, useSuspenseInfiniteQuery} from '@tanstack/react-query';
 
 export interface GetNotificationListRequest {
   itemsPerPage?: number;
-  cursorId?: number;
+  cursor?: string;
 }
 
 export interface GetNotificationListResponse {
@@ -44,7 +44,7 @@ export const patchNotificationAPI = async (notificationId: number) => {
 
 export const GET_NOTIFICATION_LIST_KEY = (
   params: GetNotificationListRequest,
-) => ['GET_NOTIFICATION_LIST', params.cursorId, params.itemsPerPage];
+) => ['GET_NOTIFICATION_LIST', params.cursor, params.itemsPerPage];
 
 export const useGETNotificationListQuery = ({
   params,

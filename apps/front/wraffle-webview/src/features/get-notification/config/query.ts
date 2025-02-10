@@ -15,7 +15,7 @@ export const getNotificationInfiniteQueryOptions = ({
   queryFn: ({pageParam}) =>
     getNotificationListAPI({
       ...params,
-      cursorId: pageParam as number | undefined,
+      cursor: pageParam as string | undefined,
     }),
-  initialPageParam: params.cursorId,
+  initialPageParam: params.cursor,
 });

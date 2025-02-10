@@ -3,7 +3,6 @@ import {getNotificationInfiniteQueryOptions} from '@/features/get-notification/c
 import {PrefetchBoundary} from '@/shared/context/query/PrefetchBoundary';
 import {Header} from '@/shared/ui';
 import {NotificationList} from '@/widgets/notification-list/ui';
-import {Icon} from '@wraffle/ui';
 
 const NotificationPage = () => {
   return (
@@ -15,9 +14,6 @@ const NotificationPage = () => {
         <Header.Middle>
           <Header.Title className='text-center'>푸시 알림</Header.Title>
         </Header.Middle>
-        <Header.Right>
-          <Icon name='arrow-bottom' />
-        </Header.Right>
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
         <PrefetchBoundary
