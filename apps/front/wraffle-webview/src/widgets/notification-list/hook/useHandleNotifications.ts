@@ -18,7 +18,7 @@ export const useHandleNotifications = ({params}: GetNotificationListParams) => {
     isFetchingNextPage: isFetchingNextNotification,
   } = useGETNotificationListQuery({params});
 
-  const {readNotificatoin} = usePATCHNotificationQuery();
+  const {readNotification} = usePATCHNotificationQuery();
 
   const notificationData = useMemo(
     () => data.pages.flatMap(page => page.items),
@@ -27,14 +27,14 @@ export const useHandleNotifications = ({params}: GetNotificationListParams) => {
 
   const onReadNotification = useCallback(
     (id: number) => {
-      readNotificatoin(id, {
+      readNotification(id, {
         onSuccess: () => {
           queryClient.invalidateQueries({queryKey: ['GET_NOTIFICATION_LIST']});
           router.push(`/notification/${id}`);
         },
       });
     },
-    [queryClient, readNotificatoin, router],
+    [queryClient, readNotification, router],
   );
 
   const onFetchNextNotifications = useCallback(() => {
