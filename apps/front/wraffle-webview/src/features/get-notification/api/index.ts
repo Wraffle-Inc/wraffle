@@ -65,5 +65,5 @@ export const usePATCHNotificationQuery = () => {
     mutationFn: patchNotificationAPI,
   });
 
-  return {readNotificatoin: mutation.mutate};
+  return {readNotification: mutation.mutate};
 };
