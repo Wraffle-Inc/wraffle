@@ -21,8 +21,8 @@ export const NotificationList = () => {
       >
         {notificationData.map(notification => (
           <NotificationItem
-            id={notification.id}
             key={notification.id}
+            id={notification.id}
             title={notification.title}
             description={notification.content}
             date={notification.createdAt}

@@ -46,7 +46,7 @@ export const NotificationItem = ({
             {description}
           </Typography>
         </div>
-        <Typography className='text-[#BDBDBD]' size='sm2'>
+        <Typography className='text-[#BDBDBD]' size='sm1'>
           {formatDate(date, 'YYYY년 M월 D일')}
         </Typography>
       </div>

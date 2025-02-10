@@ -17,6 +17,7 @@ type ScopeType = (typeof ScopeList)[number];
 
 export interface Notification {
   id: number;
+  uuid: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
