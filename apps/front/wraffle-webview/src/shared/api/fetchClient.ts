@@ -1,11 +1,19 @@
 import {getSession} from '../util/auth/server';
 import {type ApiResponseError, type ApiResponseWithData} from './type';
 
-type FetchOptions<TBody = unknown> = Omit<RequestInit, 'headers' | 'body'> & {
+type Params<T = unknown> = {
+  [K in keyof T]?: string | number | boolean | null | undefined;
+};
+
+type FetchOptions<TBody = unknown, TParams = unknown> = Omit<
+  RequestInit,
+  'headers' | 'body'
+> & {
   headers?: Record<string, string>;
   body?: TBody;
   withAuth?: boolean;
   contentType?: string;
+  params?: Params<TParams>;
 };
 
 export class FetchClient {
@@ -38,6 +46,7 @@ export class FetchClient {
       contentType = 'application/json',
       headers,
       body,
+      params,
       ...restOptions
     } = options;
 
@@ -57,7 +66,18 @@ export class FetchClient {
       ),
     );
 
-    const response = await fetch(`${this.baseUrl}${url}`, {
+    const fetchUrl = `${this.baseUrl}${url}${
+      params &&
+      '?' +
+        new URLSearchParams(
+          Object.entries(params)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            .filter(([_, value]) => value != null)
+            .map(([key, value]) => [key, String(value)]),
+        ).toString()
+    }`;
+
+    const response = await fetch(fetchUrl, {
       ...restOptions,
       headers: allHeaders,
       body: body ? JSON.stringify(body) : undefined,
