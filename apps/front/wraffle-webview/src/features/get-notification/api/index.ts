@@ -21,13 +21,9 @@ export interface GetNotificationListParams {
 export const getNotificationListAPI = async (
   params: GetNotificationListRequest,
 ) => {
-  const query = new URLSearchParams(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    Object.entries(params).filter(([_, value]) => value != null),
-  ).toString();
   const response = await apiClient.get<GetNotificationListResponse>(
-    `/push-notices/me?${query}`,
-    {withAuth: true},
+    `/push-notices/me`,
+    {withAuth: true, params},
   );
 
   return response.data;
