@@ -21,15 +21,10 @@ export interface GetNotificationListParams {
 export const getNotificationListAPI = async (
   params: GetNotificationListRequest,
 ) => {
-  const query = Object.entries(params)
-    .reduce((acc, [key, value]) => {
-      if (value !== undefined && value !== null) {
-        acc.push(`${key}=${value}`);
-      }
-      return acc;
-    }, [] as string[])
-    .join('&');
-
+  const query = new URLSearchParams(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(params).filter(([_, value]) => value != null),
+  ).toString();
   const response = await apiClient.get<GetNotificationListResponse>(
     `/push-notices/me?${query}`,
     {withAuth: true},
