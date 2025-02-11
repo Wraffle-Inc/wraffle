@@ -35,7 +35,7 @@ export const patchNotificationAPI = async (notificationId: number) => {
 
 export const GET_NOTIFICATION_LIST_KEY = (
   params: GetNotificationListRequest,
-) => ['GET_NOTIFICATION_LIST', params.cursor, params.itemsPerPage];
+) => ['GET_NOTIFICATION_LIST', params];
 
 export const useGETNotificationListQuery = ({
   params,
