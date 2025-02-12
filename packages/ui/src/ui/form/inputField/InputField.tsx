@@ -8,9 +8,10 @@ import {
 
 export interface InputFieldProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const InputField = ({children}: InputFieldProps) => {
+const InputField = ({children, className}: InputFieldProps) => {
   const labelComponent = findComponentFromChildren(children, Label);
   const errorMessageComponent = findComponentFromChildren(
     children,
@@ -18,7 +19,7 @@ const InputField = ({children}: InputFieldProps) => {
   );
   const restComponents = findRestFromChildren(children, [Label, ErrorMessage]);
   return (
-    <div>
+    <div className={className}>
       <div className='mb-2'>{labelComponent}</div>
       <div className='inline-flex w-full gap-4'>{restComponents}</div>
       <div className='mt-1 min-h-6'>{errorMessageComponent}</div>

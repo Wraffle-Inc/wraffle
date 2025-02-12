@@ -10,12 +10,18 @@ import {InputField, Select} from '@wraffle/ui';
 const MAX_INPUT_LENGTH = 4;
 
 interface RequestCodeProps {
+  defaultValue?: {
+    first: string;
+    middle: string;
+    last: string;
+  };
   onChangePhoneNumber: (phone: string) => void;
   onChangeIsVerified: Dispatch<SetStateAction<boolean>>;
   error?: FieldError;
 }
 
 const RequestCode = ({
+  defaultValue = {first: '', middle: '', last: ''},
   onChangePhoneNumber,
   onChangeIsVerified,
   error,
@@ -23,9 +29,9 @@ const RequestCode = ({
   const [middleInputRef, handleMiddleKeyUp] = useAutoFocus(MAX_INPUT_LENGTH);
   const [lastInputRef, handleLastKeyUp] = useAutoFocus(MAX_INPUT_LENGTH);
 
-  const [first, setFirst] = useState('');
-  const [middle, handleMiddle] = useInput('');
-  const [last, handleLast] = useInput('');
+  const [first, setFirst] = useState(defaultValue.first);
+  const [middle, handleMiddle] = useInput(defaultValue.middle);
+  const [last, handleLast] = useInput(defaultValue.last);
   const [errorMessage, setErrorMessage] = useState('');
 
   const {requestCode} = useRequestCode();
@@ -76,6 +82,7 @@ const RequestCode = ({
     <InputField>
       <InputField.Label htmlFor='phone'>휴대폰 번호*</InputField.Label>
       <Select
+        defaultValue={defaultValue ? defaultValue.first : ''}
         onValueChange={value => setFirst(value)}
         placeholder='선택'
         items={[

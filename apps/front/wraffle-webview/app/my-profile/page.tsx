@@ -8,7 +8,7 @@ import IconWithLabel from '@wraffle/ui/src/ui/iconWithLabel/IconWithLabel';
 
 const MyProfilePage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
-  const nickname = userInfoResponse?.nickname || '';
+  const nickname = userInfoResponse?.data.nickname || '';
 
   return (
     <div>
