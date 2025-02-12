@@ -1,4 +1,4 @@
-import {Label} from '../form';
+import {Label} from '../form/label/Label';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 
 interface RadioGroupProps {
