@@ -22,6 +22,7 @@ const menuItems: ItemType[] = [
 ];
 
 const BottomNavigation = () => {
+  const router = useRouter();
   const [selectedIcon, setSelectedIcon] = useState<string>('홈');
 
   const handleClickIcon = ({label, path}: {label: string; path: string}) => {

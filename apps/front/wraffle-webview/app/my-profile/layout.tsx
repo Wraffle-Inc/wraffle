@@ -12,8 +12,6 @@ export default function Layout({children}: Props) {
     <>
       <main>
         {children}
-        {/* <Footer /> */}
-
         <BottomNavigation />
       </main>
     </>
