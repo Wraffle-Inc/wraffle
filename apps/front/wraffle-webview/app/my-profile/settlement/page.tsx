@@ -2,13 +2,16 @@
 
 import Link from 'next/link';
 import {useGetUserInfo} from '@/features/my-profile/api/user';
+import RequestSettlementDialogButton from '@/features/my-profile/ui/RequestSettlementDialogButton';
 import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
-import {Button, Typography} from '@wraffle/ui';
+import {Typography} from '@wraffle/ui';
 
 const SettlementPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
-  const nickname = userInfoResponse?.nickname || '';
+  const nickname = userInfoResponse?.data.nickname || '';
+
+  const availableAmount = userInfoResponse?.data.availableSettlementPrice || 0;
 
   return (
     <div>
@@ -47,7 +50,7 @@ const SettlementPage = () => {
         </div>
 
         <div className='mt-6'>
-          <Button>정산 요청하기</Button>
+          <RequestSettlementDialogButton availableAmount={availableAmount} />
         </div>
       </div>
     </div>

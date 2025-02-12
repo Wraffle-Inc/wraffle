@@ -25,16 +25,18 @@ const SettlementDialogButton = ({
   bankName,
   bankAccount,
 }: SettlementDialogProps) => {
-  const [bank, setBankName] = useState(bankName || '');
-  const [account, setBankAccount] = useState(bankAccount || '');
+  const [bank, setBankName] = useState('');
+  const [account, setBankAccount] = useState('');
 
-  console.log('bank', bank);
-  console.log('account', account);
+  const handleButtonClick = () => {
+    setBankName(bankName || '');
+    setBankAccount(bankAccount || '');
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>정산 계좌 {type}하기</Button>
+        <Button onClick={handleButtonClick}>정산 계좌 {type}하기</Button>
       </DialogTrigger>
       <form>
         <DialogContent>

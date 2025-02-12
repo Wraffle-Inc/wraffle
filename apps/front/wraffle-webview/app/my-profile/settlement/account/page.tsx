@@ -8,9 +8,9 @@ import {Typography} from '@wraffle/ui';
 
 const SettlementAccountPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
-  const nickname = userInfoResponse?.nickname || '';
-  const bankName = userInfoResponse?.settlementBankName || '';
-  const bankAccount = userInfoResponse?.settlementBankAccount || '';
+  const nickname = userInfoResponse?.data.nickname || '';
+  const bankName = userInfoResponse?.data.settlementBankName || '';
+  const bankAccount = userInfoResponse?.data.settlementBankAccount || '';
 
   const isAccountExist = bankName && bankAccount;
 
