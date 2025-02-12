@@ -9,6 +9,7 @@ export * from './form';
 export * from './icon/Icon';
 export * from './icon/IconLoader';
 export * from './iconWithLabel/IconWithLabel';
+export * from './label/Label';
 export * from './radioGroup/RadioGroup';
 export * from './raffle-card';
 export * from './switch/Switch';

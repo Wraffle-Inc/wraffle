@@ -1,4 +1,4 @@
-import {Label} from '../form';
+import {Label} from '../form/label/Label';
 import clsx from 'clsx';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import {CheckIcon} from '@radix-ui/react-icons';
