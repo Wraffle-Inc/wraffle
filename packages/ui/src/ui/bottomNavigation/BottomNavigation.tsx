@@ -1,8 +1,7 @@
 'use client';
 
 import IconWithLabel from '../iconWithLabel/IconWithLabel';
-import {useRouter} from 'next/navigation';
-import {useState} from 'react';
+import {usePathname, useRouter} from 'next/navigation';
 import type {IconNameTypes} from '@wds/ui/icon/Icon';
 import {Icon} from '@wds/ui/icon/Icon';
 
@@ -12,27 +11,29 @@ type ItemType = {
   path: string;
 };
 
-// TODO: 내정보 제외한 아이콘들은 path를 추가해야 함
+// TODO: 내정보 제외한 아이콘들은 path를 수정해야 함
 const menuItems: ItemType[] = [
-  {name: 'menu', label: '카테고리', path: ''},
-  {name: 'search', label: '검색', path: ''},
-  {name: 'home', label: '홈', path: ''},
-  {name: 'gift', label: '래플', path: ''},
+  {name: 'menu', label: '카테고리', path: '/category'},
+  {name: 'search', label: '검색', path: '/search'},
+  {name: 'home', label: '홈', path: '/'},
+  {name: 'gift', label: '래플', path: '/wraffle'},
   {name: 'user-circle', label: '내정보', path: '/my-profile'},
 ];
 
 const BottomNavigation = () => {
   const router = useRouter();
-  const [selectedIcon, setSelectedIcon] = useState<string>('홈');
+  const pathname = usePathname();
 
-  const handleClickIcon = ({label, path}: {label: string; path: string}) => {
-    setSelectedIcon(label);
-    localStorage.setItem('currentTab', label);
+  const handleClickIcon = (path: string) => {
     router.push(path);
   };
 
-  const isSelectedIcon = (label: string) => {
-    return selectedIcon === label;
+  const isSelectedIcon = (path: string) => {
+    if (path === '/') {
+      return pathname === path;
+    }
+
+    return pathname.startsWith(path);
   };
 
   return (
@@ -43,8 +44,8 @@ const BottomNavigation = () => {
             key={label}
             label={label}
             Icon={<Icon name={name} />}
-            className={isSelectedIcon(label) ? 'text-black' : 'text-[#71717A]'}
-            onClick={() => handleClickIcon({label, path})}
+            className={isSelectedIcon(path) ? 'text-black' : 'text-[#71717A]'}
+            onClick={() => handleClickIcon(path)}
           />
         ))}
       </nav>
