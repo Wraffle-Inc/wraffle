@@ -2,18 +2,18 @@ import {Typography} from '../typography/Typography';
 import type {Sizes} from '../typography/prop/text.prop';
 import {cn} from '@wds/shared/utils';
 
-interface LabelProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ColorLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: string;
   size?: Sizes;
 }
 
-const Label = ({
+const ColorLabel = ({
   children,
   className,
   color = '#4338CA',
   size = 'sm1',
   ...props
-}: LabelProps) => {
+}: ColorLabelProps) => {
   return (
     <div
       className={cn(
@@ -30,4 +30,4 @@ const Label = ({
   );
 };
 
-export {Label};
+export {ColorLabel};

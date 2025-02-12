@@ -1,9 +1,9 @@
-import {Label} from './Label';
+import {ColorLabel} from './ColorLabel';
 import type {Meta, StoryFn} from '@storybook/react';
 
-const meta: Meta<typeof Label> = {
-  title: 'Components/Label',
-  component: Label,
+const meta: Meta<typeof ColorLabel> = {
+  title: 'Components/ColorLabel',
+  component: ColorLabel,
   argTypes: {
     color: {
       description: '텍스트 색상',
@@ -40,21 +40,21 @@ const meta: Meta<typeof Label> = {
 
 export default meta;
 
-const Template: StoryFn<typeof Label> = args => <Label {...args} />;
+const Template: StoryFn<typeof ColorLabel> = args => <ColorLabel {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   children: '과일',
 };
 
-export const LabelWithColor = Template.bind({});
-LabelWithColor.args = {
+export const ColorLabelWithColor = Template.bind({});
+ColorLabelWithColor.args = {
   color: '#059669',
   children: '후숙 과일',
 };
 
-export const LabelWithSize = Template.bind({});
-LabelWithSize.args = {
+export const ColorLabelWithSize = Template.bind({});
+ColorLabelWithSize.args = {
   size: 'p2',
   children: '생일',
 };

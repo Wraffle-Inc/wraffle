@@ -5,7 +5,8 @@ import type {ControllerProps, FieldPath, FieldValues} from 'react-hook-form';
 import {Controller, FormProvider, useFormContext} from 'react-hook-form';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import {Slot} from '@radix-ui/react-slot';
-import {Label, ErrorMessage, cn} from '@wraffle/ui';
+import {cn} from '@wraffle/ui';
+import {ErrorMessage, Label} from '@wraffle/ui';
 
 const Form = FormProvider;
 

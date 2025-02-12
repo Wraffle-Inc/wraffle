@@ -6,7 +6,7 @@ import {CategoryForm, PriceForm, TitleForm} from '@/features/product-form/ui';
 import {InputWithSearchIcon} from '@/shared/ui/input/InputWithSearchIcon';
 import {Tags} from '@/shared/ui/tag/Tags';
 import {getTypeText, TAG_LIMIT} from '@/shared/util';
-import {Button, Icon, Input, Label, Tag, Typography} from '@wraffle/ui';
+import {Button, Label, Typography} from '@wraffle/ui';
 
 // TODO
 // 카테고리 api 연동

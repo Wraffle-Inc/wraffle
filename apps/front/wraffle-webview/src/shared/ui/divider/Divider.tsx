@@ -1,3 +1,7 @@
-export const Divider = () => {
-  return <div className='h-1 w-full bg-[#F9FAFB]' />;
+interface DividerProps {
+  height?: number;
+}
+
+export const Divider = ({height = 1}: DividerProps) => {
+  return <div className={`h-${height} w-full bg-[#F9FAFB]`} />;
 };

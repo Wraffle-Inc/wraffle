@@ -15,7 +15,7 @@ import {Divider} from '@/shared/ui';
 import {InputWithSearchIcon} from '@/shared/ui/input/InputWithSearchIcon';
 import {Tags} from '@/shared/ui/tag/Tags';
 import {getTypeText} from '@/shared/util';
-import {Button, Icon, Input, Label, Tag} from '@wraffle/ui';
+import {Button, Label} from '@wraffle/ui';
 
 // tag api 연동할 때 삭제될 코드 입니다
 const tags = ['tasdfasg1', 'tag2', 'tasdfasdfag1333', 'tasdfasdfag1333'];
