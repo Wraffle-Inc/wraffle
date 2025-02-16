@@ -67,14 +67,15 @@ export class FetchClient {
     );
 
     const fetchUrl = `${this.baseUrl}${url}${
-      params &&
-      '?' +
-        new URLSearchParams(
-          Object.entries(params)
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            .filter(([_, value]) => value != null)
-            .map(([key, value]) => [key, String(value)]),
-        ).toString()
+      params
+        ? '?' +
+          new URLSearchParams(
+            Object.entries(params)
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              .filter(([_, value]) => value != null)
+              .map(([key, value]) => [key, String(value)]),
+          ).toString()
+        : ''
     }`;
 
     const response = await fetch(fetchUrl, {
