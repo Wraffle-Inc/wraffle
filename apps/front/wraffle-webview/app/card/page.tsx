@@ -1,5 +1,5 @@
-import {AddCard, CardList} from '@/features/card/ui';
 import {Divider, Header} from '@/shared/ui';
+import {AddCard, CardList} from '@/widgets/card-list/ui';
 import {Typography} from '@wraffle/ui';
 
 const CardPage = () => {
