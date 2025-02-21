@@ -3,7 +3,6 @@ import {ColorLabel, Typography} from '@wraffle/ui';
 
 interface CardItemProps {
   card: Card;
-  handleChangeDefaultCard: (id: number) => void;
 }
 
 const CardItem = ({card}: CardItemProps) => {
