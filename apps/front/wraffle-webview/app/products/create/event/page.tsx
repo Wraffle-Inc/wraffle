@@ -1,10 +1,15 @@
 'use client';
 
-import type {EventCreateState} from '@/entities/product/model';
+import type {
+  CreateEventPayload,
+  EventCreateState,
+} from '@/entities/product/model';
 import {
   createEventDefaultValues,
   createEventSchema,
 } from '@/entities/product/model';
+import {useCreateProductMutation} from '@/features/product/create/api/useCreateQuery';
+import type {Payload} from '@/features/product/create/config/type';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
@@ -41,13 +46,31 @@ const EventCreate = () => {
       context: {},
     },
   });
-
   const EventTotalStepIndex = 5;
 
-  // TODO
-  // 생성 api 연동
-  const onSubmit = (data: EventCreateState) => {
-    console.log('go : ', data);
+  const {mutateAsync: createProduct, data} = useCreateProductMutation();
+
+  const onSubmit = async (data: CreateEventPayload) => {
+    const formatRaffleData: Payload = {
+      type: 'event',
+      title: data.title,
+      categoryId: Number(data.categoryId),
+      tagIds: data.tagIds,
+      price: Number(data.price),
+      startDate: String(data.startDate),
+      endDate: String(data.endDate),
+      announceAt: String(data.announceAt),
+      winnerCount: Number(data.winnerCount),
+      images: data.images,
+      etc: data.etc,
+      description: '', // 사용되지 않음
+      products: data.products,
+    };
+    try {
+      await createProduct(formatRaffleData);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -64,7 +87,7 @@ const EventCreate = () => {
       )}
 
       <GenericForm
-        onSubmit={() => onSubmit(funnel.context)}
+        onSubmit={onSubmit}
         formOptions={{
           mode: 'onChange',
           resolver: (data, context, options) => {
@@ -107,9 +130,7 @@ const EventCreate = () => {
           etcStep={({history}) => (
             <EtcStep onNext={etc => history.push('successStep', {etc})} />
           )}
-          successStep={() => (
-            <SuccessList type='event' productId={'1'} thumbnail={''} /> // productId,thumbnail api 연동후 작업
-          )}
+          successStep={() => <SuccessList type='event' productData={data} />}
         />
       </GenericForm>
     </div>
@@ -117,3 +138,6 @@ const EventCreate = () => {
 };
 
 export default EventCreate;
+
+// success 라우터 따로 빼기
+// -> 이미지 링크를 어떻게 줘야

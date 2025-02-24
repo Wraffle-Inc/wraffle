@@ -6,9 +6,9 @@ const categoryIdSchema = z.string().default('');
 const tagIdsSchema = z.number().array().default([]);
 const priceSchema = z.string().default('');
 
-const startDateSchema = z.date().optional();
-const endDateSchema = z.date().optional();
-const announceAtSchema = z.date().optional();
+const startDateSchema = z.date();
+const endDateSchema = z.date();
+const announceAtSchema = z.date();
 const winnerCountSchema = z.string().default('');
 
 const imagesSchema = z.string().array().default([]);

@@ -12,9 +12,9 @@ const announceAtSchema = z.date();
 const winnerCountSchema = z.string().default('');
 
 const productsSchema = z.object({
-  title: z.string(),
+  title: z.string().default(''),
   tagIds: z.number().array().default([]),
-  imageUrl: z.string(),
+  imageUrl: z.string().default(''),
 });
 const productsArraySchema = z.array(productsSchema).default([]);
 

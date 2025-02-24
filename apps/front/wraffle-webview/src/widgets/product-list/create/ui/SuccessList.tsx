@@ -3,17 +3,20 @@ import Link from 'next/link';
 import {getTypeText} from '@/shared/util';
 import {Button, Typography} from '@wraffle/ui';
 
-export const SuccessList = ({
-  type,
-  productId,
-  thumbnail,
-}: {
-  type: 'raffle' | 'event';
-  productId: string;
-  thumbnail: string;
-}) => {
+interface SuccessListProps {
+  type: 'event' | 'raffle';
+  productData?: {
+    id: number;
+    thumbnail: string;
+  };
+}
+
+export const SuccessList = ({type, productData}: SuccessListProps) => {
   const eventOrRaffleText = getTypeText(type);
 
+  if (!productData) {
+    return <div>data loaidng</div>;
+  }
   return (
     <div className='flex h-full flex-col items-center px-4 py-6'>
       <div className='mb-24 w-full text-left'>
@@ -27,7 +30,7 @@ export const SuccessList = ({
       </div>
 
       <Image
-        src={thumbnail}
+        src={productData.thumbnail}
         width={250}
         height={250}
         alt='thumbnail-image'
@@ -35,7 +38,7 @@ export const SuccessList = ({
       />
 
       <div className='fixed inset-x-0 bottom-0 px-4 py-4'>
-        <Link href={`/products/${productId}?type=${type}`}>
+        <Link href={`/products/${productData.id}?type=${type}`} replace={true}>
           <Button className='h-[45px]'>
             {eventOrRaffleText.successWithoutReviewButton}
           </Button>
