@@ -13,7 +13,7 @@ const Tag = ({children, noHash = false, handleRemoveTag}: TagProps) => {
     >
       {!noHash && '#'} {children}
       {handleRemoveTag && (
-        <button onClick={() => handleRemoveTag(children)}>
+        <button type='button' onClick={() => handleRemoveTag(children)}>
           <svg
             width='14'
             height='14'
