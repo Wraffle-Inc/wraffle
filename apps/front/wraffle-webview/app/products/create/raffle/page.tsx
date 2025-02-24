@@ -1,10 +1,15 @@
 'use client';
 
+import type {
+  CreateRafflePayload,
+  RaffleCreateState,
+} from '@/entities/product/model';
 import {
   createRaffleDefaultValues,
   createRaffleSchema,
-  type RaffleCreateState,
 } from '@/entities/product/model';
+import {useCreateProductMutation} from '@/features/product/create/api/useCreateQuery';
+import type {Payload} from '@/features/product/create/config/type';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
@@ -37,15 +42,33 @@ const RaffleCreate = () => {
       context: {},
     },
   });
-
   const RaffleTotalStepIndex = 4;
+
+  const {mutateAsync: createProduct, data} = useCreateProductMutation();
 
   console.log(funnel.context);
 
-  // TODO
-  // 생성 api 연결
-  const onSubmit = (data: RaffleCreateState) =>
-    console.log('go to server : ', data);
+  const onSubmit = async (data: CreateRafflePayload) => {
+    const formatRaffleData: Payload = {
+      type: 'raffle',
+      title: data.title,
+      categoryId: Number(data.categoryId),
+      tagIds: data.tagIds,
+      price: Number(data.price),
+      startDate: String(data.startDate),
+      endDate: String(data.endDate),
+      announceAt: String(data.announceAt),
+      winnerCount: Number(data.winnerCount),
+      images: data.images,
+      etc: data.etc,
+      description: '', // 사용되지 않음
+    };
+    try {
+      await createProduct(formatRaffleData);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div>
@@ -61,7 +84,7 @@ const RaffleCreate = () => {
       )}
 
       <GenericForm
-        onSubmit={() => onSubmit(funnel.context)}
+        onSubmit={onSubmit}
         formOptions={{
           mode: 'onChange',
           resolver: (data, context, options) => {
@@ -99,9 +122,7 @@ const RaffleCreate = () => {
           etcStep={({history}) => (
             <EtcStep onNext={etc => history.push('successStep', {etc})} />
           )}
-          successStep={() => (
-            <SuccessList type='raffle' productId={'1'} thumbnail={''} /> // productId,thumbnail api 연동후 작업
-          )}
+          successStep={() => <SuccessList type='raffle' productData={data} />}
         />
       </GenericForm>
     </div>
