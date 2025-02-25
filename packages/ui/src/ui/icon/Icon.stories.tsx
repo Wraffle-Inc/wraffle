@@ -29,6 +29,7 @@ const meta = {
           'upload',
           'calendar',
           'write',
+          'drag',
         ],
       },
     },

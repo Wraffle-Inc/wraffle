@@ -21,7 +21,8 @@ export type IconNameTypes =
   | 'credit-card'
   | 'upload'
   | 'calendar'
-  | 'write';
+  | 'write'
+  | 'drag';
 
 type IconProps = {
   name: IconNameTypes;
