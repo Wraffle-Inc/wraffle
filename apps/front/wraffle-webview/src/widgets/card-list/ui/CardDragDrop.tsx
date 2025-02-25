@@ -3,6 +3,7 @@
 import {useDragEnd} from '../hook';
 import type {Dispatch, ReactNode, SetStateAction} from 'react';
 import type {Card} from '@/entities/card';
+import type {DraggableProvidedDragHandleProps} from '@hello-pangea/dnd';
 import {DragDropContext, Draggable, Droppable} from '@hello-pangea/dnd';
 
 interface Props {
@@ -16,7 +17,10 @@ interface Props {
     startIndex: number,
     endIndex: number,
   ) => Card[];
-  renderDragItem: (item: Card) => ReactNode;
+  renderDragItem: (
+    item: Card,
+    dragHandleProps: DraggableProvidedDragHandleProps | null,
+  ) => ReactNode;
 }
 
 const CardDragDrop = ({
@@ -69,7 +73,10 @@ export default CardDragDrop;
 interface DragItemProps {
   card: Card;
   index: number;
-  renderDragItem: (item: Card) => ReactNode;
+  renderDragItem: (
+    item: Card,
+    dragHandleProps: DraggableProvidedDragHandleProps | null,
+  ) => ReactNode;
 }
 
 const DragItem = ({card, index, renderDragItem}: DragItemProps) => {
@@ -85,9 +92,8 @@ const DragItem = ({card, index, renderDragItem}: DragItemProps) => {
                 ...provided.draggableProps.style,
               }}
               {...provided.draggableProps}
-              {...provided.dragHandleProps}
             >
-              {renderDragItem(card)}
+              {renderDragItem(card, provided.dragHandleProps)}
             </li>
           );
         }
@@ -96,9 +102,8 @@ const DragItem = ({card, index, renderDragItem}: DragItemProps) => {
             ref={provided.innerRef}
             className='mb-1 flex bg-white'
             {...provided.draggableProps}
-            {...provided.dragHandleProps}
           >
-            {renderDragItem(card)}
+            {renderDragItem(card, provided.dragHandleProps)}
           </li>
         );
       }}
