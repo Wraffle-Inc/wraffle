@@ -44,7 +44,7 @@ const CardDialog = ({
     closeDialog();
   };
 
-  const onCancleChangeCard = () => {
+  const onCancelChangeCard = () => {
     const newOrderedCardList = reorderCard(
       cards,
       destinationIndex,
@@ -72,7 +72,7 @@ const CardDialog = ({
         </DialogHeader>
         <DialogFooter className='gap-1'>
           <Button onClick={onChangeCard}>변경하기</Button>
-          <Button variant='stroke' onClick={onCancleChangeCard}>
+          <Button variant='stroke' onClick={onCancelChangeCard}>
             돌아가기
           </Button>
         </DialogFooter>
