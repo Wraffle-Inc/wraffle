@@ -2,7 +2,10 @@ import {Suspense} from 'react';
 import {getNotificationInfiniteQueryOptions} from '@/features/get-notification/config';
 import {PrefetchBoundary} from '@/shared/context/query/PrefetchBoundary';
 import {Header} from '@/shared/ui';
-import {NotificationList} from '@/widgets/notification-list/ui';
+import {
+  NotificationList,
+  SkeletonNotificationList,
+} from '@/widgets/notification-list/ui';
 
 const NotificationPage = () => {
   return (
@@ -15,7 +18,7 @@ const NotificationPage = () => {
           <Header.Title className='text-center'>푸시 알림</Header.Title>
         </Header.Middle>
       </Header>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SkeletonNotificationList />}>
         <PrefetchBoundary
           prefetchOptions={getNotificationInfiniteQueryOptions({
             params: {itemsPerPage: 10},

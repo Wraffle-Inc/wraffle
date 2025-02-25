@@ -1,7 +1,7 @@
 'use client';
 
-import {useHandleNotifications} from '../../hook';
-import {NotificationItem} from '../item/NotificationItem';
+import {useHandleNotifications} from '../hook';
+import {NotificationItem} from './NotificationItem';
 import {InfiniteScroll} from '@/shared/ui';
 
 export const NotificationList = () => {
