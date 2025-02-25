@@ -1,12 +1,11 @@
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import type {Card} from '@/entities/card';
+import {useGETCardListQuery} from '@/features/card/api';
 
-interface Props {
-  initialCards: Card[];
-}
+export const useHandleCard = () => {
+  const {data: cardList} = useGETCardListQuery();
 
-export const useHandleCard = ({initialCards}: Props) => {
-  const [cards, setCards] = useState<Card[]>(initialCards);
+  const [cards, setCards] = useState<Card[]>(cardList);
   const [targetCard, setTargetCard] = useState<Card | null>(null);
   const [sourceIndex, setSourceIndex] = useState(0);
   const [destinationIndex, setDestinationIndex] = useState(0);
@@ -24,6 +23,12 @@ export const useHandleCard = ({initialCards}: Props) => {
   const closeDialog = useCallback(() => {
     setTargetCard(null);
   }, []);
+
+  useEffect(() => {
+    if (cardList) {
+      setCards(cardList);
+    }
+  }, [cardList, setCards]);
 
   return {
     cards,

@@ -1,5 +1,9 @@
+import {Suspense} from 'react';
+import {getCardListQueryOptions} from '@/features/card/config';
+import {AddCard} from '@/features/card/ui';
+import {PrefetchBoundary} from '@/shared/context/query/PrefetchBoundary';
 import {Divider, Header} from '@/shared/ui';
-import {AddCard, CardList} from '@/widgets/card-list/ui';
+import {CardList, SkeletonCardList} from '@/widgets/card-list/ui';
 import {Typography} from '@wraffle/ui';
 
 const CardPage = () => {
@@ -21,7 +25,11 @@ const CardPage = () => {
         <Typography className='text-[#333D4B]' size='h4'>
           등록된 카드
         </Typography>
-        <CardList />
+        <Suspense fallback={<SkeletonCardList />}>
+          <PrefetchBoundary prefetchOptions={getCardListQueryOptions()}>
+            <CardList />
+          </PrefetchBoundary>
+        </Suspense>
       </section>
     </>
   );
