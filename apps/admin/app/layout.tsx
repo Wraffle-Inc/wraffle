@@ -1,6 +1,9 @@
+import MockProvider from '../mocks/provider';
 import './globals.css';
+import ReactQueryProvider from './provider/ReactQueryProvider';
 import type {Metadata} from 'next';
 import {Inter} from 'next/font/google';
+import {ReactNode} from 'react';
 import IconLoader from '@wraffle/ui/src/ui/icon/IconLoader';
 
 const inter = Inter({subsets: ['latin']});
@@ -17,8 +20,8 @@ export default function RootLayout({
   sidebar,
   content,
 }: {
-  sidebar: React.ReactNode;
-  content: React.ReactNode;
+  sidebar: ReactNode;
+  content: ReactNode;
 }) {
   return (
     <html lang='en'>
@@ -26,7 +29,9 @@ export default function RootLayout({
         <div className='flex h-screen w-screen flex-row bg-white'>
           {IconLoader}
           {sidebar}
-          {content}
+          <MockProvider>
+            <ReactQueryProvider>{content}</ReactQueryProvider>
+          </MockProvider>
         </div>
       </body>
     </html>

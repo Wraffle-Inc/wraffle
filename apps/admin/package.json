@@ -11,10 +11,12 @@
     "format": "pnpm prettier && pnpm lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.53.1",
     "@wraffle/ui": "workspace:*",
+    "msw": "^2.7.1",
+    "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.5"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -30,5 +32,10 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
