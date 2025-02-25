@@ -65,7 +65,7 @@ const CardDialog = ({
           <DialogDescription>
             기본 결제 카드가{' '}
             <strong>
-              {targetCard.cardCode} {targetCard.cardNumber.split(' ')[3]}
+              {targetCard.cardCode} {targetCard.cardNumber.slice(-4)}
             </strong>
             로 변경돼요!
           </DialogDescription>

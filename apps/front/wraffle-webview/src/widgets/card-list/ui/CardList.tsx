@@ -2,33 +2,9 @@
 
 import {CardDialog} from './CardDialog';
 import {CardItem} from './CardItem';
-import type {Card} from '@/entities/card';
 import {useHandleCard} from '@/widgets/card-list/hook';
 import DragAndDrop from '@/widgets/card-list/ui/CardDragDrop';
-
-const initialCards: Card[] = [
-  {
-    id: 1,
-    cardCode: '국민',
-    cardNumber: '**** **** **** 0123',
-    cardIndex: 1,
-    isDefault: true,
-  },
-  {
-    id: 2,
-    cardCode: '신한',
-    cardNumber: '**** **** **** 4567',
-    cardIndex: 2,
-    isDefault: false,
-  },
-  {
-    id: 3,
-    cardCode: '카카오',
-    cardNumber: '**** **** **** 8910',
-    cardIndex: 3,
-    isDefault: false,
-  },
-];
+import {Typography} from '@wraffle/ui';
 
 const CardList = () => {
   const {
@@ -42,7 +18,7 @@ const CardList = () => {
     setDestinationIndex,
     reorderCard,
     closeDialog,
-  } = useHandleCard({initialCards});
+  } = useHandleCard();
 
   return (
     <>
@@ -61,6 +37,13 @@ const CardList = () => {
           />
         )}
       />
+      {cards.length === 0 && (
+        <div className='flex h-36 items-center justify-center'>
+          <Typography size='p2' color='zinc400'>
+            등록된 카드가 없습니다!
+          </Typography>
+        </div>
+      )}
       {targetCard && (
         <CardDialog
           isOpen={targetCard !== null}
