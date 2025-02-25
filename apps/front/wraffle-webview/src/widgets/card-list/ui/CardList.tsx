@@ -23,7 +23,7 @@ const initialCards: Card[] = [
   },
   {
     id: 3,
-    cardCode: '농협',
+    cardCode: '카카오',
     cardNumber: '**** **** **** 8910',
     cardIndex: 3,
     isDefault: false,
@@ -53,7 +53,13 @@ const CardList = () => {
         setDestinationIndex={setDestinationIndex}
         setCardList={setCards}
         reorderCard={reorderCard}
-        renderDragItem={item => <CardItem key={item.id} card={item} />}
+        renderDragItem={(item, dragHandleProps) => (
+          <CardItem
+            key={item.id}
+            card={item}
+            dragHandleProps={dragHandleProps}
+          />
+        )}
       />
       {targetCard && (
         <CardDialog
