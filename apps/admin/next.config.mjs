@@ -20,6 +20,7 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['@wraffle/ui'],
+    instrumentationHook: true,
   },
 };
 
