@@ -1,8 +1,11 @@
 import fetchUserList from './fetch';
-import {QueryOptions, useQuery} from '@tanstack/react-query';
+import UserList from './type';
+import {UseQueryOptions, useQuery} from '@tanstack/react-query';
+
+type QueryOptions = UseQueryOptions<UserList, Error>;
 
 const userListQuery = (options?: QueryOptions) => {
-  return useQuery({
+  return useQuery<UserList>({
     queryKey: ['users'],
     queryFn: fetchUserList,
     ...options,

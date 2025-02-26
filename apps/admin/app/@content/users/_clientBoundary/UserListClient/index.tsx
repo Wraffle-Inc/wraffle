@@ -1,7 +1,7 @@
-'use cleint';
+'use client';
 
-import userListQuery from '../../../../../api/userList/query';
-import UserListHeader from '../../_components/UserListHeader';
+import userListQuery from '@/api/userList/query';
+import UserListHeader from '@/app/@content/users/_components/UserListHeader';
 
 const UserListClient = () => {
   const {data} = userListQuery();
@@ -9,7 +9,7 @@ const UserListClient = () => {
   return (
     <div>
       <UserListHeader />
-      {/* 클라이언트 데이터 페칭 정보 사용 */}
+      {data?.data.users.map(user => <div key={user.id}>{user.name}</div>)}
     </div>
   );
 };

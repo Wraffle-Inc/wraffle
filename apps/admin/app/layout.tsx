@@ -1,5 +1,5 @@
-import MockProvider from '../mocks/provider';
 import './globals.css';
+import MockProvider from './mocks/provider';
 import ReactQueryProvider from './provider/ReactQueryProvider';
 import type {Metadata} from 'next';
 import {Inter} from 'next/font/google';
