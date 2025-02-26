@@ -6,9 +6,7 @@ export const patchDefaultCardAPI = async (cardId: number) => {
 };
 
 export const usePATCHDefaultCardQuery = () => {
-  const mutation = useMutation({
+  return useMutation({
     mutationFn: patchDefaultCardAPI,
   });
-
-  return {patchDefaultCard: mutation.mutate};
 };
