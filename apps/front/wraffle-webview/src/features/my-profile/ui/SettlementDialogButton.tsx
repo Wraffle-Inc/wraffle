@@ -1,3 +1,4 @@
+import {usePutSettlementAccount} from '../api/user';
 import {BANK_NAME} from '../const';
 import {useState} from 'react';
 import {
@@ -12,6 +13,7 @@ import {
   DialogTrigger,
   Input,
   Select,
+  useToast,
 } from '@wraffle/ui';
 
 interface SettlementDialogProps {
@@ -25,6 +27,11 @@ const SettlementDialogButton = ({
   bankName,
   bankAccount,
 }: SettlementDialogProps) => {
+  const {toast} = useToast();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const requestPutSettlementAccount = usePutSettlementAccount();
+
   const [bank, setBankName] = useState('');
   const [account, setBankAccount] = useState('');
 
@@ -33,11 +40,40 @@ const SettlementDialogButton = ({
     setBankAccount(bankAccount || '');
   };
 
+  const handleSubmit = () => {
+    requestPutSettlementAccount(
+      {
+        bankName: bank,
+        bankAccount: account,
+      },
+      {
+        onSuccess: () => {
+          setIsOpen(false);
+          toast({
+            title: `정산 계좌가 ${type}되었습니다`,
+            duration: 1000,
+            variant: 'success',
+            icon: 'check',
+          });
+        },
+        onError: (error: Error) => {
+          toast({
+            title: error.message,
+            duration: 2000,
+            variant: 'warning',
+            icon: 'cross',
+          });
+        },
+      },
+    );
+  };
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button onClick={handleButtonClick}>정산 계좌 {type}하기</Button>
       </DialogTrigger>
+
       <form>
         <DialogContent>
           <DialogHeader className='flex flex-col items-center'>
@@ -63,7 +99,9 @@ const SettlementDialogButton = ({
           </div>
 
           <DialogFooter className='gap-2'>
-            <Button>{type}하기</Button>
+            <Button type='button' onClick={handleSubmit}>
+              {type}하기
+            </Button>
             <DialogClose asChild>
               <Button variant='stroke'>돌아가기</Button>
             </DialogClose>

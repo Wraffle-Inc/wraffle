@@ -9,13 +9,11 @@ export const usePostSettlement = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async (params: PostSettlementRequest) => {
-      const response = await apiClient.post('/settlements', {
-        body: params,
+    mutationFn: async (body: PostSettlementRequest) => {
+      await apiClient.post('/settlements', {
+        body: body,
         withAuth: true,
       });
-
-      return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['/users/me']});
@@ -23,10 +21,13 @@ export const usePostSettlement = () => {
   });
 
   const requestPostSettlement = async (
-    params: PostSettlementRequest,
-    {onSuccess, onError}: {onSuccess: () => void; onError: () => void},
+    body: PostSettlementRequest,
+    {
+      onSuccess,
+      onError,
+    }: {onSuccess: () => void; onError: (error: Error) => void},
   ) => {
-    await mutation.mutateAsync(params, {onSuccess, onError});
+    await mutation.mutateAsync(body, {onSuccess, onError});
   };
 
   return requestPostSettlement;

@@ -46,9 +46,9 @@ const RequestSettlementDialogButton = ({
 
           setIsOpen(false);
         },
-        onError: () => {
+        onError: (error: Error) => {
           toast({
-            title: '정산 요청이 실패했습니다.',
+            title: error.message,
             duration: 1000,
             variant: 'warning',
             icon: 'cross',

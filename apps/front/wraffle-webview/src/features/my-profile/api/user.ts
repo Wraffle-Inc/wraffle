@@ -85,3 +85,39 @@ export const usePutUserInfo = () => {
 
   return requestEditUserInfo;
 };
+
+interface PutSettlementAccountRequest {
+  bankName: string;
+  bankAccount: string;
+}
+
+/**
+ * 내 정산계좌 등록/수정
+ */
+export const usePutSettlementAccount = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async (body: PutSettlementAccountRequest) => {
+      await apiClient.put('/users/me/settlement-account', {
+        body,
+        withAuth: true,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [GET_USER_INFO_PATH]});
+    },
+  });
+
+  const requestPutSettlementAccount = (
+    body: PutSettlementAccountRequest,
+    {
+      onSuccess,
+      onError,
+    }: {onSuccess: () => void; onError: (error: Error) => void},
+  ) => {
+    return mutation.mutate(body, {onSuccess, onError});
+  };
+
+  return requestPutSettlementAccount;
+};
