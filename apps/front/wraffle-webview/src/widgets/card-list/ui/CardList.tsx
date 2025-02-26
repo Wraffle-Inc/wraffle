@@ -14,28 +14,27 @@ const CardList = () => {
     destinationIndex,
     setCards,
     setTargetCard,
-    setSourceIndex,
-    setDestinationIndex,
-    reorderCard,
-    closeDialog,
+    handleReorderCard,
+    handleCloseDialog,
+    handleChangeIndex,
   } = useHandleCard();
 
   return (
     <>
-      {cards.length === 0 ? (
+      {!cards.length && (
         <div className='flex h-36 items-center justify-center'>
           <Typography size='p2' color='zinc400'>
             등록된 카드가 없습니다!
           </Typography>
         </div>
-      ) : (
+      )}
+      {!!cards.length && (
         <CardDragDrop
           cardList={cards}
           setTargetCard={setTargetCard}
-          setSourceIndex={setSourceIndex}
-          setDestinationIndex={setDestinationIndex}
           setCardList={setCards}
-          reorderCard={reorderCard}
+          onReorderCard={handleReorderCard}
+          onChangeIndex={handleChangeIndex}
           renderDragItem={(item, dragHandleProps) => (
             <CardItem
               key={item.id}
@@ -53,8 +52,8 @@ const CardList = () => {
           sourceIndex={sourceIndex}
           destinationIndex={destinationIndex}
           setCards={setCards}
-          closeDialog={closeDialog}
-          reorderCard={reorderCard}
+          onCloseDialog={handleCloseDialog}
+          onReorderCard={handleReorderCard}
         />
       )}
     </>

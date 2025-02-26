@@ -16,8 +16,8 @@ interface CardDialogProps {
   sourceIndex: number;
   destinationIndex: number;
   setCards: React.Dispatch<React.SetStateAction<Card[]>>;
-  closeDialog: () => void;
-  reorderCard: (
+  onCloseDialog: () => void;
+  onReorderCard: (
     cardList: Card[],
     startIndex: number,
     endIndex: number,
@@ -31,8 +31,8 @@ const CardDialog = ({
   sourceIndex,
   destinationIndex,
   setCards,
-  closeDialog,
-  reorderCard,
+  onCloseDialog,
+  onReorderCard,
 }: CardDialogProps) => {
   const onChangeCard = () => {
     // !TODO: 카드 순서 변경 mutataion
@@ -41,11 +41,11 @@ const CardDialog = ({
         index === 0 ? {...card, isDefault: true} : {...card, isDefault: false},
       ),
     );
-    closeDialog();
+    onCloseDialog();
   };
 
   const onCancelChangeCard = () => {
-    const newOrderedCardList = reorderCard(
+    const newOrderedCardList = onReorderCard(
       cards,
       destinationIndex,
       sourceIndex,
@@ -53,11 +53,11 @@ const CardDialog = ({
       index === 0 ? {...card, isDefault: true} : {...card, isDefault: false},
     );
     setCards(newOrderedCardList);
-    closeDialog();
+    onCloseDialog();
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={closeDialog}>
+    <Dialog open={isOpen} onOpenChange={onCloseDialog}>
       <DialogContent onInteractOutside={e => e.preventDefault()}>
         <DialogHeader className='flex flex-col items-center'>
           <DialogTitle>주 사용 카드 변경</DialogTitle>
