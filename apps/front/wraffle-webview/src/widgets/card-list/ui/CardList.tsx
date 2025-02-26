@@ -1,9 +1,9 @@
 'use client';
 
 import {CardDialog} from './CardDialog';
+import {CardDragDrop} from './CardDragDrop';
 import {CardItem} from './CardItem';
 import {useHandleCard} from '@/widgets/card-list/hook';
-import DragAndDrop from '@/widgets/card-list/ui/CardDragDrop';
 import {Typography} from '@wraffle/ui';
 
 const CardList = () => {
@@ -29,7 +29,7 @@ const CardList = () => {
           </Typography>
         </div>
       ) : (
-        <DragAndDrop
+        <CardDragDrop
           cardList={cards}
           setTargetCard={setTargetCard}
           setSourceIndex={setSourceIndex}
