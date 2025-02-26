@@ -10,13 +10,12 @@ interface Props {
   cardList: Card[];
   setCardList: Dispatch<SetStateAction<Card[]>>;
   setTargetCard: Dispatch<SetStateAction<Card | null>>;
-  setSourceIndex: Dispatch<SetStateAction<number>>;
-  setDestinationIndex: Dispatch<SetStateAction<number>>;
-  reorderCard: (
+  onReorderCard: (
     cardList: Card[],
     startIndex: number,
     endIndex: number,
   ) => Card[];
+  onChangeIndex: (sourceIndex: number, destinationIndex: number) => void;
   renderDragItem: (
     item: Card,
     dragHandleProps: DraggableProvidedDragHandleProps | null,
@@ -27,18 +26,16 @@ const CardDragDrop = ({
   cardList,
   setCardList,
   setTargetCard,
-  setSourceIndex,
-  setDestinationIndex,
-  reorderCard,
+  onReorderCard,
+  onChangeIndex,
   renderDragItem,
 }: Props) => {
   const onDragEnd = useDragEnd(
     cardList,
     setCardList,
     setTargetCard,
-    setSourceIndex,
-    setDestinationIndex,
-    reorderCard,
+    onReorderCard,
+    onChangeIndex,
   );
 
   return (

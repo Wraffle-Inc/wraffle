@@ -10,7 +10,7 @@ export const useHandleCard = () => {
   const [sourceIndex, setSourceIndex] = useState(0);
   const [destinationIndex, setDestinationIndex] = useState(0);
 
-  const reorderCard = useCallback(
+  const handleReorderCard = useCallback(
     (cardList: Card[], startIndex: number, endIndex: number) => {
       const result = Array.from(cardList);
       const [removed] = result.splice(startIndex, 1);
@@ -20,9 +20,17 @@ export const useHandleCard = () => {
     [],
   );
 
-  const closeDialog = useCallback(() => {
+  const handleCloseDialog = useCallback(() => {
     setTargetCard(null);
   }, []);
+
+  const handleChangeIndex = useCallback(
+    (sourceIndex: number, destinationIndex: number) => {
+      setSourceIndex(sourceIndex);
+      setDestinationIndex(destinationIndex);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (cardList) {
@@ -37,9 +45,8 @@ export const useHandleCard = () => {
     destinationIndex,
     setCards,
     setTargetCard,
-    setSourceIndex,
-    setDestinationIndex,
-    reorderCard,
-    closeDialog,
+    handleReorderCard,
+    handleCloseDialog,
+    handleChangeIndex,
   };
 };

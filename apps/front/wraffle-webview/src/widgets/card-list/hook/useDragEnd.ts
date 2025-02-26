@@ -6,13 +6,12 @@ const useDragEnd = (
   cardList: Card[],
   setCardList: React.Dispatch<React.SetStateAction<Card[]>>,
   setTargetCard: React.Dispatch<React.SetStateAction<Card | null>>,
-  setSourceIndex: React.Dispatch<React.SetStateAction<number>>,
-  setDestinationIndex: React.Dispatch<React.SetStateAction<number>>,
-  reorderCard: (
+  onReorderCard: (
     cardList: Card[],
     startIndex: number,
     endIndex: number,
   ) => Card[],
+  onChangeIndex: (sourceIndex: number, destinationIndex: number) => void,
 ) => {
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -21,9 +20,8 @@ const useDragEnd = (
       if (source.index === destination.index) return;
 
       if (destination.index === 0 || source.index === 0) {
-        setSourceIndex(source.index);
-        setDestinationIndex(destination.index);
-        const newQuotes = reorderCard(
+        onChangeIndex(source.index, destination.index);
+        const newQuotes = onReorderCard(
           cardList,
           source.index,
           destination.index,
@@ -31,7 +29,7 @@ const useDragEnd = (
         setTargetCard(newQuotes[0]);
         setCardList(newQuotes);
       } else {
-        const newQuotes = reorderCard(
+        const newQuotes = onReorderCard(
           cardList,
           source.index,
           destination.index,
@@ -39,14 +37,7 @@ const useDragEnd = (
         setCardList(newQuotes);
       }
     },
-    [
-      cardList,
-      reorderCard,
-      setCardList,
-      setDestinationIndex,
-      setSourceIndex,
-      setTargetCard,
-    ],
+    [cardList, onChangeIndex, onReorderCard, setCardList, setTargetCard],
   );
   return onDragEnd;
 };
