@@ -68,7 +68,7 @@ const CardDragDrop = ({
   );
 };
 
-export default CardDragDrop;
+export {CardDragDrop};
 
 interface DragItemProps {
   card: Card;
