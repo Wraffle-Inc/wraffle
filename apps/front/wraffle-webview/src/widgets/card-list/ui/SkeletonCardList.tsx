@@ -1,7 +1,11 @@
-const SkeletonCardList = () => {
+interface SkeletonCardListProps {
+  length?: number;
+}
+
+const SkeletonCardList = ({length = 3}: SkeletonCardListProps) => {
   return (
     <div>
-      {[...Array(3)].map((_, index) => (
+      {Array.from({length}).map((_, index) => (
         <SkeletonCardItem key={index} showDefaultLabel={index === 0} />
       ))}
     </div>
