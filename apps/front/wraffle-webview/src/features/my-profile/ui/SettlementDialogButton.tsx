@@ -1,5 +1,5 @@
+import {BANK_NAME} from '../../../entities/settlement/const';
 import {usePutSettlementAccount} from '../api/user';
-import {BANK_NAME} from '../const';
 import {useState} from 'react';
 import {
   Button,

@@ -8,7 +8,7 @@ import {
   editUserSchema,
   type EditUserPayload,
 } from '@/entities/auth/user/schema';
-import {useGetUserInfo, usePutUserInfo} from '@/features/my-profile/api/user';
+import {useGetUserInfo, usePatchUserInfo} from '@/features/my-profile/api/user';
 import PhoneNumberVerification from '@/features/my-profile/ui/PhoneNumberVerification';
 import {Header, RHFInput, Form} from '@/shared/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -18,12 +18,12 @@ const EditProfilePage = () => {
   const router = useRouter();
   const {toast} = useToast();
 
-  const requestEditUserInfo = usePutUserInfo();
+  const requestEditUserInfo = usePatchUserInfo();
   const {data: userInfoResponse} = useGetUserInfo();
 
-  const defaultNickname = userInfoResponse?.data.nickname || '';
-  const defaultEmail = userInfoResponse?.data.email || '';
-  const defaultPhoneNumber = userInfoResponse?.data.phoneNumber || '';
+  const defaultNickname = userInfoResponse?.nickname || '';
+  const defaultEmail = userInfoResponse?.email || '';
+  const defaultPhoneNumber = userInfoResponse?.phoneNumber || '';
 
   const form = useForm<EditUserPayload>({
     resolver: zodResolver(editUserSchema),

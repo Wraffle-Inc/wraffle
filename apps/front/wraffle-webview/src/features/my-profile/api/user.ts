@@ -1,7 +1,10 @@
 import apiClient from '@/shared/api/apiClient';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-const USER_API_PREFIX = '/users/me';
+interface MutationCallbacks {
+  onSuccess: () => void;
+  onError: (error: Error) => void;
+}
 
 interface GetUserInfoResponse {
   id: number;
@@ -38,7 +41,7 @@ export const useGetUserInfo = () => {
   });
 };
 
-interface EditUserRequest {
+interface PatchUserInfoRequest {
   nickname: string;
   email: string;
   phoneNumber: string;
@@ -47,24 +50,15 @@ interface EditUserRequest {
 /**
  * 내 정보 수정
  */
-export const PUT_USER_INFO_PATH = `${USER_API_PREFIX}`;
-export const usePutUserInfo = () => {
+export const usePatchUserInfo = () => {
   const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: async (query: EditUserRequest) => {
-      const response = await fetch(PUT_USER_INFO_PATH, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(query),
-      });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message);
-      }
+  const mutation = useMutation({
+    mutationFn: async (body: PatchUserInfoRequest) => {
+      await apiClient.patch('/users/me', {
+        body,
+        withAuth: true,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -74,11 +68,8 @@ export const usePutUserInfo = () => {
   });
 
   const requestEditUserInfo = (
-    query: EditUserRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
+    query: PatchUserInfoRequest,
+    {onSuccess, onError}: MutationCallbacks,
   ) => {
     return mutation.mutate(query, {onSuccess, onError});
   };
@@ -111,10 +102,7 @@ export const usePutSettlementAccount = () => {
 
   const requestPutSettlementAccount = (
     body: PutSettlementAccountRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
+    {onSuccess, onError}: MutationCallbacks,
   ) => {
     return mutation.mutate(body, {onSuccess, onError});
   };

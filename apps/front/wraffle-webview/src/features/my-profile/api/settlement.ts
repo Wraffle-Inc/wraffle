@@ -1,6 +1,11 @@
 import apiClient from '@/shared/api/apiClient';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 
+interface MutationCallbacks {
+  onSuccess: () => void;
+  onError: (error: Error) => void;
+}
+
 interface PostSettlementRequest {
   requestSettlementPrice: number;
 }
@@ -22,10 +27,7 @@ export const usePostSettlement = () => {
 
   const requestPostSettlement = async (
     body: PostSettlementRequest,
-    {
-      onSuccess,
-      onError,
-    }: {onSuccess: () => void; onError: (error: Error) => void},
+    {onSuccess, onError}: MutationCallbacks,
   ) => {
     await mutation.mutateAsync(body, {onSuccess, onError});
   };
