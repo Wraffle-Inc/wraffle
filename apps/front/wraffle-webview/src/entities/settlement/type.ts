@@ -1,6 +1,7 @@
 export interface GetSettlementResultDto {
+  status: 'requested' | 'completed';
   id: number;
-  createdAt: Date;
+  createdAt: string;
   bankName: string;
   bankAccount: string;
   settlementPrice: number;
@@ -21,7 +22,7 @@ export interface GetSettlementResultResponse {
 
 export interface GetUserInfoResponse {
   id: number;
-  createdAt: Date;
+  createdAt: string;
   email: string;
   nickname: string;
   phoneNumber: string;
