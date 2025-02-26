@@ -22,27 +22,28 @@ const CardList = () => {
 
   return (
     <>
-      <DragAndDrop
-        cardList={cards}
-        setTargetCard={setTargetCard}
-        setSourceIndex={setSourceIndex}
-        setDestinationIndex={setDestinationIndex}
-        setCardList={setCards}
-        reorderCard={reorderCard}
-        renderDragItem={(item, dragHandleProps) => (
-          <CardItem
-            key={item.id}
-            card={item}
-            dragHandleProps={dragHandleProps}
-          />
-        )}
-      />
-      {cards.length === 0 && (
+      {cards.length === 0 ? (
         <div className='flex h-36 items-center justify-center'>
           <Typography size='p2' color='zinc400'>
             등록된 카드가 없습니다!
           </Typography>
         </div>
+      ) : (
+        <DragAndDrop
+          cardList={cards}
+          setTargetCard={setTargetCard}
+          setSourceIndex={setSourceIndex}
+          setDestinationIndex={setDestinationIndex}
+          setCardList={setCards}
+          reorderCard={reorderCard}
+          renderDragItem={(item, dragHandleProps) => (
+            <CardItem
+              key={item.id}
+              card={item}
+              dragHandleProps={dragHandleProps}
+            />
+          )}
+        />
       )}
       {targetCard && (
         <CardDialog
