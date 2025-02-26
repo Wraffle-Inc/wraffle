@@ -26,7 +26,7 @@ export default function SideBar() {
 
       {/* 탭 */}
       <div className='flex w-full flex-col gap-y-4'>
-        <SideBarTab href='/user'>회원 관리</SideBarTab>
+        <SideBarTab href='/users'>회원 관리</SideBarTab>
         <SideBarTab href='/settlement'>정산 관리</SideBarTab>
         <SideBarTab href='/raffle-event'>래플/이벤트 관리</SideBarTab>
         <SideBarTab href='/category'>카테고리 관리</SideBarTab>

@@ -6,13 +6,11 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/app/*": ["./src/app/*"],
-      "@/pages/*": ["./src/pages/*"],
-      "@/shared/*": ["./src/shared/*"],
-      "@/widgets/*": ["./src/widgets/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/entities/*": ["./src/entities/*"]
+      "@/app/*": ["app/*"],
+      "@/api/*": ["app/api/*"],
+      "@/mocks/*": ["app/mocks/*"]
     },
     "incremental": true,
     "noEmit": true
