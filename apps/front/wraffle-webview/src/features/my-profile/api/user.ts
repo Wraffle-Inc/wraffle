@@ -1,24 +1,10 @@
+import type {GetUserInfoResponse} from '@/entities/settlement/type';
 import apiClient from '@/shared/api/apiClient';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
 interface MutationCallbacks {
   onSuccess: () => void;
   onError: (error: Error) => void;
-}
-
-interface GetUserInfoResponse {
-  id: number;
-  createdAt: Date;
-  email: string;
-  nickname: string;
-  phoneNumber: string;
-  isAgreed: boolean;
-  isPrivacyAgreed: boolean;
-  isThirdAgreed: boolean;
-  isMarketingAgreed: boolean;
-  settlementBankName?: string;
-  settlementBankAccount?: string;
-  availableSettlementPrice: number;
 }
 
 /**

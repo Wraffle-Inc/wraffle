@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {useGetSettlements} from '@/features/my-profile/api/settlement';
 import {useGetUserInfo} from '@/features/my-profile/api/user';
 import RequestSettlementDialogButton from '@/features/my-profile/ui/RequestSettlementDialogButton';
 import {Header} from '@/shared/ui';
@@ -13,9 +14,13 @@ const formatPrice = (price: number) => {
 
 const SettlementPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
+  const {data: settlementsResponse} = useGetSettlements();
 
   const nickname = userInfoResponse?.nickname || '';
   const availableAmount = userInfoResponse?.availableSettlementPrice || 0;
+
+  const settledPrice =
+    settlementsResponse?.items[0].settlementAccumulatePrice || 0;
 
   return (
     <div>
@@ -49,7 +54,7 @@ const SettlementPage = () => {
             leftLabel='정산 가능 금액'
             leftValue={formatPrice(availableAmount)}
             rightLabel='정산 완료 금액'
-            rightValue='20,000원'
+            rightValue={formatPrice(settledPrice)}
           />
         </div>
 
