@@ -1,29 +1,39 @@
+import apiClient from '@/shared/api/apiClient';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-const USER_API_PREFIX = 'https://wraffle-api.justsloth.com/v1/users/me';
+const USER_API_PREFIX = '/users/me';
+
+interface GetUserInfoResponse {
+  id: number;
+  createdAt: Date;
+  email: string;
+  nickname: string;
+  phoneNumber: string;
+  isAgreed: boolean;
+  isPrivacyAgreed: boolean;
+  isThirdAgreed: boolean;
+  isMarketingAgreed: boolean;
+  settlementBankName?: string;
+  settlementBankAccount?: string;
+  availableSettlementPrice: number;
+}
 
 /**
  * 내 정보 조회
  */
-export const GET_USER_INFO_PATH = `${USER_API_PREFIX}`;
+export const GET_USER_INFO_PATH = '/users/me';
 export const useGetUserInfo = () => {
   return useQuery({
     queryKey: [GET_USER_INFO_PATH],
     queryFn: async () => {
-      const response = await fetch(GET_USER_INFO_PATH, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
+      const response = await apiClient.get<GetUserInfoResponse>(
+        GET_USER_INFO_PATH,
+        {
+          withAuth: true,
         },
-      });
+      );
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message);
-      }
-
-      return response.json();
+      return response.data;
     },
   });
 };

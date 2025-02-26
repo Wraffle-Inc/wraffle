@@ -7,11 +7,15 @@ import {Header} from '@/shared/ui';
 import {DualInfoBox} from '@/widgets/my-profile/ui/InfoBox';
 import {Typography} from '@wraffle/ui';
 
+const formatPrice = (price: number) => {
+  return price.toLocaleString() + '원';
+};
+
 const SettlementPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
-  const nickname = userInfoResponse?.data.nickname || '';
 
-  const availableAmount = userInfoResponse?.data.availableSettlementPrice || 0;
+  const nickname = userInfoResponse?.nickname || '';
+  const availableAmount = userInfoResponse?.availableSettlementPrice || 0;
 
   return (
     <div>
@@ -43,7 +47,7 @@ const SettlementPage = () => {
         <div className='mt-1'>
           <DualInfoBox
             leftLabel='정산 가능 금액'
-            leftValue='31,000원'
+            leftValue={formatPrice(availableAmount)}
             rightLabel='정산 완료 금액'
             rightValue='20,000원'
           />

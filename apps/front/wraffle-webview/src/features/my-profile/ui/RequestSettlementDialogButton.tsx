@@ -1,3 +1,5 @@
+import {usePostSettlement} from '../api/settlement';
+import {useState} from 'react';
 import {useInput} from '@/shared/hook';
 import {
   Button,
@@ -10,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
   InputField,
+  useToast,
 } from '@wraffle/ui';
 
 interface RequestSettlementDialogButtonProps {
@@ -19,18 +22,44 @@ interface RequestSettlementDialogButtonProps {
 const RequestSettlementDialogButton = ({
   availableAmount,
 }: RequestSettlementDialogButtonProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [amount, handleAmount, setAmount] = useInput('');
+  const {toast} = useToast();
+
+  const requestPostSettlement = usePostSettlement();
 
   const handleButtonClick = () => {
     setAmount('');
   };
 
   const onSubmit = () => {
-    console.log('submit', amount);
+    requestPostSettlement(
+      {requestSettlementPrice: Number(amount)},
+      {
+        onSuccess: () => {
+          toast({
+            title: '정산 요청이 완료되었습니다.',
+            duration: 1000,
+            variant: 'success',
+            icon: 'check',
+          });
+
+          setIsOpen(false);
+        },
+        onError: () => {
+          toast({
+            title: '정산 요청이 실패했습니다.',
+            duration: 1000,
+            variant: 'warning',
+            icon: 'cross',
+          });
+        },
+      },
+    );
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button onClick={handleButtonClick}>정산 요청하기</Button>
       </DialogTrigger>

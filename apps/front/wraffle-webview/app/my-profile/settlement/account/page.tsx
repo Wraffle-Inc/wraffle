@@ -4,13 +4,13 @@ import {useGetUserInfo} from '@/features/my-profile/api/user';
 import SettlementDialogButton from '@/features/my-profile/ui/SettlementDialogButton';
 import {Header} from '@/shared/ui';
 import {SingleInfoBox} from '@/widgets/my-profile/ui/InfoBox';
-import {Typography} from '@wraffle/ui';
+import {Toaster, Typography} from '@wraffle/ui';
 
 const SettlementAccountPage = () => {
   const {data: userInfoResponse} = useGetUserInfo();
-  const nickname = userInfoResponse?.data.nickname || '';
-  const bankName = userInfoResponse?.data.settlementBankName || '';
-  const bankAccount = userInfoResponse?.data.settlementBankAccount || '';
+  const nickname = userInfoResponse?.nickname || '';
+  const bankName = userInfoResponse?.settlementBankName || '';
+  const bankAccount = userInfoResponse?.settlementBankAccount || '';
 
   const isAccountExist = bankName && bankAccount;
 
@@ -18,6 +18,8 @@ const SettlementAccountPage = () => {
 
   return (
     <div>
+      <Toaster />
+
       <Header>
         <Header.Left>
           <Header.BackButton />
