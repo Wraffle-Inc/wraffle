@@ -1,8 +1,15 @@
-import {Suspense} from 'react';
+import {ComponentType, ReactElement, Suspense} from 'react';
 
-const withSuspense = (WrappedComponent: any, fallback: any) => {
-  return (props: any) => (
-    <Suspense fallback={fallback}>
+interface WithSuspenseOptions {
+  fallback: ReactElement;
+}
+
+const withSuspense = <P extends object>(
+  WrappedComponent: () => Promise<ReactElement>,
+  options: WithSuspenseOptions,
+): React.FC<P> => {
+  return (props: P) => (
+    <Suspense fallback={options.fallback}>
       <WrappedComponent {...props} />
     </Suspense>
   );

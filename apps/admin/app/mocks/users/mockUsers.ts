@@ -2,7 +2,7 @@ import API_URL from '../../api/urls';
 import {HttpResponse, http} from 'msw';
 import UserList from '@/app/api/userList/type';
 
-const url = API_URL.USERS;
+const url = API_URL.USERS.LIST;
 
 const mockUsers: UserList = {
   status: 200,
