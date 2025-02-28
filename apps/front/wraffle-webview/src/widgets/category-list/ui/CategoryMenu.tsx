@@ -12,12 +12,12 @@ export const CategoryMenu = ({
   onSelectCategory,
 }: CategoryMenuProps) => {
   return (
-    <nav className='mb-[21px] mt-[21px] flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5 scrollbar-hide'>
+    <nav className='my-2 flex h-[34px] w-full items-center gap-5 overflow-x-auto whitespace-nowrap px-5 scrollbar-hide'>
       {categories.map(category => (
         <div
           key={category.id}
           onClick={() => onSelectCategory(category)}
-          className={`relative cursor-pointer px-1 pb-3 text-sm font-semibold ${
+          className={`relative cursor-pointer px-1 text-sm font-semibold ${
             selectedCategory === category.id ? 'text-black' : 'text-[#8D95A1]'
           }`}
         >
