@@ -1,6 +1,6 @@
-'use client';
-
 import UserListClient from '../../_clientBoundary/UserListClient';
+import ErrorPage from '@/app/_components/Error';
+import LoadingPage from '@/app/_components/Loading';
 import withSuspense from '@/app/hoc/withSuspense';
 
 const UserListSuspense = withSuspense(
@@ -12,11 +12,11 @@ const UserListSuspense = withSuspense(
         </div>
       );
     } catch (error) {
-      return <div>Error</div>;
+      return <ErrorPage />;
     }
   },
   {
-    fallback: <div>Loading...</div>,
+    fallback: <LoadingPage />,
   },
 );
 
