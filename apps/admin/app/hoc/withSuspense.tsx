@@ -1,4 +1,4 @@
-import {ComponentType, ReactElement, Suspense} from 'react';
+import {ReactElement, Suspense} from 'react';
 
 interface WithSuspenseOptions {
   fallback: ReactElement;
