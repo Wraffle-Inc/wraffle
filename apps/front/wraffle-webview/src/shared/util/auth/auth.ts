@@ -2,8 +2,8 @@ import apiClient from '../../api/apiClient';
 import type {Tokens} from '../../api/type';
 import {isApiResponseError} from '../../api/type';
 import {ACCESS_TOKEN_EXPIRES_IN} from '../const';
+import {reissueToken} from './server';
 import NextAuth, {CredentialsSignin} from 'next-auth';
-import type {JWT} from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
 import {loginSchema} from '@/widgets/login/config';
 
@@ -62,7 +62,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
         return token;
       }
 
-      return await refreshAccessToken(token);
+      return await reissueToken(token);
     },
 
     async session({session, token}) {
@@ -73,23 +73,3 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
   },
   secret: process.env.AUTH_SECRET,
 });
-
-async function refreshAccessToken(token: JWT) {
-  try {
-    const response = await apiClient.post<
-      {accessToken: string},
-      {refreshToken: string}
-    >('/auth/refresh', {
-      body: {refreshToken: token.refreshToken},
-      withAuth: true,
-    });
-    return {
-      ...token,
-      accessToken: response.data.accessToken,
-      accessTokenExpires: Date.now() + ACCESS_TOKEN_EXPIRES_IN * 1000,
-    };
-  } catch (error) {
-    signOut();
-    return {...token, error: 'RefreshAccessTokenError'};
-  }
-}
