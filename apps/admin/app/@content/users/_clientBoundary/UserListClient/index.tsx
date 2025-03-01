@@ -2,14 +2,20 @@
 
 import userListQuery from '@/api/userList/query';
 import UserListHeader from '@/app/@content/users/_components/UserListHeader';
+import ListBoardHeader from '@/app/_components/ListBoardHeader';
 
 const UserListClient = () => {
   const {data} = userListQuery();
 
+  if (!data) return;
+
   return (
-    <div>
+    <div className='w-full'>
       <UserListHeader />
-      {data?.data.users.map(user => <div key={user.id}>{user.name}</div>)}
+      <ListBoardHeader
+        labels={['이름', '가입일', '계정', '생성한 래플 수']}
+        isCheckBox={true}
+      />
     </div>
   );
 };
