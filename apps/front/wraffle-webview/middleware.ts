@@ -8,6 +8,7 @@ const MAIN = '/';
 
 export async function middleware(req: NextRequest) {
   const {nextUrl} = req;
+
   const session = await getSession();
 
   const isAuthenticated = !!session;
@@ -20,8 +21,19 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(MAIN, req.url));
   }
 
-  if (!isAuthenticated && !isPublicRoute) {
-    return NextResponse.redirect(new URL(LOGIN, nextUrl));
+  if (!isAuthenticated) {
+    if (!isPublicRoute) {
+      return NextResponse.redirect(new URL(LOGIN, nextUrl));
+    } else {
+      const response = NextResponse.next();
+      if (req.cookies.has('authjs.callback-url')) {
+        response.cookies.set('authjs.callback-url', '', {maxAge: 0});
+      }
+      if (req.cookies.has('authjs.session-token')) {
+        response.cookies.set('authjs.session-token', '', {maxAge: 0});
+      }
+      return response;
+    }
   }
 
   return NextResponse.next();
