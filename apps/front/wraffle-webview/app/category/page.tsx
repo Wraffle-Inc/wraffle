@@ -1,7 +1,7 @@
 'use client';
 
 import {useSearchParams} from 'next/navigation';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {categories} from '@/entities/category';
 import type {CategoryItem} from '@/entities/category/type';
 import {Header} from '@/shared/ui';
@@ -13,13 +13,13 @@ import {RaffleCard} from '@wraffle/ui';
 const sampleProducts = [
   {
     id: 2,
-    name: '럭셔리 시계 경품 래플',
+    name: '이거 삼성 상품임',
     price: 10000,
     thumbnailUrl:
       'https://github.com/user-attachments/assets/4a104905-0106-4b8a-8dcd-06926162e2e6',
     scrapCount: 89,
     isBookmarked: false,
-    categoryId: 17,
+    categoryId: 18,
     hashtags: [{id: 8, name: '사진'}],
   },
   {
@@ -70,29 +70,49 @@ const sampleProducts = [
 
 const CategoryPage = () => {
   const searchParams = useSearchParams();
-
   const categoryName = searchParams.get('view');
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // 상위 카테고리 찾기
   const currentCategory = categoryName
-    ? categories.find(category => category.name === categoryName) // 상위 카테고리를 찾음
-    : null; // 이미 상위 카테고리인 경우
+    ? categories.find(category => category.name === categoryName)
+    : null;
 
-  // 상위 카테고리가 존재하면 해당하는 하위 카테고리 필터링
-  const filteredCategories = currentCategory
-    ? categories.filter(category => category.parentId === currentCategory?.id) // 하위 카테고리 필터링
-    : categories.filter(category => category.parentId === null); // 상위 카테고리 필터링
+  let filteredCategories = currentCategory
+    ? categories.filter(category => category.parentId === currentCategory.id)
+    : categories.filter(category => category.parentId === null);
 
-  const filteredProducts = selectedCategory
-    ? sampleProducts.filter(
-        sampleProducts => sampleProducts.categoryId === selectedCategory,
-      )
-    : [];
+  filteredCategories = [
+    {
+      id: 0,
+      name: '전체',
+      parentId: currentCategory?.id || null,
+      depth: 0,
+    },
+    ...filteredCategories,
+  ];
+
+  useEffect(() => {
+    if (currentCategory) {
+      setSelectedCategory(0);
+    }
+    setTimeout(() => setIsLoading(false), 1000); // 로딩 시뮬레이션
+  }, [currentCategory]);
+
+  const filteredProducts =
+    selectedCategory === 0
+      ? sampleProducts.filter(product =>
+          filteredCategories.some(
+            cat => cat.id !== 0 && cat.id === product.categoryId,
+          ),
+        )
+      : sampleProducts.filter(
+          product => product.categoryId === selectedCategory,
+        );
 
   const handleSelectCategory = (category: CategoryItem) => {
-    setSelectedCategory(category.id); // 선택된  카테고리 상태만 업데이트
+    setSelectedCategory(category.id);
   };
 
   return (
@@ -128,34 +148,35 @@ const CategoryPage = () => {
           <CategoryList categories={filteredCategories} />
         </section>
       )}
-      {selectedCategory && (
-        <section className='p-4'>
-          <div
-            className='grid justify-center gap-[20px]'
-            style={{
-              gridTemplateColumns: 'repeat(auto-fit, 160px)',
-            }}
-          >
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map(product => (
-                <RaffleCard
-                  key={product.id}
-                  name={product.name}
-                  thumbnailUrl={product.thumbnailUrl}
-                  price={product.price.toString()}
-                  scrapCount={product.scrapCount}
-                  isBookmarked={product.isBookmarked}
-                  hashtags={product.hashtags}
-                />
-              ))
-            ) : (
-              <Typography size='h5' className='text-gray-500'>
-                상품 추가 예정입니다.
-              </Typography>
-            )}
-          </div>
-        </section>
-      )}
+
+      <section className='p-4'>
+        <div
+          className='grid justify-center gap-[20px]'
+          style={{gridTemplateColumns: 'repeat(auto-fit, 160px)'}}
+        >
+          {isLoading ? (
+            <Typography size='h5' className='text-gray-500'>
+              로딩 중...
+            </Typography>
+          ) : filteredProducts.length > 0 ? (
+            filteredProducts.map(product => (
+              <RaffleCard
+                key={product.id}
+                name={product.name}
+                thumbnailUrl={product.thumbnailUrl}
+                price={product.price.toString()}
+                scrapCount={product.scrapCount}
+                isBookmarked={product.isBookmarked}
+                hashtags={product.hashtags}
+              />
+            ))
+          ) : (
+            <Typography size='h5' className='text-gray-500'>
+              상품 추가 예정입니다.
+            </Typography>
+          )}
+        </div>
+      </section>
       <BottomNavigation />
     </div>
   );
