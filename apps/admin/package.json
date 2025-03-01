@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.53.1",
+    "@tanstack/react-query-devtools": "^5.66.11",
     "@wraffle/ui": "workspace:*",
     "msw": "^2.7.1",
     "next": "14.2.5",
