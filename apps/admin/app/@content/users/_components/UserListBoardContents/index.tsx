@@ -1,3 +1,4 @@
+import ListBoardContent from '../ListBoardContent';
 import UserList from '@/app/api/userList/type';
 import formatDate from '@/app/utils/formatDate';
 
@@ -16,30 +17,10 @@ const UserListBoardContents: React.FC<Props> = ({isCheckBox, contents}) => {
               {isCheckBox && (
                 <input type='checkbox' className='mx-[30px] my-[9px]' />
               )}
-              <li
-                key={content.id}
-                className='flex w-[148px] items-center justify-center'
-              >
-                {content.name}
-              </li>
-              <li
-                key={content.id}
-                className='flex w-[148px] items-center justify-center'
-              >
-                {formatDate(content.createdAt)}
-              </li>
-              <li
-                key={content.id}
-                className='flex w-[148px] items-center justify-center'
-              >
-                {content.email}
-              </li>
-              <li
-                key={content.id}
-                className='flex w-[148px] items-center justify-center'
-              >
-                {content.wraffleCount}
-              </li>
+              <ListBoardContent content={content.name} />
+              <ListBoardContent content={formatDate(content.createdAt)} />
+              <ListBoardContent content={content.email} />
+              <ListBoardContent content={content.wraffleCount} />
             </div>
             <div className='flex w-[148px] items-center justify-center'>
               <button className='rounded bg-[#F2F4F6] px-[17.5px] py-[8px] text-[#4E5968]'>
