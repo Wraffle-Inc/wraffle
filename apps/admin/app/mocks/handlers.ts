@@ -1,3 +1,4 @@
-import mockUsersHandler from './users/mockUsers';
+import mockSettlementListHandler from './settlement/mockSettlementList';
+import mockUserListHandler from './users/mockUserList';
 
-export const handlers = [mockUsersHandler];
+export const handlers = [mockUserListHandler, mockSettlementListHandler];

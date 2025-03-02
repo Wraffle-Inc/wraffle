@@ -5,6 +5,10 @@ const API_URL = {
     LIST: `${BASE_URL}/users`,
     DETAIL: `${BASE_URL}/users/:id`,
   },
+  SETTLEMENTS: {
+    LIST: `${BASE_URL}/settlements`,
+    DETAIL: `${BASE_URL}/settlements/:id`,
+  },
 };
 
 export default API_URL;

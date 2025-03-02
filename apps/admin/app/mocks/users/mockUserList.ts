@@ -27,8 +27,8 @@ const mockUsers: UserList = {
   },
 };
 
-const mockUsersHandler = http.get(url, () => {
+const mockUserListHandler = http.get(url, () => {
   return HttpResponse.json(mockUsers);
 });
 
-export default mockUsersHandler;
+export default mockUserListHandler;
