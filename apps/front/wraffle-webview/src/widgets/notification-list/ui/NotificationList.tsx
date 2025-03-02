@@ -13,6 +13,7 @@ export const NotificationList = () => {
   } = useHandleNotifications({
     params: {itemsPerPage: 10},
   });
+
   return (
     <div className='flex flex-col divide-y divide-[#E0E0E0]'>
       <InfiniteScroll

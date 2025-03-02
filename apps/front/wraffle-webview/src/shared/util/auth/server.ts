@@ -4,7 +4,7 @@ import {ACCESS_TOKEN_EXPIRES_IN} from '../const';
 import {auth, signIn, signOut} from './auth';
 import type {z} from 'zod';
 import type {JWT} from 'next-auth/jwt';
-import {API_BASE_URL} from '@/shared/api/apiClient';
+import apiClient from '@/shared/api/apiClient';
 import type {loginSchema} from '@/widgets/login/config';
 
 export const signInWithCredentials = async (
@@ -25,21 +25,12 @@ export {auth as getSession};
 
 export const reissueToken = async (token: JWT) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
-      method: 'POST',
-      body: JSON.stringify({refreshToken: token.refreshToken}),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.accessToken}`,
-        credentials: 'include',
-      },
+    const {data} = await apiClient.post<
+      {accessToken: string},
+      {refreshToken: string}
+    >('/auth/refresh', {
+      body: {refreshToken: token.refreshToken},
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw data;
-    }
 
     return {
       ...token,
