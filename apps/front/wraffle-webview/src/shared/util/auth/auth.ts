@@ -37,7 +37,6 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
               body: {email, password},
             },
           );
-
           return response.data;
         } catch (error) {
           const credentialsSignin = new CredentialsSignin();
