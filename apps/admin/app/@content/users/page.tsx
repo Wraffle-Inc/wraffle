@@ -1,4 +1,4 @@
-import UserListSuspense from './_suspense/UserListClient';
+import UserListSuspense from './_suspense/UserListSuspense';
 
 export default function Page() {
   return (
