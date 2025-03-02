@@ -1,4 +1,4 @@
-import API_URL from '../urls';
+import API_URL from '../../config/urls';
 import UserList from './type';
 
 const fetchUserList = async (): Promise<UserList> => {

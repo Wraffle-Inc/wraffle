@@ -1,4 +1,4 @@
-import API_URL from '../../api/urls';
+import API_URL from '../../config/urls';
 import {HttpResponse, http} from 'msw';
 import SettlementList from '@/app/api/settlementList/type';
 
