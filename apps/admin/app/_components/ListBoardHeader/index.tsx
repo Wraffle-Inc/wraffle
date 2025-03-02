@@ -3,7 +3,7 @@ type Props = {
   isCheckBox: boolean;
 };
 
-const ListBoardHeader: React.FC<Props> = ({labels, isCheckBox}) => {
+const ListBoardHeader = ({labels, isCheckBox}: Props): JSX.Element => {
   return (
     <div className='mx-[23px] mt-[18px]'>
       <ul className='flex w-full flex-row rounded-t-xl bg-[#FAFAFB]'>
