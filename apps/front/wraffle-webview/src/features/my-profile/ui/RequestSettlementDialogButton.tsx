@@ -32,7 +32,20 @@ const RequestSettlementDialogButton = ({
     setAmount('');
   };
 
+  const disabled = amount === '';
+
   const onSubmit = () => {
+    if (Number(amount) % 10000 !== 0) {
+      toast({
+        title: '10,000원 단위로만 정산 요청이 가능합니다.',
+        duration: 1000,
+        variant: 'warning',
+        icon: 'cross',
+      });
+
+      return;
+    }
+
     requestPostSettlement(
       {requestSettlementPrice: Number(amount)},
       {
@@ -97,7 +110,7 @@ const RequestSettlementDialogButton = ({
         </div>
 
         <DialogFooter className='gap-2'>
-          <Button type='button' onClick={onSubmit}>
+          <Button type='button' disabled={disabled} onClick={onSubmit}>
             요청하기
           </Button>
           <DialogClose asChild>
