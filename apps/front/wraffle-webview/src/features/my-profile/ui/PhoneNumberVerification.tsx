@@ -1,13 +1,14 @@
-import {useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useFormContext} from 'react-hook-form';
 import type {EditUserPayload} from '@/entities/auth/user/schema';
 import {
   useSendVerificationCode,
   useVerifyVerificationCode,
 } from '@/features/validate-phone/api';
-import {RequestCode} from '@/features/validate-phone/ui';
 import {useInput} from '@/shared/hook';
-import {Button, InputField, useToast} from '@wraffle/ui';
+import {Button, InputField, Select, useToast} from '@wraffle/ui';
+
+const MAX_INPUT_LENGTH = 4;
 
 interface PhoneNumberVerificationProps {
   defaultPhoneNumber: string;
@@ -19,31 +20,48 @@ const PhoneNumberVerification = ({
   setIsCodeVerified,
 }: PhoneNumberVerificationProps) => {
   const {toast} = useToast();
-  const {setValue, watch} = useFormContext<EditUserPayload>();
-
-  const phoneNumber = watch('phoneNumber');
+  const {setValue} = useFormContext<EditUserPayload>();
 
   const [code, handleCode] = useInput('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
   const [showCodeInput, setShowCodeInput] = useState(false);
 
   const requestSendVerifyCode = useSendVerificationCode();
   const requestVerifyVerificationCode = useVerifyVerificationCode();
 
-  const handlePhoneNumber = (phone: string) => {
-    setValue('phoneNumber', phone, {shouldValidate: true});
+  const defaultValue = useMemo(() => {
+    const phoneLength = {
+      middle: defaultPhoneNumber.startsWith('02') ? 2 : 3,
+      last: defaultPhoneNumber.startsWith('02') ? 6 : 7,
+    };
 
-    setIsCodeVerified(false);
-    setIsVerified(false);
-    setShowCodeInput(false);
-  };
+    return {
+      first: defaultPhoneNumber.slice(0, phoneLength.middle),
+      middle: defaultPhoneNumber.slice(phoneLength.middle, phoneLength.last),
+      last: defaultPhoneNumber.slice(phoneLength.last),
+    };
+  }, [defaultPhoneNumber]);
 
-  const handleVerifyCodeSend = () => {
-    const phoneNumber = watch('phoneNumber');
+  const [first, setFirst] = useState(defaultValue.first);
+  const [middle, setMiddle] = useState(defaultValue.middle);
+  const [last, setLast] = useState(defaultValue.last);
 
+  useEffect(() => {
+    if (defaultPhoneNumber) {
+      const phoneLength = {
+        middle: defaultPhoneNumber.startsWith('02') ? 2 : 3,
+        last: defaultPhoneNumber.startsWith('02') ? 6 : 7,
+      };
+
+      setFirst(defaultPhoneNumber.slice(0, phoneLength.middle));
+      setMiddle(defaultPhoneNumber.slice(phoneLength.middle, phoneLength.last));
+      setLast(defaultPhoneNumber.slice(phoneLength.last));
+    }
+  }, [defaultPhoneNumber]);
+
+  const handleVerifyCodeSend = useCallback(() => {
     requestSendVerifyCode(
-      {phoneNumber},
+      {phoneNumber: first + middle + last},
       {
         onSuccess: () => {
           toast({
@@ -55,16 +73,21 @@ const PhoneNumberVerification = ({
           setShowCodeInput(true);
         },
         onError: (error: Error) => {
-          setErrorMessage(error.message);
+          toast({
+            title: `${error.message}`,
+            duration: 2000,
+            variant: 'warning',
+            icon: 'cross',
+          });
         },
       },
     );
-  };
+  }, [first, last, middle, requestSendVerifyCode, toast]);
 
-  const handleVerifyCodeCheck = () => {
+  const handleVerifyCodeCheck = useCallback(() => {
     requestVerifyVerificationCode(
       {
-        phoneNumber: phoneNumber,
+        phoneNumber: first + middle + last,
         code: code,
       },
       {
@@ -76,35 +99,66 @@ const PhoneNumberVerification = ({
             icon: 'check',
           });
           setIsCodeVerified(true);
+
+          setValue('phoneNumber', first + middle + last);
         },
         onError: (error: Error) => {
           setErrorMessage(error.message);
         },
       },
     );
-  };
+  }, [
+    code,
+    first,
+    last,
+    middle,
+    requestVerifyVerificationCode,
+    setIsCodeVerified,
+    setValue,
+    toast,
+  ]);
 
-  const isPhoneNumberChanged = () => {
-    return phoneNumber !== defaultPhoneNumber;
-  };
+  const isPhoneNumberChanged = defaultPhoneNumber !== first + middle + last;
 
   return (
     <div>
-      <RequestCode
-        defaultValue={{
-          first: defaultPhoneNumber.slice(0, 3),
-          middle: defaultPhoneNumber.slice(3, 7),
-          last: defaultPhoneNumber.slice(7, 11),
-        }}
-        onChangePhoneNumber={handlePhoneNumber}
-        onChangeIsVerified={setIsVerified}
-      />
+      <InputField>
+        <InputField.Label htmlFor='phoneNumber'>휴대폰 번호*</InputField.Label>
+
+        <Select
+          value={first}
+          onValueChange={value => setFirst(value)}
+          placeholder='선택'
+          items={[
+            {value: '010', name: '010'},
+            {value: '02', name: '02'},
+            {value: '031', name: '031'},
+            {value: '032', name: '032'},
+          ]}
+        />
+
+        <InputField.Input
+          value={middle}
+          onChange={e => setMiddle(e.target.value)}
+          placeholder=''
+          maxLength={MAX_INPUT_LENGTH}
+          type='number'
+        />
+
+        <InputField.Input
+          value={last}
+          onChange={e => setLast(e.target.value)}
+          placeholder=''
+          maxLength={MAX_INPUT_LENGTH}
+          type='number'
+        />
+      </InputField>
 
       <Button
         type='button'
         variant='stroke'
         onClick={handleVerifyCodeSend}
-        disabled={!isPhoneNumberChanged() || !isVerified}
+        disabled={!isPhoneNumberChanged}
       >
         인증번호 전송
       </Button>
@@ -115,6 +169,7 @@ const PhoneNumberVerification = ({
             <InputField.Input
               value={code}
               onChange={handleCode}
+              maxLength={6}
               placeholder='인증번호를 입력해주세요.'
             />
             <InputField.ErrorMessage isError>
@@ -125,6 +180,7 @@ const PhoneNumberVerification = ({
           <Button
             type='button'
             className='ml-4 mt-2 h-[55px]'
+            disabled={!code || code.length < 6}
             onClick={handleVerifyCodeCheck}
           >
             확인

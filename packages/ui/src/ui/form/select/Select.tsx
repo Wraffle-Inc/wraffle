@@ -24,6 +24,7 @@ export interface BaseSelectProps {
   placeholder: string;
   onValueChange: (value: string) => void;
   defaultValue?: string;
+  value?: string;
 }
 
 export interface GroupSelectProps extends BaseSelectProps {
@@ -48,9 +49,14 @@ const Select = ({
   items,
   onValueChange,
   defaultValue,
+  value,
 }: SelectProps) => {
   return (
-    <SelectRoot onValueChange={onValueChange} defaultValue={defaultValue}>
+    <SelectRoot
+      value={value}
+      onValueChange={onValueChange}
+      defaultValue={defaultValue}
+    >
       <SelectTrigger className={cn(className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

@@ -16,6 +16,7 @@ export interface RHFInputProps {
   name: string;
   label: string;
   placeholder?: string;
+  defaultValue?: string;
   description?: string;
   type?: HTMLInputTypeAttribute;
 }
@@ -24,6 +25,7 @@ const RHFInput = ({
   name,
   label,
   placeholder,
+  defaultValue,
   description,
   type,
 }: RHFInputProps) => {
@@ -43,6 +45,7 @@ const RHFInput = ({
               placeholder={placeholder}
               {...field}
               type={type}
+              defaultValue={defaultValue}
               autoComplete='off'
             />
           </FormControl>

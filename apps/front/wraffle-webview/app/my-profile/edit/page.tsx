@@ -1,7 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import type {SubmitHandler} from 'react-hook-form';
 import {useForm} from 'react-hook-form';
 import {
@@ -27,14 +27,15 @@ const EditProfilePage = () => {
 
   const form = useForm<EditUserPayload>({
     resolver: zodResolver(editUserSchema),
-    defaultValues: {
-      nickname: defaultNickname,
-      email: defaultEmail,
-      phoneNumber: defaultPhoneNumber,
-    },
   });
 
-  const {watch, handleSubmit} = form;
+  const {watch, handleSubmit, setValue} = form;
+
+  useEffect(() => {
+    setValue('nickname', defaultNickname);
+    setValue('email', defaultEmail);
+    setValue('phoneNumber', defaultPhoneNumber);
+  }, [defaultEmail, defaultNickname, defaultPhoneNumber, setValue]);
 
   const [isCodeVerified, setIsCodeVerified] = useState(false);
 
@@ -96,11 +97,13 @@ const EditProfilePage = () => {
           <RHFInput
             name='nickname'
             label='닉네임*'
+            defaultValue={defaultNickname}
             placeholder='닉네임을 입력해주세요.'
           />
           <RHFInput
             name='email'
             label='이메일*'
+            defaultValue={defaultEmail}
             placeholder='이메일을 입력해주세요.'
           />
 
