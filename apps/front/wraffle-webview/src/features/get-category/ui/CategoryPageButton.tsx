@@ -12,7 +12,7 @@ const CategoryPageButton = ({category}: CategoryButtonProps) => {
   const router = useRouter();
   return (
     <button
-      className='flex w-full items-center justify-between border-b border-[#F2F4F6] p-4'
+      className='flex w-full items-center justify-between border-b border-gray-300 p-4'
       onClick={() => router.push(`/category/${category.id}`)}
     >
       <Typography size='h4' className='text-left font-normal'>
