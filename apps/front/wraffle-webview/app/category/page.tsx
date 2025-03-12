@@ -1,7 +1,7 @@
 'use client';
 
 import {useSearchParams} from 'next/navigation';
-import {useEffect, useState, Suspense} from 'react';
+import {useEffect, useState} from 'react';
 import {categories} from '@/entities/category';
 import type {CategoryItem} from '@/entities/category/type';
 import {Header} from '@/shared/ui';
@@ -73,6 +73,7 @@ const CategoryPage = () => {
   const categoryName = searchParams.get('view');
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const currentCategory = categoryName
     ? categories.find(category => category.name === categoryName)
@@ -96,6 +97,7 @@ const CategoryPage = () => {
     if (currentCategory) {
       setSelectedCategory(0);
     }
+    setTimeout(() => setIsLoading(false), 1000); // 로딩 시뮬레이션
   }, [currentCategory]);
 
   const filteredProducts =
@@ -152,15 +154,11 @@ const CategoryPage = () => {
           className='grid justify-center gap-[20px]'
           style={{gridTemplateColumns: 'repeat(auto-fit, 160px)'}}
         >
-          <Suspense
-            fallback={
-              <Typography size='h5' className='text-gray-500'>
-                로딩 중...
-              </Typography>
-            }
-          ></Suspense>
-          {/*filteredProducts 배열이 비어 있지 않은 경우*/}
-          {filteredProducts.length > 0 &&
+          {isLoading ? (
+            <Typography size='h5' className='text-gray-500'>
+              로딩 중...
+            </Typography>
+          ) : filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
               <RaffleCard
                 key={product.id}
@@ -171,9 +169,8 @@ const CategoryPage = () => {
                 isBookmarked={product.isBookmarked}
                 hashtags={product.hashtags}
               />
-            ))}
-          {/*filteredProducts 배열이 비어 있는 경우*/}
-          {filteredProducts.length === 0 && (
+            ))
+          ) : (
             <Typography size='h5' className='text-gray-500'>
               상품 추가 예정입니다.
             </Typography>
