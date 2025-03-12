@@ -1,20 +1,16 @@
 'use client';
 
-import {useSearchParams} from 'next/navigation';
-import {useState} from 'react';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {categories} from '@/entities/category';
-import type {CategoryItem} from '@/entities/category/type';
 import {Header} from '@/shared/ui';
 import {CategoryList} from '@/widgets/category-list/ui';
-import {CategoryMenu} from '@/widgets/category-list/ui';
 import {BottomNavigation, Icon, Typography} from '@wraffle/ui';
 
 const CategoryPage = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const categoryName = searchParams.get('view');
-
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   // 상위 카테고리 찾기
   const currentCategory = categoryName
@@ -25,10 +21,6 @@ const CategoryPage = () => {
   const filteredCategories = currentCategory
     ? categories.filter(category => category.parentId === currentCategory?.id) // 하위 카테고리 필터링
     : categories.filter(category => category.parentId === null); // 상위 카테고리 필터링
-
-  const handleSelectCategory = (category: CategoryItem) => {
-    setSelectedCategory(category.id); // 선택된  카테고리 상태만 업데이트
-  };
 
   return (
     <div className='h-auto pb-16'>
@@ -47,11 +39,7 @@ const CategoryPage = () => {
       </Header>
       {currentCategory ? (
         <section className='mb-4 flex justify-center'>
-          <CategoryMenu
-            categories={filteredCategories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={handleSelectCategory}
-          />
+          <CategoryList categories={filteredCategories} />
         </section>
       ) : (
         <section className='mb-4 flex justify-center'>
