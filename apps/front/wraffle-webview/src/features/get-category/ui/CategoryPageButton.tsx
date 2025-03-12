@@ -12,10 +12,10 @@ const CategoryPageButton = ({category}: CategoryButtonProps) => {
   const router = useRouter();
   return (
     <button
-      className='flex w-full items-center justify-between border-b border-[#F2F4F6] px-6 py-4'
-      onClick={() => router.push(`/category?view=${category.name}`)}
+      className='flex w-full items-center justify-between border-b border-[#F2F4F6] p-4'
+      onClick={() => router.push(`/category/${category.id}`)}
     >
-      <Typography size='h5' className='text-left font-normal'>
+      <Typography size='h4' className='text-left font-normal'>
         {category.name}
       </Typography>
       <Icon name='arrow-right-2' height={14} width={14} className='ml-auto' />

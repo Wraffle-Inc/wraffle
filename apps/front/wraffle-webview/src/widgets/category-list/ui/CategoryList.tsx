@@ -7,7 +7,7 @@ interface CategoryButtonsProps {
 
 const CategoryList = ({categories}: CategoryButtonsProps) => {
   return (
-    <div className='mx-auto w-full max-w-screen-md overflow-x-auto'>
+    <div className='mx-auto w-full max-w-screen-md overflow-x-auto p-4'>
       {categories.map(category => (
         <CategoryPageButton key={category.id} category={category} />
       ))}
