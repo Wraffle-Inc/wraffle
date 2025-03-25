@@ -1,0 +1,32 @@
+{/* TimePicker.mdx */}
+
+import * as stories from './TimePicker.stories';
+import {Canvas, Meta, Primary, Controls, Description} from '@storybook/blocks';
+
+<Meta of={stories} />
+
+# TimePicker
+
+`TimePicker`는 사용자가 시간을 선택할 수 있도록 돕는 컴포넌트입니다. 12시간 또는 24시간 형식을 지원하며, 직관적인 스와이프 방식으로 시간을 선택할 수 있도록 구현되어 있습니다. 이 컴포넌트는 모바일 환경에서도 잘 작동하며, 다양한 사용 사례에 맞게 쉽게 커스터마이징할 수 있습니다.
+
+---
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+
+## Overview
+
+<Primary />
+
+TimePicker 컴포넌트는 시간을 선택하는 UI를 제공합니다. 사용자에게 시간을 쉽게 설정할 수 있는 방법을 제공하며, 12시간과 24시간 형식 모두 지원합니다. `infinite` 모드를 통해 무한 스크롤로 시간을 빠르게 선택할 수 있습니다. 또한 `initTime` prop을 통해 초기 시간을 설정할 수 있습니다.
+
+## Props
+
+<Controls />
+
+## Usage
+
+### 무한스크롤
+
+<Canvas of={stories.DefaultInfinite} meta={stories} />
