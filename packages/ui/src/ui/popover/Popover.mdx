@@ -1,0 +1,105 @@
+{/* Popover.mdx */}
+
+import * as stories from './Popover.stories';
+import {Canvas, Meta, Primary, Controls, Description} from '@storybook/blocks';
+
+<Meta of={stories} />
+
+# Popover
+
+`Popover`는 합성 컴포넌트입니다. 버튼 클릭 시 추가적인 정보를 보여주는 데 사용됩니다.
+
+- [Overview](#overview)
+- [Props](#props)
+- [Description](#description)
+
+## Overview
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## 컴포넌트 구조
+
+`Popover`는 다음과 같은 하위 컴포넌트들로 구성됩니다:
+
+- `Popover`: 최상위 컴포넌트
+- `PopoverTrigger`: Popover를 열고 닫는 트리거 컴포넌트
+- `PopoverContent`: Popover의 내용을 표시하는 컴포넌트
+- `PopoverAnchor`: Popover의 위치를 지정하는 기준점 컴포넌트
+
+## PopoverContent Props
+
+PopoverContent 컴포넌트는 다음과 같은 props를 받습니다:
+
+- `align`: Popover content의 정렬 방향 ('start' | 'center' | 'end', 기본값: 'center')
+- `sideOffset`: Trigger와 content 사이의 거리 (number, 기본값: 6)
+- `className`: 커스텀 스타일링을 위한 클래스 (string)
+
+## 스타일링
+
+Popover는 기본적으로 다음과 같은 스타일이 적용됩니다:
+
+- z-index: 50
+- 최소 너비: 트리거 요소의 너비
+- 둥근 모서리
+- 테두리
+- 그림자 효과
+- 애니메이션 효과 (열기/닫기)
+
+이러한 스타일은 `className` prop을 통해 커스터마이즈할 수 있습니다.
+
+## usePopover Hook
+
+`usePopover` 훅을 사용하면 Popover의 상태를 더 쉽게 관리할 수 있습니다.
+
+### 사용 예시
+
+```tsx
+import {PopoverProvider, usePopover} from './use-popover';
+
+const MyComponent = () => {
+  const {openPopover, closePopover} = usePopover();
+
+  return (
+    <button
+      onClick={() =>
+        openPopover(
+          <div>
+            <p>Popover Content</p>
+            <button onClick={closePopover}>Close</button>
+          </div>,
+        )
+      }
+    >
+      Open Popover
+    </button>
+  );
+};
+
+// 최상위 컴포넌트에서 Provider로 감싸기
+const App = () => (
+  <PopoverProvider>
+    <MyComponent />
+  </PopoverProvider>
+);
+```
+
+### Hook API
+
+usePopover 훅은 다음과 같은 값들을 반환합니다:
+
+- `content`: 현재 Popover에 표시되는 컨텐츠 (ReactNode)
+- `openPopover`: Popover를 열고 컨텐츠를 설정하는 함수 ((content: ReactNode) => void)
+- `closePopover`: Popover를 닫는 함수 (() => void)
+
+## 접근성
+
+Popover는 Radix UI의 Popover 컴포넌트를 기반으로 하며, 다음과 같은 접근성 기능을 제공합니다:
+
+- 키보드 네비게이션 지원
+- ARIA 속성 자동 관리
+- 포커스 관리
+- ESC 키를 통한 닫기
