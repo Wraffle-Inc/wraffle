@@ -46,8 +46,6 @@ const RaffleCreate = () => {
 
   const {mutateAsync: createProduct, data} = useCreateProductMutation();
 
-  console.log(funnel.context);
-
   const onSubmit = async (data: CreateRafflePayload) => {
     const formatRaffleData: Payload = {
       type: 'raffle',
@@ -61,7 +59,6 @@ const RaffleCreate = () => {
       winnerCount: Number(data.winnerCount),
       images: data.images,
       etc: data.etc,
-      description: '', // 사용되지 않음
     };
     try {
       await createProduct(formatRaffleData);
