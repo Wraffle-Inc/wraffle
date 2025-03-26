@@ -63,7 +63,6 @@ const EventCreate = () => {
       winnerCount: Number(data.winnerCount),
       images: data.images,
       etc: data.etc,
-      description: '', // 사용되지 않음
       products: data.products,
     };
     try {
@@ -138,6 +137,3 @@ const EventCreate = () => {
 };
 
 export default EventCreate;
-
-// success 라우터 따로 빼기
-// -> 이미지 링크를 어떻게 줘야

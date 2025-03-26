@@ -5,7 +5,6 @@ interface BasePayload {
   endDate: string;
   announceAt: string;
   winnerCount: number;
-  description: string;
   etc: string;
   categoryId: number;
   tagIds: number[];
