@@ -1,45 +1,83 @@
 {/* Calendar.mdx */}
 
+import * as stories from './Calendar.stories';
 import {Canvas, Meta, Primary, Controls, Description} from '@storybook/blocks';
 
-import * as CalendarStories from './Calendar.stories';
-
-<Meta of={CalendarStories} />
+<Meta of={stories} />
 
 # Calendar
 
-CalendarForm 컴포넌트는 Popover태그를 사용하여 SingleDayPickCalendar 컴포넌트를 나타내는 컴포넌트 입니다.
+`Calendar`는 날짜를 표시하고, 특정 날짜를 선택할 수 있도록 돕는 컴포넌트입니다.
+
+---
 
 - [Overview](#overview)
 - [Props](#props)
+- [Description](#description)
 
 ## Overview
 
 <Primary />
 
-## Description
-
-Calendar컴포넌트 같은 경우, option 중 mode로 Calendar안에서 Selection Modes를 single, multi, range 3가지중 고를 수 있으나,
-모드를 Props로 받지 않은 이유는 피그마상에서 날짜를 단일로 고르는 경우만 존재하는것 같아 굳이 Props로 받지 않기로 했습니다.
-
-그래서 SingleDayPickCalendar로 이름을 지었으나, 추후에 디자인 변경 or 추가가 있을 경우, 수정하겠습니다.
-
-컨테이너의 width에 따라 변경 가능하도록 width를 따로 고정값을 주지 않았습니다.
-
-응모기간을 생각해서 당일 이전의 날짜는 선택 불가하도록 구현하였습니다.
-
 ## Props
 
 <Controls />
 
-## Stories
+---
 
-### Calendar With FromDate
+## Description
 
-고를수 있는 시작일을 fromDate를 통해 설정할 수 있습니다.(예시. 오늘부터)
+`Calendar` 컴포넌트는 `react-day-picker`의 `DayPicker`를 기반으로 하며, 다음과 같은 기능을 제공합니다:
 
-<Canvas of={CalendarStories.CalendarWithFromDate} meta={CalendarStories} />
+### 선택 모드
 
-### Selected Calendar Form
+- `single`: 단일 날짜 선택
+- `multiple`: 여러 날짜 선택
+- `range`: 날짜 범위 선택
 
-<Canvas of={CalendarStories.CalendarFormSelected} meta={CalendarStories} />
+### 기본 Props
+
+`DayPickerBase`의 모든 props를 사용할 수 있습니다:
+
+- `locale`: 날짜 포맷팅에 사용할 locale
+- `numberOfMonths`: 표시할 달력의 개수
+- `showOutsideDays`: 이전/다음 달의 날짜 표시 여부
+- `showWeekNumber`: 주 번호 표시 여부
+- `weekStartsOn`: 주의 시작일 (0: 일요일)
+- `disabled`: 비활성화할 날짜
+- `hidden`: 숨길 날짜
+- `today`: 오늘 날짜로 표시할 날짜
+- `fromDate`: 선택 가능한 최초 날짜
+- `toDate`: 선택 가능한 최종 날짜
+- `fromMonth`: 선택 가능한 최초 달
+- `toMonth`: 선택 가능한 최종 달
+- `fromYear`: 선택 가능한 최초 연도
+- `toYear`: 선택 가능한 최종 연도
+
+### 모드별 Props
+
+#### Single 모드 (`mode="single"`)
+
+- `selected`: 선택된 날짜 (`Date | undefined`)
+- `onSelect`: 날짜 선택 시 호출되는 이벤트 핸들러
+- `required`: 선택을 필수로 할지 여부 (기본값: `false`)
+
+#### Multiple 모드 (`mode="multiple"`)
+
+- `selected`: 선택된 날짜 배열 (`Date[] | undefined`)
+- `onSelect`: 날짜 선택/해제 시 호출되는 이벤트 핸들러
+- `min`: 선택 가능한 최소 날짜 수
+- `max`: 선택 가능한 최대 날짜 수
+
+#### Range 모드 (`mode="range"`)
+
+- `selected`: 선택된 날짜 범위 (`DateRange | undefined`)
+  ```typescript
+  type DateRange = {
+    from: Date | undefined;
+    to?: Date | undefined;
+  };
+  ```
+- `onSelect`: 날짜 범위 선택 시 호출되는 이벤트 핸들러
+- `min`: 선택 가능한 최소 날짜 수
+- `max`: 선택 가능한 최대 날짜 수

@@ -1,57 +1,86 @@
-import {CalendarForm} from './Calendar';
+import {Calendar} from './Calendar';
 import {useState} from 'react';
+import type {SelectRangeEventHandler, DateRange} from 'react-day-picker';
 import type {Meta, StoryObj} from '@storybook/react';
 
-const meta: Meta<typeof CalendarForm> = {
-  component: CalendarForm,
+const meta: Meta<typeof Calendar> = {
   title: 'Components/Calendar',
+  component: Calendar,
+  argTypes: {
+    mode: {
+      control: 'select',
+      options: ['single', 'multiple', 'range'],
+    },
+    selected: {
+      control: false,
+    },
+    onSelect: {
+      control: false,
+    },
+    required: {
+      control: 'boolean',
+    },
+    min: {
+      control: 'number',
+      if: {arg: 'mode', eq: 'multiple'},
+    },
+    max: {
+      control: 'number',
+      if: {arg: 'mode', eq: 'multiple'},
+    },
+  },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Calendar>;
 
-export const CalendarFormDefault: Story = {
-  name: 'Default',
-  args: {
-    dateLabel: '선택한 날짜가 표시되기 전 보여지는 라벨입니다',
-  },
-  render: args => {
-    const [selected, setSelected] = useState<Date | undefined>();
-    return (
-      <CalendarForm
-        {...args}
-        selected={selected}
-        setSelected={setSelected}
-        fromDate={new Date()}
-      />
-    );
-  },
-};
-
-export const CalendarWithFromDate: Story = {
-  name: 'FromDate',
-  args: {...CalendarFormDefault.args},
-  render: args => {
-    const [selected, setSelected] = useState<Date | undefined>();
-    return (
-      <CalendarForm
-        {...args}
-        fromDate={new Date()}
-        selected={selected}
-        setSelected={setSelected}
-      />
-    );
-  },
-};
-
-export const CalendarFormSelected: Story = {
-  name: 'Selected',
-  args: {...CalendarFormDefault.args},
+export const Single: Story = {
   render: args => {
     const [selected, setSelected] = useState<Date | undefined>(new Date());
     return (
-      <CalendarForm {...args} selected={selected} setSelected={setSelected} />
+      <Calendar
+        {...args}
+        mode='single'
+        selected={selected}
+        onSelect={setSelected}
+      />
+    );
+  },
+  args: {
+    mode: 'single',
+    required: false,
+  },
+};
+
+export const Multiple: Story = {
+  render: args => {
+    const [selected, setSelected] = useState<Date[] | undefined>([new Date()]);
+    return (
+      <Calendar
+        {...args}
+        mode='multiple'
+        selected={selected}
+        onSelect={setSelected}
+      />
+    );
+  },
+  args: {
+    mode: 'multiple',
+    min: 1,
+    max: 5,
+  },
+};
+
+export const Range: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<DateRange | undefined>({
+      from: new Date(2025, 2, 1),
+      to: new Date(2025, 2, 3),
+    });
+    const handleSelect: SelectRangeEventHandler = range => setSelected(range);
+    return (
+      <Calendar mode='range' selected={selected} onSelect={handleSelect} />
     );
   },
 };
