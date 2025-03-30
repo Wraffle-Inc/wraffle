@@ -18,23 +18,3 @@ export interface CreateTag {
 export interface CreateBody {
   name: string;
 }
-
-export interface CreateTagAndAddToList {
-  tag: string;
-  createTag: (tag: string) => Promise<CreateTag>;
-  tagIds: number[];
-  onTagChange: (newTags: number[]) => void;
-}
-
-export interface AddTagFromUserInputIfDuplicate {
-  tag: string;
-  serverTags?: CreateTag[];
-  tagIds: number[];
-  onTagChange: (newTags: number[]) => void;
-}
-
-export interface AddTagFromServerData {
-  id: number;
-  tagIds: number[];
-  onTagChange: (newTags: number[]) => void;
-}
