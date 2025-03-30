@@ -1,23 +1,8 @@
-import {
-  useCreateTag,
-  useTagQuery,
-} from '../../../../../features/product/tag/api/useTagQuery';
-import {useEffect, useState} from 'react';
-import {
-  addTagFromServerData,
-  addTagFromUserInputIfDuplicate,
-  createTagAndAddToList,
-} from '@/features/product/tag/config/utils';
-import {useDebounce} from '@/shared/hook';
+import {useTagManagement} from '../../hooks/useTagManagement';
 import {InputWithSearchIcon} from '@/shared/ui/input/InputWithSearchIcon';
 import {Tags} from '@/shared/ui/tag/Tags';
 import {TAG_LIMIT} from '@/shared/util';
 import {Label} from '@wraffle/ui';
-
-interface TagList {
-  id: number;
-  name: string;
-}
 
 interface TagSectionProps {
   tagIds: number[];
@@ -25,56 +10,15 @@ interface TagSectionProps {
 }
 
 export const TagSection = ({tagIds, onTagChange}: TagSectionProps) => {
-  const [inputValue, setInputValue] = useState(''); // 입력하는 값
-  const debouncedInputValue = useDebounce(inputValue);
-
-  const [autocompleteTags, setAutocompleteTags] = useState<TagList[]>([]); // 서버에서 받아오는 태그 리스트
-
-  const [isNew, setIsNew] = useState<boolean>(true); // 새로 생성할지 말지
-
-  const [selectedTagNames, setSelectedTagNames] = useState<string[]>([]); // 화면에 보여지는 태그 리스트
-
-  const {mutateAsync: createTag} = useCreateTag();
-  const {isPending: isQueryPending, data} = useTagQuery({
-    itemsPerPage: 100, //
-    uuid: '',
-    prefix: debouncedInputValue.toLocaleLowerCase(),
-  });
-  const serverTags = data?.items;
-
-  useEffect(() => {
-    if (!serverTags) return;
-
-    setIsNew(true);
-
-    const isExistingTag = serverTags.some(tag => tag.name === inputValue);
-
-    if (isExistingTag) {
-      const suggestions = serverTags.filter(tag => tag.name !== inputValue);
-      setAutocompleteTags(suggestions);
-      setIsNew(false);
-    } else {
-      setAutocompleteTags(serverTags);
-    }
-  }, [data, inputValue, serverTags]);
-
-  const handleAddTag = async (tag: string, id: number) => {
-    if (selectedTagNames.length >= 5 || selectedTagNames.includes(tag)) {
-      setInputValue('');
-      return;
-    }
-
-    if (isNew && id === 0) {
-      createTagAndAddToList({tag, createTag, tagIds, onTagChange});
-    } else if (!isNew && id === 0) {
-      addTagFromUserInputIfDuplicate({tag, serverTags, tagIds, onTagChange});
-    } else {
-      addTagFromServerData({id, tagIds, onTagChange});
-    }
-
-    setSelectedTagNames(prev => [...prev, tag]);
-    setInputValue('');
-  };
+  const {
+    inputValue,
+    setInputValue,
+    selectedTagNames,
+    setSelectedTagNames,
+    autocompleteTags,
+    isQueryPending,
+    handleAddTag,
+  } = useTagManagement({tagIds, onTagChange});
 
   return (
     <div className='relative'>
