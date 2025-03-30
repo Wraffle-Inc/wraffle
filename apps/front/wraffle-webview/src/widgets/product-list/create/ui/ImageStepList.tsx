@@ -1,30 +1,23 @@
-import {useState} from 'react';
+import {useState, useRef} from 'react';
+import type {ChangeEvent} from 'react';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
-import {useImageUpload} from '@/features/image-handle/api/useImageUpload';
+import {uploadImage} from '@/features/image-handle/api/imageUpload';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
   const [images, setImages] = useState<string[]>([]);
-  const {getImagePresignedUrl, uploadImageToS3} = useImageUpload();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageUpload = async (e: Event) => {
-    const input = e.target as HTMLInputElement;
-    const files = input.files;
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
 
-    if (!files) return;
+    if (!file) return;
 
     try {
-      const file = files[0];
-      const fileName = encodeURIComponent(file.name);
-
-      const presignedUrl = await getImagePresignedUrl(fileName);
-
-      await uploadImageToS3(presignedUrl, file);
-
-      const fileUrl = presignedUrl;
-      setImages(prev => [...prev, fileUrl].slice(0, 4));
+      const uploadedImageUrl = await uploadImage(file);
+      setImages(prev => [...prev, uploadedImageUrl].slice(0, 4));
     } catch (error) {
-      console.error('이미지 업로드 실패:', error);
+      console.error('이미지 업로드 중 오류가 발생했습니다:', error);
     }
   };
 
@@ -52,6 +45,14 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
         </Label>
       </div>
 
+      <input
+        type='file'
+        ref={fileInputRef}
+        className='hidden'
+        accept='image/*'
+        onChange={handleImageUpload}
+      />
+
       <div className='flex flex-wrap gap-4'>
         {images.map((url, index) => (
           <ImageCardWithDelete
@@ -64,15 +65,7 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
         {images.length < 4 && (
           <AddItemCard
             label='이미지 추가'
-            onClick={() => {
-              // 웹뷰 연결 후 input 파일 변경
-              const input = document.createElement('input');
-              input.type = 'file';
-              input.accept = 'image/*';
-              input.multiple = false;
-              input.onchange = handleImageUpload;
-              input.click();
-            }}
+            onClick={() => fileInputRef.current?.click()}
             className='h-40 w-40'
           />
         )}

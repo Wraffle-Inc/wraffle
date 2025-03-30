@@ -1,10 +1,11 @@
+import {useState, useRef} from 'react';
 import type {UseFormSetValue} from 'react-hook-form';
 import type {CreateEventPayload, Product} from '@/entities/product/model';
+import {uploadImage} from '@/features/image-handle/api/imageUpload';
+import {AddItemCard} from '@/features/image-handle/ui/AddItemCard';
+import {ImageCardWithDelete} from '@/features/image-handle/ui/ImageCardWithDelete';
 import {Button, Typography} from '@wraffle/ui';
 
-// TODO
-// image api 연동
-// 이미지 추가 부분은 api연동하며 구현하겠습니다
 export const ProductImageStep = ({
   products,
   title,
@@ -16,7 +17,26 @@ export const ProductImageStep = ({
   setValue: UseFormSetValue<CreateEventPayload>;
   onReturn: () => void;
 }) => {
-  const imageUrl = '';
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const uploadedImageUrl = await uploadImage(file);
+      setImageUrl(uploadedImageUrl);
+    } catch (error) {
+      console.error('이미지 업로드 중 오류가 발생했습니다:', error);
+    }
+  };
+
+  const handleDeleteImage = () => {
+    setImageUrl('');
+  };
 
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
@@ -35,17 +55,33 @@ export const ProductImageStep = ({
         </Typography>
       </div>
 
-      <div className='flex h-60 w-60 items-center justify-center rounded-lg border border-solid border-[#F5F5F7] bg-[#FAFAFB]'>
-        <span className='text-center text-sm font-medium text-[#ADB5BD]'>
-          이미지 추가
-        </span>
-      </div>
+      <input
+        type='file'
+        ref={fileInputRef}
+        className='hidden'
+        accept='image/*'
+        onChange={handleImageUpload}
+      />
+
+      {imageUrl ? (
+        <ImageCardWithDelete
+          url={imageUrl}
+          onClick={handleDeleteImage}
+          className='h-60 w-60'
+        />
+      ) : (
+        <AddItemCard
+          label={'이미지 추가'}
+          onClick={() => fileInputRef.current?.click()}
+          className='h-60 w-60'
+        />
+      )}
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button
           type='button'
           className='mb-5 mt-3 disabled:text-[#A1A1AA]'
-          // disabled={!imageUrl}
+          disabled={!imageUrl}
           onClick={() => {
             const updatedProducts = [
               ...products,
