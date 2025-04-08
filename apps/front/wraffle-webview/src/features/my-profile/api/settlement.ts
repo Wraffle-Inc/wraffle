@@ -1,7 +1,11 @@
 import {GET_USER_INFO_PATH} from './user';
 import type {GetSettlementResultResponse} from '@/entities/settlement/type';
 import apiClient from '@/shared/api/apiClient';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 
 interface MutationCallbacks {
   onSuccess: () => void;
@@ -13,7 +17,7 @@ interface MutationCallbacks {
  */
 export const GET_SETTLEMENTS_PATH = '/settlements';
 export const useGetSettlements = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: [GET_SETTLEMENTS_PATH],
     queryFn: async () => {
       const response = await apiClient.get<GetSettlementResultResponse>(
