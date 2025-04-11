@@ -1,10 +1,10 @@
 'use client';
 
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useRouter, useParams, useSearchParams} from 'next/navigation';
 import {useEffect, useState, useRef} from 'react';
-import {sampleRaffleData, sampleEventData} from '@/entities/product/product';
-import type {RaffleData, EventData} from '@/entities/product/product';
+import type {EventData, RaffleData} from '@/entities/product/product';
 import ParticipateButton from '@/features/participate/ui/ParticipateButton';
+import {getProductDetailServer} from '@/features/product-detail/api/getProductDetailServer';
 import ShareDialog from '@/features/share-product-link/ShareDialog';
 import {Header, Divider} from '@/shared/ui';
 import {formatDate} from '@/shared/util/formatDate';
@@ -25,12 +25,52 @@ const HEADER_OFFSET = 115;
 
 const ProductPage = () => {
   const router = useRouter();
+  const {productId} = useParams();
   const searchParams = useSearchParams();
-  const type = searchParams.get('type');
-  const {selectedMenu, selectMenu} = useMenu('상품' as RaffleMenu | EventMenu);
+  const type = searchParams.get('type') as 'raffle' | 'event';
+
+  console.log('id', productId);
+  console.log('type', type);
+
   const [productData, setProductData] = useState<RaffleData | EventData | null>(
     null,
   );
+  const [isLoading, setIsLoading] = useState(true);
+
+  // ✅ 유효성 검사
+  const numericId = Number(productId);
+  const isValidtype = type === 'raffle' || type === 'event';
+
+  useEffect(() => {
+    if (!numericId || isNaN(numericId)) {
+      router.push('/404');
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        const data = await getProductDetailServer({id: numericId, type});
+        setProductData(data);
+      } catch (error) {
+        console.error('상품 조회 실패:', error);
+
+        if ((error as Error).message.includes('Unauthorized')) {
+          router.push('/login');
+        } else if ((error as Error).message.includes('Not Found')) {
+          router.push('/404');
+        } else {
+          // 기타 에러
+          alert('알 수 없는 오류가 발생했습니다.');
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [numericId, type, router, isValidtype]);
+
+  const {selectedMenu, selectMenu} = useMenu('상품' as RaffleMenu | EventMenu);
 
   const sectionsRef = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
@@ -42,23 +82,11 @@ const ProductPage = () => {
     유의사항: useRef<HTMLDivElement>(null),
   });
 
+  if (isLoading || !productData) {
+    return <div>Loading...</div>;
+  }
+
   const menus = type === 'event' ? [...EVENT_MENUS] : [...RAFFLE_MENUS];
-
-  useEffect(() => {
-    const data: {
-      raffle: RaffleData;
-      event: EventData;
-    } = {
-      raffle: sampleRaffleData,
-      event: sampleEventData,
-    };
-
-    if (type === 'raffle' || type === 'event') {
-      setProductData(data[type]);
-    } else {
-      router.push('/404');
-    }
-  }, [router, type]);
 
   // 메뉴 선택 시 스크롤 이동 함수
   const scrollToSection = (menu: RaffleMenu | EventMenu) => {
@@ -76,10 +104,6 @@ const ProductPage = () => {
     selectMenu(menu);
     scrollToSection(menu);
   };
-
-  if (!productData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className='flex min-h-screen flex-col'>
