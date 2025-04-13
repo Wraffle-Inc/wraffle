@@ -1,22 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {getTypeText} from '@/shared/util';
+import {getTypeText} from '@/shared/util/typeUtils';
 import {Button, Typography} from '@wraffle/ui';
 
-interface SuccessListProps {
-  type: 'event' | 'raffle';
-  productData?: {
-    id: number;
+interface SuccessProps {
+  searchParams: {
+    id: string;
     thumbnail: string;
+    type: 'event' | 'raffle';
   };
 }
 
-export const SuccessList = ({type, productData}: SuccessListProps) => {
+const Success = ({searchParams: {id, thumbnail, type}}: SuccessProps) => {
   const eventOrRaffleText = getTypeText(type);
+  const imageUrl = `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/${thumbnail}`;
 
-  if (!productData) {
-    return <div>data loaidng</div>;
-  }
   return (
     <div className='flex h-full flex-col items-center px-4 py-6'>
       <div className='mb-24 w-full text-left'>
@@ -30,15 +28,15 @@ export const SuccessList = ({type, productData}: SuccessListProps) => {
       </div>
 
       <Image
-        src={productData.thumbnail}
+        src={imageUrl}
         width={250}
         height={250}
         alt='thumbnail-image'
-        className='h-60 w-60 rounded-lg bg-blue-200 object-cover'
+        className='h-60 w-60 rounded-lg object-cover'
       />
 
       <div className='fixed inset-x-0 bottom-0 px-4 py-4'>
-        <Link href={`/products/${productData.id}?type=${type}`} replace={true}>
+        <Link href={`/products/${id}?type=${type}`} replace={true}>
           <Button className='h-[45px]'>
             {eventOrRaffleText.successWithoutReviewButton}
           </Button>
@@ -47,3 +45,5 @@ export const SuccessList = ({type, productData}: SuccessListProps) => {
     </div>
   );
 };
+
+export default Success;

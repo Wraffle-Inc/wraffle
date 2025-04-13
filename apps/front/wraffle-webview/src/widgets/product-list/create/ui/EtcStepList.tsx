@@ -5,7 +5,7 @@ import type {CreateEventPayload} from '@/entities/product/model';
 import {EtcForm} from '@/features/product-form/ui';
 import {Button, Typography} from '@wraffle/ui';
 
-export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
+export const EtcStep = () => {
   const {control} = useFormContext<CreateEventPayload>();
   const etc = useWatch({control, name: 'etc'});
 
@@ -25,7 +25,6 @@ export const EtcStep = ({onNext}: {onNext: (etc: string) => void}) => {
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button
           type='submit'
-          onClick={() => onNext(etc)}
           disabled={!etc}
           className='mb-5 mt-3 disabled:text-[#A1A1AA]'
         >
