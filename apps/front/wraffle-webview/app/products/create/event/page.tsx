@@ -8,15 +8,14 @@ import {
   createEventDefaultValues,
   createEventSchema,
 } from '@/entities/product/model';
-import {useCreateProductMutation} from '@/features/product/create/api/useCreateQuery';
 import type {Payload} from '@/features/product/create/config/type';
+import {useCreateProductSubmit} from '@/features/product/create/hooks/useCreateProudctSubmit';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
   EtcStep,
   ImageStep,
   ProductList,
-  SuccessList,
   TitleStep,
 } from '@/widgets/product-list/create/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -34,7 +33,6 @@ const steps = createFunnelSteps<EventCreateState>()
     requiredKeys: 'products',
   })
   .extends('etcStep', {requiredKeys: 'images'})
-  .extends('successStep', {requiredKeys: 'etc'})
   .build();
 
 const EventCreate = () => {
@@ -47,11 +45,10 @@ const EventCreate = () => {
     },
   });
   const EventTotalStepIndex = 5;
+  const {onSubmit} = useCreateProductSubmit({type: 'event'});
 
-  const {mutateAsync: createProduct, data} = useCreateProductMutation();
-
-  const onSubmit = async (data: CreateEventPayload) => {
-    const formatRaffleData: Payload = {
+  const handleSubmit = async (data: CreateEventPayload) => {
+    const formatEventData: Payload = {
       type: 'event',
       title: data.title,
       categoryId: Number(data.categoryId),
@@ -65,11 +62,8 @@ const EventCreate = () => {
       etc: data.etc,
       products: data.products,
     };
-    try {
-      await createProduct(formatRaffleData);
-    } catch (e) {
-      console.error(e);
-    }
+
+    await onSubmit(formatEventData);
   };
 
   return (
@@ -86,7 +80,7 @@ const EventCreate = () => {
       )}
 
       <GenericForm
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         formOptions={{
           mode: 'onChange',
           resolver: (data, context, options) => {
@@ -126,10 +120,7 @@ const EventCreate = () => {
           imageStep={({history}) => (
             <ImageStep onNext={images => history.push('etcStep', {images})} />
           )}
-          etcStep={({history}) => (
-            <EtcStep onNext={etc => history.push('successStep', {etc})} />
-          )}
-          successStep={() => <SuccessList type='event' productData={data} />}
+          etcStep={() => <EtcStep />}
         />
       </GenericForm>
     </div>

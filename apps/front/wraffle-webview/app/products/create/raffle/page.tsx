@@ -8,14 +8,13 @@ import {
   createRaffleDefaultValues,
   createRaffleSchema,
 } from '@/entities/product/model';
-import {useCreateProductMutation} from '@/features/product/create/api/useCreateQuery';
 import type {Payload} from '@/features/product/create/config/type';
+import {useCreateProductSubmit} from '@/features/product/create/hooks/useCreateProudctSubmit';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
   EtcStep,
   ImageStep,
-  SuccessList,
   TitleStep,
 } from '@/widgets/product-list/create/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -30,7 +29,6 @@ const steps = createFunnelSteps<RaffleCreateState>()
     requiredKeys: ['startDate', 'endDate', 'announceAt', 'winnerCount'],
   })
   .extends('etcStep', {requiredKeys: 'images'})
-  .extends('successStep', {requiredKeys: 'etc'})
   .build();
 
 const RaffleCreate = () => {
@@ -43,10 +41,9 @@ const RaffleCreate = () => {
     },
   });
   const RaffleTotalStepIndex = 4;
+  const {onSubmit} = useCreateProductSubmit({type: 'raffle'});
 
-  const {mutateAsync: createProduct, data} = useCreateProductMutation();
-
-  const onSubmit = async (data: CreateRafflePayload) => {
+  const handleSubmit = async (data: CreateRafflePayload) => {
     const formatRaffleData: Payload = {
       type: 'raffle',
       title: data.title,
@@ -60,11 +57,8 @@ const RaffleCreate = () => {
       images: data.images,
       etc: data.etc,
     };
-    try {
-      await createProduct(formatRaffleData);
-    } catch (e) {
-      console.error(e);
-    }
+
+    await onSubmit(formatRaffleData);
   };
 
   return (
@@ -81,7 +75,7 @@ const RaffleCreate = () => {
       )}
 
       <GenericForm
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         formOptions={{
           mode: 'onChange',
           resolver: (data, context, options) => {
@@ -116,10 +110,7 @@ const RaffleCreate = () => {
           imageStep={({history}) => (
             <ImageStep onNext={images => history.push('etcStep', {images})} />
           )}
-          etcStep={({history}) => (
-            <EtcStep onNext={etc => history.push('successStep', {etc})} />
-          )}
-          successStep={() => <SuccessList type='raffle' productData={data} />}
+          etcStep={() => <EtcStep />}
         />
       </GenericForm>
     </div>
