@@ -34,7 +34,7 @@ const nextConfig = {
         hostname: 'wraffle-cdn.justsloth.com',
       },
     ],
-    domains: ['github.com', 'unsplash.com'],
+    domains: ['github.com', 'unsplash.com', 'example.com'],
   },
 };
 
