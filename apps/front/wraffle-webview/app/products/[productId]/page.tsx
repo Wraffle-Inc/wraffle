@@ -171,6 +171,10 @@ const ProductPage = () => {
           isApplied={productData.isApplied}
           productImage={productData.images[0]}
           isCreator={productData.isCreator}
+          productId={productData.id}
+          productType={type.toUpperCase() as 'RAFFLE' | 'EVENT'}
+          isClipped={productData.isClipped}
+          clippingId={productData.clippingId}
         />
       </div>
     </div>
