@@ -29,6 +29,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'image.vans.co.kr',
       },
+      {
+        protocol: 'https',
+        hostname: 'wraffle-cdn.justsloth.com',
+      },
     ],
     domains: ['github.com'],
   },
