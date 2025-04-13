@@ -23,6 +23,12 @@ export const ImageCardWithDelete = ({
     <button type='button' className='absolute right-2 top-2' onClick={onClick}>
       <Image src={'/icons/ic_close.svg'} alt='close' width={12} height={12} />
     </button>
-    <img alt='thumbnail' src={url} className='h-full w-full object-cover' />
+    <Image
+      alt='thumbnail'
+      width={200}
+      height={200}
+      src={url}
+      className='h-full w-full object-cover'
+    />
   </div>
 );

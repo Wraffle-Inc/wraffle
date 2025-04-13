@@ -1,10 +1,10 @@
-import {useState, useRef} from 'react';
+import {useState} from 'react';
 import type {UseFormSetValue} from 'react-hook-form';
 import type {CreateEventPayload, Product} from '@/entities/product/model';
-import {uploadImage} from '@/features/image-handle/api/imageUpload';
+import {useImageUpload} from '@/features/image-handle/hooks/useImageUpload';
 import {AddItemCard} from '@/features/image-handle/ui/AddItemCard';
 import {ImageCardWithDelete} from '@/features/image-handle/ui/ImageCardWithDelete';
-import {Button, Typography} from '@wraffle/ui';
+import {Button, Typography, useToast} from '@wraffle/ui';
 
 export const ProductImageStep = ({
   products,
@@ -17,22 +17,22 @@ export const ProductImageStep = ({
   setValue: UseFormSetValue<CreateEventPayload>;
   onReturn: () => void;
 }) => {
+  const {toast} = useToast();
   const [imageUrl, setImageUrl] = useState<string>('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    try {
-      const uploadedImageUrl = await uploadImage(file);
-      setImageUrl(uploadedImageUrl);
-    } catch (error) {
-      console.error('이미지 업로드 중 오류가 발생했습니다:', error);
-    }
-  };
+  const {fileInputRef, handleImageUpload, triggerFileInput} = useImageUpload({
+    onSuccess: (url: string) => {
+      setImageUrl(url);
+    },
+    onError: (error: Error) => {
+      toast({
+        title: error.message,
+        duration: 2000,
+        variant: 'warning',
+        icon: 'close',
+      });
+    },
+  });
 
   const handleDeleteImage = () => {
     setImageUrl('');
@@ -72,7 +72,7 @@ export const ProductImageStep = ({
       ) : (
         <AddItemCard
           label={'이미지 추가'}
-          onClick={() => fileInputRef.current?.click()}
+          onClick={triggerFileInput}
           className='h-60 w-60'
         />
       )}
@@ -85,7 +85,7 @@ export const ProductImageStep = ({
           onClick={() => {
             const updatedProducts = [
               ...products,
-              {title: title, tagIds: [], imageUrl: imageUrl},
+              {title: title, tagIds: [1], imageUrl: imageUrl}, // tagIds 필요없는데, 서버에서 not null 값이라 임시로 넣어둠.
             ];
             setValue('products', updatedProducts);
             onReturn();

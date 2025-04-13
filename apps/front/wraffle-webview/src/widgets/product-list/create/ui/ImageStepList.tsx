@@ -1,28 +1,37 @@
-import {useState, useRef} from 'react';
-import type {ChangeEvent} from 'react';
+import {useFormContext, useWatch} from 'react-hook-form';
+import type {CreateEventPayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
-import {uploadImage} from '@/features/image-handle/api/imageUpload';
-import {Button, Label, Typography} from '@wraffle/ui';
+import {useImageUpload} from '@/features/image-handle/hooks/useImageUpload';
+import {Button, Label, Typography, useToast} from '@wraffle/ui';
 
 export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
-  const [images, setImages] = useState<string[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const {toast} = useToast();
+  const {control, setValue} = useFormContext<CreateEventPayload>();
 
-  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const [images] = useWatch({
+    control,
+    name: ['images'],
+  });
 
-    if (!file) return;
-
-    try {
-      const uploadedImageUrl = await uploadImage(file);
-      setImages(prev => [...prev, uploadedImageUrl].slice(0, 4));
-    } catch (error) {
-      console.error('이미지 업로드 중 오류가 발생했습니다:', error);
-    }
-  };
+  const {fileInputRef, handleImageUpload, triggerFileInput} = useImageUpload({
+    onSuccess: (url: string) => {
+      setValue('images', [...images, url].slice(0, 4));
+    },
+    onError: (error: Error) => {
+      toast({
+        title: error.message,
+        duration: 2000,
+        variant: 'warning',
+        icon: 'close',
+      });
+    },
+  });
 
   const handleImageDelete = (index: number) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    setValue(
+      'images',
+      images.filter((_, i) => i !== index),
+    );
   };
 
   return (
@@ -65,7 +74,7 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
         {images.length < 4 && (
           <AddItemCard
             label='이미지 추가'
-            onClick={() => fileInputRef.current?.click()}
+            onClick={triggerFileInput}
             className='h-40 w-40'
           />
         )}
