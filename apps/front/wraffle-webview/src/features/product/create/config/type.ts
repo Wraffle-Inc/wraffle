@@ -16,7 +16,6 @@ export interface RafflePayload extends BasePayload {}
 interface Product {
   title: string;
   imageUrl: string;
-  tagIds: number[];
 }
 
 export interface EventPayload extends BasePayload {

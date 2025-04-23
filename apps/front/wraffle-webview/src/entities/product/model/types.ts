@@ -1,6 +1,5 @@
 export interface Product {
   title: string;
-  tagIds: number[];
   imageUrl: string;
 }
 
