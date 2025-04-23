@@ -85,7 +85,7 @@ export const ProductImageStep = ({
           onClick={() => {
             const updatedProducts = [
               ...products,
-              {title: title, tagIds: [1], imageUrl: imageUrl}, // tagIds 필요없는데, 서버에서 not null 값이라 임시로 넣어둠.
+              {title: title, imageUrl: imageUrl},
             ];
             setValue('products', updatedProducts);
             onReturn();
