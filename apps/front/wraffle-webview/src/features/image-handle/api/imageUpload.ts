@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid';
 import apiClient from '@/shared/api/apiClient';
 
 interface PresignedUrlResponse {
@@ -8,9 +9,11 @@ interface UploadRequest {
   fileKeys: string[];
 }
 
-// filekeys에서 중복안되도록 고유 키가 되도록 해야 하나
 export const uploadImage = async (file: File): Promise<string> => {
-  const fileName = encodeURIComponent(file.name);
+  const fileExtension = file.name.split('.').pop();
+  const uniqueFileName = `${uuidv4()}.${fileExtension}`;
+  const fileName = encodeURIComponent(uniqueFileName);
+
   const response = await apiClient.post<PresignedUrlResponse, UploadRequest>(
     '/files/upload',
     {body: {fileKeys: [fileName]}, withAuth: true},
