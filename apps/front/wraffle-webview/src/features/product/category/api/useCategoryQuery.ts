@@ -10,6 +10,8 @@ const fetchCategories = async () => {
   return response.data;
 };
 
+// TODO
+// useSuspenseQuery로 개선
 export const useCategoryQuery = () =>
   useQuery({
     queryKey: ['categories'],

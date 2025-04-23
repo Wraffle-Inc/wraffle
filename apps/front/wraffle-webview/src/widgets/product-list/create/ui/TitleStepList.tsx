@@ -2,6 +2,7 @@
 
 import {useCategoryQuery} from '../../../../features/product/category/api/useCategoryQuery';
 import {TagSection} from './Section/TagSection';
+import {TitleStepSkeleton} from './TitleStepSkeleton';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {CategoryForm, PriceForm, TitleForm} from '@/features/product-form/ui';
@@ -20,6 +21,7 @@ export const TitleStep = ({
     price: string,
   ) => void;
 }) => {
+  const {data: categoryItems} = useCategoryQuery();
   const eventOrRaffleText = getTypeText(type);
 
   const {control, setValue} = useFormContext<CreateEventPayload>();
@@ -31,10 +33,8 @@ export const TitleStep = ({
 
   const idDisabled = !title || !categoryId || !price;
 
-  const {data: categoryItems} = useCategoryQuery();
-
   if (!categoryItems) {
-    return <div>loading...</div>;
+    return <TitleStepSkeleton />;
   }
 
   const suggestCategoryItems = categoryItems.items.map(item => ({
