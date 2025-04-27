@@ -6,7 +6,7 @@ export interface TagList {
 
 export interface TagQueryParams {
   itemsPerPage: number;
-  uuid: string;
+  cursor: string;
   prefix: string;
 }
 

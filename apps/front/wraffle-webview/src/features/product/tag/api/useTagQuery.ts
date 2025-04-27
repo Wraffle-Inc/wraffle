@@ -6,9 +6,13 @@ import type {
 } from '../config/type';
 import type {CursorPagination} from '@/entities/pagination/type';
 import apiClient from '@/shared/api/apiClient';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {
+  useMutation,
+  useInfiniteQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
-const fetchTags = async ({itemsPerPage, uuid, prefix}: TagQueryParams) => {
+const fetchTags = async ({itemsPerPage, cursor, prefix}: TagQueryParams) => {
   const response = await apiClient.get<{
     items: TagList[];
     pagination: CursorPagination;
@@ -16,17 +20,29 @@ const fetchTags = async ({itemsPerPage, uuid, prefix}: TagQueryParams) => {
     withAuth: true,
     params: {
       itemsPerPage: itemsPerPage,
-      uuid: uuid,
+      cursor: cursor,
       prefix: prefix,
     },
   });
   return response.data;
 };
 
-export const useTagQuery = ({itemsPerPage, uuid, prefix}: TagQueryParams) =>
-  useQuery({
-    queryKey: ['tags', itemsPerPage, uuid, prefix],
-    queryFn: () => fetchTags({itemsPerPage, uuid, prefix}),
+export const useTagQuery = (
+  {itemsPerPage, prefix}: Omit<TagQueryParams, 'cursor'>,
+  options?: {enabled?: boolean},
+) =>
+  useInfiniteQuery({
+    queryKey: ['tags', itemsPerPage, prefix],
+    queryFn: ({pageParam}) =>
+      fetchTags({itemsPerPage, cursor: pageParam, prefix}),
+    initialPageParam: '',
+    getNextPageParam: lastPage => {
+      if (lastPage.pagination.hasNextData) {
+        return lastPage.pagination.cursor;
+      }
+      return undefined;
+    },
+    enabled: options?.enabled,
   });
 
 const createTag = async (tag: string) => {
