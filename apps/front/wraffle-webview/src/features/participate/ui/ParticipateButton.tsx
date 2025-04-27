@@ -1,5 +1,6 @@
 'use client';
 
+import {applyProduct} from '../api/applyProduct';
 import ParticipateDialog from './ParticipateDialog';
 import React, {useState} from 'react';
 import {ClippingButton} from '@/features/clipping/ui/ClippingButton';
@@ -30,8 +31,20 @@ const ParticipateButton = ({
 }: ParticipateButtonProps) => {
   const [isApplied, setIsApplied] = useState(initialApplyStatus);
 
-  const handleApply = () => {
-    setIsApplied(true);
+  const handleApply = async () => {
+    try {
+      const response = await applyProduct({
+        targetId: productId,
+        type: productType,
+      });
+
+      if (response.isApplied) {
+        setIsApplied(true);
+      }
+    } catch (error) {
+      console.error('응모 실패:', error);
+      alert('응모에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   if (status === 'after') {
