@@ -25,7 +25,7 @@ const ShareDialog = () => {
               className='flex items-center justify-center'
             >
               <Image
-                src='https://i.ibb.co/MDMTKFq/insta.png'
+                src='https://github.com/user-attachments/assets/0082c9bf-d7c6-4979-851e-7a6aee60aa72'
                 alt='Instagram'
                 width={38}
                 height={38}
@@ -36,7 +36,7 @@ const ShareDialog = () => {
               className='flex items-center justify-center'
             >
               <Image
-                src='https://i.ibb.co/fv4T4x6/kakaotalk.png'
+                src='https://github.com/user-attachments/assets/0c8a3f28-4d5a-40bc-9966-1dd686313903'
                 alt='Kakao'
                 width={38}
                 height={38}
@@ -49,7 +49,7 @@ const ShareDialog = () => {
               className='flex items-center justify-center'
             >
               <Image
-                src='https://i.ibb.co/PjjqhMq/link.png'
+                src='https://github.com/user-attachments/assets/183fd7de-9628-45f4-8af2-7abc7af28f24'
                 alt='Copy Link'
                 width={38}
                 height={38}
