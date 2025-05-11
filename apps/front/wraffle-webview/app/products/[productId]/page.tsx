@@ -29,20 +29,20 @@ const ProductPage = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get('type') as 'raffle' | 'event';
 
-  console.log('id', productId);
-  console.log('type', type);
-
   const [productData, setProductData] = useState<RaffleData | EventData | null>(
     null,
   );
   const [isLoading, setIsLoading] = useState(true);
 
-  // ✅ 유효성 검사
-  const numericId = Number(productId);
-  const isValidtype = type === 'raffle' || type === 'event';
-
   useEffect(() => {
+    const numericId = Number(productId);
+
     if (!numericId || isNaN(numericId)) {
+      router.push('/404');
+      return;
+    }
+
+    if (type !== 'raffle' && type !== 'event') {
       router.push('/404');
       return;
     }
@@ -59,7 +59,6 @@ const ProductPage = () => {
         } else if ((error as Error).message.includes('Not Found')) {
           router.push('/404');
         } else {
-          // 기타 에러
           alert('알 수 없는 오류가 발생했습니다.');
         }
       } finally {
@@ -68,7 +67,7 @@ const ProductPage = () => {
     };
 
     fetchData();
-  }, [numericId, type, router, isValidtype]);
+  }, [productId, type, router]);
 
   const {selectedMenu, selectMenu} = useMenu('상품' as RaffleMenu | EventMenu);
 
@@ -88,7 +87,6 @@ const ProductPage = () => {
 
   const menus = type === 'event' ? [...EVENT_MENUS] : [...RAFFLE_MENUS];
 
-  // 메뉴 선택 시 스크롤 이동 함수
   const scrollToSection = (menu: RaffleMenu | EventMenu) => {
     const section = sectionsRef.current[menu];
     if (section && section.current) {
@@ -99,7 +97,6 @@ const ProductPage = () => {
     }
   };
 
-  // 메뉴 클릭 시 메뉴를 선택하고 해당 섹션으로 스크롤 이동
   const handleMenuSelect = (menu: RaffleMenu | EventMenu) => {
     selectMenu(menu);
     scrollToSection(menu);
