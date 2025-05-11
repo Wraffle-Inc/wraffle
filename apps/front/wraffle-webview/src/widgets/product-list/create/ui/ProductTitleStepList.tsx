@@ -1,14 +1,22 @@
 'use client';
 
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
+import type {Product} from '@/entities/product/model';
 import {Button, InputField, Typography} from '@wraffle/ui';
 
 export const ProductTitleStep = ({
+  products,
   onNext,
 }: {
+  products: Product[];
   onNext: (title: string) => void;
 }) => {
   const [title, setTitle] = useState<string>('');
+
+  const isDuplicate = useMemo(() => {
+    return products.some(product => product.title === title.trim());
+  }, [title, products]);
+
   return (
     <div className='flex h-full flex-col px-5 pb-20'>
       <div className='mb-5'>
@@ -32,13 +40,16 @@ export const ProductTitleStep = ({
           onChange={e => setTitle(e.target.value)}
           placeholder='상품 제목을 입력해주세요.'
         />
+        <InputField.ErrorMessage isError={isDuplicate}>
+          이미 존재하는 제목입니다.
+        </InputField.ErrorMessage>
       </InputField>
 
       <div className='fixed inset-x-0 bottom-0 bg-white px-4'>
         <Button
           type='button'
           className='mb-5 mt-3 disabled:text-[#A1A1AA]'
-          disabled={!title}
+          disabled={!title || isDuplicate}
           onClick={() => onNext(title)}
         >
           다음
