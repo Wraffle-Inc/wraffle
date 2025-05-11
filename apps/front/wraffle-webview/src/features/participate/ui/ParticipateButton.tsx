@@ -29,7 +29,8 @@ const ParticipateButton = ({
   isClipped,
   clippingId,
 }: ParticipateButtonProps) => {
-  const [isApplied, setIsApplied] = useState(initialApplyStatus);
+  const [isApplied, setIsApplied] = useState(() => initialApplyStatus);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleApply = async () => {
     try {
@@ -38,12 +39,17 @@ const ParticipateButton = ({
         type: productType,
       });
 
-      if (response.isApplied) {
+      console.log('API 응답 수신:', response);
+      if (response.applyStatus === 'WAITING') {
+        console.log('🎉 응모 성공, 상태 업데이트');
         setIsApplied(true);
+        setDialogOpen(true);
+      } else {
+        console.log('응모 상태가 WAITING 아님:', response.applyStatus);
       }
     } catch (error) {
-      console.error('응모 실패:', error);
-      alert('응모에 실패했습니다. 다시 시도해주세요.');
+      console.error('❗ 응모 중 에러 발생:', error);
+      alert('예상치 못한 에러가 발생했습니다.');
     }
   };
 
@@ -57,9 +63,7 @@ const ParticipateButton = ({
 
   return (
     <div className='flex gap-4 p-2'>
-      {isCreator ? (
-        <Button variant='default'>추첨하러 가기</Button>
-      ) : (
+      {!isCreator && (
         <>
           <ClippingButton
             targetId={productId}
@@ -68,13 +72,18 @@ const ParticipateButton = ({
             isInitiallyClipped={isClipped}
             initialClippingId={clippingId}
           />
-          <ParticipateDialog
-            isApplied={isApplied}
-            handleApply={handleApply}
-            productImage={productImage}
-          />
+
+          <Button disabled={isApplied} onClick={handleApply}>
+            {isApplied ? '응모를 완료하였습니다' : '응모하기'}
+          </Button>
         </>
       )}
+      <ParticipateDialog
+        isApplied={isApplied}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        productImage={productImage}
+      />
     </div>
   );
 };
