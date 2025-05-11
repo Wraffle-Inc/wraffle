@@ -3,14 +3,22 @@
 import apiClient from '@/shared/api/apiClient';
 import {getSession} from '@/shared/util/auth/server';
 
-export const deleteClipping = async (clippingId: number): Promise<void> => {
+interface DeleteClippingRequest {
+  id: number;
+  type: 'RAFFLE' | 'EVENT';
+}
+
+export const deleteClipping = async (
+  data: DeleteClippingRequest,
+): Promise<void> => {
   const session = await getSession();
 
   if (!session?.accessToken) {
     throw new Error('Unauthorized');
   }
 
-  await apiClient.delete<void>(`/clippings/${clippingId}`, {
+  await apiClient.delete<DeleteClippingRequest>(`/clippings`, {
     withAuth: true,
+    body: data,
   });
 };

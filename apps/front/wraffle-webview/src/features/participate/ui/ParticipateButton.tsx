@@ -15,7 +15,6 @@ interface ParticipateButtonProps {
   productId: number;
   productType: 'RAFFLE' | 'EVENT';
   isClipped: boolean;
-  clippingId?: number;
 }
 
 const ParticipateButton = ({
@@ -27,7 +26,6 @@ const ParticipateButton = ({
   productId,
   productType,
   isClipped,
-  clippingId,
 }: ParticipateButtonProps) => {
   const [isApplied, setIsApplied] = useState(() => initialApplyStatus);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -70,7 +68,6 @@ const ParticipateButton = ({
             type={productType}
             clipCount={clipCount}
             isInitiallyClipped={isClipped}
-            initialClippingId={clippingId}
           />
 
           <Button disabled={isApplied} onClick={handleApply}>
