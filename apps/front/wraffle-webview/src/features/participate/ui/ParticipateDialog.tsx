@@ -11,33 +11,29 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@wraffle/ui';
 
 interface DialogComponentProps {
   isApplied: boolean;
-  handleApply: () => void;
+  open: boolean;
   productImage: string;
+  onOpenChange: (open: boolean) => void;
 }
 
 const ParticipateDialog = ({
-  isApplied,
-  handleApply,
+  open,
+  onOpenChange,
   productImage,
 }: DialogComponentProps) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button disabled={isApplied} onClick={handleApply}>
-          {isApplied ? '응모를 완료하였습니다' : '응모하기'}
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent withCloseButton={true}>
         <DialogHeader className='flex flex-col items-center'>
           <DialogTitle>참여가 완료되었습니다</DialogTitle>
           <DialogDescription>
             응모 후 당첨 시에만 결제를 진행해요!
           </DialogDescription>
+
           <div className='mt-[20px] flex justify-center'>
             <Image
               src={productImage}

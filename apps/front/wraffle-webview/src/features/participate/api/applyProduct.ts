@@ -11,7 +11,7 @@ interface ApplyToProductRequest {
 interface ApplyProductResponse {
   id: number;
   applyUid: string;
-  isApplied: boolean;
+  applyStatus: 'WAITING' | 'COMPLETE' | 'APPROVED' | 'REJECTED';
 }
 
 export const applyProduct = async (
