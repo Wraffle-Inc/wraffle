@@ -13,8 +13,9 @@ import {
   createEventDefaultValues,
   createEventSchema,
 } from '@/entities/product/model';
+import {useFileUpload} from '@/features/image-handle/hooks/useFileUpload';
 import type {Payload} from '@/features/product/create/config/type';
-import {useCreateProductSubmit} from '@/features/product/create/hooks/useCreateProudctSubmit';
+import {useCreateProduct} from '@/features/product/create/hooks/useCreateQuery';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {createFunnelSteps, useFunnel} from '@use-funnel/browser';
@@ -43,9 +44,20 @@ export const EventForm = () => {
     },
   });
   const EventTotalStepIndex = 5;
-  const {onSubmit} = useCreateProductSubmit({type: 'event'});
+  const {mutateAsync: createProduct} = useCreateProduct({type: 'event'});
+  const {mutateAsync: uploadImages} = useFileUpload();
 
   const handleSubmit = async (data: CreateEventPayload) => {
+    const imageUrls = await uploadImages(data.images);
+
+    const productsImageUrls = await uploadImages(
+      data.products.map(product => product.imageUrl),
+    );
+    const products = data.products.map((product, index) => ({
+      ...product,
+      imageUrl: productsImageUrls[index],
+    }));
+
     const formatEventData: Payload = {
       type: 'event',
       title: data.title,
@@ -56,12 +68,12 @@ export const EventForm = () => {
       endDate: String(data.endDate),
       announceAt: String(data.announceAt),
       winnerCount: Number(data.winnerCount),
-      images: data.images,
+      images: imageUrls,
       etc: data.etc,
-      products: data.products,
+      products,
     };
 
-    await onSubmit(formatEventData);
+    await createProduct(formatEventData);
   };
 
   return (

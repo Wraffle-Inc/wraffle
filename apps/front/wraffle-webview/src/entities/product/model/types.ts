@@ -1,6 +1,6 @@
 export interface Product {
   title: string;
-  imageUrl: string;
+  imageUrl: File;
 }
 
 interface createState {
@@ -12,7 +12,7 @@ interface createState {
   endDate?: Date;
   announceAt?: Date;
   winnerCount?: string;
-  images?: string[];
+  images?: File[];
   etc?: string;
 }
 

@@ -8,30 +8,41 @@ interface PresignedUrlResponse {
 interface UploadRequest {
   fileKeys: string[];
 }
-
-export const uploadImage = async (file: File): Promise<string> => {
-  const fileExtension = file.name.split('.').pop();
-  const uniqueFileName = `${uuidv4()}.${fileExtension}`;
-  const fileName = encodeURIComponent(uniqueFileName);
+export const uploadImage = async (images: File[]) => {
+  const fileKeys = images.map(image => {
+    const fileExtension = image.name.split('.').pop();
+    const uniqueFileName = `${uuidv4()}.${fileExtension}`;
+    const fileName = encodeURIComponent(uniqueFileName);
+    return fileName;
+  });
 
   const response = await apiClient.post<PresignedUrlResponse, UploadRequest>(
     '/files/upload',
-    {body: {fileKeys: [fileName]}, withAuth: true},
+    {
+      body: {fileKeys},
+      withAuth: true,
+    },
   );
 
-  const presignedUrl = response.data.presignedUrls[0];
-  const contentType = file.type || 'image/jpeg';
+  const presignedUrls = response.data.presignedUrls;
+  const uploadPromises = images.map((image, index) =>
+    uploadImageToS3(presignedUrls[index], image),
+  );
+  await Promise.all(uploadPromises);
 
-  await fetch(presignedUrl, {
+  const publicUrls = fileKeys.map(fileKey => {
+    return `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/${fileKey}`;
+  });
+
+  return publicUrls;
+};
+
+const uploadImageToS3 = async (presignedUrl: string, file: File) => {
+  return await fetch(presignedUrl, {
     method: 'PUT',
     body: file,
     headers: {
-      'Content-Type': contentType,
-      'Cache-Control': 'public, max-age=31536000',
+      'Content-Type': file.type,
     },
   });
-
-  const publicUrl = `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/${fileName}`;
-
-  return publicUrl;
 };

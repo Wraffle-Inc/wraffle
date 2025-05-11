@@ -8,8 +8,9 @@ import {
   createRaffleDefaultValues,
   createRaffleSchema,
 } from '@/entities/product/model';
+import {useFileUpload} from '@/features/image-handle/hooks/useFileUpload';
 import type {Payload} from '@/features/product/create/config/type';
-import {useCreateProductSubmit} from '@/features/product/create/hooks/useCreateProudctSubmit';
+import {useCreateProduct} from '@/features/product/create/hooks/useCreateQuery';
 import {GenericForm, Header, ProgressBar} from '@/shared/ui';
 import {
   DateStep,
@@ -41,9 +42,12 @@ export const RaffleForm = () => {
     },
   });
   const RaffleTotalStepIndex = 4;
-  const {onSubmit} = useCreateProductSubmit({type: 'raffle'});
+  const {mutateAsync: createProduct} = useCreateProduct({type: 'raffle'});
+  const {mutateAsync: uploadImages} = useFileUpload();
 
   const handleSubmit = async (data: CreateRafflePayload) => {
+    const imageUrls = await uploadImages(data.images);
+
     const formatRaffleData: Payload = {
       type: 'raffle',
       title: data.title,
@@ -54,11 +58,11 @@ export const RaffleForm = () => {
       endDate: String(data.endDate),
       announceAt: String(data.announceAt),
       winnerCount: Number(data.winnerCount),
-      images: data.images,
+      images: imageUrls,
       etc: data.etc,
     };
 
-    await onSubmit(formatRaffleData);
+    await createProduct(formatRaffleData);
   };
 
   return (

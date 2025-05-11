@@ -1,11 +1,12 @@
+import type {ChangeEvent} from 'react';
+import {useRef} from 'react';
 import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
-import {useImageUpload} from '@/features/image-handle/hooks/useImageUpload';
-import {Button, Label, Typography, useToast} from '@wraffle/ui';
+import {Button, Label, Typography} from '@wraffle/ui';
 
-export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
-  const {toast} = useToast();
+export const ImageStep = ({onNext}: {onNext: (images: File[]) => void}) => {
+  const imagesInputRef = useRef<HTMLInputElement>(null);
   const {control, setValue} = useFormContext<CreateEventPayload>();
 
   const [images] = useWatch({
@@ -13,25 +14,23 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
     name: ['images'],
   });
 
-  const {fileInputRef, handleImageUpload, triggerFileInput} = useImageUpload({
-    onSuccess: (url: string) => {
-      setValue('images', [...images, url].slice(0, 4));
-    },
-    onError: (error: Error) => {
-      toast({
-        title: error.message,
-        duration: 2000,
-        variant: 'warning',
-        icon: 'close',
-      });
-    },
-  });
+  const onImagesChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const files = Array.from(e.target.files);
+    setValue('images', [...images, ...files]);
+    if (imagesInputRef.current) {
+      imagesInputRef.current.value = '';
+    }
+  };
 
   const handleImageDelete = (index: number) => {
     setValue(
       'images',
       images.filter((_, i) => i !== index),
     );
+    if (imagesInputRef.current) {
+      imagesInputRef.current.value = '';
+    }
   };
 
   return (
@@ -56,17 +55,18 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
 
       <input
         type='file'
-        ref={fileInputRef}
+        ref={imagesInputRef}
         className='hidden'
         accept='image/*'
-        onChange={handleImageUpload}
+        onChange={onImagesChange}
+        multiple
       />
 
       <div className='flex flex-wrap gap-4'>
-        {images.map((url, index) => (
+        {images.map((file, index) => (
           <ImageCardWithDelete
-            key={url}
-            url={url}
+            key={`${file.name}-${index}`}
+            url={URL.createObjectURL(file)}
             onClick={() => handleImageDelete(index)}
             className='h-40 w-40'
           />
@@ -74,7 +74,7 @@ export const ImageStep = ({onNext}: {onNext: (images: string[]) => void}) => {
         {images.length < 4 && (
           <AddItemCard
             label='이미지 추가'
-            onClick={triggerFileInput}
+            onClick={() => imagesInputRef.current?.click()}
             className='h-40 w-40'
           />
         )}
