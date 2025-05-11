@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import type {ChangeEvent} from 'react';
+import {useRef, useState} from 'react';
 import type {UseFormSetValue} from 'react-hook-form';
 import type {CreateEventPayload, Product} from '@/entities/product/model';
-import {useImageUpload} from '@/features/image-handle/hooks/useImageUpload';
 import {AddItemCard} from '@/features/image-handle/ui/AddItemCard';
 import {ImageCardWithDelete} from '@/features/image-handle/ui/ImageCardWithDelete';
-import {Button, Typography, useToast} from '@wraffle/ui';
+import {Button, Typography} from '@wraffle/ui';
 
 export const ProductImageStep = ({
   products,
@@ -17,25 +17,21 @@ export const ProductImageStep = ({
   setValue: UseFormSetValue<CreateEventPayload>;
   onReturn: () => void;
 }) => {
-  const {toast} = useToast();
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const {fileInputRef, handleImageUpload, triggerFileInput} = useImageUpload({
-    onSuccess: (url: string) => {
-      setImageUrl(url);
-    },
-    onError: (error: Error) => {
-      toast({
-        title: error.message,
-        duration: 2000,
-        variant: 'warning',
-        icon: 'close',
-      });
-    },
-  });
+  const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+    setImageFile(file);
+  };
 
   const handleDeleteImage = () => {
-    setImageUrl('');
+    setImageFile(null);
+
+    if (imageInputRef.current) {
+      imageInputRef.current.value = '';
+    }
   };
 
   return (
@@ -57,22 +53,22 @@ export const ProductImageStep = ({
 
       <input
         type='file'
-        ref={fileInputRef}
+        ref={imageInputRef}
         className='hidden'
         accept='image/*'
-        onChange={handleImageUpload}
+        onChange={onImageChange}
       />
 
-      {imageUrl ? (
+      {imageFile ? (
         <ImageCardWithDelete
-          url={imageUrl}
+          url={URL.createObjectURL(imageFile)}
           onClick={handleDeleteImage}
           className='h-60 w-60'
         />
       ) : (
         <AddItemCard
           label={'이미지 추가'}
-          onClick={triggerFileInput}
+          onClick={() => imageInputRef.current?.click()}
           className='h-60 w-60'
         />
       )}
@@ -81,13 +77,13 @@ export const ProductImageStep = ({
         <Button
           type='button'
           className='mb-5 mt-3 disabled:text-[#A1A1AA]'
-          disabled={!imageUrl}
+          disabled={!imageFile}
           onClick={() => {
-            const updatedProducts = [
+            if (!imageFile) return;
+            setValue('products', [
               ...products,
-              {title: title, imageUrl: imageUrl},
-            ];
-            setValue('products', updatedProducts);
+              {title: title, imageUrl: imageFile},
+            ]);
             onReturn();
           }}
         >

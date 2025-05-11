@@ -11,7 +11,7 @@ const endDateSchema = z.date();
 const announceAtSchema = z.date();
 const winnerCountSchema = z.string().default('');
 
-const imagesSchema = z.string().array().default([]);
+const imagesSchema = z.instanceof(File).array().default([]);
 
 const etcSchema = z.string().default('');
 

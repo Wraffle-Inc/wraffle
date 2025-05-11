@@ -13,11 +13,11 @@ const winnerCountSchema = z.string().default('');
 
 const productsSchema = z.object({
   title: z.string().default(''),
-  imageUrl: z.string().default(''),
+  imageUrl: z.instanceof(File),
 });
 const productsArraySchema = z.array(productsSchema).default([]);
 
-const imagesSchema = z.string().array().default([]);
+const imagesSchema = z.instanceof(File).array().default([]);
 
 const etcSchema = z.string().default('');
 
