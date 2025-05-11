@@ -3,7 +3,7 @@
 import {ProductImageStep} from './ProductImageStepList';
 import {ProductListStep} from './ProductListStep';
 import {ProductTitleStep} from './ProductTitleStepList';
-import {useFormContext} from 'react-hook-form';
+import {useFormContext, useWatch} from 'react-hook-form';
 import type {CreateEventPayload, Product} from '@/entities/product/model';
 import {useFunnel} from '@use-funnel/browser';
 
@@ -39,20 +39,25 @@ export const ProductList = ({
     },
   });
 
-  const {setValue, getValues} = useFormContext<CreateEventPayload>();
-  const products = getValues('products');
+  const {control, setValue} = useFormContext<CreateEventPayload>();
+  const products = useWatch({
+    control,
+    name: 'products',
+  });
 
   return (
     <funnel.Render
       listStep={({history}) => (
         <ProductListStep
           products={products}
+          setValue={setValue}
           onNext={onNext}
           onCreate={() => history.push('titleStep')}
         />
       )}
       titleStep={({history}) => (
         <ProductTitleStep
+          products={products}
           onNext={title => history.push('imageStep', {title})}
         />
       )}

@@ -1,14 +1,18 @@
+import type {UseFormSetValue} from 'react-hook-form';
 import type {Product} from '@/entities/product/model';
+import type {CreateEventPayload} from '@/entities/product/model';
 import {AddItemCard, ImageCardWithDelete} from '@/features/image-handle';
 import {Button, Label, Typography} from '@wraffle/ui';
 
 // api 연동
 export const ProductListStep = ({
   products,
+  setValue,
   onNext,
   onCreate,
 }: {
   products: Product[];
+  setValue: UseFormSetValue<CreateEventPayload>;
   onNext: (products: Product[]) => void;
   onCreate: () => void;
 }) => {
@@ -33,11 +37,21 @@ export const ProductListStep = ({
       </div>
 
       <div className='flex flex-wrap gap-4'>
-        {products.map(product => (
-          <div key={product.imageUrl} className='flex flex-col gap-2'>
+        {products.map((product, index) => (
+          <div
+            key={`${product.imageUrl.name}-${index}`}
+            className='flex flex-col gap-2'
+          >
             <ImageCardWithDelete
-              url={product.imageUrl}
-              onClick={() => {}}
+              url={URL.createObjectURL(product.imageUrl)}
+              onClick={() => {
+                setValue(
+                  'products',
+                  products.filter(
+                    p => p.imageUrl.name !== product.imageUrl.name,
+                  ),
+                );
+              }}
               className='h-40 w-40'
             />
             <Typography as='p' size='p2'>
