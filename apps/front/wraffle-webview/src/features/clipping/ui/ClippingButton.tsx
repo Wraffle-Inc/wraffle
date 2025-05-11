@@ -10,7 +10,6 @@ interface ClippingButtonProps {
   type: 'RAFFLE' | 'EVENT';
   clipCount: number;
   isInitiallyClipped?: boolean;
-  initialClippingId?: number; // ✅ 클리핑 ID
 }
 
 interface ApiError {
@@ -25,32 +24,27 @@ export const ClippingButton = ({
   type,
   clipCount,
   isInitiallyClipped = false,
-  initialClippingId,
 }: ClippingButtonProps) => {
   const [isBookmarked, setIsBookmarked] = useState(isInitiallyClipped);
   const [count, setCount] = useState(clipCount);
-  const [clippingId, setClippingId] = useState<number | null>(
-    initialClippingId ?? null,
-  );
 
   const handleBookmark = async () => {
     try {
       if (isBookmarked) {
-        if (!clippingId) {
-          alert('클리핑 ID가 존재하지 않아 삭제할 수 없습니다.');
-          return;
-        }
-        await deleteClipping(clippingId);
+        await deleteClipping({
+          id: targetId,
+          type,
+        });
+
         setIsBookmarked(false);
         setCount(prev => Math.max(prev - 1, 0));
-        setClippingId(null);
         return;
       }
 
-      const res = await createClipping({targetId, type});
+      await createClipping({targetId, type});
+
       setIsBookmarked(true);
       setCount(prev => prev + 1);
-      setClippingId(res.data?.id ?? null);
     } catch (err) {
       const error = err as ApiError;
 

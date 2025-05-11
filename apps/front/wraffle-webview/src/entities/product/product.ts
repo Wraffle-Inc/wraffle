@@ -23,7 +23,6 @@ export interface BaseProductData {
   applyCount: number;
   winnerCount: number;
   isClipped: boolean;
-  clippingId?: number;
   isCreator: boolean;
   isApplied: boolean;
   createUserId: number;

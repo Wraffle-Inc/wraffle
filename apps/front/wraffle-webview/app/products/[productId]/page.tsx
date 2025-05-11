@@ -174,7 +174,6 @@ const ProductPage = () => {
           productId={productData.id}
           productType={type.toUpperCase() as 'RAFFLE' | 'EVENT'}
           isClipped={productData.isClipped}
-          clippingId={productData.clippingId}
         />
       </div>
     </div>
