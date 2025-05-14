@@ -1,4 +1,4 @@
-import type {CategoryItem} from './type';
+import type {CategoryItem} from './model/type';
 
 export const categories: CategoryItem[] = [
   {

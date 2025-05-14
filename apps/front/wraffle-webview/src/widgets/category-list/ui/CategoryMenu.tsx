@@ -1,4 +1,4 @@
-import type {CategoryItem} from '@/entities/category/type';
+import type {CategoryItem} from '@/entities/category/model/type';
 
 type CategoryMenuProps = {
   categories: CategoryItem[];

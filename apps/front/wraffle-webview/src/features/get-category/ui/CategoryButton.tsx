@@ -12,7 +12,7 @@ const CategoryButton = ({category}: CategoryButtonProps) => {
   const router = useRouter();
 
   const goCategory = () => {
-    router.push(`/category/${category.id}`);
+    router.push(`/category?view=${category.name}`);
   };
 
   return (

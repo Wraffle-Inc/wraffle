@@ -1,2 +1,3 @@
 export * from './const';
-export * from './type';
+export * from './model/type';
+export * from './api/getCategories';

@@ -2,8 +2,8 @@
 
 import {useSearchParams} from 'next/navigation';
 import {useEffect, useState, Suspense} from 'react';
-import {categories} from '@/entities/category';
-import type {CategoryItem} from '@/entities/category/type';
+import type {CategoryItem} from '@/entities/category';
+import {getCategories} from '@/entities/category/';
 import {Header} from '@/shared/ui';
 import {CategoryList} from '@/widgets/category-list/ui';
 import {CategoryMenu} from '@/widgets/category-list/ui';
@@ -71,39 +71,42 @@ const sampleProducts = [
 const CategoryPage = () => {
   const searchParams = useSearchParams();
   const categoryName = searchParams.get('view');
-
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   const currentCategory = categoryName
     ? categories.find(category => category.name === categoryName)
     : null;
 
-  let filteredCategories = currentCategory
-    ? categories.filter(category => category.parentId === currentCategory.id)
-    : categories.filter(category => category.parentId === null);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await getCategories(); // 서버에서 상위 카테고리만 반환
+        setCategories(res);
+        if (categoryName) setSelectedCategory(0);
+      } catch (err) {
+        console.error('카테고리 조회 실패:', err);
+      }
+    };
 
-  filteredCategories = [
+    fetchCategories();
+  }, [categoryName]);
+
+  // 전체/개별 카테고리 렌더링용 리스트
+  const menuCategories = [
     {
       id: 0,
       name: '전체',
-      parentId: currentCategory?.id || null,
+      parentId: currentCategory?.id ?? null,
       depth: 0,
     },
-    ...filteredCategories,
+    ...categories,
   ];
-
-  useEffect(() => {
-    if (currentCategory) {
-      setSelectedCategory(0);
-    }
-  }, [currentCategory]);
 
   const filteredProducts =
     selectedCategory === 0
       ? sampleProducts.filter(product =>
-          filteredCategories.some(
-            cat => cat.id !== 0 && cat.id === product.categoryId,
-          ),
+          categories.some(c => c.id === product.categoryId),
         )
       : sampleProducts.filter(
           product => product.categoryId === selectedCategory,
@@ -128,6 +131,7 @@ const CategoryPage = () => {
           <Icon name={currentCategory ? 'shopping-box' : 'bell'} />
         </Header.Right>
       </Header>
+
       {currentCategory ? (
         <section className='flex flex-col justify-center'>
           <Header withUnderline>
@@ -136,14 +140,14 @@ const CategoryPage = () => {
             </Header.Middle>
           </Header>
           <CategoryMenu
-            categories={filteredCategories}
+            categories={menuCategories}
             selectedCategory={selectedCategory}
             onSelectCategory={handleSelectCategory}
           />
         </section>
       ) : (
         <section className='flex justify-center'>
-          <CategoryList categories={filteredCategories} />
+          <CategoryList categories={menuCategories} />
         </section>
       )}
 
@@ -152,14 +156,7 @@ const CategoryPage = () => {
           className='grid justify-center gap-[20px]'
           style={{gridTemplateColumns: 'repeat(auto-fit, 160px)'}}
         >
-          <Suspense
-            fallback={
-              <Typography size='h5' className='text-gray-500'>
-                로딩 중...
-              </Typography>
-            }
-          ></Suspense>
-          {/*filteredProducts 배열이 비어 있지 않은 경우*/}
+          <Suspense fallback={<Typography size='h5'>로딩 중...</Typography>} />
           {filteredProducts.length > 0 &&
             filteredProducts.map(product => (
               <RaffleCard
@@ -172,7 +169,6 @@ const CategoryPage = () => {
                 hashtags={product.hashtags}
               />
             ))}
-          {/*filteredProducts 배열이 비어 있는 경우*/}
           {filteredProducts.length === 0 && (
             <Typography size='h5' className='text-gray-500'>
               상품 추가 예정입니다.
@@ -180,6 +176,7 @@ const CategoryPage = () => {
           )}
         </div>
       </section>
+
       <BottomNavigation />
     </div>
   );

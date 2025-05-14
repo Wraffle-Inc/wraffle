@@ -1,4 +1,4 @@
-import type {CategoryItem} from '@/entities/category/type';
+import type {CategoryItem} from '@/entities/category/model/type';
 import {CategoryPageButton} from '@/features/get-category/ui';
 
 interface CategoryButtonsProps {
